@@ -53,9 +53,6 @@ export const Theme = {
             font-family: "Noto Sans KR", sans-serif;
             font-weight: 700;
             font-size: 24px;
-            line-height: 140%;
-            letter-spacing: 0.02em;
-            text-transform: capitalize;
         `,
         inputField: css`
             font-family: "Noto Sans KR", sans-serif;
