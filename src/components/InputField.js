@@ -27,7 +27,7 @@ const InputLabel = styled.label`
 
 const StyledInputField = styled.input`
     box-sizing: border-box;
-    width: 497px;
+    width: 479px;
     height: 58px;
     border: 1px solid #C2C2C2;
     border-radius: 20px;
