@@ -63,7 +63,7 @@ export const Theme = {
         title: css`
         font-family: "Noto Sans KR", sans-serif;
         font-weight: 900;
-        font-size: 96px;
+        font-size: 66px;
         line-height: 116px;
         `,
         loginText: css`

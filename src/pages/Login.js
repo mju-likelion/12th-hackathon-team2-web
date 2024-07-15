@@ -20,7 +20,7 @@ const Login = () => {
         <ThemeProvider theme={Theme}>
             <GlobalStyle />
             <Container>
-                <Title>멋사이드 아웃</Title>
+                <Title>Mutside Out</Title>
                 <LoginForm>
                     <LoginText>로그인</LoginText>
                     <InputFieldWrapper>
@@ -41,7 +41,7 @@ const Login = () => {
 export default Login;
 
 const LoginForm = styled.div`
-    width: 687px;
+    width: 587px;
     padding: 40px;
     background: ${(props) => props.theme.colors.pink2};
     border-radius: 30px;
@@ -68,7 +68,7 @@ const SignupWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    width: 687px;
+    width: 587px;
     margin-top: 20px;
 `;
 
