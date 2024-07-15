@@ -11,7 +11,7 @@ const StyledButton = styled.button`
     border: none;
     border-radius: 20px;
     cursor: pointer;
-    margin-top: 62px;
+    
 `;
 
 const Button = ({ children, onClick }) => {

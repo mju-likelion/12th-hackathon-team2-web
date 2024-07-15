@@ -19,7 +19,7 @@ const Join = () => {
         <ThemeProvider theme={Theme}>
             <GlobalStyle />
             <Container>
-                <Title>멋사이드 아웃</Title>
+                <Title>Mutside Out</Title>
                 <SignupForm>
                     <SignupText>회원가입</SignupText>
                     <InputField label="이메일" placeholder="abcd@email.com" />
@@ -41,6 +41,7 @@ const SignupForm = styled.div`
     padding: 40px;
     background: ${(props) => props.theme.colors.pink2};
     border-radius: 30px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
 const SignupText = styled.h2`
