@@ -53,9 +53,6 @@ export const Theme = {
             font-family: "Noto Sans KR", sans-serif;
             font-weight: 700;
             font-size: 24px;
-            line-height: 140%;
-            letter-spacing: 0.02em;
-            text-transform: capitalize;
         `,
         inputField: css`
             font-family: "Noto Sans KR", sans-serif;
@@ -64,31 +61,31 @@ export const Theme = {
             line-height: 160%;
         `,
         title: css`
-        font-family: "Noto Sans KR", sans-serif;
-        font-weight: 900;
-        font-size: 96px;
-        line-height: 116px;
+            font-family: "Inside Out", sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 48px;
         `,
         loginText: css`
-        font-family: "Noto Sans KR", sans-serif;
-        font-weight: 900;
-        font-size: 50px;
-        line-height: 61px;
-        text-align: center;
+            font-family: "Noto Sans KR", sans-serif;
+            font-weight: 900;
+            font-size: 50px;
+            line-height: 61px;
+            text-align: center;
         `,
         signupText: css`
-        font-family: "Noto Sans KR", sans-serif;
-        font-weight: 600;
-        font-size: 28px;
-        line-height: 34px;
-        text-align: center;
+            font-family: "Noto Sans KR", sans-serif;
+            font-weight: 600;
+            font-size: 28px;
+            line-height: 34px;
+            text-align: center;
         `,
         noAccountText: css`
-        font-family: "Noto Sans KR", sans-serif;
-        font-weight: 400;
-        font-size: 20px;
-        line-height: 24px;
-        text-align: center;
+            font-family: "Noto Sans KR", sans-serif;
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 24px;
+            text-align: center;
         `,
     },
     colors: {
