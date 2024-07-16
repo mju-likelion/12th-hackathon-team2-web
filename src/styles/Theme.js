@@ -87,6 +87,13 @@ export const Theme = {
             line-height: 24px;
             text-align: center;
         `,
+        menuItem: css`
+                font-family: "Noto Sans KR", sans-serif;
+                font-weight: 600;
+                font-size: 32px;
+                line-height: 39px;
+                text-align: center;
+            `,
     },
     colors: {
         red1: "#B37371",
@@ -96,6 +103,7 @@ export const Theme = {
         pink2: "#F7A29D",
         pink3: "#F77770",
 
+        gray: "#B1B1B1",
         black: "#000000",
         white: "#FFFFFF",
     },

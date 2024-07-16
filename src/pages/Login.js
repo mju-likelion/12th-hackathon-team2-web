@@ -12,6 +12,10 @@ import { Theme } from "../styles/Theme.js";
 const Login = () => {
     const navigate = useNavigate();
 
+    const handleLoginClick = () => {
+        navigate("/main");
+    };
+
     const handleSignupClick = () => {
         navigate("/join");
     };
@@ -26,7 +30,7 @@ const Login = () => {
                     <InputFieldWrapper>
                         <InputField label="이메일" placeholder="abcd@email.com" />
                         <InputField label="비밀번호" placeholder="password" type="password" />
-                        <BigButton>로그인</BigButton>
+                        <BigButton onClick={handleLoginClick}>로그인</BigButton>
                     </InputFieldWrapper>
                 </LoginForm>
                 <SignupWrapper>
@@ -63,7 +67,6 @@ const InputFieldWrapper = styled.div`
     align-items: flex-end;
 `;
 
-
 const SignupWrapper = styled.div`
     display: flex;
     align-items: center;
@@ -71,7 +74,6 @@ const SignupWrapper = styled.div`
     width: 587px;
     margin-top: 20px;
 `;
-
 
 const NoAccountText = styled.span`
     ${props => props.theme.fonts.noAccountText};
