@@ -29,15 +29,16 @@ export const Theme = {
         `,
         SmallButton: css`
             font-family: "Noto Sans KR", sans-serif;
-            font-weight: 600;
+            font-weight: 800;
             font-size: 28px;
             line-height: 34px;
             text-align: center;
         `,
         subTitle: css`
             font-family: "Noto Sans KR", sans-serif;
-            font-weight: 400;
-            font-size: 20px;
+            font-weight: 800;
+            font-size: 36px;
+            line-height: 44px;
         `,
         mediumText: css`
             font-family: "Noto Sans KR", sans-serif;
@@ -46,8 +47,9 @@ export const Theme = {
         `,
         semiText: css`
             font-family: "Noto Sans KR", sans-serif;
-            font-weight: 400;
-            font-size: 21px;
+            font-weight: 600;
+            font-size: 26px;
+            line-height: 31px;
         `,
         inputLabel: css`
             font-family: "Noto Sans KR", sans-serif;
@@ -88,12 +90,20 @@ export const Theme = {
             text-align: center;
         `,
         menuItem: css`
-                font-family: "Noto Sans KR", sans-serif;
-                font-weight: 600;
-                font-size: 32px;
-                line-height: 39px;
-                text-align: center;
-            `,
+            font-family: "Noto Sans KR", sans-serif;
+            font-weight: 600;
+            font-size: 32px;
+            line-height: 39px;
+            text-align: center;
+        `,
+        tinyButton: css`
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 24px;
+            text-align: center;
+        `,
     },
     colors: {
         red1: "#B37371",
