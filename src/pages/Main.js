@@ -50,7 +50,7 @@ const Menu = styled.div`
 const MenuItem = styled.div`
     ${props => props.theme.fonts.menuItem};
     color: ${props => props.theme.colors.gray};
-    cursor: pointer; // Ensure it looks clickable
+    cursor: pointer;
     &:hover {
         color: ${props => props.theme.colors.pink3};
     }
