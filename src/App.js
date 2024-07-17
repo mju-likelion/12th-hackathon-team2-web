@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { DiaryProvider } from './components/DiaryContext';
+import { RoomsProvider } from './components/RoomsContext'; // Import RoomsProvider
 import CreateRoom from "./pages/CreateRoom";
 import Diary from "./pages/Diary";
 import DiaryDetail from "./pages/DiaryDetail";
@@ -21,18 +22,20 @@ function App() {
       <GlobalStyle />
       <Router>
         <DiaryProvider>
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/join" element={<Join />} />
-            <Route path="/main" element={<Main />} />
-            <Route path="/planner" element={<Planner />} />
-            <Route path="/diary" element={<Diary />} />
-            <Route path="/diary/:id" element={<DiaryDetail />} />
-            <Route path="/session" element={<Session />} />
-            <Route path="/pomodoro" element={<Pomodoro />} />
-            <Route path="/room/:id" element={<SessionDetail />} />
-            <Route path="/create-room" element={<CreateRoom />} />
-          </Routes>
+          <RoomsProvider>
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/join" element={<Join />} />
+              <Route path="/main" element={<Main />} />
+              <Route path="/planner" element={<Planner />} />
+              <Route path="/diary" element={<Diary />} />
+              <Route path="/diary/:id" element={<DiaryDetail />} />
+              <Route path="/session" element={<Session />} />
+              <Route path="/pomodoro" element={<Pomodoro />} />
+              <Route path="/room/:id" element={<SessionDetail />} />
+              <Route path="/create-room" element={<CreateRoom />} />
+            </Routes>
+          </RoomsProvider>
         </DiaryProvider>
       </Router>
     </ThemeProvider>

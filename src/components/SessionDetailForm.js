@@ -2,12 +2,24 @@ import React from "react";
 import styled from "styled-components";
 import { Theme } from "../styles/Theme";
 
-const SessionDetailForm = ({ children }) => {
+const SessionDetailForm = ({ title, setTitle, link, setLink, content, setContent, children }) => {
     return (
         <SessionForm>
-            <Input placeholder="title" />
-            <Input placeholder="Link" />
-            <TextArea placeholder="content" />
+            <Input 
+                placeholder="title" 
+                value={title} 
+                onChange={(e) => setTitle(e.target.value)} 
+            />
+            <Input 
+                placeholder="Link" 
+                value={link} 
+                onChange={(e) => setLink(e.target.value)} 
+            />
+            <TextArea 
+                placeholder="content" 
+                value={content} 
+                onChange={(e) => setContent(e.target.value)} 
+            />
             {children}
         </SessionForm>
     );

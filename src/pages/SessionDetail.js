@@ -1,19 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
+import { useRooms } from "../components/RoomsContext";
 import SessionDetailForm from "../components/SessionDetailForm";
 import TinyButton from "../components/TinyButton";
 import GlobalStyle from "../styles/GlobalStyle";
 import { Theme } from "../styles/Theme";
 
-const SessionDetail = ({ rooms, setRooms }) => {
+const SessionDetail = () => {
+    const { rooms, setRooms } = useRooms();
     const navigate = useNavigate();
     const { id } = useParams();
     const roomId = parseInt(id);
 
+    const room = rooms.find(room => room.id === roomId);
+
+    const [title, setTitle] = useState(room ? room.title : "");
+    const [link, setLink] = useState(room ? room.link : "");
+    const [content, setContent] = useState(room ? room.content : "");
+
     const handleDelete = () => {
         const updatedRooms = rooms.filter(room => room.id !== roomId);
         setRooms(updatedRooms);
+        navigate("/session");
+    };
+
+    const handleCreate = () => {
+        const isActive = title.trim() !== "" && link.trim() !== "" && content.trim() !== "";
+
+        if (!room) {
+            const newRoom = { id: roomId, title, link, content, active: isActive };
+            setRooms([...rooms, newRoom]);
+        } else {
+            const updatedRooms = rooms.map(room => {
+                if (room.id === roomId) {
+                    return { ...room, title, link, content, active: isActive };
+                }
+                return room;
+            });
+            setRooms(updatedRooms);
+        }
         navigate("/session");
     };
 
@@ -26,9 +52,20 @@ const SessionDetail = ({ rooms, setRooms }) => {
             <GlobalStyle />
             <Container>
                 <Header>실시간 집중 세션</Header>
-                <SessionDetailForm>
+                <SessionDetailForm
+                    title={title}
+                    setTitle={setTitle}
+                    link={link}
+                    setLink={setLink}
+                    content={content}
+                    setContent={setContent}
+                >
                     <ButtonContainer>
-                        <TinyButton onClick={handleDelete}>삭제하기</TinyButton>
+                        {room && room.active ? (
+                            <TinyButton onClick={handleDelete}>삭제하기</TinyButton>
+                        ) : (
+                            <TinyButton onClick={handleCreate}>생성하기</TinyButton>
+                        )}
                         <TinyButton onClick={handleBackToList}>목록으로</TinyButton>
                     </ButtonContainer>
                 </SessionDetailForm>
