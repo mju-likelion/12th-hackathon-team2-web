@@ -1,0 +1,40 @@
+import React from 'react';
+import styled from 'styled-components';
+
+const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(i);
+    }
+
+    return (
+        <PaginationContainer>
+            <PageNumber onClick={() => onPageChange(currentPage - 1)}>&lt;</PageNumber>
+            {pageNumbers.map(number => (
+                <PageNumber key={number} onClick={() => onPageChange(number)}>
+                    {number}
+                </PageNumber>
+            ))}
+            <PageNumber onClick={() => onPageChange(currentPage + 1)}>&gt;</PageNumber>
+        </PaginationContainer>
+    );
+};
+
+export default Pagination;
+
+const PaginationContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+`;
+
+const PageNumber = styled.div`
+    margin: 0 10px;
+    cursor: pointer;
+    ${({ theme }) => theme.fonts.mediumText};
+    color: ${({ theme }) => theme.colors.gray};
+
+    &:hover {
+        color: ${({ theme }) => theme.colors.pink2};
+    }
+`;
