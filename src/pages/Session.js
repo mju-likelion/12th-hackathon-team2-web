@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
+import Pagination from "../components/Pagination";
 import SmallButton from "../components/SmallButton";
 import RoomOff from "../img/RoomOff.svg";
 import RoomOn from "../img/RoomOn.svg";
@@ -20,6 +21,8 @@ const SessionPage = () => {
     ];
 
     const [rooms] = useState(initialRooms);
+    const [currentPage, setCurrentPage] = useState(1);
+    const roomsPerPage = 8;
     const navigate = useNavigate();
 
     const handleAddRoom = () => {
@@ -29,6 +32,17 @@ const SessionPage = () => {
     const handleRoomClick = (id) => {
         navigate(`/room/${id}`);
     };
+
+    const handlePageChange = (pageNumber) => {
+        if (pageNumber < 1 || pageNumber > Math.ceil(rooms.length / roomsPerPage)) return;
+        setCurrentPage(pageNumber);
+    };
+
+    const indexOfLastRoom = currentPage * roomsPerPage;
+    const indexOfFirstRoom = indexOfLastRoom - roomsPerPage;
+    const currentRooms = rooms.slice(indexOfFirstRoom, indexOfLastRoom);
+
+    const totalPages = Math.ceil(rooms.length / roomsPerPage);
 
     return (
         <ThemeProvider theme={Theme}>
@@ -41,7 +55,7 @@ const SessionPage = () => {
                     </ButtonWrapper>
                 </Header>
                 <RoomContainer>
-                    {rooms.map((room) => (
+                    {currentRooms.map((room) => (
                         <Room key={room.id} onClick={() => handleRoomClick(room.id)}>
                             <RoomContent>
                                 <RoomIcon src={room.active ? RoomOn : RoomOff} alt={`room${room.id}`} />
@@ -50,6 +64,11 @@ const SessionPage = () => {
                         </Room>
                     ))}
                 </RoomContainer>
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={handlePageChange}
+                />
             </Container>
         </ThemeProvider>
     );
@@ -84,6 +103,8 @@ const RoomContainer = styled.div`
   margin-top: 25px;
   width: 100%;
   max-width: 1200px;
+  margin-bottom: 17px;
+  
 `;
 
 const Room = styled.div`

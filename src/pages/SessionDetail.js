@@ -6,7 +6,7 @@ import TinyButton from "../components/TinyButton";
 import GlobalStyle from "../styles/GlobalStyle";
 import { Theme } from "../styles/Theme";
 
-const RoomDetail = ({ rooms, setRooms }) => {
+const SessionDetail = ({ rooms, setRooms }) => {
     const navigate = useNavigate();
     const { id } = useParams();
     const roomId = parseInt(id);
@@ -37,7 +37,7 @@ const RoomDetail = ({ rooms, setRooms }) => {
     );
 };
 
-export default RoomDetail;
+export default SessionDetail;
 
 const Container = styled.div`
     display: flex;

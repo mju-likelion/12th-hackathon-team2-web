@@ -10,8 +10,8 @@ import Login from "./pages/Login";
 import Main from "./pages/Main";
 import Planner from "./pages/Planner";
 import Pomodoro from "./pages/Pomodoro";
-import RoomDetail from "./pages/RoomDetail";
 import Session from "./pages/Session";
+import SessionDetail from "./pages/SessionDetail";
 import GlobalStyle from "./styles/GlobalStyle";
 import { Theme } from "./styles/Theme";
 
@@ -30,7 +30,7 @@ function App() {
             <Route path="/diary/:id" element={<DiaryDetail />} />
             <Route path="/session" element={<Session />} />
             <Route path="/pomodoro" element={<Pomodoro />} />
-            <Route path="/room/:id" element={<RoomDetail />} />
+            <Route path="/room/:id" element={<SessionDetail />} />
             <Route path="/create-room" element={<CreateRoom />} />
           </Routes>
         </DiaryProvider>
