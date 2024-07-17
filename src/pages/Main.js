@@ -16,7 +16,7 @@ const Main = () => {
                 <Logo src={AvocadoImage} alt="Avocado Logo" />
                 <Header>Mutside Out</Header>
                 <Menu>
-                    <MenuItem onClick={() => navigate('/calendar')}>플래너</MenuItem>
+                    <MenuItem onClick={() => navigate('/planner')}>플래너</MenuItem>
                     <MenuItem onClick={() => navigate('/diary')}>감정일기</MenuItem>
                     <MenuItem onClick={() => navigate('/session')}>집중세션</MenuItem>
                     <MenuItem onClick={() => navigate('/pomodoro')}>뽀모도로</MenuItem>
