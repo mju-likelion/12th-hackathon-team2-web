@@ -1,4 +1,4 @@
-import { css } from "styled-components";
+import { css } from 'styled-components';
 
 export const Theme = {
     fonts: {
@@ -104,6 +104,27 @@ export const Theme = {
             line-height: 24px;
             text-align: center;
         `,
+        DateHeader: css`
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 40px;
+            line-height: 48px;
+        `,
+        Context: css`
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 32px;
+            line-height: 39px;
+        `,
+        PageNumber: css`
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 24px;
+        `,
     },
     colors: {
         red1: "#B37371",
@@ -112,7 +133,6 @@ export const Theme = {
         pink1: "#FDEFEE",
         pink2: "#F7A29D",
         pink3: "#F77770",
-
         gray: "#B1B1B1",
         black: "#000000",
         white: "#FFFFFF",
