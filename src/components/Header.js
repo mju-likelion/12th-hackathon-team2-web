@@ -13,7 +13,7 @@ const Header = () => {
 
   return (
     <HeaderContainer>
-      <Title>MUTSIDE OUT</Title>
+      <Title onClick={() => handleNavigation("/main")}>MUTSIDE OUT</Title>
       <Menu>
         <MenuItem
           active={activePage === "/diary"}
@@ -60,6 +60,7 @@ const Title = styled.h1`
   color: ${(props) => props.theme.colors.pink3};
   font-size: 30px;
   margin-right: 50px;
+  cursor: pointer;
 `;
 const Menu = styled.div`
   display: flex;
