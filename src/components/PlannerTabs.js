@@ -4,16 +4,16 @@ import styled from 'styled-components';
 const PlannerTabs = ({ activeTab, setActiveTab }) => (
     <TabsContainer>
         <TabItem
-            isActive={activeTab === 'to-do'}
+            $isActive={activeTab === 'to-do'}
             onClick={() => setActiveTab('to-do')}
         >
-            <TabText isActive={activeTab === 'to-do'}>To-Do</TabText>
+            <TabText $isActive={activeTab === 'to-do'}>To-Do</TabText>
         </TabItem>
         <TabItem
-            isActive={activeTab === 'completed'}
+            $isActive={activeTab === 'completed'}
             onClick={() => setActiveTab('completed')}
         >
-            <TabText isActive={activeTab === 'completed'}>Completed</TabText>
+            <TabText $isActive={activeTab === 'completed'}>Completed</TabText>
         </TabItem>
     </TabsContainer>
 );
