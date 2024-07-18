@@ -35,12 +35,12 @@ const ToDoItem = ({ item, onCheck, onUpdate, editable }) => {
     };
 
     return (
-        <Item completed={item.completed}>
+        <Item completed={item.completed.toString()}>
             <CheckButton 
                 src={item.completed ? CheckButtonOn : CheckButtonOff} 
                 alt="Check Button" 
                 onClick={() => !item.completed && onCheck(item.id)}
-                completed={item.completed}
+                completed={item.completed.toString()}
             />
             {editMode ? (
                 <EditTextarea 
@@ -72,7 +72,7 @@ const Item = styled.div`
 const CheckButton = styled.img`
     width: 20px;
     height: 20px;
-    opacity: ${({ completed }) => (completed ? 0.5 : 1)};
+    opacity: ${({ completed }) => (completed === 'true' ? 0.5 : 1)};
     margin-right: 10px;
 `;
 
