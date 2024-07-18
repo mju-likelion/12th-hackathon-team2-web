@@ -32,15 +32,15 @@ const TabItem = styled.div`
     justify-content: center;
     width: 45px;
     height: 139px;
-    background: ${({ isActive, theme }) => (isActive ? theme.colors.white : theme.colors.pink3)};
+    background: ${({ $isActive, theme }) => ($isActive ? theme.colors.white : theme.colors.pink3)};
     border-radius: 14px 0 0 14px;
     cursor: pointer;
-    color: ${({ isActive, theme }) => (isActive ? theme.colors.pink3 : theme.colors.white)};
+    color: ${({ $isActive, theme }) => ($isActive ? theme.colors.pink3 : theme.colors.white)};
 `;
 
 const TabText = styled.div`
     ${({ theme }) => theme.fonts.tinyButton};
     transform: rotate(-90deg);
     white-space: nowrap;
-    color: ${({ isActive, theme }) => (isActive ? theme.colors.pink3 : theme.colors.white)};
+    color: ${({ $isActive, theme }) => ($isActive ? theme.colors.pink3 : theme.colors.white)};
 `;
