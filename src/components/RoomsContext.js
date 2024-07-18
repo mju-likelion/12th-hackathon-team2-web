@@ -6,7 +6,7 @@ export const useRooms = () => useContext(RoomsContext);
 
 export const RoomsProvider = ({ children }) => {
     const initialRooms = [
-        { id: 1, active: false },
+        
     ];
 
     const [rooms, setRooms] = useState(initialRooms);
