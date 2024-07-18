@@ -2,8 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { DiaryProvider } from './components/DiaryContext';
-import { RoomsProvider } from './components/RoomsContext'; // Import RoomsProvider
-import CreateRoom from "./pages/CreateRoom";
+import { RoomsProvider } from './components/RoomsContext';
 import Diary from "./pages/Diary";
 import DiaryDetail from "./pages/DiaryDetail";
 import Join from "./pages/Join";
@@ -33,7 +32,6 @@ function App() {
               <Route path="/session" element={<Session />} />
               <Route path="/pomodoro" element={<Pomodoro />} />
               <Route path="/room/:id" element={<SessionDetail />} />
-              <Route path="/create-room" element={<CreateRoom />} />
             </Routes>
           </RoomsProvider>
         </DiaryProvider>
