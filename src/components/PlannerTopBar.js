@@ -5,7 +5,7 @@ import PlannerIcon from '../img/PlannerIcon.svg';
 const PlannerTopBar = ({ toDoCount }) => (
     <TopBarContainer>
         <PlannerIconImg src={PlannerIcon} alt="Planner Icon" />
-        <Counter>Today's To-Do: {toDoCount}</Counter>
+        <Counter>Today&apos;s To-Do: {toDoCount}</Counter>
     </TopBarContainer>
 );
 
