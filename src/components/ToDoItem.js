@@ -23,9 +23,9 @@ const ToDoItem = ({ item, onCheck, onUpdate, editable }) => {
         const value = e.target.value;
         if (value.length <= 29) {
             setText(value);
-            setError(''); // Clear error message when user starts typing
+            setError('');
         } else {
-            setError('할 일은 최대 29자까지 입력할 수 있습니다.'); // Set error message
+            setError('할 일은 최대 29자까지 입력할 수 있습니다.');
         }
     };
 

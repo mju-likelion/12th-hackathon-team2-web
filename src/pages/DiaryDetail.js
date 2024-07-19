@@ -56,7 +56,6 @@ const DiaryDetail = () => {
     navigate("/diaries");
   };
 
-  // Format the date
   const formattedDate = entry.date ? format(new Date(entry.date), 'yyyy.MM.dd') : '';
 
   return (
