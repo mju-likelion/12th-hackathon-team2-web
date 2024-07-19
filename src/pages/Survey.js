@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import SurveyButton from "../components/SurveyButton";
 import styled from "styled-components";
 import TinyButton from "../components/TinyButton";
+import { useNavigate } from "react-router-dom";
 
 const Survey = () => {
   const [answers, setAnswers] = useState({});
+  const navigate = useNavigate();
 
   const handleSelect = (questionIndex, option) => {
     setAnswers((prevAnswers) => ({
@@ -153,7 +155,9 @@ const Survey = () => {
       </Question>
 
       <SaveBtn>
-        <TinyButton>저장</TinyButton>
+        <TinyButton onClick={() => navigate("/surveys/result")}>
+          저장
+        </TinyButton>
       </SaveBtn>
     </Container>
   );
@@ -164,7 +168,6 @@ const Container = styled.div`
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  /* border: 1px solid #ccc; */
 `;
 const Title = styled.div`
   padding-top: 50px;
