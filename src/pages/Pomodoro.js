@@ -13,6 +13,7 @@ const Pomodoro = () => {
   const [isBreak, setIsBreak] = useState(false);
   const [cycleCount, setCycleCount] = useState(0);
   const [timerInterval, setTimerInterval] = useState(null);
+  const [history, setHistory] = useState([]);
 
   useEffect(() => {
     if (isRunning && timeLeft !== null) {
@@ -65,6 +66,11 @@ const Pomodoro = () => {
       return;
     }
 
+    setHistory((prevHistory) => [
+      ...prevHistory,
+      { workMinutes: workMin, breakMinutes: breakMin },
+    ]);
+
     setCycleCount(1);
     setIsBreak(false);
     setTimeLeft(workMin * 60 * 1000);
@@ -88,6 +94,15 @@ const Pomodoro = () => {
     setBreakMinutes('');
   };
 
+  const handleHistoryClick = (workMin, breakMin) => {
+    setWorkMinutes(workMin.toString());
+    setBreakMinutes(breakMin.toString());
+    setTimeLeft(workMin * 60 * 1000);
+    setIsBreak(false);
+    setCycleCount(1);
+    setIsRunning(true);
+  };
+
   const formatTime = (time) => {
     const minutes = Math.floor(time / (1000 * 60));
     const seconds = Math.floor((time % (1000 * 60)) / 1000);
@@ -98,52 +113,70 @@ const Pomodoro = () => {
     <Div>
       <Header />
       <Container>
-        <Title>뽀모도로</Title>
-        <Info>
-          {isRunning && `${cycleCount}번째 타임`}{' '}
-          <span>{isBreak ? '<휴식 시간>' : '<집중시간>'}</span>
-        </Info>
+        <History>
+          <HistoryTitle>
+            <FaClock style={{ width: '20%' }} /> <br />
+            최근 이용
+          </HistoryTitle>
+          {history.map((item, index) => (
+            <HistoryItem
+              key={index}
+              onClick={() =>
+                handleHistoryClick(item.workMinutes, item.breakMinutes)
+              }
+            >
+              {item.workMinutes}분 / {item.breakMinutes}분
+            </HistoryItem>
+          ))}
+        </History>
+        <Right>
+          <Title>뽀모도로</Title>
+          <Info>
+            {isRunning && `${cycleCount}번째 타임`}{' '}
+            <span>{isBreak ? '<휴식 시간>' : '<집중시간>'}</span>
+          </Info>
 
-        <TimerDisplay>
-          <FaClock style={{ marginRight: '10px', width: '20%' }} />
-          {timeLeft !== null ? formatTime(timeLeft) : '00:00'}
-        </TimerDisplay>
-        <audio id='notificationSound' src={Sound}></audio>
-        <ButtonGroup>
-          <TinyButton onClick={handleStart} disabled={isRunning}>
-            시작
-          </TinyButton>
-          <TinyButton onClick={handlePause} disabled={!isRunning}>
-            일시정지
-          </TinyButton>
-          <TinyButton onClick={handleReset}>리셋</TinyButton>
-        </ButtonGroup>
-        <Settings>
-          <SettingBox>
-            <h3>집중시간</h3>
-            <Input
-              type='number'
-              value={workMinutes}
-              onChange={(e) => setWorkMinutes(e.target.value)}
-              placeholder='분을 입력해주세요'
-              min='1'
-              max='60'
-              disabled={isRunning}
-            />
-          </SettingBox>
-          <SettingBox>
-            <h3>휴식시간</h3>
-            <Input
-              type='number'
-              value={breakMinutes}
-              onChange={(e) => setBreakMinutes(e.target.value)}
-              placeholder='분을 입력해주세요'
-              min='0'
-              max='60'
-              disabled={isRunning}
-            />
-          </SettingBox>
-        </Settings>
+          <TimerDisplay>
+            <FaClock style={{ marginRight: '10px', width: '20%' }} />
+            {timeLeft !== null ? formatTime(timeLeft) : '00:00'}
+          </TimerDisplay>
+          <audio id='notificationSound' src={Sound}></audio>
+          <ButtonGroup>
+            <TinyButton onClick={handleStart} disabled={isRunning}>
+              시작
+            </TinyButton>
+            <TinyButton onClick={handlePause} disabled={!isRunning}>
+              일시정지
+            </TinyButton>
+            <TinyButton onClick={handleReset}>리셋</TinyButton>
+          </ButtonGroup>
+          <Settings>
+            <SettingBox>
+              <h3>집중시간</h3>
+              <Input
+                type='number'
+                value={workMinutes}
+                onChange={(e) => setWorkMinutes(e.target.value)}
+                placeholder='분을 입력해주세요'
+                min='1'
+                max='60'
+                disabled={isRunning}
+              />
+            </SettingBox>
+            <SettingBox>
+              <h3>휴식시간</h3>
+              <Input
+                type='number'
+                value={breakMinutes}
+                onChange={(e) => setBreakMinutes(e.target.value)}
+                placeholder='분을 입력해주세요'
+                min='0'
+                max='60'
+                disabled={isRunning}
+              />
+            </SettingBox>
+          </Settings>
+        </Right>
       </Container>
     </Div>
   );
@@ -157,9 +190,41 @@ const Div = styled.div`
 const Container = styled.div`
   padding-top: 80px;
   display: flex;
+  width: 100;
+`;
+
+const History = styled.div`
+  width: 300px;
+  background-color: ${(props) => props.theme.colors.pink1};
+  padding: 10px;
+  margin-right: 10px;
+  border-radius: 30px;
+  height: 530px;
+  overflow-y: auto;
+`;
+
+const HistoryTitle = styled.h3`
+  margin-top: 40px;
+  text-align: center;
+  ${(props) => props.theme.fonts.PageNumber};
+  margin-bottom: 80px;
+`;
+
+const HistoryItem = styled.div`
+  ${(props) => props.theme.fonts.PageNumber};
+  margin-bottom: 15px;
+  cursor: pointer;
+  text-align: center;
+  &:hover {
+    color: ${(props) => props.theme.colors.pink3};
+  }
+`;
+const Right = styled.div`
+  display: flex;
   flex-direction: column;
   align-items: center;
 `;
+
 const Title = styled.div`
   ${(props) => props.theme.fonts.Context};
 `;
@@ -192,7 +257,6 @@ const Settings = styled.div`
   h3 {
     text-align: center;
     ${(props) => props.theme.fonts.PageNumber};
-    margin-bottom: 0ch;
   }
 `;
 const SettingBox = styled.div`
