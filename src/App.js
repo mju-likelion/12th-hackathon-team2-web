@@ -8,14 +8,15 @@ import DiaryDetail from "./pages/DiaryDetail";
 import Join from "./pages/Join";
 import Login from "./pages/Login";
 import Main from "./pages/Main";
+import NotFound from './pages/NotFound';
 import Planner from "./pages/Planner";
 import Pomodoro from "./pages/Pomodoro";
 import Session from "./pages/Session";
 import SessionDetail from "./pages/SessionDetail";
-import GlobalStyle from "./styles/GlobalStyle";
-import { Theme } from "./styles/Theme";
 import Survey from "./pages/Survey";
 import SurveyResult from "./pages/SurveyResult";
+import GlobalStyle from "./styles/GlobalStyle";
+import { Theme } from "./styles/Theme";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
               <Route path="/rooms/:id" element={<SessionDetail />} />
               <Route path="/surveys" element={<Survey />} />
               <Route path="/surveys/result" element={<SurveyResult />} />
+              <Route path='/*' element={<NotFound />} />
             </Routes>
           </RoomsProvider>
         </DiaryProvider>
