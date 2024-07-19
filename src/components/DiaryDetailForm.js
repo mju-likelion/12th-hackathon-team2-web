@@ -3,6 +3,8 @@ import { Controller } from 'react-hook-form';
 import styled from 'styled-components';
 import TinyButton from './TinyButton';
 
+const TITLE_MAX_LENGTH = 40;
+
 const DiaryDetailForm = ({ control, handleSave, handleDelete, isNew, errors }) => {
     return (
         <Form onSubmit={handleSave}>
@@ -14,6 +16,7 @@ const DiaryDetailForm = ({ control, handleSave, handleDelete, isNew, errors }) =
                         <Input
                             placeholder="제목"
                             {...field}
+                            maxLength={TITLE_MAX_LENGTH}
                         />
                         {errors.title && <ErrorMessage>{errors.title.message}</ErrorMessage>}
                     </>
