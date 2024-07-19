@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../components/Header';
+import { FaClock } from 'react-icons/fa';
 import styled from 'styled-components';
 import Sound from '../assets/alarm.mp3';
-import { FaClock } from 'react-icons/fa';
+import Header from '../components/Header';
 import TinyButton from '../components/TinyButton';
 
 const Pomodoro = () => {
@@ -190,7 +190,8 @@ const Div = styled.div`
 const Container = styled.div`
   padding-top: 80px;
   display: flex;
-  width: 100;
+  width: 100%;
+  
 `;
 
 const History = styled.div`
@@ -219,17 +220,23 @@ const HistoryItem = styled.div`
     color: ${(props) => props.theme.colors.pink3};
   }
 `;
+
 const Right = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 700px;
 `;
 
 const Title = styled.div`
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
   ${(props) => props.theme.fonts.Context};
 `;
+
 const Info = styled.div`
-  ${(props) => props.theme.fonts.PageNumber};
+  font-size: 1em;
   margin: 10px 0;
   span {
     ${(props) => props.theme.fonts.PageNumber};
@@ -239,17 +246,19 @@ const Info = styled.div`
 
 const TimerDisplay = styled.div`
   display: flex;
-  font-size: 100px;
+  font-size: 6vw;
   padding: 10px;
 `;
+
 const ButtonGroup = styled.div`
   display: flex;
   flex-direction: row;
   gap: 10px;
   margin-bottom: 80px;
 `;
+
 const Settings = styled.div`
-  width: 1000px;
+  width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -259,9 +268,11 @@ const Settings = styled.div`
     ${(props) => props.theme.fonts.PageNumber};
   }
 `;
+
 const SettingBox = styled.div`
   background-color: ${(props) => props.theme.colors.pink1};
-  width: 400px;
+  width: 40%;
+  max-width: 400px;
   height: 180px;
   display: flex;
   flex-direction: column;
@@ -269,8 +280,9 @@ const SettingBox = styled.div`
   justify-content: center;
   border-radius: 30px;
 `;
+
 const Input = styled.input`
-  width: 270px;
+  width: 70%;
   height: 30px;
   margin: 10px;
   padding: 10px;
