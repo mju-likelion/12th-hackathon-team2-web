@@ -1,3 +1,4 @@
+import { format } from 'date-fns'; // Import format function from date-fns
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -16,7 +17,7 @@ const Diary = () => {
   const handleAddEntry = () => {
     const newEntry = {
       title: "",
-      date: new Date().toISOString().split("T")[0],
+      date: format(new Date(), 'yyyy.MM.dd'),
       content: "",
     };
     const newEntries = [...entries, newEntry];

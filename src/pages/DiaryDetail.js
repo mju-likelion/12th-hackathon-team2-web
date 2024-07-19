@@ -1,4 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import { format } from 'date-fns';
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
@@ -55,12 +56,15 @@ const DiaryDetail = () => {
     navigate("/diaries");
   };
 
+  // Format the date
+  const formattedDate = entry.date ? format(new Date(entry.date), 'yyyy.MM.dd') : '';
+
   return (
     <Div>
       <Header />
       <Container>
         <Title>
-          <DateHeader>{entry.date}</DateHeader>
+          <DateHeader>{formattedDate}</DateHeader>
           <TinyButton onClick={handleBackToList}>목록으로</TinyButton>
         </Title>
         <DiaryDetailForm
