@@ -20,7 +20,7 @@ const Login = () => {
     };
 
     const handleSignupClick = () => {
-        navigate("/join");
+        navigate("/auth/signup");
     };
 
     const {
