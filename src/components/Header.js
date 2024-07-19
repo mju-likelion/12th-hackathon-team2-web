@@ -5,7 +5,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const activePage = location.pathname;
+  const activePath = location.pathname.toLowerCase();
+
+  const isActive = (path) => {
+    return activePath.startsWith(path.toLowerCase());
+  };
 
   const handleNavigation = (path) => {
     navigate(path);
@@ -16,25 +20,25 @@ const Header = () => {
       <Title onClick={() => handleNavigation("/main")}>MUTSIDE OUT</Title>
       <Menu>
         <MenuItem
-          active={activePage === "/diary"}
-          onClick={() => handleNavigation("/diary")}
+          active={isActive("/diaries")}
+          onClick={() => handleNavigation("/diaries")}
         >
           감정일기
         </MenuItem>
         <MenuItem
-          active={activePage === "/session"}
-          onClick={() => handleNavigation("/session")}
+          active={isActive("/rooms")}
+          onClick={() => handleNavigation("/rooms")}
         >
           집중세션
         </MenuItem>
         <MenuItem
-          active={activePage === "/planner"}
-          onClick={() => handleNavigation("/planner")}
+          active={isActive("/planners")}
+          onClick={() => handleNavigation("/planners")}
         >
           플래너
         </MenuItem>
         <MenuItem
-          active={activePage === "/pomodoro"}
+          active={isActive("/pomodoro")}
           onClick={() => handleNavigation("/pomodoro")}
         >
           뽀모도로
@@ -49,7 +53,6 @@ const HeaderContainer = styled.div`
   height: 65px;
   display: flex;
   align-items: center;
-  align-items: center;
   border-bottom: 2px solid ${(props) => props.theme.colors.pink2};
   padding: 10px 40px;
   margin: 0 20px;
@@ -62,6 +65,7 @@ const Title = styled.h1`
   margin-right: 50px;
   cursor: pointer;
 `;
+
 const Menu = styled.div`
   display: flex;
   ${(props) => props.theme.fonts.Context};
