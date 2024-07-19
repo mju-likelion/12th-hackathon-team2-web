@@ -25,17 +25,17 @@ function App() {
         <DiaryProvider>
           <RoomsProvider>
             <Routes>
-              <Route path="/" element={<Login />} />
-              <Route path="/join" element={<Join />} />
+              <Route path="/auth/login" element={<Login />} />
+              <Route path="/auth/signup" element={<Join />} />
               <Route path="/main" element={<Main />} />
-              <Route path="/planner" element={<Planner />} />
-              <Route path="/diary" element={<Diary />} />
-              <Route path="/diary/:id" element={<DiaryDetail />} />
-              <Route path="/session" element={<Session />} />
+              <Route path="/planners" element={<Planner />} />
+              <Route path="/diaries" element={<Diary />} />
+              <Route path="/diaries/:id" element={<DiaryDetail />} />
+              <Route path="/rooms" element={<Session />} />
               <Route path="/pomodoro" element={<Pomodoro />} />
-              <Route path="/room/:id" element={<SessionDetail />} />
-              <Route path="/survey" element={<Survey />} />
-              <Route path="/Result" element={<SurveyResult />} />
+              <Route path="/rooms/:id" element={<SessionDetail />} />
+              <Route path="/surveys" element={<Survey />} />
+              <Route path="/surveys/result" element={<SurveyResult />} />
             </Routes>
           </RoomsProvider>
         </DiaryProvider>
