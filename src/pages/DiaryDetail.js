@@ -10,12 +10,15 @@ import Header from "../components/Header";
 import TinyButton from "../components/TinyButton";
 import { schemaDiaryDetail } from '../hooks/ValidationYup';
 
+const TITLE_MAX_LENGTH = 40;
+
 const DiaryDetail = () => {
   const { entries, editEntry, deleteEntry } = useDiary();
   const { id } = useParams();
   const navigate = useNavigate();
 
   const [entry, setEntry] = useState({ title: '', content: '', date: '' });
+  const [titleError, setTitleError] = useState("");
 
   useEffect(() => {
     const fetchedEntry = entries[parseInt(id)] || { title: '', content: '', date: '' };
@@ -42,6 +45,10 @@ const DiaryDetail = () => {
   }, [entry, setValue]);
 
   const handleSaveEntry = (data) => {
+    if (data.title.length > TITLE_MAX_LENGTH) {
+      setTitleError(`타이틀은 최대 ${TITLE_MAX_LENGTH}자까지 입력할 수 있습니다.`);
+      return;
+    }
     const updatedEntry = { ...entry, title: data.title, content: data.content };
     editEntry(parseInt(id), updatedEntry);
     navigate("/diaries");
@@ -54,6 +61,16 @@ const DiaryDetail = () => {
 
   const handleBackToList = () => {
     navigate("/diaries");
+  };
+
+  const handleTitleChange = (e) => {
+    const { value } = e.target;
+    if (value.length <= TITLE_MAX_LENGTH) {
+      setValue('title', value);
+      setTitleError("");
+    } else {
+      setTitleError(`타이틀은 최대 ${TITLE_MAX_LENGTH}자까지 입력할 수 있습니다.`);
+    }
   };
 
   const formattedDate = entry.date ? format(new Date(entry.date), 'yyyy.MM.dd') : '';
@@ -72,6 +89,8 @@ const DiaryDetail = () => {
           handleDelete={handleDeleteEntry}
           isNew={entry.title === "" && entry.content === ""}
           errors={errors}
+          titleError={titleError}
+          onTitleChange={handleTitleChange}
         />
       </Container>
     </Div>

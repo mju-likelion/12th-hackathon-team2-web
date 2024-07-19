@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header";
@@ -8,6 +8,9 @@ import TinyButton from "../components/TinyButton";
 import { schemaSessionDetail } from '../hooks/ValidationYup';
 import { Theme } from "../styles/Theme";
 
+const TITLE_MAX_LENGTH = 40;
+const LINK_MAX_LENGTH = 40;
+
 const SessionDetail = () => {
     const { rooms, setRooms } = useRooms();
     const navigate = useNavigate();
@@ -15,6 +18,9 @@ const SessionDetail = () => {
     const roomId = parseInt(id);
 
     const room = rooms.find((room) => room.id === roomId);
+
+    const [titleError, setTitleError] = useState("");
+    const [linkError, setLinkError] = useState("");
 
     const handleDelete = () => {
         const updatedRooms = rooms.filter((room) => room.id !== roomId);
@@ -45,6 +51,26 @@ const SessionDetail = () => {
         navigate("/rooms");
     };
 
+    const handleTitleChange = (e, setFieldValue) => {
+        const { value } = e.target;
+        if (value.length <= TITLE_MAX_LENGTH) {
+            setFieldValue('title', value);
+            setTitleError("");
+        } else {
+            setTitleError(`타이틀은 최대 ${TITLE_MAX_LENGTH}자까지 입력할 수 있습니다.`);
+        }
+    };
+
+    const handleLinkChange = (e, setFieldValue) => {
+        const { value } = e.target;
+        if (value.length <= LINK_MAX_LENGTH) {
+            setFieldValue('link', value);
+            setLinkError("");
+        } else {
+            setLinkError(`링크는 최대 ${LINK_MAX_LENGTH}자까지 입력할 수 있습니다.`);
+        }
+    };
+
     return (
         <Div>
             <Header />
@@ -59,19 +85,25 @@ const SessionDetail = () => {
                     validationSchema={schemaSessionDetail}
                     onSubmit={handleCreateOrUpdate}
                 >
-                    {({ errors, touched }) => (
+                    {({ errors, touched, setFieldValue }) => (
                         <StyledForm>
                             <Field
                                 name="title"
                                 placeholder="title"
                                 as={Input}
+                                maxLength={TITLE_MAX_LENGTH}
+                                onChange={(e) => handleTitleChange(e, setFieldValue)}
                             />
+                            {titleError ? <Error>{titleError}</Error> : null}
                             {errors.title && touched.title ? <Error>{errors.title}</Error> : null}
                             <Field
                                 name="link"
                                 placeholder="Link"
                                 as={Input}
+                                maxLength={LINK_MAX_LENGTH}
+                                onChange={(e) => handleLinkChange(e, setFieldValue)}
                             />
+                            {linkError ? <Error>{linkError}</Error> : null}
                             {errors.link && touched.link ? <Error>{errors.link}</Error> : null}
                             <Field
                                 name="content"
@@ -101,6 +133,7 @@ const Div = styled.div`
     width: 100%;
     padding: 20px;
 `;
+
 const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -149,7 +182,6 @@ const Input = styled.input`
 const TextArea = styled.textarea`
     ${Theme.fonts.inputLabel};
     padding: 10px;
-    
     border: 3px solid ${Theme.colors.pink2};
     border-radius: 10px;
     outline: none;
