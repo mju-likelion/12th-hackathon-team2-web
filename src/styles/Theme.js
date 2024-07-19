@@ -125,6 +125,7 @@ export const Theme = {
             font-size: 20px;
             line-height: 24px;
         `,
+        
     },
     colors: {
         red1: "#B37371",
@@ -136,5 +137,6 @@ export const Theme = {
         gray: "#B1B1B1",
         black: "#000000",
         white: "#FFFFFF",
+        blue: "#004DFF",
     },
 };

@@ -1,18 +1,35 @@
-import React from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import React, { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import Button from "../components/BigButton";
 import Container from "../components/Container";
 import InputField from "../components/InputField";
 import Title from "../components/Title";
+import { schemaJoin } from '../hooks/ValidationYup';
 import GlobalStyle from "../styles/GlobalStyle";
 import { Theme } from "../styles/Theme.js";
 
 const Join = () => {
     const navigate = useNavigate();
+    const [attemptedSubmit, setAttemptedSubmit] = useState(false);
 
-    const handleJoinClick = () => {
-        navigate('/');
+    const {
+        control,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
+        resolver: yupResolver(schemaJoin),
+        mode: 'onChange',
+    });
+
+    const onSubmit = (data) => {
+        setAttemptedSubmit(true);
+        if (Object.keys(errors).length === 0) {
+            console.log(data);
+            navigate('/');
+        }
     };
 
     return (
@@ -20,13 +37,63 @@ const Join = () => {
             <GlobalStyle />
             <Container>
                 <Title>Mutside Out</Title>
-                <SignupForm>
+                <SignupForm onSubmit={handleSubmit(onSubmit)}>
                     <SignupText>회원가입</SignupText>
-                    <InputField label="이메일" placeholder="abcd@email.com" />
-                    <InputField label="비밀번호" placeholder="password" type="password" />
-                    <InputField label="비밀번호 확인" placeholder="password" type="password" />
-                    <InputField label="닉네임" placeholder="nickname" />
-                    <Button onClick={handleJoinClick}>가입하기</Button>
+                    <Controller
+                        name="email"
+                        control={control}
+                        render={({ field }) => (
+                            <InputField
+                                label="이메일"
+                                placeholder="abcd@email.com"
+                                error={errors.email?.message}
+                                attemptedSubmit={attemptedSubmit}
+                                {...field}
+                            />
+                        )}
+                    />
+                    <Controller
+                        name="pw"
+                        control={control}
+                        render={({ field }) => (
+                            <InputField
+                                label="비밀번호"
+                                placeholder="password"
+                                type="password"
+                                error={errors.pw?.message}
+                                attemptedSubmit={attemptedSubmit}
+                                {...field}
+                            />
+                        )}
+                    />
+                    <Controller
+                        name="checkPw"
+                        control={control}
+                        render={({ field }) => (
+                            <InputField
+                                label="비밀번호 확인"
+                                placeholder="password"
+                                type="password"
+                                error={errors.checkPw?.message}
+                                attemptedSubmit={attemptedSubmit}
+                                {...field}
+                            />
+                        )}
+                    />
+                    <Controller
+                        name="nickname"
+                        control={control}
+                        render={({ field }) => (
+                            <InputField
+                                label="닉네임"
+                                placeholder="nickname"
+                                error={errors.nickname?.message}
+                                attemptedSubmit={attemptedSubmit}
+                                {...field}
+                            />
+                        )}
+                    />
+                    <Button type="submit">가입하기</Button>
                 </SignupForm>
             </Container>
         </ThemeProvider>
@@ -35,7 +102,7 @@ const Join = () => {
 
 export default Join;
 
-const SignupForm = styled.div`
+const SignupForm = styled.form`
     display: flex;
     flex-direction: column;
     padding: 40px;
