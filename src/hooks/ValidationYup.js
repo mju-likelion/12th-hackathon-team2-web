@@ -64,3 +64,10 @@ export const schemaDiaryDetail = yup.object().shape({
       .string()
       .required('내용을 입력해주세요.')
 });
+
+export const schemaPlanner = yup.object().shape({
+  text: yup
+    .string()
+    .required('할 일 입력은 필수입니다.')
+    .max(29, '할 일은 최대 29자까지 입력할 수 있습니다.'),
+});
