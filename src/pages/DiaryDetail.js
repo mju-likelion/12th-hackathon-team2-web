@@ -1,27 +1,52 @@
-import React, { useState } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useDiary } from "../components/DiaryContext";
 import DiaryDetailForm from "../components/DiaryDetailForm";
 import Header from "../components/Header";
 import TinyButton from "../components/TinyButton";
+import { schemaDiaryDetail } from '../hooks/ValidationYup';
 
 const DiaryDetail = () => {
   const { entries, editEntry, deleteEntry } = useDiary();
   const { id } = useParams();
   const navigate = useNavigate();
-  const entry = entries[parseInt(id)];
 
-  const [title, setTitle] = useState(entry.title);
-  const [content, setContent] = useState(entry.content);
+  const [entry, setEntry] = useState({ title: '', content: '', date: '' });
 
-  const handleSave = () => {
-    const updatedEntry = { ...entry, title, content };
+  useEffect(() => {
+    const fetchedEntry = entries[parseInt(id)] || { title: '', content: '', date: '' };
+    setEntry(fetchedEntry);
+  }, [entries, id]);
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    setValue
+  } = useForm({
+    resolver: yupResolver(schemaDiaryDetail),
+    mode: 'onChange',
+    defaultValues: {
+      title: entry.title,
+      content: entry.content
+    }
+  });
+
+  useEffect(() => {
+    setValue("title", entry.title);
+    setValue("content", entry.content);
+  }, [entry, setValue]);
+
+  const handleSaveEntry = (data) => {
+    const updatedEntry = { ...entry, title: data.title, content: data.content };
     editEntry(parseInt(id), updatedEntry);
     navigate("/diaries");
   };
 
-  const handleDelete = () => {
+  const handleDeleteEntry = () => {
     deleteEntry(parseInt(id));
     navigate("/diaries");
   };
@@ -39,13 +64,11 @@ const DiaryDetail = () => {
           <TinyButton onClick={handleBackToList}>목록으로</TinyButton>
         </Title>
         <DiaryDetailForm
-          title={title}
-          setTitle={setTitle}
-          content={content}
-          setContent={setContent}
-          handleSave={handleSave}
-          handleDelete={handleDelete}
+          control={control}
+          handleSave={handleSubmit(handleSaveEntry)}
+          handleDelete={handleDeleteEntry}
           isNew={entry.title === "" && entry.content === ""}
+          errors={errors}
         />
       </Container>
     </Div>
@@ -53,10 +76,12 @@ const DiaryDetail = () => {
 };
 
 export default DiaryDetail;
+
 const Div = styled.div`
   width: 100%;
   padding: 20px;
 `;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
