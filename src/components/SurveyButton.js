@@ -1,16 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
-const SurveyButton = ({ content }) => {
-  const [clicked, setClicked] = useState(false);
-
-  const handleClick = () => {
-    setClicked(!clicked);
-  };
-
+const SurveyButton = ({ content, selected, onClick }) => {
   return (
     <div>
-      <Button onClick={handleClick} clicked={clicked}>
+      <Button onClick={onClick} clicked={selected}>
         {content}
       </Button>
     </div>
