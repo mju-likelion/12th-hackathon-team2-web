@@ -115,7 +115,7 @@ const Pomodoro = () => {
       <Container>
         <History>
           <HistoryTitle>
-            <FaClock style={{ width: '20%' }} /> <br />
+            <FaClock style={{ width: '30%' }} /> <br />
             최근 이용
           </HistoryTitle>
           {history.map((item, index) => (
@@ -190,18 +190,17 @@ const Div = styled.div`
 const Container = styled.div`
   padding-top: 80px;
   display: flex;
-  width: 100%;
-  
 `;
 
 const History = styled.div`
-  width: 300px;
+  width: 16vw;
+  min-width: 170px;
   background-color: ${(props) => props.theme.colors.pink1};
   padding: 10px;
-  margin-right: 10px;
   border-radius: 30px;
-  height: 530px;
+  height: 550px;
   overflow-y: auto;
+  margin-left: 7vw;
 `;
 
 const HistoryTitle = styled.h3`
@@ -227,6 +226,7 @@ const Right = styled.div`
   flex-direction: column;
   align-items: center;
   max-width: 700px;
+  margin: auto;
 `;
 
 const Title = styled.div`
@@ -246,23 +246,21 @@ const Info = styled.div`
 
 const TimerDisplay = styled.div`
   display: flex;
-  font-size: 6vw;
+  font-size: 100px;
   padding: 10px;
 `;
 
 const ButtonGroup = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 40px;
   margin-bottom: 80px;
 `;
 
 const Settings = styled.div`
-  width: 100%;
   display: flex;
   justify-content: space-around;
-  align-items: center;
-  margin-bottom: 20px;
+  gap: 30px;
   h3 {
     text-align: center;
     ${(props) => props.theme.fonts.PageNumber};
@@ -271,9 +269,8 @@ const Settings = styled.div`
 
 const SettingBox = styled.div`
   background-color: ${(props) => props.theme.colors.pink1};
-  width: 40%;
-  max-width: 400px;
-  height: 180px;
+  width: 27vw;
+  height: 11vw;
   display: flex;
   flex-direction: column;
   align-items: center;
