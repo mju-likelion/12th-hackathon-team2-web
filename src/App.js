@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import { DiaryProvider } from './components/DiaryContext';
-import { RoomsProvider } from './components/RoomsContext';
+import { DiaryProvider } from "./components/DiaryContext";
+import { RoomsProvider } from "./components/RoomsContext";
 import Diary from "./pages/Diary";
 import DiaryDetail from "./pages/DiaryDetail";
 import Join from "./pages/Join";
@@ -14,6 +14,8 @@ import Session from "./pages/Session";
 import SessionDetail from "./pages/SessionDetail";
 import GlobalStyle from "./styles/GlobalStyle";
 import { Theme } from "./styles/Theme";
+import Survey from "./pages/Survey";
+import SurveyResult from "./pages/SurveyResult";
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
               <Route path="/session" element={<Session />} />
               <Route path="/pomodoro" element={<Pomodoro />} />
               <Route path="/room/:id" element={<SessionDetail />} />
+              <Route path="/survey" element={<Survey />} />
+              <Route path="/Result" element={<SurveyResult />} />
             </Routes>
           </RoomsProvider>
         </DiaryProvider>
