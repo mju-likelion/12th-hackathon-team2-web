@@ -3,8 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useDiary } from "../components/DiaryContext";
 import DiaryDetailForm from "../components/DiaryDetailForm";
-import TinyButton from "../components/TinyButton";
 import Header from "../components/Header";
+import TinyButton from "../components/TinyButton";
 
 const DiaryDetail = () => {
   const { entries, editEntry, deleteEntry } = useDiary();

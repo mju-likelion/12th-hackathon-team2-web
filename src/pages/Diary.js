@@ -4,8 +4,8 @@ import styled from "styled-components";
 import { useDiary } from "../components/DiaryContext";
 import DiaryHeader from "../components/DiaryHeader";
 import DiaryList from "../components/DiaryList";
-import Pagination from "../components/Pagination";
 import Header from "../components/Header";
+import Pagination from "../components/Pagination";
 
 const Diary = () => {
   const { entries, setEntries } = useDiary();

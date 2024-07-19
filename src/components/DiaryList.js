@@ -1,16 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import DiaryItem from './DiaryItem';
 
 const DiaryList = ({ entries, onEntryClick }) => (
     <ListContainer>
         {entries.map((entry, index) => (
-            <DiaryItem
-                key={index}
-                title={entry.title}
-                date={entry.date}
-                onClick={() => onEntryClick(index)}
-            />
+            <ItemContainer key={index} onClick={() => onEntryClick(index)}>
+                <DiaryTitle>{entry.title}</DiaryTitle>
+                <DiaryDate>{entry.date}</DiaryDate>
+            </ItemContainer>
         ))}
     </ListContainer>
 );
@@ -23,4 +20,26 @@ const ListContainer = styled.div`
     margin-right: 81px;
     display: flex;
     flex-direction: column;
+`;
+
+const ItemContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.gray};
+    margin-bottom: 26px;
+    cursor: pointer;
+`;
+
+const DiaryTitle = styled.div`
+    ${({ theme }) => theme.fonts.inputLabel};
+    color: ${({ theme }) => theme.colors.black};
+    margin-left: 20px;
+    width: 100%;
+    height: 42px;
+`;
+
+const DiaryDate = styled.div`
+    ${({ theme }) => theme.fonts.PageNumber};
+    color: ${({ theme }) => theme.colors.pink3};
 `;
