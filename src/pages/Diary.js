@@ -1,11 +1,12 @@
+import { format } from 'date-fns';
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useDiary } from "../components/DiaryContext";
 import DiaryHeader from "../components/DiaryHeader";
 import DiaryList from "../components/DiaryList";
-import Pagination from "../components/Pagination";
 import Header from "../components/Header";
+import Pagination from "../components/Pagination";
 
 const Diary = () => {
   const { entries, setEntries } = useDiary();
@@ -16,7 +17,7 @@ const Diary = () => {
   const handleAddEntry = () => {
     const newEntry = {
       title: "",
-      date: new Date().toISOString().split("T")[0],
+      date: format(new Date(), 'yyyy.MM.dd'),
       content: "",
     };
     const newEntries = [...entries, newEntry];

@@ -52,10 +52,11 @@ const Container = styled.div`
 const InnerContainer = styled.div`
     width: 100%;
     height: 100%;
+    
 `;
 
 const ItemList = styled.div`
-    margin-top: 20px;
+    margin-bottom: 20px;
     overflow-y: scroll;
     height: 100%;
     &::-webkit-scrollbar {
