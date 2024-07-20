@@ -26,7 +26,7 @@ const Header = () => {
   return (
     <HeaderContainer>
       <Sidebar>
-        <Title onClick={() => handleNavigation('/main')}>MUTSIDE OUT</Title>
+        <Title onClick={() => handleNavigation('/main')}>Mutside Out</Title>
         <SideMenu onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <MenuBars /> : <Close />}
         </SideMenu>
@@ -103,7 +103,7 @@ const SideMenu = styled.div`
 const Title = styled.h1`
   ${(props) => props.theme.fonts.title};
   color: ${(props) => props.theme.colors.pink3};
-  font-size: 30px;
+  font-size: 35px;
   margin-right: 50px;
   cursor: pointer;
 `;
@@ -111,7 +111,8 @@ const Title = styled.h1`
 const Menu = styled.div`
   display: flex;
   ${(props) => props.theme.fonts.Context};
-  gap: 60px;
+  gap: 5vw;
+  align-items: center;
 
   @media (max-width: 1030px) {
     flex-direction: column;
@@ -123,6 +124,7 @@ const Menu = styled.div`
 
 const MenuItem = styled.div`
   cursor: pointer;
+  text-align: center;
   margin-top: 10px;
   padding: 7px 15px;
   font-weight: ${(props) => (props.active ? 'bold' : 'normal')};

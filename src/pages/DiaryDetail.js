@@ -1,13 +1,13 @@
-import { yupResolver } from "@hookform/resolvers/yup";
+import { yupResolver } from '@hookform/resolvers/yup';
 import { format } from 'date-fns';
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
-import styled from "styled-components";
-import { useDiary } from "../components/DiaryContext";
-import DiaryDetailForm from "../components/DiaryDetailForm";
-import Header from "../components/Header";
-import TinyButton from "../components/TinyButton";
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate, useParams } from 'react-router-dom';
+import styled from 'styled-components';
+import { useDiary } from '../components/DiaryContext';
+import DiaryDetailForm from '../components/DiaryDetailForm';
+import Header from '../components/Header';
+import TinyButton from '../components/TinyButton';
 import { schemaDiaryDetail } from '../hooks/ValidationYup';
 
 const TITLE_MAX_LENGTH = 40;
@@ -18,10 +18,14 @@ const DiaryDetail = () => {
   const navigate = useNavigate();
 
   const [entry, setEntry] = useState({ title: '', content: '', date: '' });
-  const [titleError, setTitleError] = useState("");
+  const [titleError, setTitleError] = useState('');
 
   useEffect(() => {
-    const fetchedEntry = entries[parseInt(id)] || { title: '', content: '', date: '' };
+    const fetchedEntry = entries[parseInt(id)] || {
+      title: '',
+      content: '',
+      date: '',
+    };
     setEntry(fetchedEntry);
   }, [entries, id]);
 
@@ -29,51 +33,57 @@ const DiaryDetail = () => {
     control,
     handleSubmit,
     formState: { errors },
-    setValue
+    setValue,
   } = useForm({
     resolver: yupResolver(schemaDiaryDetail),
     mode: 'onChange',
     defaultValues: {
       title: entry.title,
-      content: entry.content
-    }
+      content: entry.content,
+    },
   });
 
   useEffect(() => {
-    setValue("title", entry.title);
-    setValue("content", entry.content);
+    setValue('title', entry.title);
+    setValue('content', entry.content);
   }, [entry, setValue]);
 
   const handleSaveEntry = (data) => {
     if (data.title.length > TITLE_MAX_LENGTH) {
-      setTitleError(`타이틀은 최대 ${TITLE_MAX_LENGTH}자까지 입력할 수 있습니다.`);
+      setTitleError(
+        `타이틀은 최대 ${TITLE_MAX_LENGTH}자까지 입력할 수 있습니다.`
+      );
       return;
     }
     const updatedEntry = { ...entry, title: data.title, content: data.content };
     editEntry(parseInt(id), updatedEntry);
-    navigate("/diaries");
+    navigate('/diaries');
   };
 
   const handleDeleteEntry = () => {
     deleteEntry(parseInt(id));
-    navigate("/diaries");
+    navigate('/diaries');
   };
 
   const handleBackToList = () => {
-    navigate("/diaries");
+    navigate('/diaries');
   };
 
   const handleTitleChange = (e) => {
     const { value } = e.target;
     if (value.length <= TITLE_MAX_LENGTH) {
       setValue('title', value);
-      setTitleError("");
+      setTitleError('');
     } else {
-      setTitleError(`타이틀은 최대 ${TITLE_MAX_LENGTH}자까지 입력할 수 있습니다.`);
+      setTitleError(
+        `타이틀은 최대 ${TITLE_MAX_LENGTH}자까지 입력할 수 있습니다.`
+      );
     }
   };
 
-  const formattedDate = entry.date ? format(new Date(entry.date), 'yyyy.MM.dd') : '';
+  const formattedDate = entry.date
+    ? format(new Date(entry.date), 'yyyy.MM.dd')
+    : '';
 
   return (
     <Div>
@@ -87,7 +97,7 @@ const DiaryDetail = () => {
           control={control}
           handleSave={handleSubmit(handleSaveEntry)}
           handleDelete={handleDeleteEntry}
-          isNew={entry.title === "" && entry.content === ""}
+          isNew={entry.title === '' && entry.content === ''}
           errors={errors}
           titleError={titleError}
           onTitleChange={handleTitleChange}
@@ -105,6 +115,8 @@ const Div = styled.div`
 `;
 
 const Container = styled.div`
+  width: 80%;
+  margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
