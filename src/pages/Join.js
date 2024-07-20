@@ -28,7 +28,7 @@ const Join = () => {
         setAttemptedSubmit(true);
         if (Object.keys(errors).length === 0) {
             console.log(data);
-            navigate('/');
+            navigate('/auth/login');
         }
     };
 
