@@ -5,7 +5,7 @@ import PlannerHeader from "../components/PlannerHeader";
 import PlannerListContainer from "../components/PlannerListContainer";
 import PlannerTabs from "../components/PlannerTabs";
 import PlannerTopBar from "../components/PlannerTopBar";
-import TinyButton from "../components/TinyButton"; // Add this import
+import TinyButton from "../components/TinyButton";
 
 const formatDate = (date) => {
   const d = new Date(date);

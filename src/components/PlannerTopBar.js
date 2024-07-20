@@ -17,9 +17,11 @@ const TopBarContainer = styled.div`
     width: 100%;
     max-width: 959px;
     margin-left: 40px;
+    padding: 0 20px;
 
     @media (max-width: 768px) {
-        flex-direction: column;
+        display: flex;
+        justify-content: space-between;
         align-items: center;
         margin-left: 0;
         padding: 0 20px;
@@ -42,7 +44,8 @@ const Counter = styled.div`
     margin-top: 10px;
 
     @media (max-width: 768px) {
-        margin-top: 20px;
+        margin-bottom: 10px;
+        width: 200px;
         text-align: center;
     }
 `;
