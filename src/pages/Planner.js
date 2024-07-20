@@ -5,6 +5,7 @@ import PlannerHeader from "../components/PlannerHeader";
 import PlannerListContainer from "../components/PlannerListContainer";
 import PlannerTabs from "../components/PlannerTabs";
 import PlannerTopBar from "../components/PlannerTopBar";
+import TinyButton from "../components/TinyButton"; // Add this import
 
 const formatDate = (date) => {
   const d = new Date(date);
@@ -100,6 +101,9 @@ const Planner = () => {
                 handleUpdate={handleUpdate}
                 handleAddItem={handleAddItem}
               />
+              <AddButtonContainer>
+                <TinyButton onClick={handleAddItem}>추가하기</TinyButton>
+              </AddButtonContainer>
             </InnerContent>
           </Content>
         </PlannerContainer>
@@ -111,14 +115,16 @@ const Planner = () => {
 export default Planner;
 
 const Div = styled.div`
-  width: 100%;
+  width: 100vw;
   padding: 20px;
 `;
+
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  position: relative;
 `;
 
 const PlannerContainer = styled.div`
@@ -127,25 +133,57 @@ const PlannerContainer = styled.div`
   align-items: center;
   background: ${({ theme }) => theme.colors.pink1};
   border-radius: 10px;
-  width: 1082px;
-  height: 696px;
+  width: 100%;
+  max-width: 1082px;
+  min-height: 553px;
   margin-top: 20px;
   padding: 20px;
+  position: relative;
+
+  @media (max-width: 768px) {
+    max-width: 90%;
+    max-height: 90%;
+  }
 `;
 
 const Content = styled.div`
   display: flex;
   height: 100%;
+  width: 100%;
   position: relative;
+  flex-direction: column;
+  
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 `;
 
 const InnerContent = styled.div`
-  width: 859px;
-  height: 553px;
+  width: 100%;
+  height: 100%;
   background: ${({ theme }) => theme.colors.white};
   border-radius: 14px;
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 553px;
+  max-height: 553px;
+
+  @media (min-width: 859px) {
+    width: 100%;
+  }
 `;
+
+const AddButtonContainer = styled.div`
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+
+  @media (max-width: 768px) {
+    right: 10px;
+    bottom: 10px;
+  }
+`;
+

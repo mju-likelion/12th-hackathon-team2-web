@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import CompletedTab from './CompletedTab';
-import TinyButton from './TinyButton';
 import ToDoItem from './ToDoItem';
+
 
 const PlannerListContainer = ({ activeTab, toDoList, completedList, handleCheck, handleUpdate, handleAddItem }) => (
     <Container>
@@ -20,9 +20,6 @@ const PlannerListContainer = ({ activeTab, toDoList, completedList, handleCheck,
                         />
                     ))}
                 </ItemList>
-                <AddButtonContainer>
-                    <TinyButton onClick={handleAddItem}>추가하기</TinyButton>
-                </AddButtonContainer>
             </InnerContainer>
         ) : (
             <InnerContainer>
@@ -43,7 +40,7 @@ export default PlannerListContainer;
 
 const Container = styled.div`
     width: 100%;
-    height: 100%;
+    height: 559px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -52,15 +49,16 @@ const Container = styled.div`
 const InnerContainer = styled.div`
     width: 100%;
     height: 100%;
-    
 `;
 
 const ItemList = styled.div`
     margin-bottom: 20px;
     overflow-y: scroll;
-    height: 100%;
+    height: calc(100% - 40px);
+    padding-right: 10px;
+
     &::-webkit-scrollbar {
-        width: 12px;
+        width: 8px;
     }
     &::-webkit-scrollbar-track {
         background: #f1f1f1;
@@ -71,9 +69,8 @@ const ItemList = styled.div`
     &::-webkit-scrollbar-thumb:hover {
         background: #555;
     }
-`;
 
-const AddButtonContainer = styled.div`
-    display: flex;
-    justify-content: flex-end;
+    @media (max-width: 859px) {
+        height: calc(100% - 50px);
+    }
 `;
