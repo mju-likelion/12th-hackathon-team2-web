@@ -1,11 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-const InputField = ({ label, placeholder, type = "text" }) => {
+const InputField = ({ label, placeholder, type = "text", error, attemptedSubmit, ...props }) => {
     return (
         <InputWrapper>
             <InputLabel>{label}</InputLabel>
-            <StyledInputField type={type} placeholder={placeholder} />
+            <InputContainer>
+                <StyledInputField type={type} placeholder={placeholder} {...props} />
+                <ErrorText hasError={!!error}>
+                    {error || ' '}
+                </ErrorText>
+            </InputContainer>
         </InputWrapper>
     );
 };
@@ -21,8 +26,14 @@ const InputWrapper = styled.div`
 const InputLabel = styled.label`
     ${props => props.theme.fonts.inputLabel};
     color: ${(props) => props.theme.colors.white};
-    width: 150px;
+    width: 140px;
     text-align: center;
+`;
+
+const InputContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    position: relative;
 `;
 
 const StyledInputField = styled.input`
@@ -33,9 +44,17 @@ const StyledInputField = styled.input`
     border-radius: 20px;
     padding: 20px;
     ${props => props.theme.fonts.inputField};
-    color: ${(props) => props.theme.colors.gray};
+    color: ${(props) => props.theme.colors.black};
     border: 1px solid ${(props) => props.theme.colors.borderGray};
     border-radius: 20px;
     background: ${(props) => props.theme.colors.white};
-    flex: 1;
+`;
+
+const ErrorText = styled.span`
+    ${props => props.theme.fonts.helperText};
+    color: ${(props) => (props.hasError ? props.theme.colors.blue : props.theme.colors.black)};
+    position: absolute;
+    top: 100%;
+    left: 5%;
+    transform: translateY(10px);
 `;

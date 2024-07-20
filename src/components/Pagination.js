@@ -9,13 +9,17 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 
     return (
         <PaginationContainer>
-            <PageNumber onClick={() => onPageChange(currentPage - 1)}>&lt;</PageNumber>
-            {pageNumbers.map(number => (
-                <PageNumber key={number} onClick={() => onPageChange(number)}>
-                    {number}
-                </PageNumber>
-            ))}
-            <PageNumber onClick={() => onPageChange(currentPage + 1)}>&gt;</PageNumber>
+            {totalPages > 0 && (
+                <>
+                    <PageNumber onClick={() => onPageChange(currentPage - 1)}>&lt;</PageNumber>
+                    {pageNumbers.map(number => (
+                        <PageNumber key={number} onClick={() => onPageChange(number)}>
+                            {number}
+                        </PageNumber>
+                    ))}
+                    <PageNumber onClick={() => onPageChange(currentPage + 1)}>&gt;</PageNumber>
+                </>
+            )}
         </PaginationContainer>
     );
 };
