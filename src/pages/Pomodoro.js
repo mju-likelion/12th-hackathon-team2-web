@@ -256,7 +256,7 @@ const TimerDisplay = styled.div`
 const ButtonGroup = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 40px;
+  gap: 2.7vw;
   margin-bottom: 80px;
 `;
 

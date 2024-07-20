@@ -26,7 +26,7 @@ const Header = () => {
   return (
     <HeaderContainer>
       <Sidebar>
-        <Title onClick={() => handleNavigation('/main')}>Mutside Out</Title>
+        <Title onClick={() => handleNavigation('/main')}>MUTSIDE OUT</Title>
         <SideMenu onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <MenuBars /> : <Close />}
         </SideMenu>
@@ -73,10 +73,10 @@ const HeaderContainer = styled.div`
   padding: 10px 40px;
   margin: 0 20px;
 
-  /* @media (max-width: 1030px) {
+  @media (max-width: 1030px) {
     flex-direction: column;
     height: auto;
-  } */
+  }
 `;
 
 const Sidebar = styled.div`
@@ -84,10 +84,10 @@ const Sidebar = styled.div`
   align-items: center;
   gap: 20px;
 
-  /* @media (max-width: 1030px) {
+  @media (max-width: 1030px) {
     width: 100%;
     justify-content: space-between;
-  } */
+  }
 `;
 
 const SideMenu = styled.div`
@@ -95,13 +95,12 @@ const SideMenu = styled.div`
   font-size: 24px;
   cursor: pointer;
 
-  /* @media (max-width: 1030px) {
+  @media (max-width: 1030px) {
     display: block;
-  } */
+  }
 `;
 
 const Title = styled.h1`
-  min-width: 150px;
   ${(props) => props.theme.fonts.title};
   color: ${(props) => props.theme.colors.pink3};
   font-size: 30px;
@@ -110,22 +109,19 @@ const Title = styled.h1`
 `;
 
 const Menu = styled.div`
-  width: 100vw;
   display: flex;
   ${(props) => props.theme.fonts.Context};
-  gap: 6vw;
-  text-align: center;
+  gap: 60px;
 
-  /* @media (max-width: 1030px) {
+  @media (max-width: 1030px) {
     flex-direction: column;
     gap: 5px;
     width: 100%;
     display: ${(props) => (props.open ? 'flex' : 'none')};
-  } */
+  }
 `;
 
 const MenuItem = styled.div`
-  width: 100px;
   cursor: pointer;
   margin-top: 10px;
   padding: 7px 15px;
@@ -135,18 +131,18 @@ const MenuItem = styled.div`
   color: ${(props) =>
     props.active ? props.theme.colors.black : props.theme.colors.gray};
 
-  /* @media (max-width: 1030px) {
+  @media (max-width: 1030px) {
     padding: 5px 0;
     border-bottom: ${(props) =>
-    props.active ? `3px solid ${props.theme.colors.pink3}` : 'none'};
-  } */
+      props.active ? `3px solid ${props.theme.colors.pink3}` : 'none'};
+  }
 
   &.logout {
     display: none;
 
-    /* @media (max-width: 1030px) {
+    @media (max-width: 1030px) {
       display: block;
-    } */
+    }
   }
 `;
 
@@ -159,8 +155,8 @@ const LogoutButton = styled.button`
   display: flex;
   margin-left: auto;
 
-  /* @media (max-width: 1030px) {
-    display: none; */
+  @media (max-width: 1030px) {
+    display: none;
   }
 `;
 
