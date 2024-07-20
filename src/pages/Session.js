@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import Pagination from "../components/Pagination";
-import { useRooms } from "../components/RoomsContext";
-import RoomsList from "../components/RoomsList";
-import SmallButton from "../components/SmallButton";
-import Header from "../components/Header";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import Pagination from '../components/Pagination';
+import { useRooms } from '../components/RoomsContext';
+import RoomsList from '../components/RoomsList';
+import SmallButton from '../components/SmallButton';
+import Header from '../components/Header';
 
 const SessionPage = () => {
   const { rooms } = useRooms();
@@ -62,10 +62,12 @@ const Div = styled.div`
   padding: 20px;
 `;
 const Container = styled.div`
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  margin: auto;
 `;
 
 const Title = styled.div`
@@ -74,7 +76,7 @@ const Title = styled.div`
   align-items: center;
   width: 100%;
   max-width: 1200px;
-  margin-top: 50px;
+  margin-top: 52px;
 `;
 
 const SubTitle = styled.h2`
