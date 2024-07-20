@@ -1,12 +1,12 @@
 import { format } from 'date-fns';
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import { useDiary } from "../components/DiaryContext";
-import DiaryHeader from "../components/DiaryHeader";
-import DiaryList from "../components/DiaryList";
-import Header from "../components/Header";
-import Pagination from "../components/Pagination";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { useDiary } from '../components/DiaryContext';
+import DiaryHeader from '../components/DiaryHeader';
+import DiaryList from '../components/DiaryList';
+import Header from '../components/Header';
+import Pagination from '../components/Pagination';
 
 const Diary = () => {
   const { entries, setEntries } = useDiary();
@@ -16,9 +16,9 @@ const Diary = () => {
 
   const handleAddEntry = () => {
     const newEntry = {
-      title: "",
+      title: '',
       date: format(new Date(), 'yyyy.MM.dd'),
-      content: "",
+      content: '',
     };
     const newEntries = [...entries, newEntry];
     setEntries(newEntries);
@@ -40,22 +40,28 @@ const Diary = () => {
   const totalPages = Math.ceil(entries.length / entriesPerPage);
 
   return (
-    <Container>
+    <Div>
       <Header />
-      <DiaryHeader onAddEntry={handleAddEntry} />
-      <DiaryList entries={currentEntries} onEntryClick={handleEntryClick} />
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-      />
-    </Container>
+      <Container>
+        <DiaryHeader onAddEntry={handleAddEntry} />
+        <DiaryList entries={currentEntries} onEntryClick={handleEntryClick} />
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      </Container>
+    </Div>
   );
 };
 
 export default Diary;
 
-const Container = styled.div`
+const Div = styled.div`
   width: 100%;
   padding: 20px;
+`;
+const Container = styled.div`
+  width: 80%;
+  margin: auto;
 `;

@@ -22,7 +22,6 @@ const Room = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   position: relative;
-  width: 40vw;
   height: 155px;
   border: 1px solid ${({ theme }) => theme.colors.pink3};
   border-radius: 10px;

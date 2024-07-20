@@ -23,7 +23,7 @@ const RoomContainer = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   margin-top: 25px;
-  width: 80%;
+  width: 100%;
   align-items: center;
   justify-content: center;
   max-width: 1200px;
