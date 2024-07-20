@@ -1,4 +1,3 @@
-// components/ToDoItem.js
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { schemaPlanner } from '../hooks/ValidationYup';
@@ -84,13 +83,26 @@ const ToDoItem = ({ item, onCheck, onUpdate, editable }) => {
 export default ToDoItem;
 
 const Item = styled.div`
-    width: 687px;
+    width: 100%;
+    max-width: 887px;
     min-height: 41px;
     display: flex;
     align-items: center;
-    margin: 40px;
+    margin: 20px auto;
+    padding: 10px;
     border-bottom: 3px solid ${({ theme }) => theme.colors.pink3};
     position: relative;
+
+    @media (max-width: 768px) {
+        width: 90%;
+        margin: 10px auto;
+        padding: 8px;
+    }
+
+    @media (max-width: 480px) {
+        margin: 8px auto;
+        padding: 6px;
+    }
 `;
 
 const CheckButton = styled.img`
@@ -98,6 +110,12 @@ const CheckButton = styled.img`
     height: 20px;
     opacity: ${({ completed }) => (completed === 'true' ? 0.5 : 1)};
     margin-right: 10px;
+
+    @media (max-width: 480px) {
+        width: 18px;
+        height: 18px;
+        margin-right: 8px;
+    }
 `;
 
 const Content = styled.div`
@@ -107,6 +125,10 @@ const Content = styled.div`
 const Text = styled.span`
     ${({ theme }) => theme.fonts.semiText};
     cursor: pointer;
+
+    @media (max-width: 480px) {
+        font-size: 14px;
+    }
 `;
 
 const EditTextarea = styled.textarea`
@@ -120,6 +142,10 @@ const EditTextarea = styled.textarea`
     padding: 0;
     margin: 0;
     background: none;
+
+    @media (max-width: 480px) {
+        font-size: 14px;
+    }
 `;
 
 const Error = styled.div`
@@ -129,4 +155,14 @@ const Error = styled.div`
     position: absolute;
     bottom: -20px;
     left: 10px;
+
+    @media (max-width: 768px) {
+        bottom: -25px;
+    }
+
+    @media (max-width: 480px) {
+        font-size: 10px;
+        bottom: -20px;
+    }
 `;
+

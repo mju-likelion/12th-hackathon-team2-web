@@ -24,6 +24,12 @@ const TabsContainer = styled.div`
     display: flex;
     flex-direction: column;
     margin-top: 26px;
+
+    @media (max-width: 768px) {
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 10px;
+    }
 `;
 
 const TabItem = styled.div`
@@ -36,6 +42,13 @@ const TabItem = styled.div`
     border-radius: 14px 0 0 14px;
     cursor: pointer;
     color: ${({ $isActive, theme }) => ($isActive ? theme.colors.pink3 : theme.colors.white)};
+
+    @media (max-width: 768px) {
+        width: 90px;
+        height: 45px;
+        border-radius: 14px 14px 0 0;
+        margin: 0 5px;
+    }
 `;
 
 const TabText = styled.div`
@@ -43,4 +56,9 @@ const TabText = styled.div`
     transform: rotate(-90deg);
     white-space: nowrap;
     color: ${({ $isActive, theme }) => ($isActive ? theme.colors.pink3 : theme.colors.white)};
+
+    @media (max-width: 768px) {
+        transform: none;
+    }
 `;
+
