@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { Theme } from "../styles/Theme";
+import SurveyButton from './SurveyButton';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -20,18 +21,13 @@ const Header = () => {
 
   const handleLogout = () => {
     console.log('Logged out');
-    navigate('/auth/login');  // Navigate to /auth/login on logout
+    navigate('/auth/login');
     setMenuOpen(false);
   };
 
   return (
     <HeaderContainer>
-      <Sidebar>
-        <Title onClick={() => handleNavigation('/main')}>Mutside Out</Title>
-        <SideMenu onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? <MenuBars /> : <Close />}
-        </SideMenu>
-      </Sidebar>
+      <Title onClick={() => handleNavigation('/main')}>Mutside Out</Title>
       <Menu open={menuOpen}>
         <MenuItem
           active={isActive('/diaries')}
@@ -57,47 +53,23 @@ const Header = () => {
         >
           뽀모도로
         </MenuItem>
-        <MenuItem className='logout' onClick={handleLogout}>
-          로그아웃
-        </MenuItem>
       </Menu>
-      <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
+      <LogoutButton content="로그아웃" onClick={handleLogout} />
     </HeaderContainer>
   );
 };
 
 const HeaderContainer = styled.div`
-  height: 65px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   border-bottom: 2px solid ${(props) => props.theme.colors.pink2};
   padding: 10px 40px;
   margin: 0 20px;
+  min-width: 300px;
 
   @media (max-width: 1030px) {
-    flex-direction: column;
-    height: auto;
-  }
-`;
-
-const Sidebar = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 20px;
-
-  @media (max-width: 1030px) {
-    width: 100%;
-    justify-content: space-between;
-  }
-`;
-
-const SideMenu = styled.div`
-  display: none;
-  font-size: 24px;
-  cursor: pointer;
-
-  @media (max-width: 1030px) {
-    display: block;
+    padding: 10px 20px;
   }
 `;
 
@@ -105,68 +77,80 @@ const Title = styled.h1`
   ${(props) => props.theme.fonts.title};
   color: ${(props) => props.theme.colors.pink3};
   font-size: 35px;
-  margin-right: 50px;
   cursor: pointer;
+  white-space: nowrap;
+
+  @media (max-width: 1030px) {
+    font-size: 30px;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 25px;
+  }
 `;
 
 const Menu = styled.div`
   display: flex;
-  ${(props) => props.theme.fonts.Context};
-  gap: 5vw;
   align-items: center;
+  justify-content: center;
+  gap: 5vw;
+  ${(props) => props.theme.fonts.Context};
+  flex-grow: 1;
+  flex-wrap: nowrap;
 
-  @media (max-width: 1030px) {
-    flex-direction: column;
-    gap: 5px;
-    width: 100%;
-    display: ${(props) => (props.open ? 'flex' : 'none')};
+  @media (max-width: 1200px) {
+    gap: 4vw;
+  }
+
+  @media (max-width: 900px) {
+    gap: 0.5vw;
+  }
+
+  @media (max-width: 600px) {
+    gap: 0;
   }
 `;
 
 const MenuItem = styled.div`
   cursor: pointer;
   text-align: center;
-  margin-top: 10px;
   padding: 7px 15px;
   font-weight: ${(props) => (props.active ? 'bold' : 'normal')};
   border-bottom: ${(props) =>
     props.active ? `5px solid ${props.theme.colors.pink3}` : 'none'};
   color: ${(props) =>
     props.active ? props.theme.colors.black : props.theme.colors.gray};
+  white-space: nowrap;
 
   @media (max-width: 1030px) {
-    padding: 5px 0;
+    padding: 5px 10px;
     border-bottom: ${(props) =>
       props.active ? `3px solid ${props.theme.colors.pink3}` : 'none'};
   }
 
-  &.logout {
-    display: none;
-
-    @media (max-width: 1030px) {
-      display: block;
-    }
+  @media (max-width: 600px) {
+    padding: 3px 5px;
+    font-size: 0.9rem;
   }
+
 `;
 
-const LogoutButton = styled.button`
-  background-color: ${(props) => props.theme.colors.pink1};
-  border: none;
-  border-radius: 50px;
-  padding: 10px 20px;
-  cursor: pointer;
-  display: flex;
-  margin-left: auto;
+const LogoutButton = styled(SurveyButton)`
+  padding: 7px 15px;
+  white-space: nowrap;
+  color: ${(props) => props.theme.colors.white};
+  background-color: ${Theme.colors.pink2};
+  width: 100px;
+  height: 40px;
 
   @media (max-width: 1030px) {
-    display: none;
+    padding: 5px 10px;
+  }
+
+  @media (max-width: 600px) {
+    padding: 3px 5px;
+    font-size: 0.9rem;
   }
 `;
 
-const MenuBars = styled(FaTimes)`
-  color: ${(props) => props.theme.colors.pink3};
-`;
-const Close = styled(FaBars)`
-  color: ${(props) => props.theme.colors.pink3};
-`;
 export default Header;

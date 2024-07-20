@@ -1,13 +1,11 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-const SurveyButton = ({ content, selected, onClick }) => {
+const SurveyButton = ({ content, selected, onClick, className }) => {
   return (
-    <div>
-      <Button onClick={onClick} clicked={selected}>
-        {content}
-      </Button>
-    </div>
+    <Button className={className} onClick={onClick} clicked={selected}>
+      {content}
+    </Button>
   );
 };
 
@@ -23,8 +21,9 @@ const Button = styled.button`
     props.clicked ? props.theme.colors.pink2 : props.theme.colors.white};
   border: ${(props) =>
     props.clicked
-      ? `1px solid  ${props.theme.colors.pink2}`
-      : `1px solid  ${props.theme.colors.gray}`};
+      ? `1px solid ${props.theme.colors.pink2}`
+      : `1px solid ${props.theme.colors.gray}`};
+  white-space: nowrap;
 `;
 
 export default SurveyButton;
