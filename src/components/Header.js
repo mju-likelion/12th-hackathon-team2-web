@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-import { useNavigate, useLocation } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import { useLocation, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -20,6 +20,7 @@ const Header = () => {
 
   const handleLogout = () => {
     console.log('Logged out');
+    navigate('/auth/login');  // Navigate to /auth/login on logout
     setMenuOpen(false);
   };
 
