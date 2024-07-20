@@ -71,9 +71,12 @@ const Pomodoro = () => {
       { workMinutes: workMin, breakMinutes: breakMin },
     ]);
 
-    setCycleCount(1);
-    setIsBreak(false);
-    setTimeLeft(workMin * 60 * 1000);
+    if (timeLeft === null) {
+      setCycleCount(1);
+      setIsBreak(false);
+      setTimeLeft(workMin * 60 * 1000);
+    }
+
     setIsRunning(true);
   };
 
