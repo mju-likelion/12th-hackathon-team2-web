@@ -56,7 +56,7 @@ const Signup = () => {
                         render={({ field }) => (
                             <InputField
                                 label="이메일"
-                                placeholder="abcd@email.com"
+                                placeholder="이메일을 입력하세요"
                                 error={errors.email?.message}
                                 attemptedSubmit={attemptedSubmit}
                                 {...field}
@@ -69,7 +69,7 @@ const Signup = () => {
                         render={({ field }) => (
                             <InputField
                                 label="비밀번호"
-                                placeholder="password"
+                                placeholder="비밀번호를 입력하세요"
                                 type="password"
                                 error={errors.pw?.message}
                                 attemptedSubmit={attemptedSubmit}
@@ -83,7 +83,7 @@ const Signup = () => {
                         render={({ field }) => (
                             <InputField
                                 label="비밀번호 확인"
-                                placeholder="password"
+                                placeholder="비밀번호를 확인하세요"
                                 type="password"
                                 error={errors.checkPw?.message}
                                 attemptedSubmit={attemptedSubmit}
@@ -97,7 +97,7 @@ const Signup = () => {
                         render={({ field }) => (
                             <InputField
                                 label="닉네임"
-                                placeholder="nickname"
+                                placeholder="닉네밈을 입력하세요"
                                 error={errors.nickname?.message}
                                 attemptedSubmit={attemptedSubmit}
                                 {...field}

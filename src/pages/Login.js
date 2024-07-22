@@ -61,7 +61,6 @@ const Login = () => {
                         <Controller
                             name="email"
                             control={control}
-                            defaultValue=""
                             render={({ field }) => (
                                 <InputField
                                     label="이메일"
@@ -74,11 +73,10 @@ const Login = () => {
                         <Controller
                             name="password"
                             control={control}
-                            defaultValue=""
                             render={({ field }) => (
                                 <InputField
                                     label="비밀번호"
-                                    placeholder="password"
+                                    placeholder="비밀번호를 입력하세요"
                                     type="password"
                                     error={errors.password?.message}
                                     {...field}
