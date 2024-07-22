@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import { DiaryProvider } from "./components/DiaryContext";
-import { RoomsProvider } from "./components/RoomsContext";
+import { DiaryProvider } from "./components/Diary/DiaryContext";
+import { RoomsProvider } from "./components/Session/RoomsContext";
 import Diary from "./pages/Diary";
 import DiaryDetail from "./pages/DiaryDetail";
 import Login from "./pages/Login";

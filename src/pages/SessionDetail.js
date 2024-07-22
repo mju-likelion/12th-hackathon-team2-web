@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../components/Header';
-import { useRooms } from '../components/RoomsContext';
+import { useRooms } from '../components/Session/RoomsContext';
 import TinyButton from '../components/TinyButton';
 import { schemaSessionDetail } from '../hooks/ValidationYup';
 import { Theme } from '../styles/Theme';

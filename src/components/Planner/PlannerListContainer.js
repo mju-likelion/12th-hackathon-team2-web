@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import CompletedTab from './CompletedTab';
-import ToDoItem from './ToDoItem';
+import ToDoItem from './ToDoItem.js';
 
 
 const PlannerListContainer = ({ activeTab, toDoList, completedList, handleCheck, handleUpdate, handleAddItem }) => (

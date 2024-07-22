@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import SmallButton from './SmallButton';
+import SmallButton from '../SmallButton';
 
 const DiaryHeader = ({ onAddEntry }) => (
   <HeaderContainer>

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { schemaPlanner } from '../hooks/ValidationYup';
-import CheckButtonOff from '../img/CheckButtonOff.png';
-import CheckButtonOn from '../img/CheckButtonOn.png';
+import { schemaPlanner } from '../../hooks/ValidationYup';
+import CheckButtonOff from '../../img/CheckButtonOff.png';
+import CheckButtonOn from '../../img/CheckButtonOn.png';
 
 const ToDoItem = ({ item, onCheck, onUpdate, editable }) => {
     const [editMode, setEditMode] = useState(false);

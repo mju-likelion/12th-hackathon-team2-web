@@ -1,7 +1,7 @@
 import React from 'react';
 import { Controller } from 'react-hook-form';
 import styled from 'styled-components';
-import TinyButton from './TinyButton';
+import TinyButton from '../TinyButton';
 
 const TITLE_MAX_LENGTH = 40;
 

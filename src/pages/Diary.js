@@ -2,9 +2,9 @@ import { format } from 'date-fns';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useDiary } from '../components/DiaryContext';
-import DiaryHeader from '../components/DiaryHeader';
-import DiaryList from '../components/DiaryList';
+import { useDiary } from '../components/Diary/DiaryContext';
+import DiaryHeader from '../components/Diary/DiaryHeader';
+import DiaryList from '../components/Diary/DiaryList';
 import Header from '../components/Header';
 import Pagination from '../components/Pagination';
 
