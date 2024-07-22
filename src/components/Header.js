@@ -1,10 +1,11 @@
+import Cookies from 'js-cookie';
 import React, { useState } from 'react';
+import { FaBars, FaTimes } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { LogoutApi } from '../api/Auth/LogoutApi';
 import { Theme } from "../styles/Theme";
 import SurveyButton from './SurveyButton';
-import { FaBars, FaTimes } from 'react-icons/fa';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -22,14 +23,17 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    LogoutApi({}, {
+    LogoutApi({
       navigateSuccess: () => {
         console.log('Logged out');
-        navigate('/auth/login');
+        Cookies.remove('loginToken');
+        window.location.replace('/auth/login');
+        alert('로그아웃되었습니다. 다시 로그인화면으로 돌아갑니다.');
         setMenuOpen(false);
       },
       navigateError: (error) => {
         console.error('Logout failed', error);
+        error.response && navigate('/*');
       },
     });
   };
@@ -39,7 +43,7 @@ const Header = () => {
       <Sidebar>
         <Title onClick={() => handleNavigation('/main')}>Mutside Out</Title>
         <SideMenu onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? <MenuBars /> : <Close />}
+          {menuOpen ? <Close /> : <MenuBars />}
         </SideMenu>
       </Sidebar>
       <Menu open={menuOpen}>
@@ -177,7 +181,7 @@ const MenuItem = styled.div`
   @media (max-width: 680px) {
     padding: 5px 0;
     border-bottom: ${(props) =>
-      props.active ? `3px solid ${props.theme.colors.pink3}` : 'none'};
+      props.$active ? `3px solid ${props.theme.colors.pink3}` : 'none'};
   }
 
   &.logout {
@@ -206,10 +210,10 @@ const LogoutButton = styled(SurveyButton)`
   }
 `;
 
-const MenuBars = styled(FaTimes)`
+const MenuBars = styled(FaBars)`
   color: ${(props) => props.theme.colors.pink3};
 `;
-const Close = styled(FaBars)`
+const Close = styled(FaTimes)`
   color: ${(props) => props.theme.colors.pink3};
 `;
 

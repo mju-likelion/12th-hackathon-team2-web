@@ -3,15 +3,14 @@ import styled from 'styled-components';
 import CompletedTab from './CompletedTab';
 import ToDoItem from './ToDoItem.js';
 
-
-const PlannerListContainer = ({ activeTab, toDoList, completedList, handleCheck, handleUpdate, handleAddItem }) => (
+const PlannerListContainer = ({ activeTab, toDoList, completedList, handleCheck, handleUpdate }) => (
     <Container>
         {activeTab === 'to-do' ? (
             <InnerContainer>
                 <ItemList>
                     {toDoList.map((item) => (
                         <ToDoItem 
-                            key={item.id} 
+                            key={item.plannerId} 
                             item={item} 
                             onCheck={handleCheck} 
                             onUpdate={handleUpdate} 

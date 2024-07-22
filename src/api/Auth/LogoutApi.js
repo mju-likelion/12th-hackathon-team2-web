@@ -1,9 +1,11 @@
-import axios from 'axios';
+import Cookies from 'js-cookie';
+import { Axios } from '../Axios';
 
 export const LogoutApi = (callbackFunctions) => {
     const { navigateSuccess, navigateError } = callbackFunctions;
-    axios.get(`/auth/logout`)
+    Axios.get('/auth/logout')
         .then(() => {
+            Cookies.remove('loginToken');
             navigateSuccess();
         })
         .catch((error) => {
