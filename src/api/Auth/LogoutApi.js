@@ -1,8 +1,8 @@
-import axios from 'axios';
+import { Axios } from '../Axios';
 
 export const LogoutApi = (callbackFunctions) => {
     const { navigateSuccess, navigateError } = callbackFunctions;
-    axios.get(`/auth/logout`)
+    Axios.get(`/auth/logout`)
         .then(() => {
             navigateSuccess();
         })

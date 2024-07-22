@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { PlannersGetApi } from "../api/Planners/PlannersGetApi";
 import Header from "../components/Header";
 import PlannerHeader from "../components/Planner/PlannerHeader";
 import PlannerListContainer from "../components/Planner/PlannerListContainer";
@@ -17,16 +18,26 @@ const formatDate = (date) => {
 };
 
 const Planner = () => {
-  const [toDoList, setToDoList] = useState([
-    { id: 1, text: "할 일을 입력하세요", completed: false },
-  ]);
+  const [toDoList, setToDoList] = useState([]);
   const [completedList, setCompletedList] = useState([]);
   const [activeTab, setActiveTab] = useState("to-do");
+
+  useEffect(() => {
+    PlannersGetApi()
+      .then(response => {
+        if (response.data.statusCode === "200 OK") {
+          setToDoList(response.data.data);
+        }
+      })
+      .catch(error => {
+        console.error("There was an error fetching the planner data!", error);
+      });
+  }, []);
 
   const handleCheck = (id) => {
     setToDoList((prevList) =>
       prevList.map((item) =>
-        item.id === id
+        item.plannerId === id
           ? {
               ...item,
               completed: !item.completed,
@@ -38,11 +49,11 @@ const Planner = () => {
 
     setTimeout(() => {
       setToDoList((prevList) => {
-        const itemToMove = prevList.find((item) => item.id === id);
+        const itemToMove = prevList.find((item) => item.plannerId === id);
         if (itemToMove && itemToMove.completed) {
           setCompletedList((prevCompleted) => {
             if (
-              !prevCompleted.some((completedItem) => completedItem.id === id)
+              !prevCompleted.some((completedItem) => completedItem.plannerId === id)
             ) {
               return [...prevCompleted, itemToMove].sort(
                 (a, b) => new Date(b.completedDate) - new Date(a.completedDate)
@@ -50,7 +61,7 @@ const Planner = () => {
             }
             return prevCompleted;
           });
-          return prevList.filter((item) => item.id !== id);
+          return prevList.filter((item) => item.plannerId !== id);
         }
         return prevList;
       });
@@ -60,20 +71,20 @@ const Planner = () => {
   const handleUpdate = (id, newText) => {
     setToDoList((prevList) =>
       prevList.map((item) =>
-        item.id === id ? { ...item, text: newText } : item
+        item.plannerId === id ? { ...item, content: newText } : item
       )
     );
     setCompletedList((prevList) =>
       prevList.map((item) =>
-        item.id === id ? { ...item, text: newText } : item
+        item.plannerId === id ? { ...item, content: newText } : item
       )
     );
   };
 
   const handleAddItem = () => {
     const newItem = {
-      id: Date.now(),
-      text: "할 일을 입력하세요",
+      plannerId: Date.now().toString(),
+      content: "할 일을 입력하세요",
       completed: false,
     };
     setToDoList((prevList) => [...prevList, newItem]);
@@ -186,4 +197,3 @@ const AddButtonContainer = styled.div`
     bottom: 10px;
   }
 `;
-
