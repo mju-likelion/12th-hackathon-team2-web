@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-export const schemaJoin = yup.object().shape({
+export const schemaSignup = yup.object().shape({
   email: yup
     .string()
     .required('사용하실 이메일을 입력해주세요.')

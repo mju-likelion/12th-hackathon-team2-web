@@ -3,33 +3,44 @@ import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
+import { SignupApi } from '../api/Auth/SignupApi';
 import Button from "../components/BigButton";
 import Container from "../components/Container";
 import InputField from "../components/InputField";
 import Title from "../components/Title";
-import { schemaJoin } from '../hooks/ValidationYup';
+import { schemaSignup } from '../hooks/ValidationYup';
 import GlobalStyle from "../styles/GlobalStyle";
 import { Theme } from "../styles/Theme.js";
 
-const Join = () => {
+const Signup = () => {
     const navigate = useNavigate();
-    const [attemptedSubmit, setAttemptedSubmit] = useState(false);
+    const [attemptedSubmit] = useState(false);
 
     const {
         control,
         handleSubmit,
         formState: { errors },
     } = useForm({
-        resolver: yupResolver(schemaJoin),
+        resolver: yupResolver(schemaSignup),
         mode: 'onChange',
     });
 
     const onSubmit = (data) => {
-        setAttemptedSubmit(true);
-        if (Object.keys(errors).length === 0) {
-            console.log(data);
+        SignupApi(data, callbackFunctions);
+    };
+
+    const callbackFunctions = {
+        navigateSuccess: () => {
+            alert('이메일을 확인해주세요. 이메일 인증이 완료되면 회원가입이 완료됩니다!');
             navigate('/auth/login');
-        }
+        },
+        navigateError: (error) => {
+            if (error.response && error.response.status === 409) {
+                alert('이미 사용중인 이메일입니다. 다른 이메일을 입력해주세요.');
+            } else {
+                alert('회원가입에 실패했습니다. 다시 시도해주세요.');
+            }
+        },
     };
 
     return (
@@ -100,7 +111,7 @@ const Join = () => {
     );
 };
 
-export default Join;
+export default Signup;
 
 const SignupForm = styled.form`
     display: flex;
