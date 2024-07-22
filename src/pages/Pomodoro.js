@@ -1,12 +1,13 @@
+// Pomodoro.jsx
 import React, { useEffect, useState } from 'react';
-import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import styled from 'styled-components';
 import Sound from '../assets/alarm.mp3';
 import Header from '../components/Header';
+import Settings from '../components/Pomodoro/Settings';
+import TimerDisplay from '../components/Pomodoro/TimerDisplay';
 import TinyButton from '../components/TinyButton';
 import pomodoroLogo from '../img/pomodoroLogo.svg';
-import { Theme } from "../styles/Theme";
 
 const Pomodoro = () => {
   const [workMinutes, setWorkMinutes] = useState('');
@@ -124,84 +125,38 @@ const Pomodoro = () => {
     <Div>
       <Header />
       <Container>
-        <Left>
-          <SideTitle>주기설정</SideTitle>
-          <SettingBox>
-            <h3>집중시간</h3>
-            <Input
-              type='number'
-              value={workMinutes}
-              onChange={(e) => setWorkMinutes(e.target.value)}
-              placeholder='분을 입력해주세요'
-              min='1'
-              max='60'
-            />
-          </SettingBox>
-          <SettingBox>
-            <h3>휴식시간</h3>
-            <Input
-              type='number'
-              value={breakMinutes}
-              onChange={(e) => setBreakMinutes(e.target.value)}
-              placeholder='분을 입력해주세요'
-              min='0'
-              max='60'
-            />
-          </SettingBox>
-          <SideTitle>최근이용</SideTitle>
-          <Report>
-            {history.map((item, index) => (
-              <HistoryItem
-                key={index}
-                onClick={() =>
-                  handleHistoryClick(item.workMinutes, item.breakMinutes)
-                }
-              >
-                {item.workMinutes}분 / {item.breakMinutes}분
-              </HistoryItem>
-            ))}
-          </Report>
-        </Left>
+        <Settings
+          workMinutes={workMinutes}
+          setWorkMinutes={setWorkMinutes}
+          breakMinutes={breakMinutes}
+          setBreakMinutes={setBreakMinutes}
+          history={history}
+          handleHistoryClick={handleHistoryClick}
+        />
         <Right>
           <Title><Logo src={pomodoroLogo} alt="Pomodoro Logo" /></Title>
           <Info>
             {isRunning && `${cycleCount}번째 타임`}{' '}
           </Info>
           <TimerContainer>
-            <Timer1>
-              <StyledTitle>{'집중시간'}</StyledTitle>
-              <TimerSection>
-                <TimerDisplay>
-                  <CircularProgressbar
-                    value={getPercentage(timeLeft)}
-                    text={timeLeft !== null && !isBreak ? formatTime(timeLeft) : '00:00'}
-                    styles={buildStyles({
-                      pathColor: `#FFFFFF`,
-                      textColor: '#E93C3C',
-                      trailColor: '#E93C3C',
-                      backgroundColor: '#FFFFFF',
-                    })}
-                  />
-                </TimerDisplay>
-              </TimerSection>
-            </Timer1>
-            <Timer2>
-              <StyledTitle>{'휴식시간'}</StyledTitle>
-              <TimerSection>
-                <TimerDisplay>
-                  <CircularProgressbar
-                    value={getPercentage(timeLeft)}
-                    text={timeLeft !== null && isBreak ? formatTime(timeLeft) : '00:00'}
-                    styles={buildStyles({
-                      pathColor: `#FFFFFF`,
-                      textColor: '#E93C3C',
-                      trailColor: '#E93C3C',
-                      backgroundColor: '#FFFFFF',
-                    })}
-                  />
-                </TimerDisplay>
-              </TimerSection>
-            </Timer2>
+            <TimerDisplay
+              label={'집중시간'}
+              timeLeft={timeLeft}
+              isBreak={false}
+              workMinutes={workMinutes}
+              breakMinutes={breakMinutes}
+              formatTime={formatTime}
+              getPercentage={getPercentage}
+            />
+            <TimerDisplay
+              label={'휴식시간'}
+              timeLeft={timeLeft}
+              isBreak={true}
+              workMinutes={workMinutes}
+              breakMinutes={breakMinutes}
+              formatTime={formatTime}
+              getPercentage={getPercentage}
+            />
           </TimerContainer>
           <audio id='notificationSound' src={Sound}></audio>
           <ButtonGroup>
@@ -227,68 +182,6 @@ const Div = styled.div`
 const Container = styled.div`
   padding-top: 80px;
   display: flex;
-`;
-
-const Left = styled.div`
-  width: 25vw;
-  min-width: 170px;
-  height: 80%;
-  background-color: ${(props) => props.theme.colors.pink1};
-  padding: 30px;
-  border-radius: 30px;
-  margin-left: 7vw;
-`;
-
-const SideTitle = styled.h3`
-  margin-top: 20px;
-  ${(props) => props.theme.fonts.PageNumber};
-  border-bottom: solid 2px ${(props) => props.theme.colors.pink3};
-  padding-bottom: 7px;
-  margin-bottom: 30px;
-`;
-const Report = styled.div`
-  background-color: ${(props) => props.theme.colors.white};
-  min-height: 17vw;
-  max-height: 20vw;
-  height: 50%;
-  width: 95%;
-  border-radius: 5px;
-  overflow-y: scroll;
-  padding: 20px;
-`;
-const HistoryItem = styled.div`
-  ${(props) => props.theme.fonts.PageNumber};
-  margin-bottom: 15px;
-  cursor: pointer;
-
-  font-weight: 400;
-  font-size: 17px;
-  &:hover {
-    color: ${(props) => props.theme.colors.pink3};
-  }
-`;
-const SettingBox = styled.div`
-  background-color: ${(props) => props.theme.colors.pink1};
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-radius: 30px;
-  h3 {
-    font-weight: 400;
-    font-size: 17px;
-  }
-`;
-
-const Input = styled.input`
-  margin-top: 10px;
-  width: 90%;
-  height: 20px;
-  padding: 10px;
-  outline: none;
-  border: none;
-  border-radius: 5px;
-  margin-bottom: 10px;
 `;
 
 const Right = styled.div`
@@ -323,36 +216,6 @@ const TimerContainer = styled.div`
   margin: 20px 0;
 `;
 
-const TimerDisplay = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-size: 100px;
-  padding: 10px;
-`;
-
-const TimerSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 20px;
-`;
-
-const Timer1 = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 45%;
-`;
-
-const Timer2 = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 45%;
-`;
-
 const ButtonGroup = styled.div`
   display: flex;
   flex-direction: row;
@@ -363,24 +226,6 @@ const ButtonGroup = styled.div`
 const Logo = styled.img`
   width: 309px;
   height: 61px;
-`;
-
-const StyledTitle = styled.div`
-    ${Theme.fonts.tinyButton};
-    color: ${Theme.colors.white};
-    padding: 10px;
-    background-color: ${Theme.colors.pink2};
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-top: 10px;
-    width: 120px;
-    height: 40px;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-
-    &:hover {
-        background-color: ${Theme.colors.pink3};
-    }
 `;
 
 export default Pomodoro;
