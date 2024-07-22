@@ -61,14 +61,14 @@ const Login = () => {
                             )}
                         />
                         <Controller
-                            name="pw"
+                            name="password"
                             control={control}
                             render={({ field }) => (
                                 <InputField
                                     label="비밀번호"
                                     placeholder="password"
                                     type="password"
-                                    error={errors.pw?.message}
+                                    error={errors.password?.message}
                                     {...field}
                                 />
                             )}
