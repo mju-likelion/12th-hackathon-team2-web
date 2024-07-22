@@ -26,7 +26,7 @@ function App() {
         <DiaryProvider>
           <RoomsProvider>
             <Routes>
-              <Route path="/auth/login" element={<Login />} />
+              <Route path="/" element={<Login />} />
               <Route path="/auth/signup" element={<Signup />} />
               <Route path="/main" element={<Main />} />
               <Route path="/planners" element={<Planner />} />
