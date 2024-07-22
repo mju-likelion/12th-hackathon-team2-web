@@ -5,6 +5,7 @@
   "dependencies": {
     "@babel/helper-validator-option": "^7.24.8",
     "@hookform/resolvers": "^3.9.0",
+    "@remix-run/router": "^1.18.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -29,9 +30,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start:ssl": "HTTPS=true SSL_CRT_FILE=./cert/mutsideout.com+4.pem SSL_KEY_FILE=./cert/mutsideout.com+4-key.pem react-scripts start"
-  },
-  "eslintConfig": {
-
   },
   "eslintConfig": {
     "extends": [
