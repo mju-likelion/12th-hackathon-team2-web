@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import React, { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -14,7 +15,7 @@ const Header = () => {
 
   const isActive = (path) => {
     return activePath.startsWith(path.toLowerCase());
-  };  
+  };
 
   const handleNavigation = (path) => {
     navigate(path);
@@ -25,10 +26,10 @@ const Header = () => {
     LogoutApi({
       navigateSuccess: () => {
         console.log('Logged out');
-        window.sessionStorage.setItem('loginState', false);
-        window.location.replace('auth/login');
+        Cookies.remove('loginToken');
+        window.location.replace('/auth/login');
         alert('로그아웃되었습니다. 다시 로그인화면으로 돌아갑니다.');
-        setMenuOpen(false); 
+        setMenuOpen(false);
       },
       navigateError: (error) => {
         console.error('Logout failed', error);

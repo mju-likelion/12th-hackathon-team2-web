@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { PlannersGetApi } from "../api/Planners/PlannersGetApi";
+import { PlannersPostApi } from "../api/Planners/PlannersPostApi";
 import Header from "../components/Header";
 import PlannerHeader from "../components/Planner/PlannerHeader";
 import PlannerListContainer from "../components/Planner/PlannerListContainer";
@@ -82,12 +83,21 @@ const Planner = () => {
   };
 
   const handleAddItem = () => {
-    const newItem = {
-      plannerId: Date.now().toString(),
-      content: "할 일을 입력하세요",
-      completed: false,
-    };
-    setToDoList((prevList) => [...prevList, newItem]);
+    const content = "할 일을 입력하세요";
+    PlannersPostApi(content)
+      .then(response => {
+        if (response.data.statusCode === "201 CREATED") {
+          const newItem = {
+            plannerId: Date.now().toString(),
+            content: content,
+            completed: false,
+          };
+          setToDoList((prevList) => [...prevList, newItem]);
+        }
+      })
+      .catch(error => {
+        console.error("There was an error creating the planner item!", error);
+      });
   };
 
   const sortedCompletedList = completedList.sort(
@@ -110,7 +120,6 @@ const Planner = () => {
                 completedList={sortedCompletedList}
                 handleCheck={handleCheck}
                 handleUpdate={handleUpdate}
-                handleAddItem={handleAddItem}
               />
               <AddButtonContainer>
                 <TinyButton onClick={handleAddItem}>추가하기</TinyButton>
