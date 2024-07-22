@@ -3,6 +3,7 @@ import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
+import { LoginApi } from '../api/Auth/LoginApi';
 import BigButton from "../components/BigButton";
 import Container from "../components/Container";
 import InputField from "../components/InputField";
@@ -33,8 +34,10 @@ const Login = () => {
     });
 
     const onSubmit = (data) => {
-        console.log(data);
-        handleLoginClick();
+        LoginApi(data, {
+            navigateSuccess: handleLoginClick,
+            navigateError: (error) => console.error(error),
+        });
     };
 
     return (

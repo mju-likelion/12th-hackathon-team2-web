@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { Theme } from '../styles/Theme';
+import { LogoutApi } from '../api/Auth/LogoutApi';
+import { Theme } from "../styles/Theme";
 import SurveyButton from './SurveyButton';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
@@ -21,9 +22,16 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    console.log('Logged out');
-    navigate('/auth/login');
-    setMenuOpen(false);
+    LogoutApi({}, {
+      navigateSuccess: () => {
+        console.log('Logged out');
+        navigate('/auth/login');
+        setMenuOpen(false);
+      },
+      navigateError: (error) => {
+        console.error('Logout failed', error);
+      },
+    });
   };
 
   return (
@@ -36,25 +44,25 @@ const Header = () => {
       </Sidebar>
       <Menu open={menuOpen}>
         <MenuItem
-          active={isActive('/diaries')}
+          $active={isActive('/diaries')}
           onClick={() => handleNavigation('/diaries')}
         >
           감정일기
         </MenuItem>
         <MenuItem
-          active={isActive('/rooms')}
+          $active={isActive('/rooms')}
           onClick={() => handleNavigation('/rooms')}
         >
           집중세션
         </MenuItem>
         <MenuItem
-          active={isActive('/planners')}
+          $active={isActive('/planners')}
           onClick={() => handleNavigation('/planners')}
         >
           플래너
         </MenuItem>
         <MenuItem
-          active={isActive('/pomodoro')}
+          $active={isActive('/pomodoro')}
           onClick={() => handleNavigation('/pomodoro')}
         >
           뽀모도로
@@ -153,17 +161,17 @@ const MenuItem = styled.div`
   cursor: pointer;
   text-align: center;
   padding: 7px 15px;
-  font-weight: ${(props) => (props.active ? 'bold' : 'normal')};
+  font-weight: ${(props) => (props.$active ? 'bold' : 'normal')};
   border-bottom: ${(props) =>
-    props.active ? `5px solid ${props.theme.colors.pink3}` : 'none'};
+    props.$active ? `5px solid ${props.theme.colors.pink3}` : 'none'};
   color: ${(props) =>
-    props.active ? props.theme.colors.black : props.theme.colors.gray};
+    props.$active ? props.theme.colors.black : props.theme.colors.gray};
   white-space: nowrap;
 
   @media (max-width: 1030px) {
     padding: 5px 10px;
     border-bottom: ${(props) =>
-      props.active ? `3px solid ${props.theme.colors.pink3}` : 'none'};
+      props.$active ? `3px solid ${props.theme.colors.pink3}` : 'none'};
   }
 
   @media (max-width: 680px) {
