@@ -167,36 +167,42 @@ const Pomodoro = () => {
           <Info>
             {isRunning && `${cycleCount}번째 타임`}{' '}
           </Info>
-          <StyledTitle>{'집중시간'}</StyledTitle>
-          <TimerSection>
-            <TimerDisplay>
-              <CircularProgressbar
-                value={getPercentage(timeLeft)}
-                text={timeLeft !== null && !isBreak ? formatTime(timeLeft) : '00:00'}
-                styles={buildStyles({
-                  pathColor: `#FFFFFF`,
-                  textColor: '#E93C3C',
-                  trailColor: '#E93C3C',
-                  backgroundColor: '#FFFFFF',
-                })}
-              />
-            </TimerDisplay>
-          </TimerSection>
-          <StyledTitle>{'휴식시간'}</StyledTitle>
-          <TimerSection>
-            <TimerDisplay>
-              <CircularProgressbar
-                value={getPercentage(timeLeft)}
-                text={timeLeft !== null && isBreak ? formatTime(timeLeft) : '00:00'}
-                styles={buildStyles({
-                  pathColor: `#FFFFFF`,
-                  textColor: '#E93C3C',
-                  trailColor: '#E93C3C',
-                  backgroundColor: '#FFFFFF',
-                })}
-              />
-            </TimerDisplay>
-          </TimerSection>
+          <TimerContainer>
+            <Timer1>
+              <StyledTitle>{'집중시간'}</StyledTitle>
+              <TimerSection>
+                <TimerDisplay>
+                  <CircularProgressbar
+                    value={getPercentage(timeLeft)}
+                    text={timeLeft !== null && !isBreak ? formatTime(timeLeft) : '00:00'}
+                    styles={buildStyles({
+                      pathColor: `#FFFFFF`,
+                      textColor: '#E93C3C',
+                      trailColor: '#E93C3C',
+                      backgroundColor: '#FFFFFF',
+                    })}
+                  />
+                </TimerDisplay>
+              </TimerSection>
+            </Timer1>
+            <Timer2>
+              <StyledTitle>{'휴식시간'}</StyledTitle>
+              <TimerSection>
+                <TimerDisplay>
+                  <CircularProgressbar
+                    value={getPercentage(timeLeft)}
+                    text={timeLeft !== null && isBreak ? formatTime(timeLeft) : '00:00'}
+                    styles={buildStyles({
+                      pathColor: `#FFFFFF`,
+                      textColor: '#E93C3C',
+                      trailColor: '#E93C3C',
+                      backgroundColor: '#FFFFFF',
+                    })}
+                  />
+                </TimerDisplay>
+              </TimerSection>
+            </Timer2>
+          </TimerContainer>
           <audio id='notificationSound' src={Sound}></audio>
           <ButtonGroup>
             <TinyButton onClick={handleStart} disabled={isRunning}>
@@ -309,6 +315,14 @@ const Info = styled.div`
   }
 `;
 
+const TimerContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin: 20px 0;
+`;
+
 const TimerDisplay = styled.div`
   display: flex;
   flex-direction: row;
@@ -323,6 +337,20 @@ const TimerSection = styled.div`
   align-items: center;
   width: 100%;
   margin-bottom: 20px;
+`;
+
+const Timer1 = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 45%;
+`;
+
+const Timer2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 45%;
 `;
 
 const ButtonGroup = styled.div`
