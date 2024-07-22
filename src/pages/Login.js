@@ -38,9 +38,13 @@ const Login = () => {
     });
 
     const onSubmit = async (data) => {
+        const callbackFunctions = {
+            navigateSuccess: handleLoginClick,
+            navigateError: (error) => console.error(error)
+        };
+
         try {
-            await LoginApi(data);
-            handleLoginClick();
+            await LoginApi(data, callbackFunctions);
         } catch (error) {
             console.error(error);
         }
@@ -61,7 +65,7 @@ const Login = () => {
                             render={({ field }) => (
                                 <InputField
                                     label="이메일"
-                                    placeholder="abcd@email.com"
+                                    placeholder="이메일을 입력하세요"
                                     error={errors.email?.message}
                                     {...field}
                                 />
