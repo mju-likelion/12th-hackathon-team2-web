@@ -3,7 +3,7 @@ import { Axios } from '../Axios';
 
 export const LogoutApi = (callbackFunctions) => {
     const { navigateSuccess, navigateError } = callbackFunctions;
-    Axios.post('/auth/logout')
+    Axios.get('/auth/logout')
         .then(() => {
             Cookies.remove('loginToken');
             navigateSuccess();
