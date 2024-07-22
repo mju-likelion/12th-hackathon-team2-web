@@ -134,6 +134,8 @@ export const Theme = {
         pink1: "#FDEFEE",
         pink2: "#F7A29D",
         pink3: "#F77770",
+        pink4: "#F85959",
+        pink5: "#E93C3C",
         gray: "#B1B1B1",
         black: "#000000",
         white: "#FFFFFF",

@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 import { FaClock } from 'react-icons/fa';
 import styled from 'styled-components';
 import Sound from '../assets/alarm.mp3';
 import Header from '../components/Header';
+import Timebox from '../components/Timebox';
 import TinyButton from '../components/TinyButton';
+import pomodoroLogo from '../img/pomodoroLogo.svg';
 
 const Pomodoro = () => {
   const [workMinutes, setWorkMinutes] = useState('');
@@ -112,6 +116,11 @@ const Pomodoro = () => {
     return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
   };
 
+  const getPercentage = (time) => {
+    const total = isBreak ? parseInt(breakMinutes) * 60 * 1000 : parseInt(workMinutes) * 60 * 1000;
+    return ((total - time) / total) * 100;
+  };
+
   return (
     <Div>
       <Header />
@@ -133,15 +142,37 @@ const Pomodoro = () => {
           ))}
         </History>
         <Right>
-          <Title>뽀모도로</Title>
+          <Title><Logo src={pomodoroLogo} alt="Pomodoro Logo" /></Title>
           <Info>
             {isRunning && `${cycleCount}번째 타임`}{' '}
-            <span>{isBreak ? '<휴식 시간>' : '<집중시간>'}</span>
           </Info>
-
           <TimerDisplay>
-            <FaClock style={{ marginRight: '10px', width: '20%' }} />
-            {timeLeft !== null ? formatTime(timeLeft) : '00:00'}
+            <TimerSection>
+              <Timebox>{'집중시간'}</Timebox>
+              <CircularProgressbar
+                value={getPercentage(timeLeft)}
+                text={timeLeft !== null && !isBreak ? formatTime(timeLeft) : '00:00'}
+                styles={buildStyles({
+                  pathColor: `#E93C3C`,
+                  textColor: '#E93C3C',
+                  trailColor: '#E93C3C',
+                  backgroundColor: '#FFFFFF',
+                })}
+              />
+            </TimerSection>
+            <TimerSection>
+              <Timebox>{'휴식시간'}</Timebox>
+              <CircularProgressbar
+                value={getPercentage(timeLeft)}
+                text={timeLeft !== null && isBreak ? formatTime(timeLeft) : '00:00'}
+                styles={buildStyles({
+                  pathColor: `#E93C3C`,
+                  textColor: '#E93C3C',
+                  trailColor: '#E93C3C',
+                  backgroundColor: '#FFFFFF',
+                })}
+              />
+            </TimerSection>
           </TimerDisplay>
           <audio id='notificationSound' src={Sound}></audio>
           <ButtonGroup>
@@ -153,32 +184,6 @@ const Pomodoro = () => {
             </TinyButton>
             <TinyButton onClick={handleReset}>리셋</TinyButton>
           </ButtonGroup>
-          <Settings>
-            <SettingBox>
-              <h3>집중시간</h3>
-              <Input
-                type='number'
-                value={workMinutes}
-                onChange={(e) => setWorkMinutes(e.target.value)}
-                placeholder='분을 입력해주세요'
-                min='1'
-                max='60'
-                disabled={isRunning}
-              />
-            </SettingBox>
-            <SettingBox>
-              <h3>휴식시간</h3>
-              <Input
-                type='number'
-                value={breakMinutes}
-                onChange={(e) => setBreakMinutes(e.target.value)}
-                placeholder='분을 입력해주세요'
-                min='0'
-                max='60'
-                disabled={isRunning}
-              />
-            </SettingBox>
-          </Settings>
         </Right>
       </Container>
     </Div>
@@ -225,16 +230,17 @@ const HistoryItem = styled.div`
 
 const Right = styled.div`
   flex: 1;
+  background-color: ${(props) => props.theme.colors.pink1};
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 700px;
+  max-width: 910px;
+  height: 773px;
   margin: auto;
 `;
 
 const Title = styled.div`
-  font-size: 1.5em;
-  margin-bottom: 0.5em;
+  margin-top: 73px;
   ${(props) => props.theme.fonts.Context};
 `;
 
@@ -249,46 +255,32 @@ const Info = styled.div`
 
 const TimerDisplay = styled.div`
   display: flex;
+  justify-content: space-between;
+  width: 100%;
   font-size: 100px;
   padding: 10px;
+`;
+
+const TimerSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
 `;
 
 const ButtonGroup = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 2.7vw;
+  gap: 4.7vw;
   margin-bottom: 80px;
 `;
 
-const Settings = styled.div`
-  display: flex;
-  justify-content: space-around;
-  gap: 30px;
-  h3 {
-    text-align: center;
-    ${(props) => props.theme.fonts.PageNumber};
-  }
-`;
-
-const SettingBox = styled.div`
-  background-color: ${(props) => props.theme.colors.pink1};
-  width: 27vw;
-  height: 11vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 30px;
-`;
-
-const Input = styled.input`
-  width: 70%;
-  height: 30px;
-  margin: 10px;
-  padding: 10px;
-  outline: none;
-  border: none;
-  border-radius: 5px;
+// const Timebox = styled.div`
+//   color: ${(props) => props.theme.colors.pink3};
+// `;
+const Logo = styled.img`
+  width: 309px;
+  height: 61px;
 `;
 
 export default Pomodoro;
