@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
-import PlannerHeader from "../components/PlannerHeader";
-import PlannerListContainer from "../components/PlannerListContainer";
-import PlannerTabs from "../components/PlannerTabs";
-import PlannerTopBar from "../components/PlannerTopBar";
+import PlannerHeader from "../components/Planner/PlannerHeader";
+import PlannerListContainer from "../components/Planner/PlannerListContainer";
+import PlannerTabs from "../components/Planner/PlannerTabs";
+import PlannerTopBar from "../components/Planner/PlannerTopBar";
 import TinyButton from "../components/TinyButton";
 
 const formatDate = (date) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import PlannerIcon from '../img/PlannerIcon.svg';
+import PlannerIcon from '../../img/PlannerIcon.svg';
 
 const PlannerTopBar = ({ toDoCount }) => (
     <TopBarContainer>

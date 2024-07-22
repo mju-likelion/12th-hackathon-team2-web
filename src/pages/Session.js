@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Pagination from '../components/Pagination';
-import { useRooms } from '../components/RoomsContext';
-import RoomsList from '../components/RoomsList';
-import SmallButton from '../components/SmallButton';
 import Header from '../components/Header';
+import Pagination from '../components/Pagination';
+import { useRooms } from '../components/Session/RoomsContext';
+import RoomsList from '../components/Session/RoomsList';
+import SmallButton from '../components/SmallButton';
 
 const SessionPage = () => {
   const { rooms } = useRooms();
