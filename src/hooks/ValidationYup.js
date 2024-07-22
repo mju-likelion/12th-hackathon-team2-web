@@ -31,7 +31,7 @@ export const schemaLogin = yup.object().shape({
     .string()
     .required('사용하실 이메일을 입력해주세요.')
     .email('이메일형식에 맞지 않습니다.'),
-  pw: yup
+  password: yup
     .string()
     .required('문자와 숫자를 조합하여 8~14자 사이로 입력해주세요.')
     .max(14, '비밀번호는 최대 14자리로 입력해주세요.')

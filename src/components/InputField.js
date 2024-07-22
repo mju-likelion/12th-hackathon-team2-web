@@ -1,19 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 
-const InputField = ({ label, placeholder, type = "text", error, attemptedSubmit, ...props }) => {
+const InputField = React.forwardRef(({ label, placeholder, type = "text", error, attemptedSubmit, ...props }, ref) => {
     return (
         <InputWrapper>
             <InputLabel>{label}</InputLabel>
             <InputContainer>
-                <StyledInputField type={type} placeholder={placeholder} {...props} />
-                <ErrorText hasError={!!error}>
+                <StyledInputField ref={ref} type={type} placeholder={placeholder} {...props} />
+                <ErrorText showError={!!error}>
                     {error || ' '}
                 </ErrorText>
             </InputContainer>
         </InputWrapper>
     );
-};
+});
+
+InputField.displayName = "InputField";
 
 export default InputField;
 
@@ -50,9 +52,10 @@ const StyledInputField = styled.input`
     background: ${(props) => props.theme.colors.white};
 `;
 
-const ErrorText = styled.span`
+
+const ErrorText = styled(({ showError, ...rest }) => <span {...rest} />)`
     ${props => props.theme.fonts.helperText};
-    color: ${(props) => (props.hasError ? props.theme.colors.blue : props.theme.colors.black)};
+    color: ${(props) => (props.showError ? props.theme.colors.blue : props.theme.colors.black)};
     position: absolute;
     top: 100%;
     left: 5%;

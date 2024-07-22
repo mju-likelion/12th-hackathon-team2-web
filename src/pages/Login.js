@@ -31,13 +31,19 @@ const Login = () => {
     } = useForm({
         resolver: yupResolver(schemaLogin),
         mode: 'onChange',
+        defaultValues: {
+            email: "",
+            password: ""
+        }
     });
 
-    const onSubmit = (data) => {
-        LoginApi(data, {
-            navigateSuccess: handleLoginClick,
-            navigateError: (error) => console.error(error),
-        });
+    const onSubmit = async (data) => {
+        try {
+            await LoginApi(data);
+            handleLoginClick();
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
@@ -51,6 +57,7 @@ const Login = () => {
                         <Controller
                             name="email"
                             control={control}
+                            defaultValue=""
                             render={({ field }) => (
                                 <InputField
                                     label="이메일"
@@ -63,6 +70,7 @@ const Login = () => {
                         <Controller
                             name="password"
                             control={control}
+                            defaultValue=""
                             render={({ field }) => (
                                 <InputField
                                     label="비밀번호"
