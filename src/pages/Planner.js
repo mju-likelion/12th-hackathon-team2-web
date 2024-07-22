@@ -14,7 +14,7 @@ const formatDate = (date) => {
   const month = String(d.getMonth() + 1).padStart(2, "0");
   const day = String(d.getDate()).padStart(2, "0");
 
-  return `${year}-${month}-${day} `;
+  return `${year}-${month}-${day}`;
 };
 
 const Planner = () => {
@@ -26,7 +26,7 @@ const Planner = () => {
     PlannersGetApi()
       .then(response => {
         if (response.data.statusCode === "200 OK") {
-          setToDoList(response.data.data);
+          setToDoList(Array.isArray(response.data.data) ? response.data.data : []);
         }
       })
       .catch(error => {
