@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { LogoutApi } from '../api/Auth/LogoutApi';
 import { Theme } from "../styles/Theme";
 import SurveyButton from './SurveyButton';
+
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -19,9 +21,16 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    console.log('Logged out');
-    navigate('/auth/login');
-    setMenuOpen(false);
+    LogoutApi({}, {
+      navigateSuccess: () => {
+        console.log('Logged out');
+        navigate('/auth/login');
+        setMenuOpen(false);
+      },
+      navigateError: (error) => {
+        console.error('Logout failed', error);
+      },
+    });
   };
 
   return (
@@ -57,8 +66,6 @@ const Header = () => {
     </HeaderContainer>
   );
 };
-
-
 
 const HeaderContainer = styled.div`
   display: flex;
