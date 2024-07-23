@@ -97,7 +97,7 @@ const Planner = () => {
       .then(response => {
         if (response.data.statusCode === "201 CREATED") {
           const newItem = {
-            plannerId: response.data.data.plannerId,
+            plannerId: response.data.plannerId,
             content: content,
             completed: false,
           };
