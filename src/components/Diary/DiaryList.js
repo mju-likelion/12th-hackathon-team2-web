@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 const DiaryList = ({ entries, onEntryClick }) => (
   <ListContainer>
-    {entries.map((entry, index) => (
-      <ItemContainer key={index} onClick={() => onEntryClick(index)}>
+    {entries.map((entry) => (
+      <ItemContainer key={entry.id} onClick={() => onEntryClick(entry.id)}>
         <DiaryTitle>{entry.title}</DiaryTitle>
         <DiaryDate>{entry.date}</DiaryDate>
       </ItemContainer>

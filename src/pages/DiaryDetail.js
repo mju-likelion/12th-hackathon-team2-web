@@ -1,89 +1,101 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { useDiary } from '../components/Diary/DiaryContext';
 import DiaryDetailForm from '../components/Diary/DiaryDetailForm';
 import Header from '../components/Header';
 import TinyButton from '../components/TinyButton';
 import { schemaDiaryDetail } from '../hooks/ValidationYup';
-
-const TITLE_MAX_LENGTH = 40;
+import getDiary from '../api/Diaries/DiariesDetailGetApi';
+import updateDiary from '../api/Diaries/DiariesPatchApi';
+import deleteDiary from '../api/Diaries/DiariesDeleteApi';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const DiaryDetail = () => {
-  const { entries, editEntry, deleteEntry } = useDiary();
   const { id } = useParams();
   const navigate = useNavigate();
 
   const [entry, setEntry] = useState({ title: '', content: '', date: '' });
-  const [titleError, setTitleError] = useState('');
-
-  useEffect(() => {
-    const fetchedEntry = entries[parseInt(id)] || {
-      title: '',
-      content: '',
-      date: '',
-    };
-    setEntry(fetchedEntry);
-  }, [entries, id]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const {
     control,
     handleSubmit,
     formState: { errors },
-    setValue,
+    reset,
   } = useForm({
     resolver: yupResolver(schemaDiaryDetail),
     mode: 'onChange',
     defaultValues: {
-      title: entry.title,
-      content: entry.content,
+      title: '',
+      content: '',
     },
   });
 
   useEffect(() => {
-    setValue('title', entry.title);
-    setValue('content', entry.content);
-  }, [entry, setValue]);
+    const fetchDiary = async () => {
+      try {
+        setLoading(true);
+        const response = await getDiary(id);
+        const diaryData = response.data;
+        setEntry({
+          id: diaryData.id,
+          title: diaryData.title,
+          content: diaryData.content,
+          date: diaryData.createdAt,
+        });
+        reset({
+          title: diaryData.title,
+          content: diaryData.content,
+        });
+      } catch (err) {
+        setError('일기조회실패');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const handleSaveEntry = (data) => {
-    if (data.title.length > TITLE_MAX_LENGTH) {
-      setTitleError(
-        `타이틀은 최대 ${TITLE_MAX_LENGTH}자까지 입력할 수 있습니다.`
-      );
-      return;
+    fetchDiary();
+  }, [id, reset]);
+
+  const handleSaveEntry = async (data) => {
+    const updatedEntry = {
+      title: data.title,
+      content: data.content,
+    };
+
+    try {
+      await updateDiary(entry.id, updatedEntry);
+      navigate('/diaries');
+    } catch (err) {
+      setError('일기수정실패');
+      console.error(err);
     }
-    const updatedEntry = { ...entry, title: data.title, content: data.content };
-    editEntry(parseInt(id), updatedEntry);
-    navigate('/diaries');
   };
 
-  const handleDeleteEntry = () => {
-    deleteEntry(parseInt(id));
-    navigate('/diaries');
+  const handleDeleteEntry = async () => {
+    try {
+      await deleteDiary(entry.id);
+      navigate('/diaries');
+    } catch (err) {
+      setError('일기삭제실패');
+      console.error(err);
+    }
   };
 
   const handleBackToList = () => {
     navigate('/diaries');
   };
 
-  const handleTitleChange = (e) => {
-    const { value } = e.target;
-    if (value.length <= TITLE_MAX_LENGTH) {
-      setValue('title', value);
-      setTitleError('');
-    } else {
-      setTitleError(
-        `타이틀은 최대 ${TITLE_MAX_LENGTH}자까지 입력할 수 있습니다.`
-      );
-    }
-  };
-
   const formattedDate = entry.date
     ? format(new Date(entry.date), 'yyyy.MM.dd')
     : '';
+
+  if (loading) return <div>로딩...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <Div>
@@ -97,10 +109,8 @@ const DiaryDetail = () => {
           control={control}
           handleSave={handleSubmit(handleSaveEntry)}
           handleDelete={handleDeleteEntry}
-          isNew={entry.title === '' && entry.content === ''}
+          isNew={false}
           errors={errors}
-          titleError={titleError}
-          onTitleChange={handleTitleChange}
         />
       </Container>
     </Div>
