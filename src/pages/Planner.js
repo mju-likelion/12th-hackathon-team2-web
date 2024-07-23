@@ -130,19 +130,24 @@ const Planner = () => {
     PlannersPostApi(content)
       .then(response => {
         if (response.data.statusCode === "201 CREATED") {
-          const newItem = {
-            plannerId: response.data.data.plannerId,
-            content: content,
-            completed: false,
-          };
-          setToDoList((prevList) => [...prevList, newItem].filter(item => item !== null));
+          return PlannersGetApi();
+        } else {
+          throw new Error("Failed to create new item");
+        }
+      })
+      .then(response => {
+        if (response.data.statusCode === "200 OK") {
+          const filteredList = response.data.data.plannerList.filter(item => item !== null);
+          setToDoList(filteredList);
+        } else {
+          throw new Error("Failed to fetch updated planner list");
         }
       })
       .catch(error => {
-        console.error("There was an error creating the planner item!", error);
+        console.error("There was an error handling the planner item!", error);
       });
   };
-
+  
   const sortedCompletedList = completedList
     .sort((a, b) => new Date(b.completedDate) - new Date(a.completedDate))
     .filter(item => item !== null);
