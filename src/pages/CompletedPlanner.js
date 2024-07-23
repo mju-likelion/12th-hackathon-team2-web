@@ -6,6 +6,7 @@ import PlannerHeader from '../components/Planner/PlannerHeader';
 import PlannerListContainer from '../components/Planner/PlannerListContainer';
 import PlannerTabs from '../components/Planner/PlannerTabs';
 import PlannerTopBar from '../components/Planner/PlannerTopBar';
+
 const CompletedPlanner = () => {
   const [activeTab, setActiveTab] = React.useState('completed');
   const [completedList, setCompletedList] = React.useState([]);

@@ -3,21 +3,19 @@ import { Axios } from '../Axios';
 export const PlannersCompleteGetApi = () => {
     return Axios.get('/planners/completed')
         .then(response => {
-            const data = response.data.data;
-            const formattedData = {};
+            const data = response.data.data.groupedPlanners;
+            const sortedData = {};
 
-            data.forEach(plan => {
-                const date = plan.modifiedDate.split('T')[0];
-                if (!formattedData[date]) {
-                    formattedData[date] = [];
-                }
-                formattedData[date].push(plan);
+            const dates = Object.keys(data).sort((a, b) => new Date(b) - new Date(a));
+
+            dates.forEach(date => {
+                sortedData[date] = data[date].filter(plan => plan !== null);
             });
 
             return {
                 statusCode: "200 OK",
                 message: "completed plans",
-                data: formattedData
+                data: sortedData
             };
         })
         .catch(error => {
