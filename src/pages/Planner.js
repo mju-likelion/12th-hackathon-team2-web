@@ -76,26 +76,31 @@ const Planner = () => {
       .then(response => {
         if (response.data.statusCode === "200 OK") {
           const updatedItem = response.data.data;
-          setToDoList((prevList) =>
-            prevList
-              .map((item) =>
-                item && item.plannerId === updatedItem.plannerId ? { ...item, content: updatedItem.content } : item
-              )
-              .filter(item => item !== null)
-          );
-          setCompletedList((prevList) =>
-            prevList
-              .map((item) =>
-                item && item.plannerId === updatedItem.plannerId ? { ...item, content: updatedItem.content } : item
-              )
-              .filter(item => item !== null)
-          );
+          if (updatedItem) {
+            setToDoList((prevList) =>
+              prevList
+                .map((item) =>
+                  item && item.plannerId === updatedItem.plannerId ? { ...item, content: updatedItem.content } : item
+                )
+                .filter(item => item !== null)
+            );
+            setCompletedList((prevList) =>
+              prevList
+                .map((item) =>
+                  item && item.plannerId === updatedItem.plannerId ? { ...item, content: updatedItem.content } : item
+                )
+                .filter(item => item !== null)
+            );
+          } else {
+            console.error("Updated item is null or undefined.");
+          }
         }
       })
       .catch(error => {
         console.error("There was an error updating the planner item!", error);
       });
   };
+  
 
   const handleAddItem = () => {
     const content = "할 일을 입력하세요";
