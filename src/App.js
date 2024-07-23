@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-d
 import { ThemeProvider } from 'styled-components';
 import { DiaryProvider } from './components/Diary/DiaryContext';
 import { RoomsProvider } from './components/Session/RoomsContext';
+import CompletedPlanner from './pages/CompletedPlanner';
 import Diary from './pages/Diary';
 import DiaryDetail from './pages/DiaryDetail';
 import Login from './pages/Login';
@@ -31,6 +32,7 @@ function App() {
               <Route path="/auth/signup" element={<Signup />} />
               <Route path="/main" element={<Main />} />
               <Route path="/planners" element={<Planner />} />
+              <Route path="/planners/completed" element={<CompletedPlanner />} />
               <Route path="/diaries" element={<Diary />} />
               <Route path="/diaries/:id" element={<DiaryDetail />} />
               <Route path="/rooms" element={<Session />} />

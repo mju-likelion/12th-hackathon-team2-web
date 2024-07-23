@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { PlannersCompleteGetApi } from "../api/Planners/PlannersCompleteGetApi";
 import { PlannersGetApi } from "../api/Planners/PlannersGetApi";
 import { PlannersPatchApi } from "../api/Planners/PlannersPatchApi";
 import { PlannersPostApi } from "../api/Planners/PlannersPostApi";
@@ -38,19 +37,7 @@ const Planner = () => {
         console.error("There was an error fetching the planner data!", error);
       });
 
-    PlannersCompleteGetApi()
-      .then(response => {
-        if (response.statusCode === "200 OK") {
-          const completedPlans = [];
-          Object.values(response.data).forEach(plans => {
-            completedPlans.push(...plans);
-          });
-          setCompletedList(completedPlans.filter(item => item !== null));
-        }
-      })
-      .catch(error => {
-        console.error("There was an error fetching the completed planner data!", error);
-      });
+
   }, []);
 
   const handleCheck = (id) => {
