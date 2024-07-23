@@ -15,7 +15,6 @@ const PlannerListContainer = ({ activeTab, toDoList, completedList, handleCheck,
                             onCheck={handleCheck} 
                             onUpdate={handleUpdate} 
                             editable={!item.completed}
-                            disabled={item.completed}
                         />
                     ))}
                 </ItemList>
