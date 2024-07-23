@@ -64,7 +64,7 @@ const AlertModal = ({ isOpen, close, message }) => {
               <div key={index}>{line}</div>
             ))}
           </ModalMessage>
-          <ModalButton onClick={close}>닫기</ModalButton>
+          <ModalButton onClick={close}>확인</ModalButton>
         </ModalView>
       </ModalBackdrop>
     </ThemeProvider>
