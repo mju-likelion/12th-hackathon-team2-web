@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { v4 as uuidv4 } from 'uuid'; // uuid 라이브러리 임포트
 import { PlannersGetApi } from "../api/Planners/PlannersGetApi";
 import { PlannersPatchApi } from "../api/Planners/PlannersPatchApi";
 import { PlannersPostApi } from "../api/Planners/PlannersPostApi";
@@ -98,7 +97,7 @@ const Planner = () => {
       .then(response => {
         if (response.data.statusCode === "201 CREATED") {
           const newItem = {
-            plannerId: uuidv4(), // UUID 형식의 아이디 생성
+            plannerId: response.data.data.plannerId,
             content: content,
             completed: false,
           };
