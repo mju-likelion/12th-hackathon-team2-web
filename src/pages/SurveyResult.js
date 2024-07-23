@@ -1,26 +1,42 @@
-import React from "react";
-import Header from "../components/Header";
-import styled from "styled-components";
-import TinyButton from "../components/TinyButton";
-import { useNavigate } from "react-router-dom";
-import AvocadoImage from "../img/Avocado.svg";
-import TomatoImage from "../img/Tomato.svg";
-import BananaImage from "../img/Banana.svg";
-import Rating from "../components/Rating";
+import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import Header from '../components/Header';
+import styled from 'styled-components';
+import TinyButton from '../components/TinyButton';
+import AvocadoImage from '../img/Avocado.svg';
+import TomatoImage from '../img/Tomato.svg';
+import BananaImage from '../img/Banana.svg';
+import Rating from '../components/Rating';
+
+const gradeMapping = {
+  AVOCADO: { image: AvocadoImage, name: '아보카도' },
+  TOMATO: { image: TomatoImage, name: '토마토' },
+  BANANA: { image: BananaImage, name: '바나나' },
+};
 
 const SurveyResult = () => {
+  const location = useLocation();
   const navigate = useNavigate();
+  const { resultData } = location.state || {};
+
+  if (!resultData) {
+    return <div>결과 데이터를 불러오는 중입니다...</div>;
+  }
+
+  console.log('Result Data:', resultData);
+
+  const gradeInfo = gradeMapping[resultData.data.grade] || {};
 
   return (
     <Div>
       <Header />
       <Container>
-        <Rating circleImage={AvocadoImage} grade={"아보카도"} />
+        <Rating circleImage={gradeInfo.image} grade={gradeInfo.name} />
         <Info>
-          정확한 ADHD 검사를 위해서는
-          <br /> 추가적인 검사가 필요해요.
+          {resultData.message ||
+            '정확한 ADHD 검사를 위해서는 추가적인 검사가 필요해요.'}
         </Info>
-        <TinyButton onClick={() => navigate("/main")}>확인</TinyButton>
+        <TinyButton onClick={() => navigate('/main')}>확인</TinyButton>
       </Container>
     </Div>
   );
