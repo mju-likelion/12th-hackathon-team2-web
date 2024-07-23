@@ -29,7 +29,7 @@ const Signup = () => {
 
   const callbackFunctions = {
     navigateSuccess: () => {
-      setModalMessage('회원가입이 완료되었습니다! \n 확인 버튼을 누르면 설문 조사가 시작됩니다 \n 설문조사는 회원가입시 1회만 진행됩니다.');
+      setModalMessage('회원가입이 완료되었습니다! \n확인 버튼을 누르면 설문 조사가 시작됩니다. \n설문조사는 회원가입시 1회만 진행됩니다.');
       setModalOpen(true);
     },
     navigateError: (error) => {
