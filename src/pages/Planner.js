@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { PlannersGetApi } from "../api/Planners/PlannersGetApi";
 import { PlannersPatchApi } from "../api/Planners/PlannersPatchApi";
 import { PlannersPostApi } from "../api/Planners/PlannersPostApi";
-import ErrorBoundary from '../components/ErrorBoundary'; // Import ErrorBoundary
 import Header from "../components/Header";
 import PlannerHeader from "../components/Planner/PlannerHeader";
 import PlannerListContainer from "../components/Planner/PlannerListContainer";
@@ -40,15 +39,17 @@ const Planner = () => {
 
   const handleCheck = (id) => {
     setToDoList((prevList) =>
-      prevList.map((item) =>
-        item && item.plannerId === id
-          ? {
-              ...item,
-              completed: !item.completed,
-              completedDate: formatDate(new Date()),
-            }
-          : item
-      ).filter(item => item !== null)
+      prevList
+        .map((item) =>
+          item && item.plannerId === id
+            ? {
+                ...item,
+                completed: !item.completed,
+                completedDate: formatDate(new Date()),
+              }
+            : item
+        )
+        .filter(item => item !== null)
     );
 
     setTimeout(() => {
@@ -56,12 +57,10 @@ const Planner = () => {
         const itemToMove = prevList.find((item) => item && item.plannerId === id);
         if (itemToMove && itemToMove.completed) {
           setCompletedList((prevCompleted) => {
-            if (
-              !prevCompleted.some((completedItem) => completedItem.plannerId === id)
-            ) {
-              return [...prevCompleted, itemToMove].sort(
-                (a, b) => new Date(b.completedDate) - new Date(a.completedDate)
-              ).filter(item => item !== null);
+            if (!prevCompleted.some((completedItem) => completedItem.plannerId === id)) {
+              return [...prevCompleted, itemToMove]
+                .sort((a, b) => new Date(b.completedDate) - new Date(a.completedDate))
+                .filter(item => item !== null);
             }
             return prevCompleted.filter(item => item !== null);
           });
@@ -78,14 +77,18 @@ const Planner = () => {
         if (response.data.statusCode === "200 OK") {
           const updatedItem = response.data.data;
           setToDoList((prevList) =>
-            prevList.map((item) =>
-              item && item.plannerId === updatedItem.plannerId ? { ...item, content: updatedItem.content } : item
-            ).filter(item => item !== null)
+            prevList
+              .map((item) =>
+                item && item.plannerId === updatedItem.plannerId ? { ...item, content: updatedItem.content } : item
+              )
+              .filter(item => item !== null)
           );
           setCompletedList((prevList) =>
-            prevList.map((item) =>
-              item && item.plannerId === updatedItem.plannerId ? { ...item, content: updatedItem.content } : item
-            ).filter(item => item !== null)
+            prevList
+              .map((item) =>
+                item && item.plannerId === updatedItem.plannerId ? { ...item, content: updatedItem.content } : item
+              )
+              .filter(item => item !== null)
           );
         }
       })
@@ -112,37 +115,35 @@ const Planner = () => {
       });
   };
 
-  const sortedCompletedList = completedList.sort(
-    (a, b) => new Date(b.completedDate) - new Date(a.completedDate)
-  ).filter(item => item !== null);
+  const sortedCompletedList = completedList
+    .sort((a, b) => new Date(b.completedDate) - new Date(a.completedDate))
+    .filter(item => item !== null);
 
   return (
-    <ErrorBoundary> {/* Wrap with ErrorBoundary */}
-      <Div>
-        <Header />
-        <PageContainer>
-          <PlannerHeader />
-          <PlannerContainer>
-            <PlannerTopBar toDoCount={toDoList.length} />
-            <Content>
-              <PlannerTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-              <InnerContent>
-                <PlannerListContainer
-                  activeTab={activeTab}
-                  toDoList={toDoList}
-                  completedList={sortedCompletedList}
-                  handleCheck={handleCheck}
-                  handleUpdate={handleUpdate}
-                />
-                <AddButtonContainer>
-                  <TinyButton onClick={handleAddItem}>추가하기</TinyButton>
-                </AddButtonContainer>
-              </InnerContent>
-            </Content>
-          </PlannerContainer>
-        </PageContainer>
-      </Div>
-    </ErrorBoundary>
+    <Div>
+      <Header />
+      <PageContainer>
+        <PlannerHeader />
+        <PlannerContainer>
+          <PlannerTopBar toDoCount={toDoList.length} />
+          <Content>
+            <PlannerTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+            <InnerContent>
+              <PlannerListContainer
+                activeTab={activeTab}
+                toDoList={toDoList.filter(item => item !== null)}
+                completedList={sortedCompletedList}
+                handleCheck={handleCheck}
+                handleUpdate={handleUpdate}
+              />
+              <AddButtonContainer>
+                <TinyButton onClick={handleAddItem}>추가하기</TinyButton>
+              </AddButtonContainer>
+            </InnerContent>
+          </Content>
+        </PlannerContainer>
+      </PageContainer>
+    </Div>
   );
 };
 
@@ -186,7 +187,7 @@ const Content = styled.div`
   width: 100%;
   position: relative;
   flex-direction: column;
-  
+
   @media (min-width: 768px) {
     flex-direction: row;
   }
@@ -220,4 +221,3 @@ const AddButtonContainer = styled.div`
     bottom: 10px;
   }
 `;
-
