@@ -103,7 +103,7 @@ const InputFieldWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 20px;
+    margin-right: 30px;
 `;
 
 const BigButtonWrapper = styled.div`
