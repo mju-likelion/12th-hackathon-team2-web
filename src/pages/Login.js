@@ -58,33 +58,16 @@ const Login = () => {
                 <LoginForm onSubmit={handleSubmit(onSubmit)}>
                     <LoginText>로그인</LoginText>
                     <InputFieldWrapper>
-                        <Controller
-                            name="email"
-                            control={control}
-                            render={({ field }) => (
-                                <InputField
-                                    label="이메일"
-                                    placeholder="이메일을 입력하세요"
-                                    error={errors.email?.message}
-                                    {...field}
-                                />
-                            )}
-                        />
-                        <Controller
-                            name="password"
-                            control={control}
-                            render={({ field }) => (
-                                <InputField
-                                    label="비밀번호"
-                                    placeholder="비밀번호를 입력하세요"
-                                    type="password"
-                                    error={errors.password?.message}
-                                    {...field}
-                                />
-                            )}
-                        />
-                        <BigButton type="submit">로그인</BigButton>
+                        <Controller name="email" control={control} render={({ field }) => (
+                            <InputField label="이메일" placeholder="이메일을 입력하세요" error={errors.email?.message} {...field} />
+                        )}/>
+                        <Controller name="password" control={control} render={({ field }) => (
+                            <InputField label="비밀번호" placeholder="비밀번호를 입력하세요" type="password" error={errors.password?.message} {...field} />
+                        )}/>
                     </InputFieldWrapper>
+                    <BigButtonWrapper>
+                        <BigButton type="submit">로그인</BigButton>
+                    </BigButtonWrapper>
                 </LoginForm>
                 <SignupWrapper>
                     <NoAccountText>계정이 없으신가요?</NoAccountText>
@@ -98,7 +81,8 @@ const Login = () => {
 export default Login;
 
 const LoginForm = styled.form`
-    width: 587px;
+    width: 100%;
+    max-width: 587px;
     padding: 40px;
     background: ${(props) => props.theme.colors.pink2};
     border-radius: 30px;
@@ -119,17 +103,27 @@ const InputFieldWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    gap: 20px;
+`;
+
+const BigButtonWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 `;
 
 const SignupWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    width: 587px;
+    width: 100%;
+    max-width: 587px;
     margin-top: 20px;
 `;
 
 const NoAccountText = styled.span`
     ${props => props.theme.fonts.noAccountText};
     color: ${(props) => props.theme.colors.black};
+    margin-right: 10px;
 `;
