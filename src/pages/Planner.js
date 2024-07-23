@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { PlannersCompleteGetApi } from "../api/Planners/PlannersCompleteGetApi"; // import the new completion API function
 import { PlannersGetApi } from "../api/Planners/PlannersGetApi";
 import { PlannersPatchApi } from "../api/Planners/PlannersPatchApi";
 import { PlannersPostApi } from "../api/Planners/PlannersPostApi";
@@ -36,10 +37,24 @@ const Planner = () => {
       .catch(error => {
         console.error("There was an error fetching the planner data!", error);
       });
+
+    PlannersCompleteGetApi()
+      .then(response => {
+        if (response.data.statusCode === "200 OK") {
+          const completedPlans = [];
+          Object.values(response.data.data).forEach(plans => {
+            completedPlans.push(...plans);
+          });
+          setCompletedList(completedPlans.filter(item => item !== null));
+        }
+      })
+      .catch(error => {
+        console.error("There was an error fetching the completed planner data!", error);
+      });
   }, []);
 
   const handleCheck = (id) => {
-    PlannersPutApi(id)
+    PlannersPutApi(id, { isCompleted: true })
       .then(response => {
         if (response.data.statusCode === "200 OK") {
           setToDoList((prevList) =>
