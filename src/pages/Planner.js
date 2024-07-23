@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { PlannersGetApi } from "../api/Planners/PlannersGetApi";
+import { PlannersPatchApi } from "../api/Planners/PlannersPatchApi";
 import { PlannersPostApi } from "../api/Planners/PlannersPostApi";
 import Header from "../components/Header";
 import PlannerHeader from "../components/Planner/PlannerHeader";
@@ -70,16 +71,24 @@ const Planner = () => {
   };
 
   const handleUpdate = (id, newText) => {
-    setToDoList((prevList) =>
-      prevList.map((item) =>
-        item.plannerId === id ? { ...item, content: newText } : item
-      )
-    );
-    setCompletedList((prevList) =>
-      prevList.map((item) =>
-        item.plannerId === id ? { ...item, content: newText } : item
-      )
-    );
+    PlannersPatchApi(id, newText)
+      .then(response => {
+        if (response.data.statusCode === "200 OK") {
+          setToDoList((prevList) =>
+            prevList.map((item) =>
+              item.plannerId === id ? { ...item, content: newText } : item
+            )
+          );
+          setCompletedList((prevList) =>
+            prevList.map((item) =>
+              item.plannerId === id ? { ...item, content: newText } : item
+            )
+          );
+        }
+      })
+      .catch(error => {
+        console.error("There was an error updating the planner item!", error);
+      });
   };
 
   const handleAddItem = () => {
