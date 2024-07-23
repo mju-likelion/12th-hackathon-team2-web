@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { PlannersGetApi } from "../api/Planners/PlannersGetApi";
 import { PlannersPatchApi } from "../api/Planners/PlannersPatchApi";
 import { PlannersPostApi } from "../api/Planners/PlannersPostApi";
+import ErrorBoundary from '../components/ErrorBoundary'; // Import ErrorBoundary
 import Header from "../components/Header";
 import PlannerHeader from "../components/Planner/PlannerHeader";
 import PlannerListContainer from "../components/Planner/PlannerListContainer";
@@ -28,7 +29,8 @@ const Planner = () => {
     PlannersGetApi()
       .then(response => {
         if (response.data.statusCode === "200 OK") {
-          setToDoList(Array.isArray(response.data.data) ? response.data.data : []);
+          const filteredList = response.data.data.plannerList.filter(item => item !== null);
+          setToDoList(filteredList);
         }
       })
       .catch(error => {
@@ -39,19 +41,19 @@ const Planner = () => {
   const handleCheck = (id) => {
     setToDoList((prevList) =>
       prevList.map((item) =>
-        item.plannerId === id
+        item && item.plannerId === id
           ? {
               ...item,
               completed: !item.completed,
               completedDate: formatDate(new Date()),
             }
           : item
-      )
+      ).filter(item => item !== null)
     );
 
     setTimeout(() => {
       setToDoList((prevList) => {
-        const itemToMove = prevList.find((item) => item.plannerId === id);
+        const itemToMove = prevList.find((item) => item && item.plannerId === id);
         if (itemToMove && itemToMove.completed) {
           setCompletedList((prevCompleted) => {
             if (
@@ -59,13 +61,13 @@ const Planner = () => {
             ) {
               return [...prevCompleted, itemToMove].sort(
                 (a, b) => new Date(b.completedDate) - new Date(a.completedDate)
-              );
+              ).filter(item => item !== null);
             }
-            return prevCompleted;
+            return prevCompleted.filter(item => item !== null);
           });
-          return prevList.filter((item) => item.plannerId !== id);
+          return prevList.filter((item) => item && item.plannerId !== id);
         }
-        return prevList;
+        return prevList.filter(item => item !== null);
       });
     }, 2000);
   };
@@ -74,15 +76,16 @@ const Planner = () => {
     PlannersPatchApi(id, newText)
       .then(response => {
         if (response.data.statusCode === "200 OK") {
+          const updatedItem = response.data.data;
           setToDoList((prevList) =>
             prevList.map((item) =>
-              item.plannerId === id ? { ...item, content: newText } : item
-            )
+              item && item.plannerId === updatedItem.plannerId ? { ...item, content: updatedItem.content } : item
+            ).filter(item => item !== null)
           );
           setCompletedList((prevList) =>
             prevList.map((item) =>
-              item.plannerId === id ? { ...item, content: newText } : item
-            )
+              item && item.plannerId === updatedItem.plannerId ? { ...item, content: updatedItem.content } : item
+            ).filter(item => item !== null)
           );
         }
       })
@@ -97,11 +100,11 @@ const Planner = () => {
       .then(response => {
         if (response.data.statusCode === "201 CREATED") {
           const newItem = {
-            plannerId: response.data.plannerId,
+            plannerId: response.data.data.plannerId,
             content: content,
             completed: false,
           };
-          setToDoList((prevList) => [...prevList, newItem]);
+          setToDoList((prevList) => [...prevList, newItem].filter(item => item !== null));
         }
       })
       .catch(error => {
@@ -111,33 +114,35 @@ const Planner = () => {
 
   const sortedCompletedList = completedList.sort(
     (a, b) => new Date(b.completedDate) - new Date(a.completedDate)
-  );
+  ).filter(item => item !== null);
 
   return (
-    <Div>
-      <Header />
-      <PageContainer>
-        <PlannerHeader />
-        <PlannerContainer>
-          <PlannerTopBar toDoCount={toDoList.length} />
-          <Content>
-            <PlannerTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-            <InnerContent>
-              <PlannerListContainer
-                activeTab={activeTab}
-                toDoList={toDoList}
-                completedList={sortedCompletedList}
-                handleCheck={handleCheck}
-                handleUpdate={handleUpdate}
-              />
-              <AddButtonContainer>
-                <TinyButton onClick={handleAddItem}>추가하기</TinyButton>
-              </AddButtonContainer>
-            </InnerContent>
-          </Content>
-        </PlannerContainer>
-      </PageContainer>
-    </Div>
+    <ErrorBoundary> {/* Wrap with ErrorBoundary */}
+      <Div>
+        <Header />
+        <PageContainer>
+          <PlannerHeader />
+          <PlannerContainer>
+            <PlannerTopBar toDoCount={toDoList.length} />
+            <Content>
+              <PlannerTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+              <InnerContent>
+                <PlannerListContainer
+                  activeTab={activeTab}
+                  toDoList={toDoList}
+                  completedList={sortedCompletedList}
+                  handleCheck={handleCheck}
+                  handleUpdate={handleUpdate}
+                />
+                <AddButtonContainer>
+                  <TinyButton onClick={handleAddItem}>추가하기</TinyButton>
+                </AddButtonContainer>
+              </InnerContent>
+            </Content>
+          </PlannerContainer>
+        </PageContainer>
+      </Div>
+    </ErrorBoundary>
   );
 };
 
@@ -215,3 +220,4 @@ const AddButtonContainer = styled.div`
     bottom: 10px;
   }
 `;
+
