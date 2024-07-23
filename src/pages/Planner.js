@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { PlannersCompleteGetApi } from "../api/Planners/PlannersCompleteGetApi";
 import { PlannersGetApi } from "../api/Planners/PlannersGetApi";
+import { PlannersPatchApi } from "../api/Planners/PlannersPatchApi";
 import { PlannersPostApi } from "../api/Planners/PlannersPostApi";
+import { PlannersPutApi } from "../api/Planners/PlannersPutApi";
 import Header from "../components/Header";
 import PlannerHeader from "../components/Planner/PlannerHeader";
 import PlannerListContainer from "../components/Planner/PlannerListContainer";
@@ -27,59 +30,99 @@ const Planner = () => {
     PlannersGetApi()
       .then(response => {
         if (response.data.statusCode === "200 OK") {
-          setToDoList(Array.isArray(response.data.data) ? response.data.data : []);
+          const filteredList = response.data.data.plannerList.filter(item => item !== null);
+          setToDoList(filteredList);
         }
       })
       .catch(error => {
         console.error("There was an error fetching the planner data!", error);
       });
+
+    PlannersCompleteGetApi()
+      .then(response => {
+        if (response.statusCode === "200 OK") {
+          const completedPlans = [];
+          Object.values(response.data).forEach(plans => {
+            completedPlans.push(...plans);
+          });
+          setCompletedList(completedPlans.filter(item => item !== null));
+        }
+      })
+      .catch(error => {
+        console.error("There was an error fetching the completed planner data!", error);
+      });
   }, []);
 
   const handleCheck = (id) => {
-    setToDoList((prevList) =>
-      prevList.map((item) =>
-        item.plannerId === id
-          ? {
-              ...item,
-              completed: !item.completed,
-              completedDate: formatDate(new Date()),
-            }
-          : item
-      )
-    );
+    PlannersPutApi(id, { isCompleted: true })
+      .then(response => {
+        if (response.data.statusCode === "200 OK") {
+          setToDoList((prevList) =>
+            prevList
+              .map((item) =>
+                item && item.plannerId === id
+                  ? {
+                      ...item,
+                      completed: true,
+                      completedDate: formatDate(new Date()),
+                    }
+                  : item
+              )
+              .filter(item => item !== null)
+          );
 
-    setTimeout(() => {
-      setToDoList((prevList) => {
-        const itemToMove = prevList.find((item) => item.plannerId === id);
-        if (itemToMove && itemToMove.completed) {
-          setCompletedList((prevCompleted) => {
-            if (
-              !prevCompleted.some((completedItem) => completedItem.plannerId === id)
-            ) {
-              return [...prevCompleted, itemToMove].sort(
-                (a, b) => new Date(b.completedDate) - new Date(a.completedDate)
-              );
-            }
-            return prevCompleted;
-          });
-          return prevList.filter((item) => item.plannerId !== id);
+          setTimeout(() => {
+            setToDoList((prevList) => {
+              const itemToMove = prevList.find((item) => item && item.plannerId === id);
+              if (itemToMove && itemToMove.completed) {
+                setCompletedList((prevCompleted) => {
+                  if (!prevCompleted.some((completedItem) => completedItem.plannerId === id)) {
+                    return [...prevCompleted, itemToMove]
+                      .sort((a, b) => new Date(b.completedDate) - new Date(a.completedDate))
+                      .filter(item => item !== null);
+                  }
+                  return prevCompleted.filter(item => item !== null);
+                });
+                return prevList.filter((item) => item && item.plannerId !== id);
+              }
+              return prevList.filter(item => item !== null);
+            });
+          }, 2000);
         }
-        return prevList;
+      })
+      .catch(error => {
+        console.error("There was an error completing the planner item!", error);
       });
-    }, 2000);
   };
 
   const handleUpdate = (id, newText) => {
-    setToDoList((prevList) =>
-      prevList.map((item) =>
-        item.plannerId === id ? { ...item, content: newText } : item
-      )
-    );
-    setCompletedList((prevList) =>
-      prevList.map((item) =>
-        item.plannerId === id ? { ...item, content: newText } : item
-      )
-    );
+    PlannersPatchApi(id, newText)
+      .then(response => {
+        if (response.data.statusCode === "200 OK") {
+          const updatedItem = response.data.data;
+          if (updatedItem) {
+            setToDoList((prevList) =>
+              prevList
+                .map((item) =>
+                  item && item.plannerId === updatedItem.plannerId ? { ...item, content: updatedItem.content } : item
+                )
+                .filter(item => item !== null)
+            );
+            setCompletedList((prevList) =>
+              prevList
+                .map((item) =>
+                  item && item.plannerId === updatedItem.plannerId ? { ...item, content: updatedItem.content } : item
+                )
+                .filter(item => item !== null)
+            );
+          } else {
+            console.error("Updated item is null or undefined.");
+          }
+        }
+      })
+      .catch(error => {
+        console.error("There was an error updating the planner item!", error);
+      });
   };
 
   const handleAddItem = () => {
@@ -88,11 +131,11 @@ const Planner = () => {
       .then(response => {
         if (response.data.statusCode === "201 CREATED") {
           const newItem = {
-            plannerId: Date.now().toString(),
+            plannerId: response.data.data.plannerId,
             content: content,
             completed: false,
           };
-          setToDoList((prevList) => [...prevList, newItem]);
+          setToDoList((prevList) => [...prevList, newItem].filter(item => item !== null));
         }
       })
       .catch(error => {
@@ -100,9 +143,9 @@ const Planner = () => {
       });
   };
 
-  const sortedCompletedList = completedList.sort(
-    (a, b) => new Date(b.completedDate) - new Date(a.completedDate)
-  );
+  const sortedCompletedList = completedList
+    .sort((a, b) => new Date(b.completedDate) - new Date(a.completedDate))
+    .filter(item => item !== null);
 
   return (
     <Div>
@@ -116,7 +159,7 @@ const Planner = () => {
             <InnerContent>
               <PlannerListContainer
                 activeTab={activeTab}
-                toDoList={toDoList}
+                toDoList={toDoList.filter(item => item !== null)}
                 completedList={sortedCompletedList}
                 handleCheck={handleCheck}
                 handleUpdate={handleUpdate}
@@ -172,7 +215,7 @@ const Content = styled.div`
   width: 100%;
   position: relative;
   flex-direction: column;
-  
+
   @media (min-width: 768px) {
     flex-direction: row;
   }

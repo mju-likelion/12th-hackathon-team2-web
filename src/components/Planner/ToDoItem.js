@@ -6,7 +6,7 @@ import CheckButtonOn from '../../img/CheckButtonOn.png';
 
 const ToDoItem = ({ item, onCheck, onUpdate, editable }) => {
     const [editMode, setEditMode] = useState(false);
-    const [text, setText] = useState(item.text);
+    const [text, setText] = useState(item.content);
     const [error, setError] = useState('');
 
     const handleTextClick = () => {
@@ -41,7 +41,7 @@ const ToDoItem = ({ item, onCheck, onUpdate, editable }) => {
                 setText('할 일을 입력하세요');
             }
             setEditMode(false);
-            onUpdate(item.id, text);
+            onUpdate(item.plannerId, text);
         } catch (err) {
             setError(err.message);
         }
@@ -58,7 +58,7 @@ const ToDoItem = ({ item, onCheck, onUpdate, editable }) => {
             <CheckButton 
                 src={item.completed ? CheckButtonOn : CheckButtonOff} 
                 alt="Check Button" 
-                onClick={() => !item.completed && onCheck(item.id)}
+                onClick={() => !item.completed && onCheck(item.plannerId)}
                 completed={item.completed.toString()}
             />
             <Content>
@@ -165,4 +165,3 @@ const Error = styled.div`
         bottom: -20px;
     }
 `;
-
