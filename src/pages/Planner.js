@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { PlannersCompleteGetApi } from "../api/Planners/PlannersCompleteGetApi"; // import the new completion API function
+import { PlannersCompleteGetApi } from "../api/Planners/PlannersCompleteGetApi";
 import { PlannersGetApi } from "../api/Planners/PlannersGetApi";
 import { PlannersPatchApi } from "../api/Planners/PlannersPatchApi";
 import { PlannersPostApi } from "../api/Planners/PlannersPostApi";
@@ -40,9 +40,9 @@ const Planner = () => {
 
     PlannersCompleteGetApi()
       .then(response => {
-        if (response.data.statusCode === "200 OK") {
+        if (response.statusCode === "200 OK") {
           const completedPlans = [];
-          Object.values(response.data.data).forEach(plans => {
+          Object.values(response.data).forEach(plans => {
             completedPlans.push(...plans);
           });
           setCompletedList(completedPlans.filter(item => item !== null));
