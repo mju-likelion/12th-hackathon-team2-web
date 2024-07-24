@@ -12,6 +12,34 @@ const SmallButton = styled.span`
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     width: 198.3px;
     height: 65.29px;
+
+    @media (max-width: 1024px) {
+        padding: 18px;
+        width: 180px;
+        height: 60px;
+    }
+
+    @media (max-width: 768px) {
+        padding: 3px;
+        width: 110px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 480px) {
+        padding: 3px;
+        width: 110px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 360px) {
+        padding: 12px;
+        width: 120px;
+        height: 45px;
+        margin-left: 5px;
+
+    }
 `;
 
 export default SmallButton;

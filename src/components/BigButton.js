@@ -18,5 +18,24 @@ const StyledButton = styled.button`
     border-radius: 20px;
     cursor: pointer;
     margin-top: 10px;
-    
+
+    @media (max-width: 1024px) {
+        padding: 14px;
+        font-size: 1.1rem;
+    }
+
+    @media (max-width: 768px) {
+        padding: 12px;
+        font-size: 1rem;
+    }
+
+    @media (max-width: 480px) {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 360px) {
+        padding: 8px;
+        font-size: 0.8rem;
+    }
 `;

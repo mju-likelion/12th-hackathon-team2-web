@@ -11,6 +11,7 @@ const Container = styled.div`
   background: url(${background}) no-repeat center center;
   background-size: cover;
   position: relative;
+  padding: 20px;
 `;
 
 export default Container;

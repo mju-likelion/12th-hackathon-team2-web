@@ -92,11 +92,36 @@ const SignupForm = styled.form`
   background: ${props => props.theme.colors.pink2};
   border-radius: 30px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  @media (max-width: 768px) {
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px;
+    border-radius: 10px;
+  }
 `;
 
 const SignupText = styled.h2`
-  ${props => props.theme.fonts.signupText};
+  ${props => props.theme.fonts.loginText};
   margin-bottom: 20px;
   color: ${props => props.theme.colors.white};
-`;
 
+  @media (max-width: 1024px) {
+        font-size: 1.8rem;
+    }
+
+    @media (max-width: 768px) {
+        font-size: 1.5rem;
+    }
+
+    @media (max-width: 480px) {
+        font-size: 0.7rem;
+    }
+
+    @media (max-width: 360px) {
+        font-size: 0.6rem;
+    }
+`;
