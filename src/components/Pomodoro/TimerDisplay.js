@@ -31,6 +31,7 @@ const Timer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 45%;
+  height: 100%;
 `;
 
 const TimerDisplayContainer = styled.div`
@@ -59,7 +60,6 @@ const StyledTitle = styled.div`
   cursor: pointer;
   margin-bottom: 20px;
   width: 120px;
-  height: 40px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
   &:hover {

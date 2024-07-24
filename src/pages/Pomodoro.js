@@ -218,8 +218,8 @@ const Div = styled.div`
 `;
 
 const Container = styled.div`
-  padding-top: 80px;
   display: flex;
+  height: 653px;
 `;
 
 const Right = styled.div`
@@ -227,8 +227,12 @@ const Right = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 900px;
-  margin: auto;
+  margin: 10px;
+  padding: 20px;
+  background-color: ${(props) => props.theme.colors.pink1};
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 100%;
 `;
 
 const Title = styled.div`
@@ -257,8 +261,8 @@ const TimerContainer = styled.div`
 const ButtonGroup = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 2.7vw;
-  margin-bottom: 80px;
+  gap: 10px;
+  margin-bottom: 20px;
   max-width: 900px;
 `;
 
@@ -267,6 +271,4 @@ const Logo = styled.img`
   height: 61px;
 `;
 
-
 export default Pomodoro;
-

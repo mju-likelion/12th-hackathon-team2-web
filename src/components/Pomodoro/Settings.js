@@ -1,4 +1,3 @@
-// Settings.jsx
 import React from 'react';
 import styled from 'styled-components';
 
@@ -46,11 +45,18 @@ const Settings = ({ workMinutes, setWorkMinutes, breakMinutes, setBreakMinutes, 
 const Left = styled.div`
   width: 25vw;
   min-width: 170px;
-  height: 80%;
+  height: 653px;
   background-color: ${(props) => props.theme.colors.pink1};
   padding: 30px;
-  border-radius: 30px;
-  margin-left: 7vw;
+  border-radius: 20px;
+  margin: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  @media (max-width: 768px) {
+    width: 50vw;
+  }
+  @media (max-width: 480px) {
+    width: 90vw;
+  }
 `;
 
 const SideTitle = styled.h3`
@@ -60,27 +66,31 @@ const SideTitle = styled.h3`
   padding-bottom: 7px;
   margin-bottom: 30px;
 `;
+
 const Report = styled.div`
   background-color: ${(props) => props.theme.colors.white};
-  min-height: 17vw;
-  max-height: 20vw;
-  height: 50%;
+  height: 45%;
   width: 95%;
   border-radius: 5px;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding: 20px;
+  @media (max-height: 653px) {
+    height: auto;
+    max-height: 50vh;
+  }
 `;
+
 const HistoryItem = styled.div`
   ${(props) => props.theme.fonts.PageNumber};
   margin-bottom: 15px;
   cursor: pointer;
-
   font-weight: 400;
   font-size: 17px;
   &:hover {
     color: ${(props) => props.theme.colors.pink3};
   }
 `;
+
 const SettingBox = styled.div`
   background-color: ${(props) => props.theme.colors.pink1};
   margin-top: 10px;
