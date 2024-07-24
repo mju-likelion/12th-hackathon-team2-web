@@ -1,55 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Formik, Field, Form } from 'formik';
+import { Field, Form, Formik } from 'formik';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../components/Header';
 import TinyButton from '../components/TinyButton';
 import { schemaSessionDetail } from '../hooks/ValidationYup';
 import { Theme } from '../styles/Theme';
-import { getRoom } from '../api/Rooms/RoomsGetApi';
-import { updateRoom } from '../api/Rooms/RoomsPatchApi';
-import { deleteRoom } from '../api/Rooms/RoomsDeleteApi';
+import { createRoom } from '../api/Rooms/RoomsPostApi';
 
 const TITLE_MAX_LENGTH = 40;
 const LINK_MAX_LENGTH = 40;
 
-const SessionDetail = () => {
+const SessionCreate = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
-  const roomId = id;
-  const [room, setRoom] = useState(null);
   const [titleError, setTitleError] = useState('');
   const [linkError, setLinkError] = useState('');
 
-  useEffect(() => {
-    const fetchRoom = async () => {
-      try {
-        const data = await getRoom(roomId);
-        setRoom(data.data);
-      } catch (error) {
-        console.error('방 조회 실패', error);
-      }
-    };
-
-    fetchRoom();
-  }, [roomId]);
-
-  const handleUpdate = async (values) => {
+  const handleCreate = async (values) => {
     const { title, link, content } = values;
     try {
-      await updateRoom(roomId, { title, link, content });
+      await createRoom({ title, link, content });
       navigate('/rooms');
     } catch (error) {
-      console.error('방 수정 실패', error);
-    }
-  };
-
-  const handleDelete = async () => {
-    try {
-      await deleteRoom(roomId);
-      navigate('/rooms');
-    } catch (error) {
-      console.error('방 삭제 실패', error);
+      console.error('방 생성 실패', error);
     }
   };
 
@@ -75,21 +48,15 @@ const SessionDetail = () => {
     }
   };
 
-  if (!room) return <div>Loading...</div>;
-
   return (
     <Div>
       <Header />
       <Container>
         <Title>실시간 집중 세션</Title>
         <Formik
-          initialValues={{
-            title: room.title,
-            link: room.link,
-            content: room.content,
-          }}
+          initialValues={{ title: '', link: '', content: '' }}
           validationSchema={schemaSessionDetail}
-          onSubmit={handleUpdate}
+          onSubmit={handleCreate}
         >
           {({ errors, touched, setFieldValue }) => (
             <StyledForm>
@@ -120,11 +87,10 @@ const SessionDetail = () => {
                 <Error>{errors.content}</Error>
               ) : null}
               <ButtonContainer>
-                <TinyButton onClick={handleDelete}>삭제하기</TinyButton>
+                <TinyButton type='submit'>생성하기</TinyButton>
                 <TinyButton onClick={() => navigate('/rooms')}>
                   목록으로
                 </TinyButton>
-                <TinyButton type='submit'>수정하기</TinyButton>
               </ButtonContainer>
             </StyledForm>
           )}
@@ -134,7 +100,7 @@ const SessionDetail = () => {
   );
 };
 
-export default SessionDetail;
+export default SessionCreate;
 
 const Div = styled.div`
   width: 100%;

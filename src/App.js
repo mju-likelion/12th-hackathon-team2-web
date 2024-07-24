@@ -24,6 +24,7 @@ import SurveyResult from './pages/SurveyResult';
 import GlobalStyle from './styles/GlobalStyle';
 import { Theme } from './styles/Theme';
 import DiaryWrite from './pages/DiaryWrite';
+import SessionCreate from './pages/SessionCreate';
 
 function App() {
   return (
@@ -46,8 +47,10 @@ function App() {
               <Route path='/diaries/:id' element={<DiaryDetail />} />
               <Route path='/diaries/new' element={<DiaryWrite />} />
               <Route path='/rooms' element={<Session />} />
-              <Route path='/pomodoro' element={<Pomodoro />} />
               <Route path='/rooms/:id' element={<SessionDetail />} />
+              <Route path='/rooms/:id' element={<SessionDetail />} />
+              <Route path='/rooms/new' element={<SessionCreate />} />
+              <Route path='/pomodoro' element={<Pomodoro />} />
               <Route path='/surveys' element={<Survey />} />
               <Route path='/surveys/result' element={<SurveyResult />} />
               <Route path='/*' element={<NotFound />} />

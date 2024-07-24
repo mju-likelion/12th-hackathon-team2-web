@@ -3,19 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../components/Header';
 import Pagination from '../components/Pagination';
-import { useRooms } from '../components/Session/RoomsContext';
+import { RoomsProvider, useRooms } from '../components/Session/RoomsContext';
 import RoomsList from '../components/Session/RoomsList';
 import SmallButton from '../components/SmallButton';
 
-const SessionPage = () => {
-  const { rooms } = useRooms();
-  const [currentPage, setCurrentPage] = useState(1);
+const SessionPageContent = () => {
+  const { rooms, totalPages, currentPage, setCurrentPage } = useRooms();
   const roomsPerPage = 8;
   const navigate = useNavigate();
 
   const handleAddRoom = () => {
-    const newRoomId = rooms.length + 1;
-    navigate(`/rooms/${newRoomId}`);
+    navigate(`/rooms/new`);
   };
 
   const handleRoomClick = (id) => {
@@ -23,16 +21,13 @@ const SessionPage = () => {
   };
 
   const handlePageChange = (pageNumber) => {
-    if (pageNumber < 1 || pageNumber > Math.ceil(rooms.length / roomsPerPage))
-      return;
+    if (pageNumber < 1 || pageNumber > totalPages) return;
     setCurrentPage(pageNumber);
   };
 
   const indexOfLastRoom = currentPage * roomsPerPage;
   const indexOfFirstRoom = indexOfLastRoom - roomsPerPage;
   const currentRooms = rooms.slice(indexOfFirstRoom, indexOfLastRoom);
-
-  const totalPages = Math.ceil(rooms.length / roomsPerPage);
 
   return (
     <Div>
@@ -54,6 +49,12 @@ const SessionPage = () => {
     </Div>
   );
 };
+
+const SessionPage = () => (
+  <RoomsProvider>
+    <SessionPageContent />
+  </RoomsProvider>
+);
 
 export default SessionPage;
 
