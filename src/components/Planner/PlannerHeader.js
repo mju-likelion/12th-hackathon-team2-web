@@ -10,11 +10,12 @@ const PlannerHeader = () => (
 export default PlannerHeader;
 
 const HeaderContainer = styled.div`
-    margin-top: 3vh;
+    margin-top: 4vh;
 `;
 
 const Title = styled.h1`
     ${({ theme }) => theme.fonts.subTitle};
     display: flex;
     align-items: center;
+    
 `;
