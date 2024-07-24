@@ -1,8 +1,9 @@
-import { yupResolver } from '@hookform/resolvers/yup';
+import { format } from 'date-fns';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaDiaryDetail } from '../hooks/ValidationYup';
 import postDiary from '../api/Diaries/DiariesPostApi';
 import Header from '../components/Header';
@@ -39,12 +40,11 @@ const DiaryWrite = () => {
 
     try {
       await postDiary(newEntry);
+      navigate('/diaries');
     } catch (error) {
       console.error('일기등록실패:', error);
       return;
     }
-
-    navigate('/diaries');
   };
 
   const handleBackToList = () => {
@@ -63,12 +63,14 @@ const DiaryWrite = () => {
     }
   };
 
+  const formattedDate = format(new Date(), 'yyyy.MM.dd');
+
   return (
     <Div>
       <Header />
       <Container>
         <Title>
-          <TinyButton onClick={handleBackToList}>목록으로</TinyButton>
+          <DateHeader>{formattedDate}</DateHeader>
         </Title>
         <DiaryDetailForm
           control={control}
@@ -107,4 +109,8 @@ const Title = styled.div`
   margin-top: 52px;
 `;
 
-const TinyButton = styled.button``;
+const DateHeader = styled.div`
+  margin-top: 20px;
+  ${({ theme }) => theme.fonts.DateHeader};
+  color: ${({ theme }) => theme.colors.pink3};
+`;
