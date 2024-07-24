@@ -28,7 +28,12 @@ const Diary = () => {
         const diaryList = response.data?.diaryList || [];
         const pagination = response.data?.pagination || { totalPage: 1 };
 
-        setEntries(diaryList);
+        const formattedDiaries = diaryList.map((diary) => ({
+          ...diary,
+          date: format(new Date(diary.createdAt), 'yyyy.MM.dd'),
+        }));
+
+        setEntries(formattedDiaries);
         setTotalPages(pagination.totalPage);
       } catch (err) {
         console.error('Failed to fetch diaries:', err);

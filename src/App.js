@@ -1,5 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+} from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { DiaryProvider } from './components/Diary/DiaryContext';
 import { RoomsProvider } from './components/Session/RoomsContext';
@@ -18,6 +23,7 @@ import Survey from './pages/Survey';
 import SurveyResult from './pages/SurveyResult';
 import GlobalStyle from './styles/GlobalStyle';
 import { Theme } from './styles/Theme';
+import DiaryWrite from './pages/DiaryWrite';
 
 function App() {
   return (
@@ -27,20 +33,24 @@ function App() {
         <DiaryProvider>
           <RoomsProvider>
             <Routes>
-              <Route path="/" element={<Navigate to="/auth/login" />} />
-              <Route path="/auth/login" element={<Login />} />
-              <Route path="/auth/signup" element={<Signup />} />
-              <Route path="/main" element={<Main />} />
-              <Route path="/planners" element={<Planner />} />
-              <Route path="/planners/completed" element={<CompletedPlanner />} />
-              <Route path="/diaries" element={<Diary />} />
-              <Route path="/diaries/:id" element={<DiaryDetail />} />
-              <Route path="/rooms" element={<Session />} />
-              <Route path="/pomodoro" element={<Pomodoro />} />
-              <Route path="/rooms/:id" element={<SessionDetail />} />
-              <Route path="/surveys" element={<Survey />} />
-              <Route path="/surveys/result" element={<SurveyResult />} />
-              <Route path="/*" element={<NotFound />} />
+              <Route path='/' element={<Navigate to='/auth/login' />} />
+              <Route path='/auth/login' element={<Login />} />
+              <Route path='/auth/signup' element={<Signup />} />
+              <Route path='/main' element={<Main />} />
+              <Route path='/planners' element={<Planner />} />
+              <Route
+                path='/planners/completed'
+                element={<CompletedPlanner />}
+              />
+              <Route path='/diaries' element={<Diary />} />
+              <Route path='/diaries/:id' element={<DiaryDetail />} />
+              <Route path='/diaries/new' element={<DiaryWrite />} />
+              <Route path='/rooms' element={<Session />} />
+              <Route path='/pomodoro' element={<Pomodoro />} />
+              <Route path='/rooms/:id' element={<SessionDetail />} />
+              <Route path='/surveys' element={<Survey />} />
+              <Route path='/surveys/result' element={<SurveyResult />} />
+              <Route path='/*' element={<NotFound />} />
             </Routes>
           </RoomsProvider>
         </DiaryProvider>
