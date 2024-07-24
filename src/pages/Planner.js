@@ -191,7 +191,7 @@ const PlannerContainer = styled.div`
   width: 100%;
   max-width: 1082px;
 
-  min-height: 553px;
+  min-height: 453px;
   margin-top: 2vh;
   padding: 2vh;
   position: relative;
@@ -223,12 +223,10 @@ const InnerContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 553px;
-  max-height: 553px;
+
 
   @media (max-width: 768px) {
-    min-height: 50vh;
-    max-height: 50vh;
+
   }
 `;
 

@@ -51,8 +51,7 @@ const InnerContainer = styled.div`
 const ItemList = styled.div`
     overflow-y: auto;
     height: 100%;
-    padding-right: 10px;
-
+    
     &::-webkit-scrollbar {
         width: 8px;
     }
