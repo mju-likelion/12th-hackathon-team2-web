@@ -4,7 +4,7 @@ import { Theme } from '../styles/Theme';
 
 const ModalBackdrop = styled.div`
   position: fixed;
-  top: 10;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
@@ -36,7 +36,7 @@ const ModalButton = styled.button`
   color: ${props => props.theme.colors.white};
   border-radius: 8px;
   cursor: pointer;
-  font: ${props => props.theme.fonts.defalt};
+  font: ${props => props.theme.fonts.default};
   transition: background-color 0.3s ease;
   &:hover {
     background-color: ${props => props.theme.colors.pink4};
@@ -45,26 +45,26 @@ const ModalButton = styled.button`
 
 const ModalMessage = styled.p`
   color: ${props => props.theme.colors.black};
-  font: ${props => props.theme.fonts.defalt};
+  font: ${props => props.theme.fonts.default};
   text-align: center;
   margin: 0;
   padding: 0;
   line-height: 1.5;
 `;
 
-const AlertModal = ({ isOpen, close, message }) => {
+const AlertModal = ({ isOpen, onClose, message }) => {
   if (!isOpen) return null;
 
   return (
     <ThemeProvider theme={Theme}>
-      <ModalBackdrop onClick={close}>
+      <ModalBackdrop onClick={onClose}>
         <ModalView onClick={(e) => e.stopPropagation()}>
           <ModalMessage>
             {message.split('\n').map((line, index) => (
               <div key={index}>{line}</div>
             ))}
           </ModalMessage>
-          <ModalButton onClick={close}>확인</ModalButton>
+          <ModalButton onClick={onClose}>확인</ModalButton>
         </ModalView>
       </ModalBackdrop>
     </ThemeProvider>

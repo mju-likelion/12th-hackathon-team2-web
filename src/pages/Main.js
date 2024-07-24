@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import { gradeGetApi } from '../api/users/gradeGetApi';
+import AlertModal from '../components/AlertModal';
 import Container from "../components/Container";
 import AvocadoImage from "../img/Avocado.svg";
 import BananaImage from "../img/Banana.svg";
@@ -19,12 +20,12 @@ const gradeMapping = {
 const Main = () => {
   const navigate = useNavigate();
   const [userGrade, setUserGrade] = useState(null);
+  const [alertMessage, setAlertMessage] = useState(null);
 
   useEffect(() => {
     const loginToken = Cookies.get('loginToken');
     if (!loginToken) {
-      alert('로그인이 필요합니다. 로그인 페이지로 이동합니다.');
-      navigate('/auth/login');
+      setAlertMessage('로그인이 필요합니다. \n로그인 페이지로 이동합니다.');
       return;
     }
 
@@ -36,6 +37,11 @@ const Main = () => {
       console.error('유저 등급 조회 실패:', error);
     });
   }, [navigate]);
+
+  const handleAlertClose = () => {
+    setAlertMessage(null);
+    navigate('/auth/login');
+  };
 
   const gradeInfo = gradeMapping[userGrade] || {};
 
@@ -52,6 +58,7 @@ const Main = () => {
           <MenuItem onClick={() => navigate("/rooms")}>집중세션</MenuItem>
           <MenuItem onClick={() => navigate("/pomodoro")}>뽀모도로</MenuItem>
         </Menu>
+        {alertMessage && <AlertModal isOpen={Boolean(alertMessage)} message={alertMessage} onClose={handleAlertClose} />}
       </Container>
     </ThemeProvider>
   );
