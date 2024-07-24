@@ -17,6 +17,7 @@ const Signup = () => {
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
+  const [confirmAction, setConfirmAction] = useState(() => () => setModalOpen(false));
 
   const {
     control,
@@ -30,6 +31,7 @@ const Signup = () => {
   const callbackFunctions = {
     navigateSuccess: () => {
       setModalMessage('회원가입이 완료되었습니다! \n확인 버튼을 누르면 설문 조사가 시작됩니다. \n설문조사는 회원가입시 1회만 진행됩니다.');
+      setConfirmAction(() => () => navigate('/surveys'));
       setModalOpen(true);
     },
     navigateError: (error) => {
@@ -38,17 +40,13 @@ const Signup = () => {
       } else {
         setModalMessage('회원가입에 실패했습니다. \n다시 시도해주세요.');
       }
+      setConfirmAction(() => () => setModalOpen(false));
       setModalOpen(true);
     },
   };
 
   const onSubmit = (data) => {
     SignupApi(data, callbackFunctions);
-  };
-
-  const closeModal = () => {
-    setModalOpen(false);
-    navigate('/surveys', { replace: true });
   };
 
   return (
@@ -72,7 +70,14 @@ const Signup = () => {
           )}/>
           <Button type='submit'>가입하기</Button>
         </SignupForm>
-        {modalOpen && <AlertModal isOpen={modalOpen} close={closeModal} message={modalMessage} />}
+        {modalOpen && (
+          <AlertModal
+            isOpen={modalOpen}
+            close={() => setModalOpen(false)}
+            message={modalMessage}
+            handleConfirm={confirmAction}
+          />
+        )}
       </Container>
     </ThemeProvider>
   );
@@ -94,3 +99,4 @@ const SignupText = styled.h2`
   margin-bottom: 20px;
   color: ${props => props.theme.colors.white};
 `;
+

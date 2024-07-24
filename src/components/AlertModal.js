@@ -2,6 +2,27 @@ import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Theme } from '../styles/Theme';
 
+const AlertModal = ({ isOpen, close, message, handleConfirm }) => {
+  if (!isOpen) return null;
+
+  return (
+    <ThemeProvider theme={Theme}>
+      <ModalBackdrop onClick={close}>
+        <ModalView onClick={(e) => e.stopPropagation()}>
+          <ModalMessage>
+            {message.split('\n').map((line, index) => (
+              <div key={index}>{line}</div>
+            ))}
+          </ModalMessage>
+          <ModalButton onClick={handleConfirm}>확인</ModalButton>
+        </ModalView>
+      </ModalBackdrop>
+    </ThemeProvider>
+  );
+};
+
+export default AlertModal;
+
 const ModalBackdrop = styled.div`
   position: fixed;
   top: 0;
@@ -51,24 +72,3 @@ const ModalMessage = styled.p`
   padding: 0;
   line-height: 1.5;
 `;
-
-const AlertModal = ({ isOpen, onClose, message }) => {
-  if (!isOpen) return null;
-
-  return (
-    <ThemeProvider theme={Theme}>
-      <ModalBackdrop onClick={onClose}>
-        <ModalView onClick={(e) => e.stopPropagation()}>
-          <ModalMessage>
-            {message.split('\n').map((line, index) => (
-              <div key={index}>{line}</div>
-            ))}
-          </ModalMessage>
-          <ModalButton onClick={onClose}>확인</ModalButton>
-        </ModalView>
-      </ModalBackdrop>
-    </ThemeProvider>
-  );
-};
-
-export default AlertModal;
