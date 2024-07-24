@@ -75,7 +75,7 @@ const SessionDetail = () => {
     }
   };
 
-  if (!room) return <div>Loading...</div>;
+  if (!room) return <div>로딩...</div>;
 
   return (
     <Div>

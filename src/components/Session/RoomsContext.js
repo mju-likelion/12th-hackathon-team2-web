@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import { fetchRooms } from '../../api/Rooms/RoomsPageGetApi';
 
 const RoomsContext = createContext();
@@ -8,29 +8,28 @@ export const RoomsProvider = ({ children }) => {
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {
-    const loadRooms = async () => {
-      try {
-        const data = await fetchRooms(currentPage);
-        setRooms(data.data.roomList);
-        setTotalPages(data.data.pagination.totalPage);
-      } catch (error) {
-        console.error('세션 조회 실패', error);
-      }
-    };
+  const loadRooms = async (page) => {
+    try {
+      const { rooms, totalPages, currentPage } = await fetchRooms(page);
+      setRooms(rooms);
+      setTotalPages(totalPages);
+      setCurrentPage(currentPage);
+    } catch (error) {
+      console.error('방 데이터 로드 실패:', error);
+    }
+  };
 
-    loadRooms();
+  useEffect(() => {
+    loadRooms(currentPage);
   }, [currentPage]);
 
   return (
     <RoomsContext.Provider
-      value={{ rooms, totalPages, currentPage, setCurrentPage }}
+      value={{ rooms, totalPages, currentPage, setCurrentPage, loadRooms }}
     >
       {children}
     </RoomsContext.Provider>
   );
 };
 
-export const useRooms = () => {
-  return useContext(RoomsContext);
-};
+export const useRooms = () => useContext(RoomsContext);
