@@ -150,6 +150,7 @@ const BigButtonWrapper = styled.div`
     justify-content: center;
 `;
 
+
 const SignupWrapper = styled.div`
     display: flex;
     align-items: center;
