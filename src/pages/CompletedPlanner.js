@@ -10,6 +10,7 @@ import PlannerTopBar from '../components/Planner/PlannerTopBar';
 const CompletedPlanner = () => {
   const [activeTab, setActiveTab] = React.useState('completed');
   const [completedList, setCompletedList] = React.useState([]);
+  const [totalDone, setTotalDone] = React.useState(0);
 
   React.useEffect(() => {
     PlannersCompleteGetApi()
@@ -19,7 +20,11 @@ const CompletedPlanner = () => {
           Object.values(response.data).forEach(plans => {
             completedPlans.push(...plans);
           });
-          setCompletedList(completedPlans.filter(item => item !== null));
+          const sortedCompletedPlans = completedPlans
+            .filter(item => item !== null)
+            .sort((a, b) => new Date(b.modifiedDate) - new Date(a.modifiedDate));
+          setCompletedList(sortedCompletedPlans);
+          setTotalDone(sortedCompletedPlans.length);
         }
       })
       .catch(error => {
@@ -33,7 +38,7 @@ const CompletedPlanner = () => {
       <PageContainer>
         <PlannerHeader />
         <PlannerContainer>
-          <PlannerTopBar toDoCount={0} />
+          <PlannerTopBar totalDone={totalDone} />
           <Content>
             <PlannerTabs activeTab={activeTab} setActiveTab={setActiveTab} />
             <InnerContent>

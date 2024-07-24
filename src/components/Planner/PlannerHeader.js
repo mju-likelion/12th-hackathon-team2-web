@@ -10,7 +10,7 @@ const PlannerHeader = () => (
 export default PlannerHeader;
 
 const HeaderContainer = styled.div`
-    margin-top: 50px;
+    margin-top: 3vh;
 `;
 
 const Title = styled.h1`

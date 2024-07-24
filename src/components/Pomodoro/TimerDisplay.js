@@ -4,7 +4,7 @@ import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import styled from 'styled-components';
 
-const TimerDisplay = ({ label, timeLeft, isBreak, workMinutes, breakMinutes, formatTime, getPercentage }) => {
+const TimerDisplay = ({ label, timeLeft, isBreak, formatTime, getPercentage }) => {
   return (
     <Timer>
       <StyledTitle>{label}</StyledTitle>
@@ -14,7 +14,7 @@ const TimerDisplay = ({ label, timeLeft, isBreak, workMinutes, breakMinutes, for
             value={getPercentage(timeLeft)}
             text={timeLeft !== null && (isBreak ? formatTime(timeLeft) : formatTime(timeLeft))}
             styles={buildStyles({
-              pathColor: `#FFFFFF`,
+              pathColor: `#2DBA00`,
               textColor: '#E93C3C',
               trailColor: '#E93C3C',
               backgroundColor: '#FFFFFF',
@@ -57,7 +57,7 @@ const StyledTitle = styled.div`
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  margin-top: 10px;
+  margin-bottom: 20px;
   width: 120px;
   height: 40px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));

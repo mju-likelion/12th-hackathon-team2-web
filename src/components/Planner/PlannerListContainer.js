@@ -26,7 +26,6 @@ const PlannerListContainer = ({ activeTab, toDoList, completedList, handleCheck,
                         completedList={completedList} 
                         onCheck={handleCheck} 
                         onUpdate={handleUpdate} 
-                        isCompletedTab={true} 
                     />
                 </ItemList>
             </InnerContainer>
@@ -38,7 +37,7 @@ export default PlannerListContainer;
 
 const Container = styled.div`
     width: 100%;
-    height: 559px;
+    height: 453px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -50,9 +49,8 @@ const InnerContainer = styled.div`
 `;
 
 const ItemList = styled.div`
-    margin-bottom: 20px;
-    overflow-y: scroll;
-    height: calc(100% - 40px);
+    overflow-y: auto;
+    height: 100%;
     padding-right: 10px;
 
     &::-webkit-scrollbar {

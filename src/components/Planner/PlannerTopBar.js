@@ -2,10 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import PlannerIcon from '../../img/PlannerIcon.svg';
 
-const PlannerTopBar = ({ toDoCount }) => (
+const PlannerTopBar = ({ toDoCount, totalDone }) => (
     <TopBarContainer>
         <PlannerIconImg src={PlannerIcon} alt="Planner Icon" />
-        <Counter>Today&apos;s To-Do: {toDoCount}</Counter>
+        <Counter>
+            {toDoCount !== undefined && <div>Today To-Do: {toDoCount}</div>}
+            {totalDone !== undefined && <div>Total Done: {totalDone}</div>}
+        </Counter>
     </TopBarContainer>
 );
 
@@ -19,13 +22,13 @@ const TopBarContainer = styled.div`
     margin-left: 40px;
     padding: 0 20px;
 
-    @media (max-width: 768px) {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-left: 0;
-        padding: 0 20px;
-    }
+@media (max-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 0;
+    padding: 0 20px;
+}
 `;
 
 const PlannerIconImg = styled.img`
@@ -39,7 +42,6 @@ const PlannerIconImg = styled.img`
 `;
 
 const Counter = styled.div`
-    ${({ theme }) => theme.fonts.inputLabel};
     color: ${({ theme }) => theme.colors.pink3};
     margin-top: 10px;
 
@@ -48,5 +50,8 @@ const Counter = styled.div`
         width: 200px;
         text-align: center;
     }
-`;
 
+    div {
+        margin-bottom: 5px;
+    }
+`;

@@ -47,8 +47,8 @@ export const Theme = {
         `,
         semiText: css`
             font-family: "Noto Sans KR", sans-serif;
-            font-weight: 600;
-            font-size: 26px;
+            font-weight: 400;
+            font-size: 22px;
             line-height: 31px;
         `,
         inputLabel: css`

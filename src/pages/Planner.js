@@ -171,14 +171,14 @@ export default Planner;
 
 const Div = styled.div`
   width: 100vw;
-  padding: 20px;
+  padding: 2vh;
 `;
 
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 2vh;
   position: relative;
 `;
 
@@ -190,14 +190,15 @@ const PlannerContainer = styled.div`
   border-radius: 10px;
   width: 100%;
   max-width: 1082px;
+
   min-height: 553px;
-  margin-top: 20px;
-  padding: 20px;
+  margin-top: 2vh;
+  padding: 2vh;
   position: relative;
 
   @media (max-width: 768px) {
     max-width: 90%;
-    max-height: 90%;
+    min-height: 50vh;
   }
 `;
 
@@ -218,26 +219,27 @@ const InnerContent = styled.div`
   height: 100%;
   background: ${({ theme }) => theme.colors.white};
   border-radius: 14px;
-  padding: 20px;
+  padding: 2vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 553px;
   max-height: 553px;
 
-  @media (min-width: 859px) {
-    width: 100%;
+  @media (max-width: 768px) {
+    min-height: 50vh;
+    max-height: 50vh;
   }
 `;
 
 const AddButtonContainer = styled.div`
   position: absolute;
-  bottom: 20px;
-  right: 20px;
+  bottom: 2vh;
+  right: 2vh;
   z-index: 1000;
 
   @media (max-width: 768px) {
-    right: 10px;
-    bottom: 10px;
+    right: 1vh;
+    bottom: 1vh;
   }
 `;
