@@ -112,10 +112,6 @@ const LoginForm = styled.form`
         border-radius: 20px;
     }
 
-    @media (max-width: 480px) {
-        padding: 10px;
-        border-radius: 10px;
-    }
 `;
 
 const LoginText = styled.h2`
@@ -131,13 +127,6 @@ const LoginText = styled.h2`
         font-size: 1.5rem;
     }
 
-    @media (max-width: 480px) {
-        font-size: 0.7rem;
-    }
-
-    @media (max-width: 360px) {
-        font-size: 0.6rem;
-    }
 `;
 
 const InputFieldWrapper = styled.div`
@@ -164,12 +153,10 @@ const SignupWrapper = styled.div`
 
     @media (max-width: 768px) {
         margin-top: 10px;
-        margin-right: 140px;
+        margin-right: 80px;
     }
 
-    @media (max-width: 480px) {
-        margin-top: 5px;
-    }
+
 `;
 
 const NoAccountText = styled.span`

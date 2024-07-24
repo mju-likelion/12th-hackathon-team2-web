@@ -26,12 +26,6 @@ const SmallButton = styled.span`
         font-size: 0.8rem;
     }
 
-    @media (max-width: 480px) {
-        padding: 3px;
-        width: 70px;
-        height: 45px;
-        font-size: 0.7rem;
-    }
 
 `;
 
