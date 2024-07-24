@@ -36,7 +36,11 @@ const Signup = () => {
     },
     navigateError: (error) => {
       if (error.response && error.response.status === 409) {
-        setModalMessage('이미 사용중인 이메일입니다. \n다른 이메일을 입력해주세요.');
+        if (error.response.data.message === '이미 사용 중인 이름입니다.') {
+          setModalMessage('이미 사용중인 닉네임입니다. \n다른 닉네임을 입력해주세요.');
+        } else {
+          setModalMessage('이미 사용중인 이메일입니다. \n다른 이메일을 입력해주세요.');
+        }
       } else {
         setModalMessage('회원가입에 실패했습니다. \n다시 시도해주세요.');
       }
@@ -110,18 +114,18 @@ const SignupText = styled.h2`
   color: ${props => props.theme.colors.white};
 
   @media (max-width: 1024px) {
-        font-size: 1.8rem;
-    }
+    font-size: 1.8rem;
+  }
 
-    @media (max-width: 768px) {
-        font-size: 1.5rem;
-    }
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 
-    @media (max-width: 480px) {
-        font-size: 0.7rem;
-    }
+  @media (max-width: 480px) {
+    font-size: 0.7rem;
+  }
 
-    @media (max-width: 360px) {
-        font-size: 0.6rem;
-    }
+  @media (max-width: 360px) {
+    font-size: 0.6rem;
+  }
 `;
