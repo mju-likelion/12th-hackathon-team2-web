@@ -26,7 +26,6 @@ const PlannerListContainer = ({ activeTab, toDoList, completedList, handleCheck,
                         completedList={completedList} 
                         onCheck={handleCheck} 
                         onUpdate={handleUpdate} 
-                        isCompletedTab={true} 
                     />
                 </ItemList>
             </InnerContainer>

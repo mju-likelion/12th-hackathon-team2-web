@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import ToDoItem from './ToDoItem';
 
-const CompletedTab = ({ completedList }) => {
+const CompletedTab = ({ completedList, onCheck, onUpdate }) => {
     const groupedItems = completedList.reduce((acc, item) => {
-        const date = item.completedDate || 'Unknown Date';
+        const date = item.modifiedDate || 'Unknown Date';
         if (!acc[date]) {
             acc[date] = [];
         }
@@ -18,7 +18,12 @@ const CompletedTab = ({ completedList }) => {
                 <DateGroup key={date}>
                     <DateHeader>{date}</DateHeader>
                     {groupedItems[date].map((item) => (
-                        <ToDoItem key={item.id} item={item} />
+                        <ToDoItem 
+                            key={item.plannerId} 
+                            item={item} 
+                            onCheck={onCheck} 
+                            onUpdate={onUpdate} 
+                        />
                     ))}
                 </DateGroup>
             ))}
@@ -60,4 +65,3 @@ const DateHeader = styled.div`
     line-height: 24px;
     color: #B1B1B1;
 `;
-

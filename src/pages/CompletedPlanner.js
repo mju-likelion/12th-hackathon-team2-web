@@ -19,7 +19,10 @@ const CompletedPlanner = () => {
           Object.values(response.data).forEach(plans => {
             completedPlans.push(...plans);
           });
-          setCompletedList(completedPlans.filter(item => item !== null));
+          const sortedCompletedPlans = completedPlans
+            .filter(item => item !== null)
+            .sort((a, b) => new Date(b.modifiedDate) - new Date(a.modifiedDate));
+          setCompletedList(sortedCompletedPlans);
         }
       })
       .catch(error => {
