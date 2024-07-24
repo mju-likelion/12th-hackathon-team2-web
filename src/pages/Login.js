@@ -154,17 +154,16 @@ const SignupWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    width: 100%;
+    width: 80%;
     margin-top: 20px;
-
     @media (max-width: 1024px) {
         margin-top: 15px;
-        margin-right: 50px;
+        margin-right: 40px;
     }
 
     @media (max-width: 768px) {
         margin-top: 10px;
-        margin-right: 310px;
+        margin-right: 140px;
     }
 
     @media (max-width: 480px) {
@@ -177,16 +176,11 @@ const NoAccountText = styled.span`
     color: ${(props) => props.theme.colors.black};
     margin-right: 10px;
 
+    @media (max-width: 1024px) {
+        margin-right: 15px;
+    }
+
     @media (max-width: 768px) {
         margin-right: 8px;
-        font-size: 0.7rem;
-    }
-
-    @media (max-width: 480px) {
-        margin-right: 5px;
-    }
-
-    @media (max-width: 360px) {
-        margin-right: 3px;
     }
 `;
