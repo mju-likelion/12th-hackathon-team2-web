@@ -65,7 +65,7 @@ const Login = () => {
                         )}/>
                         <Controller name="password" control={control} render={({ field }) => (
                             <InputFieldWrapper>
-                                <InputField label="비밀번호" placeholder="비밀번호를 입력하세요" error={errors.password?.message} {...field} />
+                                <InputField label="비밀번호" placeholder="비밀번호를 입력하세요" type="password" error={errors.password?.message} {...field} />
                             </InputFieldWrapper>
                         )}/>
                         <BigButtonWrapper>
