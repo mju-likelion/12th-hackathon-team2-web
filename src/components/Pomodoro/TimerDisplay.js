@@ -14,7 +14,7 @@ const TimerDisplay = ({ label, timeLeft, isBreak, workMinutes, breakMinutes, for
             value={getPercentage(timeLeft)}
             text={timeLeft !== null && (isBreak ? formatTime(timeLeft) : formatTime(timeLeft))}
             styles={buildStyles({
-              pathColor: `#FFFFFF`,
+              pathColor: `#2DBA00`,
               textColor: '#E93C3C',
               trailColor: '#E93C3C',
               backgroundColor: '#FFFFFF',
@@ -39,6 +39,7 @@ const TimerDisplayContainer = styled.div`
   align-items: center;
   font-size: 100px;
   padding: 10px;
+  
 `;
 
 const TimerSection = styled.div`

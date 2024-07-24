@@ -12,16 +12,18 @@ import pomodoroLogo from '../img/pomodoroLogo.svg';
 const Pomodoro = () => {
   const [workMinutes, setWorkMinutes] = useState('');
   const [breakMinutes, setBreakMinutes] = useState('');
-  const [timeLeft, setTimeLeft] = useState(null);
+  const [workTimeLeft, setWorkTimeLeft] = useState(null);
+  const [breakTimeLeft, setBreakTimeLeft] = useState(null);
   const [isRunning, setIsRunning] = useState(false);
   const [isBreak, setIsBreak] = useState(false);
   const [cycleCount, setCycleCount] = useState(0);
-  const [timerInterval, setTimerInterval] = useState(null);
+  const [workTimerInterval, setWorkTimerInterval] = useState(null);
+  const [breakTimerInterval, setBreakTimerInterval] = useState(null);
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
-    if (isRunning && timeLeft !== null) {
-      const endTime = new Date().getTime() + timeLeft;
+    if (isRunning && workTimeLeft !== null) {
+      const endTime = new Date().getTime() + workTimeLeft;
 
       const interval = setInterval(() => {
         const now = new Date().getTime();
@@ -30,33 +32,60 @@ const Pomodoro = () => {
         if (remainingTime <= 0) {
           clearInterval(interval);
           setIsRunning(false);
-          setTimeLeft(0);
+          setWorkTimeLeft(0);
           document.getElementById('notificationSound').play();
-          handleCycleCompletion();
+          handleWorkCompletion();
         } else {
-          setTimeLeft(remainingTime);
+          setWorkTimeLeft(remainingTime);
         }
       }, 1000);
 
-      setTimerInterval(interval);
+      setWorkTimerInterval(interval);
 
       return () => clearInterval(interval);
     }
-  }, [isRunning, timeLeft]);
+  }, [isRunning, workTimeLeft]);
 
-  const handleCycleCompletion = () => {
-    if (isBreak) {
-      setCycleCount((prevCount) => prevCount + 1);
-      setIsBreak(false);
+  useEffect(() => {
+    if (isRunning && breakTimeLeft !== null) {
+      const endTime = new Date().getTime() + breakTimeLeft;
 
-      const nextCycleTime = parseInt(workMinutes) * 60 * 1000;
-      setTimeLeft(nextCycleTime);
-    } else {
-      setIsBreak(true);
+      const interval = setInterval(() => {
+        const now = new Date().getTime();
+        const remainingTime = endTime - now;
 
-      const nextCycleTime = parseInt(breakMinutes) * 60 * 1000;
-      setTimeLeft(nextCycleTime);
+        if (remainingTime <= 0) {
+          clearInterval(interval);
+          setIsRunning(false);
+          setBreakTimeLeft(0);
+          document.getElementById('notificationSound').play();
+          handleBreakCompletion();
+        } else {
+          setBreakTimeLeft(remainingTime);
+        }
+      }, 1000);
+
+      setBreakTimerInterval(interval);
+
+      return () => clearInterval(interval);
     }
+  }, [isRunning, breakTimeLeft]);
+
+  const handleWorkCompletion = () => {
+    setIsBreak(true);
+
+    const nextCycleTime = parseInt(breakMinutes) * 60 * 1000;
+    setBreakTimeLeft(nextCycleTime);
+
+    setIsRunning(true);
+  };
+
+  const handleBreakCompletion = () => {
+    setCycleCount((prevCount) => prevCount + 1);
+    setIsBreak(false);
+
+    const nextCycleTime = parseInt(workMinutes) * 60 * 1000;
+    setWorkTimeLeft(nextCycleTime);
 
     setIsRunning(true);
   };
@@ -75,10 +104,10 @@ const Pomodoro = () => {
       { workMinutes: workMin, breakMinutes: breakMin },
     ]);
 
-    if (timeLeft === null) {
+    if (workTimeLeft === null && breakTimeLeft === null) {
       setCycleCount(1);
       setIsBreak(false);
-      setTimeLeft(workMin * 60 * 1000);
+      setWorkTimeLeft(workMin * 60 * 1000);
     }
 
     setIsRunning(true);
@@ -87,14 +116,17 @@ const Pomodoro = () => {
   const handlePause = () => {
     if (isRunning) {
       setIsRunning(false);
-      clearInterval(timerInterval);
+      clearInterval(workTimerInterval);
+      clearInterval(breakTimerInterval);
     }
   };
 
   const handleReset = () => {
     setIsRunning(false);
-    clearInterval(timerInterval);
-    setTimeLeft(null);
+    clearInterval(workTimerInterval);
+    clearInterval(breakTimerInterval);
+    setWorkTimeLeft(null);
+    setBreakTimeLeft(null);
     setCycleCount(0);
     setIsBreak(false);
     setWorkMinutes('');
@@ -104,7 +136,8 @@ const Pomodoro = () => {
   const handleHistoryClick = (workMin, breakMin) => {
     setWorkMinutes(workMin.toString());
     setBreakMinutes(breakMin.toString());
-    setTimeLeft(workMin * 60 * 1000);
+    setWorkTimeLeft(workMin * 60 * 1000);
+    setBreakTimeLeft(null);
     setIsBreak(false);
     setCycleCount(1);
     setIsRunning(true);
@@ -116,8 +149,13 @@ const Pomodoro = () => {
     return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
   };
 
-  const getPercentage = (time) => {
-    const total = isBreak ? parseInt(breakMinutes) * 60 * 1000 : parseInt(workMinutes) * 60 * 1000;
+  const getWorkPercentage = (time) => {
+    const total = parseInt(workMinutes) * 60 * 1000;
+    return ((total - time) / total) * 100;
+  };
+
+  const getBreakPercentage = (time) => {
+    const total = parseInt(breakMinutes) * 60 * 1000;
     return ((total - time) / total) * 100;
   };
 
@@ -139,23 +177,23 @@ const Pomodoro = () => {
             {isRunning && `${cycleCount}번째 타임`}{' '}
           </Info>
           <TimerContainer>
-            <TimerDisplay
+            <TimerDisplay 
               label={'집중시간'}
-              timeLeft={timeLeft}
+              timeLeft={workTimeLeft}
               isBreak={false}
               workMinutes={workMinutes}
               breakMinutes={breakMinutes}
               formatTime={formatTime}
-              getPercentage={getPercentage}
+              getPercentage={getWorkPercentage}
             />
             <TimerDisplay
               label={'휴식시간'}
-              timeLeft={timeLeft}
+              timeLeft={breakTimeLeft}
               isBreak={true}
               workMinutes={workMinutes}
               breakMinutes={breakMinutes}
               formatTime={formatTime}
-              getPercentage={getPercentage}
+              getPercentage={getBreakPercentage}
             />
           </TimerContainer>
           <audio id='notificationSound' src={Sound}></audio>
@@ -228,4 +266,6 @@ const Logo = styled.img`
   height: 61px;
 `;
 
+
 export default Pomodoro;
+
