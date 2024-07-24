@@ -227,7 +227,7 @@ const Right = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 700px;
+  max-width: 900px;
   margin: auto;
 `;
 
@@ -259,6 +259,7 @@ const ButtonGroup = styled.div`
   flex-direction: row;
   gap: 2.7vw;
   margin-bottom: 80px;
+  max-width: 900px;
 `;
 
 const Logo = styled.img`
