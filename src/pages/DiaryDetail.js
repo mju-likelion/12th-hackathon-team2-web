@@ -77,12 +77,15 @@ const DiaryDetail = () => {
   };
 
   const handleDeleteEntry = async () => {
-    try {
-      await deleteDiary(entry.id);
-      navigate('/diaries');
-    } catch (err) {
-      setError('일기삭제실패');
-      console.error(err);
+    const confirmDelete = window.confirm('정말로 이 일기를 삭제하시겠습니까?');
+    if (confirmDelete) {
+      try {
+        await deleteDiary(entry.id);
+        navigate('/diaries');
+      } catch (err) {
+        setError('일기삭제실패');
+        console.error(err);
+      }
     }
   };
 

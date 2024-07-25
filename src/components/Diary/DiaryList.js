@@ -6,7 +6,7 @@ const DiaryList = ({ entries, onEntryClick }) => (
     {entries.map((entry) => (
       <ItemContainer key={entry.id} onClick={() => onEntryClick(entry.id)}>
         <DiaryTitle>{entry.title}</DiaryTitle>
-        <DiaryDate>{entry.date}</DiaryDate> {/* Display formatted date */}
+        <DiaryDate>{entry.date}</DiaryDate>
       </ItemContainer>
     ))}
   </ListContainer>
