@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import DiaryHeader from '../components/Diary/DiaryHeader';
 import DiaryList from '../components/Diary/DiaryList';
@@ -15,52 +15,54 @@ const Diary = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const entriesPerPage = 6;
+  const location = useLocation();
+
+  const entriesPerPage = 10;
 
   useEffect(() => {
-    const loadDiaries = async (page) => {
-      try {
-        setLoading(true);
-        const response = await fetchDiaries(page);
+    const query = new URLSearchParams(location.search);
+    const page = parseInt(query.get('page'), 10) || 1;
+    setCurrentPage(page);
+    loadDiaries(page);
+  }, [location.search]);
 
-        console.log('API Response:', response);
+  const loadDiaries = async (page) => {
+    try {
+      setLoading(true);
+      const response = await fetchDiaries(page);
 
-        const diaryList = response.data?.diaryList || [];
-        const pagination = response.data?.pagination || { totalPage: 1 };
+      console.log('API Response:', response);
 
-        const formattedDiaries = diaryList.map((diary) => ({
-          ...diary,
-          date: format(new Date(diary.createdAt), 'yyyy.MM.dd'),
-        }));
+      const diaryList = response.data?.diaryList || [];
+      const pagination = response.data?.pagination || { totalPage: 1 };
 
-        setEntries(formattedDiaries);
-        setTotalPages(pagination.totalPage);
-      } catch (err) {
-        console.error('Failed to fetch diaries:', err);
-        setError('다이어리 목록을 가져오는 데 실패했습니다.');
-      } finally {
-        setLoading(false);
-      }
-    };
+      const formattedDiaries = diaryList.map((diary) => ({
+        ...diary,
+        date: format(new Date(diary.createdAt), 'yyyy.MM.dd'),
+      }));
 
-    loadDiaries(currentPage);
-  }, [currentPage]);
+      setEntries(formattedDiaries);
+      setTotalPages(pagination.totalPage);
+    } catch (err) {
+      console.error('Failed to fetch diaries:', err);
+      setError('다이어리 목록을 가져오는 데 실패했습니다.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleAddEntry = () => {
     navigate(`/diaries/new`);
   };
 
   const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
+    if (pageNumber < 1 || pageNumber > totalPages) return;
+    navigate(`/diaries?page=${pageNumber}`);
   };
 
   const handleEntryClick = (id) => {
     navigate(`/diaries/${id}`);
   };
-
-  const indexOfLastEntry = currentPage * entriesPerPage;
-  const indexOfFirstEntry = indexOfLastEntry - entriesPerPage;
-  const currentEntries = entries.slice(indexOfFirstEntry, indexOfLastEntry);
 
   return (
     <Div>
@@ -73,10 +75,7 @@ const Diary = () => {
           <p>{error}</p>
         ) : (
           <>
-            <DiaryList
-              entries={currentEntries}
-              onEntryClick={handleEntryClick}
-            />
+            <DiaryList entries={entries} onEntryClick={handleEntryClick} />
             <Pagination
               currentPage={currentPage}
               totalPages={totalPages}
