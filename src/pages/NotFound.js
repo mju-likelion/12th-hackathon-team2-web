@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import SmallButton from '../components/SmallButton';
@@ -16,7 +16,7 @@ const NotFound = () => {
             <StyledSmallButton onClick={goToMain}>메인으로</StyledSmallButton>
         </BackgroundImg>
     );
-}
+};
 
 export default NotFound;
 
