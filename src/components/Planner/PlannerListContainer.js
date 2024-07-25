@@ -66,6 +66,6 @@ const ItemList = styled.div`
     }
 
     @media (max-width: 859px) {
-        height: calc(100% - 50px);
+        height: 45vh;
     }
 `;

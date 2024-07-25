@@ -57,7 +57,7 @@ const Planner = () => {
               )
               .filter(item => item !== null)
           );
-
+  
           setTimeout(() => {
             setToDoList((prevList) => {
               const itemToMove = prevList.find((item) => item && item.plannerId === id);
@@ -125,7 +125,12 @@ const Planner = () => {
       .then(response => {
         if (response.data.statusCode === "200 OK") {
           const filteredList = response.data.data.plannerList.filter(item => item !== null);
-          setToDoList(filteredList);
+          setToDoList(prevList => {
+            const newList = filteredList.filter(item => 
+              !prevList.some(prevItem => prevItem && prevItem.plannerId === item.plannerId)
+            );
+            return [...newList, ...prevList];
+          });
         } else {
           throw new Error("Failed to fetch updated planner list");
         }
@@ -134,6 +139,7 @@ const Planner = () => {
         console.error("There was an error handling the planner item!", error);
       });
   };
+  
   
   const sortedCompletedList = completedList
     .sort((a, b) => new Date(b.completedDate) - new Date(a.completedDate))
