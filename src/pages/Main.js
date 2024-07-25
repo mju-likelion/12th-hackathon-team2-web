@@ -40,6 +40,10 @@ const Main = () => {
 
   const handleAlertClose = () => {
     setAlertMessage(null);
+  };
+
+  const handleAlertConfirm = () => {
+    setAlertMessage(null);
     navigate('/auth/login');
   };
 
@@ -58,7 +62,14 @@ const Main = () => {
           <MenuItem onClick={() => navigate("/rooms")}>집중세션</MenuItem>
           <MenuItem onClick={() => navigate("/pomodoro")}>뽀모도로</MenuItem>
         </Menu>
-        {alertMessage && <AlertModal isOpen={Boolean(alertMessage)} message={alertMessage} onClose={handleAlertClose} />}
+        {alertMessage && (
+          <AlertModal 
+            isOpen={Boolean(alertMessage)} 
+            message={alertMessage} 
+            close={handleAlertClose}
+            handleConfirm={handleAlertConfirm}
+          />
+        )}
       </Container>
     </ThemeProvider>
   );
