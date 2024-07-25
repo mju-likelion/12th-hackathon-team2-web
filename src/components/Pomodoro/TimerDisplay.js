@@ -30,7 +30,7 @@ const Timer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 45%;
+  width: 50%;
   height: 100%;
 `;
 

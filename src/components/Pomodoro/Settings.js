@@ -45,7 +45,7 @@ const Settings = ({ workMinutes, setWorkMinutes, breakMinutes, setBreakMinutes, 
 const Left = styled.div`
   width: 25vw;
   min-width: 170px;
-  height: 653px;
+  height: 80vh;
   background-color: ${(props) => props.theme.colors.pink1};
   padding: 30px;
   border-radius: 20px;

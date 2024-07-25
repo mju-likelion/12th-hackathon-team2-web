@@ -178,7 +178,7 @@ const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1vh;
+  padding: 2vh;
   position: relative;
 `;
 
@@ -197,8 +197,7 @@ const PlannerContainer = styled.div`
   position: relative;
 
   @media (max-width: 768px) {
-    max-width: 90%;
-    min-height: 5vh;
+    min-width: 462px;
   }
 `;
 
@@ -210,6 +209,7 @@ const Content = styled.div`
   flex-direction: column;
 
   @media (min-width: 768px) {
+    min-width: 362px;
     flex-direction: row;
   }
 `;
@@ -225,7 +225,8 @@ const InnerContent = styled.div`
   align-items: center;
 
   @media (max-width: 768px) {
-
+    min-width: 362px;
+    height: 50vh;
   }
 `;
 

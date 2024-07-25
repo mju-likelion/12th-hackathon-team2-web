@@ -59,6 +59,7 @@ const CompletedPlanner = () => {
 
 export default CompletedPlanner;
 
+
 const Div = styled.div`
   width: 100vw;
   padding: 2vh;
@@ -77,18 +78,17 @@ const PlannerContainer = styled.div`
   flex-direction: column;
   align-items: center;
   background: ${({ theme }) => theme.colors.pink1};
-  border-radius: 10px;
+  border-radius: 20px;
   width: 100%;
   max-width: 1082px;
 
   min-height: 453px;
   margin-top: 2vh;
-  padding: 2vh;
+  padding: 4vh;
   position: relative;
 
   @media (max-width: 768px) {
-    max-width: 90%;
-    min-height: 50vh;
+    min-width: 462px;
   }
 `;
 
@@ -98,21 +98,25 @@ const Content = styled.div`
   width: 100%;
   position: relative;
   flex-direction: column;
+
   @media (min-width: 768px) {
+    min-width: 362px;
     flex-direction: row;
   }
 `;
 
 const InnerContent = styled.div`
   width: 100%;
-  height: 100%;
+  height: 60vh;
   background: ${({ theme }) => theme.colors.white};
   border-radius: 14px;
   padding: 2vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  @media (min-width: 769px) {
-    width: 100%;
+
+  @media (max-width: 768px) {
+    min-width: 362px;
+    height: 50vh;
   }
 `;
