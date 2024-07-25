@@ -9,9 +9,21 @@ import BananaImage from '../img/Banana.svg';
 import Rating from '../components/Rating';
 
 const gradeMapping = {
-  AVOCADO: { image: AvocadoImage, name: '아보카도' },
-  TOMATO: { image: TomatoImage, name: '토마토' },
-  BANANA: { image: BananaImage, name: '바나나' },
+  AVOCADO: {
+    image: AvocadoImage,
+    name: '아보카도',
+    message: '성인 ADHD일 가능성이 낮지만',
+  },
+  TOMATO: {
+    image: TomatoImage,
+    name: '토마토',
+    message: '성인 ADHD일 가능성이 높으며 ',
+  },
+  BANANA: {
+    image: BananaImage,
+    name: '바나나',
+    message: '성인 ADHD일 가능성이 낮지만',
+  },
 };
 
 const SurveyResult = () => {
@@ -26,6 +38,7 @@ const SurveyResult = () => {
   console.log('Result Data:', resultData);
 
   const gradeInfo = gradeMapping[resultData.data.grade] || {};
+  const message = gradeInfo.message;
 
   return (
     <Div>
@@ -33,8 +46,9 @@ const SurveyResult = () => {
       <Container>
         <Rating circleImage={gradeInfo.image} grade={gradeInfo.name} />
         <Info>
-          {resultData.message ||
-            '정확한 ADHD 검사를 위해서는 추가적인 검사가 필요해요.'}
+          {message}
+          <br />
+          정확한 검사를 위해서는 추가적인 검사가 필요해요.
         </Info>
         <TinyButton onClick={() => navigate('/main')}>확인</TinyButton>
       </Container>
@@ -56,10 +70,10 @@ const Container = styled.div`
 
 const Info = styled.p`
   margin-top: 20px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   ${(props) => props.theme.fonts.tinyButton};
   color: ${(props) => props.theme.colors.gray};
-  line-height: 1.5em;
+  line-height: 1.7em;
 `;
 
 export default SurveyResult;
