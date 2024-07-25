@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import BigButton from '../components/BigButton';
 import Header from '../components/Header';
 import Pagination from '../components/Pagination';
 import { RoomsProvider, useRooms } from '../components/Session/RoomsContext';
 import RoomsList from '../components/Session/RoomsList';
-import SmallButton from '../components/SmallButton';
 
 const SessionPageContent = () => {
   const { rooms, totalPages, currentPage, setCurrentPage } = useRooms();
@@ -41,7 +41,7 @@ const SessionPageContent = () => {
         <Title>
           <SubTitle>실시간 집중 세션</SubTitle>
           <ButtonWrapper>
-            <SmallButton onClick={handleAddRoom}>+ 방만들기</SmallButton>
+            <BigButton onClick={handleAddRoom}>+ 방만들기</BigButton>
           </ButtonWrapper>
         </Title>
         <RoomsList rooms={rooms} onRoomClick={handleRoomClick} />
@@ -91,5 +91,15 @@ const SubTitle = styled.h2`
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-  width: auto;
+  width: 150px;
+    @media (max-width: 1024px) {
+      width: 150px;
+    }
+    @media (max-width: 768px) {
+      width: 130px;
+    }
+
+    @media (max-width: 480px) {
+      width: 110px;
+    }
 `;

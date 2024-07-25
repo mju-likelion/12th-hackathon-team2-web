@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import SmallButton from '../SmallButton';
+import BigButton from '../BigButton';
 
 const DiaryHeader = ({ onAddEntry }) => (
   <HeaderContainer>
     <Header>감정 일기</Header>
     <ButtonWrapper>
-      <SmallButton onClick={onAddEntry}>일기 작성</SmallButton>
+      <BigButton onClick={onAddEntry}>일기 작성</BigButton>
     </ButtonWrapper>
   </HeaderContainer>
 );
@@ -27,4 +27,15 @@ const Header = styled.h1`
 
 const ButtonWrapper = styled.div`
   display: flex;
+  width: 150px;
+    @media (max-width: 1024px) {
+      width: 150px;
+    }
+    @media (max-width: 768px) {
+      width: 130px;
+    }
+
+    @media (max-width: 480px) {
+      width: 110px;
+    }
 `;

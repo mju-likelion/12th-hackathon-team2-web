@@ -30,9 +30,7 @@ export const Theme = {
         SmallButton: css`
             font-family: "Noto Sans KR", sans-serif;
             font-weight: 800;
-            font-size: 28px;
-            line-height: 34px;
-            text-align: center;
+            font-size: 20px;
         `,
         subTitle: css`
             font-family: "Noto Sans KR", sans-serif;

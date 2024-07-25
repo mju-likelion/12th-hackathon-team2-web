@@ -57,7 +57,7 @@ const Planner = () => {
               )
               .filter(item => item !== null)
           );
-
+  
           setTimeout(() => {
             setToDoList((prevList) => {
               const itemToMove = prevList.find((item) => item && item.plannerId === id);
@@ -125,7 +125,12 @@ const Planner = () => {
       .then(response => {
         if (response.data.statusCode === "200 OK") {
           const filteredList = response.data.data.plannerList.filter(item => item !== null);
-          setToDoList(filteredList);
+          setToDoList(prevList => {
+            const newList = filteredList.filter(item => 
+              !prevList.some(prevItem => prevItem && prevItem.plannerId === item.plannerId)
+            );
+            return [...newList, ...prevList];
+          });
         } else {
           throw new Error("Failed to fetch updated planner list");
         }
@@ -134,6 +139,7 @@ const Planner = () => {
         console.error("There was an error handling the planner item!", error);
       });
   };
+  
   
   const sortedCompletedList = completedList
     .sort((a, b) => new Date(b.completedDate) - new Date(a.completedDate))
@@ -187,18 +193,17 @@ const PlannerContainer = styled.div`
   flex-direction: column;
   align-items: center;
   background: ${({ theme }) => theme.colors.pink1};
-  border-radius: 10px;
+  border-radius: 20px;
   width: 100%;
   max-width: 1082px;
 
-  min-height: 553px;
+  min-height: 453px;
   margin-top: 2vh;
-  padding: 2vh;
+  padding: 4vh;
   position: relative;
 
   @media (max-width: 768px) {
-    max-width: 90%;
-    min-height: 50vh;
+    min-width: 462px;
   }
 `;
 
@@ -210,25 +215,24 @@ const Content = styled.div`
   flex-direction: column;
 
   @media (min-width: 768px) {
+    min-width: 362px;
     flex-direction: row;
   }
 `;
 
 const InnerContent = styled.div`
   width: 100%;
-  height: 100%;
+  height: 60vh;
   background: ${({ theme }) => theme.colors.white};
   border-radius: 14px;
   padding: 2vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 553px;
-  max-height: 553px;
 
   @media (max-width: 768px) {
-    min-height: 50vh;
-    max-height: 50vh;
+    min-width: 362px;
+    height: 50vh;
   }
 `;
 

@@ -51,8 +51,7 @@ const InnerContainer = styled.div`
 const ItemList = styled.div`
     overflow-y: auto;
     height: 100%;
-    padding-right: 10px;
-
+    
     &::-webkit-scrollbar {
         width: 8px;
     }
@@ -67,6 +66,6 @@ const ItemList = styled.div`
     }
 
     @media (max-width: 859px) {
-        height: calc(100% - 50px);
+        height: 45vh;
     }
 `;

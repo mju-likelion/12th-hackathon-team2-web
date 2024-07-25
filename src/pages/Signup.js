@@ -17,6 +17,7 @@ const Signup = () => {
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
+  const [confirmAction, setConfirmAction] = useState(() => () => setModalOpen(false));
 
   const {
     control,
@@ -30,25 +31,26 @@ const Signup = () => {
   const callbackFunctions = {
     navigateSuccess: () => {
       setModalMessage('회원가입이 완료되었습니다! \n확인 버튼을 누르면 설문 조사가 시작됩니다. \n설문조사는 회원가입시 1회만 진행됩니다.');
+      setConfirmAction(() => () => navigate('/surveys'));
       setModalOpen(true);
     },
     navigateError: (error) => {
       if (error.response && error.response.status === 409) {
-        setModalMessage('이미 사용중인 이메일입니다. \n다른 이메일을 입력해주세요.');
+        if (error.response.data.message === '이미 사용 중인 이름입니다.') {
+          setModalMessage('이미 사용중인 닉네임입니다. \n다른 닉네임을 입력해주세요.');
+        } else {
+          setModalMessage('이미 사용중인 이메일입니다. \n다른 이메일을 입력해주세요.');
+        }
       } else {
         setModalMessage('회원가입에 실패했습니다. \n다시 시도해주세요.');
       }
+      setConfirmAction(() => () => setModalOpen(false));
       setModalOpen(true);
     },
   };
 
   const onSubmit = (data) => {
     SignupApi(data, callbackFunctions);
-  };
-
-  const closeModal = () => {
-    setModalOpen(false);
-    navigate('/surveys', { replace: true });
   };
 
   return (
@@ -72,7 +74,14 @@ const Signup = () => {
           )}/>
           <Button type='submit'>가입하기</Button>
         </SignupForm>
-        {modalOpen && <AlertModal isOpen={modalOpen} close={closeModal} message={modalMessage} />}
+        {modalOpen && (
+          <AlertModal
+            isOpen={modalOpen}
+            close={() => setModalOpen(false)}
+            message={modalMessage}
+            handleConfirm={confirmAction}
+          />
+        )}
       </Container>
     </ThemeProvider>
   );
@@ -87,10 +96,36 @@ const SignupForm = styled.form`
   background: ${props => props.theme.colors.pink2};
   border-radius: 30px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  @media (max-width: 768px) {
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px;
+    border-radius: 10px;
+  }
 `;
 
 const SignupText = styled.h2`
-  ${props => props.theme.fonts.signupText};
+  ${props => props.theme.fonts.loginText};
   margin-bottom: 20px;
   color: ${props => props.theme.colors.white};
+
+  @media (max-width: 1024px) {
+    font-size: 1.8rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.7rem;
+  }
+
+  @media (max-width: 360px) {
+    font-size: 0.6rem;
+  }
 `;

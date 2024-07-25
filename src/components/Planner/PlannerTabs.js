@@ -52,6 +52,7 @@ const TabItem = styled.div`
   justify-content: center;
   width: 45px;
   height: 139px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   background: ${({ $isActive, theme }) => ($isActive ? theme.colors.white : theme.colors.pink3)};
   border-radius: 14px 0 0 14px;
   cursor: pointer;
