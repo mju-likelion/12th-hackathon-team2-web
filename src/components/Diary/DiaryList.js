@@ -42,4 +42,5 @@ const DiaryTitle = styled.div`
 const DiaryDate = styled.div`
   ${({ theme }) => theme.fonts.PageNumber};
   color: ${({ theme }) => theme.colors.pink3};
+  margin-right: 20px;
 `;

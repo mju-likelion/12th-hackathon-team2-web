@@ -7,7 +7,7 @@ const RoomItem = ({ room, onClick }) => {
   return (
     <Room onClick={onClick}>
       <RoomContent>
-        <RoomIcon src={room.active ? RoomOn : RoomOff} alt={`room${room.id}`} />
+        <RoomIcon src={RoomOn} alt={`room${room.id}`} />
         <RoomName>{room.title || `room${room.id}`}</RoomName>
       </RoomContent>
     </Room>
