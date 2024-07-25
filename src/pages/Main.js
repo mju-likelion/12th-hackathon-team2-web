@@ -1,15 +1,15 @@
 import Cookies from 'js-cookie';
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import styled, { ThemeProvider } from "styled-components";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled, { ThemeProvider } from 'styled-components';
 import { gradeGetApi } from '../api/users/gradeGetApi';
 import AlertModal from '../components/AlertModal';
-import Container from "../components/Container";
-import AvocadoImage from "../img/Avocado.svg";
-import BananaImage from "../img/Banana.svg";
-import TomatoImage from "../img/Tomato.svg";
-import GlobalStyle from "../styles/GlobalStyle";
-import { Theme } from "../styles/Theme";
+import Container from '../components/Container';
+import AvocadoImage from '../img/Avocado.svg';
+import BananaImage from '../img/Banana.svg';
+import TomatoImage from '../img/Tomato.svg';
+import GlobalStyle from '../styles/GlobalStyle';
+import { Theme } from '../styles/Theme';
 
 const gradeMapping = {
   AVOCADO: { image: AvocadoImage, name: '아보카도' },
@@ -29,13 +29,15 @@ const Main = () => {
       return;
     }
 
-    gradeGetApi().then(response => {
-      if (response.status === 200) {
-        setUserGrade(response.data.data.grade);
-      }
-    }).catch(error => {
-      console.error('유저 등급 조회 실패:', error);
-    });
+    gradeGetApi()
+      .then((response) => {
+        if (response.status === 200) {
+          setUserGrade(response.data.data.grade);
+        }
+      })
+      .catch((error) => {
+        console.error('유저 등급 조회 실패:', error);
+      });
   }, [navigate]);
 
   const handleAlertClose = () => {
@@ -53,19 +55,21 @@ const Main = () => {
     <ThemeProvider theme={Theme}>
       <GlobalStyle />
       <Container>
-        {gradeInfo.image && <Logo src={gradeInfo.image} alt={`${gradeInfo.name} Logo`} />}
+        {gradeInfo.image && (
+          <Logo src={gradeInfo.image} alt={`${gradeInfo.name} Logo`} />
+        )}
         <Header>Mutside Out</Header>
         {userGrade && <UserGrade>유저 등급: {gradeInfo.name}</UserGrade>}
         <Menu>
-          <MenuItem onClick={() => navigate("/planners")}>플래너</MenuItem>
-          <MenuItem onClick={() => navigate("/diaries")}>감정일기</MenuItem>
-          <MenuItem onClick={() => navigate("/rooms")}>집중세션</MenuItem>
-          <MenuItem onClick={() => navigate("/pomodoro")}>뽀모도로</MenuItem>
+          <MenuItem onClick={() => navigate('/planners')}>플래너</MenuItem>
+          <MenuItem onClick={() => navigate('/diaries')}>감정일기</MenuItem>
+          <MenuItem onClick={() => navigate('/rooms')}>집중세션</MenuItem>
+          <MenuItem onClick={() => navigate('/pomodoro')}>뽀모도로</MenuItem>
         </Menu>
         {alertMessage && (
-          <AlertModal 
-            isOpen={Boolean(alertMessage)} 
-            message={alertMessage} 
+          <AlertModal
+            isOpen={Boolean(alertMessage)}
+            message={alertMessage}
             close={handleAlertClose}
             handleConfirm={handleAlertConfirm}
           />
@@ -86,13 +90,14 @@ const Logo = styled.img`
 const Header = styled.h1`
   ${(props) => props.theme.fonts.title};
   color: ${(props) => props.theme.colors.pink3};
-  margin-bottom: 50px;
+  margin-bottom: 10px;
 `;
 
 const UserGrade = styled.div`
-  ${(props) => props.theme.fonts.menuItem};
-  color: ${(props) => props.theme.colors.gray};
-  margin-bottom: 20px;
+  ${(props) => props.theme.fonts.pagenumber};
+  color: ${(props) => props.theme.colors.pink2};
+  margin-bottom: 50px;
+  font-weight: 700;
 `;
 
 const Menu = styled.div`

@@ -98,7 +98,7 @@ const Survey = () => {
 };
 
 const Container = styled.div`
-  width: 100%;
+  width: 80%;
   max-width: 900px;
   margin: 40px auto;
   padding: 30px;
