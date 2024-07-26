@@ -143,9 +143,13 @@ const Pomodoro = () => {
     };
 
     const formatTime = (time) => {
-        const minutes = Math.floor(time / (1000 * 60));
+        const totalMinutes = Math.floor(time / (1000 * 60));
         const seconds = Math.floor((time % (1000 * 60)) / 1000);
-        return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        const hours = Math.floor(totalMinutes / 60);
+        const minutes = totalMinutes % 60;
+        return hours > 0
+            ? `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+            : `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
     };
 
     const getWorkPercentage = (time) => {
