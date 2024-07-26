@@ -124,11 +124,12 @@ const Header = styled.h1`
 const UserGrade = styled.div`
     ${(props) => props.theme.fonts.pagenumber};
     color: ${(props) => props.theme.colors.pink2};
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     font-weight: 700;
 `;
 
 const Menu = styled.div`
+    margin-top: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
