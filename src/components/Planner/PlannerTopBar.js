@@ -13,14 +13,14 @@ const PlannerTopBar = ({ toDoCount, totalDone }) => {
     }, []);
 
     const formatDate = (date) => {
-        const options = { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric', 
-            hour: '2-digit', 
-            minute: '2-digit', 
-            second: '2-digit' 
+        const options = {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
         };
         return date.toLocaleDateString('ko-KR', options);
     };
@@ -53,13 +53,13 @@ const TopBarContainer = styled.div`
 `;
 
 const CurrentTime = styled.div`
-    font-size: 1.2em;
+    font-size: 20px;
     font-weight: bold;
     text-align: left;
     flex: 1;
     margin-bottom: 20px;
-    color: ${({ theme }) => theme.colors.black};
-    
+    color: ${({ theme }) => theme.colors.gray};
+
     @media (max-width: 768px) {
         font-size: 1em;
         text-align: center;
