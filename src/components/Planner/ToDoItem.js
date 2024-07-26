@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import { schemaPlanner } from '../../hooks/ValidationYup';
 import CheckButtonOff from '../../img/CheckButtonOff.png';
 import CheckButtonOn from '../../img/CheckButtonOn.png';
+import DeleteIcon from '../../img/deleteIcon.png'; // 삭제 아이콘 추가
 
-const ToDoItem = ({ item, onCheck, onUpdate, editable }) => {
+const ToDoItem = ({ item, onCheck, onUpdate, onDelete, editable }) => {
     const [editMode, setEditMode] = useState(false);
     const [text, setText] = useState(item.content);
     const [error, setError] = useState('');
@@ -55,26 +56,31 @@ const ToDoItem = ({ item, onCheck, onUpdate, editable }) => {
 
     return (
         <Item>
-            <CheckButton 
-                src={item.completed ? CheckButtonOn : CheckButtonOff} 
-                alt="Check Button" 
+            <CheckButton
+                src={item.completed ? CheckButtonOn : CheckButtonOff}
+                alt='Check Button'
                 onClick={() => !item.completed && onCheck(item.plannerId)}
                 completed={item.completed.toString()}
             />
             <Content>
                 {editMode ? (
-                    <EditTextarea 
-                        value={text} 
-                        onChange={handleTextChange} 
-                        onBlur={handleBlur} 
+                    <EditTextarea
+                        value={text}
+                        onChange={handleTextChange}
+                        onBlur={handleBlur}
                         onKeyPress={handleKeyPress}
-                        autoFocus 
+                        autoFocus
                         rows={1}
                     />
                 ) : (
                     <Text onClick={handleTextClick}>{text}</Text>
                 )}
             </Content>
+            <DeleteButton
+                src={DeleteIcon}
+                alt='Delete Button'
+                onClick={() => onDelete(item.plannerId)}
+            />
             {error && <Error>{error}</Error>}
         </Item>
     );
@@ -145,6 +151,19 @@ const EditTextarea = styled.textarea`
 
     @media (max-width: 480px) {
         font-size: 14px;
+    }
+`;
+
+const DeleteButton = styled.img`
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
+    cursor: pointer;
+
+    @media (max-width: 480px) {
+        width: 18px;
+        height: 18px;
+        margin-left: 8px;
     }
 `;
 
