@@ -27,6 +27,7 @@ const SessionDetail = lazy(() => import('./pages/SessionDetail'));
 const Signup = lazy(() => import('./pages/Signup'));
 const Survey = lazy(() => import('./pages/Survey'));
 const SurveyResult = lazy(() => import('./pages/SurveyResult'));
+const Calendar = lazy(() => import('./pages/Calendar')); // 추가된 부분
 
 function App() {
     return (
@@ -79,6 +80,11 @@ function App() {
                                     path='/surveys/result'
                                     element={<SurveyResult />}
                                 />
+                                <Route
+                                    path='/calendar'
+                                    element={<Calendar />}
+                                />{' '}
+                                {/* 추가된 부분 */}
                                 <Route path='/*' element={<NotFound />} />
                             </Routes>
                         </Suspense>
