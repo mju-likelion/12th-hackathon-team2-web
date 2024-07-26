@@ -1,21 +1,30 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-const InputField = React.forwardRef(({ label, placeholder, type = "text", error, attemptedSubmit, ...props }, ref) => {
-    return (
-        <InputWrapper>
-            <InputLabel>{label}</InputLabel>
-            <InputContainer>
-                <StyledInputField ref={ref} type={type} placeholder={placeholder} hasError={!!error} {...props} />
-                <ErrorText showError={!!error}>
-                    {error || ' '}
-                </ErrorText>
-            </InputContainer>
-        </InputWrapper>
-    );
-});
+const InputField = React.forwardRef(
+    (
+        { label, placeholder, type = 'text', error, attemptedSubmit, ...props },
+        ref
+    ) => {
+        return (
+            <InputWrapper>
+                <InputLabel>{label}</InputLabel>
+                <InputContainer>
+                    <StyledInputField
+                        ref={ref}
+                        type={type}
+                        placeholder={placeholder}
+                        hasError={!!error}
+                        {...props}
+                    />
+                    <ErrorText showError={!!error}>{error || ' '}</ErrorText>
+                </InputContainer>
+            </InputWrapper>
+        );
+    }
+);
 
-InputField.displayName = "InputField";
+InputField.displayName = 'InputField';
 
 export default InputField;
 
@@ -40,7 +49,7 @@ const InputWrapper = styled.div`
 `;
 
 const InputLabel = styled.label`
-    ${props => props.theme.fonts.inputLabel};
+    ${(props) => props.theme.fonts.inputLabel};
     color: ${(props) => props.theme.colors.white};
     width: 100%;
     margin-right: 10px;
@@ -71,16 +80,22 @@ const StyledInputField = styled.input`
     box-sizing: border-box;
     width: 330px;
     height: 50px;
-    border: 1px solid #C2C2C2;
+    border: 1px solid #c2c2c2;
     border-radius: 20px;
     padding: 20px;
-    ${props => props.theme.fonts.inputField};
+    ${(props) => props.theme.fonts.inputField};
     color: ${(props) => props.theme.colors.black};
-    border: 1px solid ${(props) => props.theme.colors.borderGray};
+    /* border: 1px solid ${(props) => props.theme.colors.borderGray}; */
     border-radius: 20px;
     background: ${(props) => props.theme.colors.white};
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25); */
     margin-bottom: ${(props) => (props.hasError ? '10px' : '0')};
+
+    &:focus {
+        border: 2.5px solid;
+        border-color: ${(props) => props.theme.colors.pink3};
+        outline: none;
+    }
 
     @media (max-width: 1024px) {
         width: 300px;
@@ -104,8 +119,9 @@ const StyledInputField = styled.input`
 `;
 
 const ErrorText = styled(({ showError, ...rest }) => <span {...rest} />)`
-    ${props => props.theme.fonts.helperText};
-    color: ${(props) => (props.showError ? props.theme.colors.blue : props.theme.colors.black)};
+    ${(props) => props.theme.fonts.helperText};
+    color: ${(props) =>
+        props.showError ? props.theme.colors.blue : props.theme.colors.black};
     margin-left: 10px;
     width: 300px;
     height: 0px;
