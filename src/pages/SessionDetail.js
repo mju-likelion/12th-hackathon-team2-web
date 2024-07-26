@@ -216,8 +216,8 @@ const Container = styled.div`
 `;
 
 const Title = styled.h1`
-    margin-top: 87px;
-    margin-bottom: 50px;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
     ${Theme.fonts.subTitle};
     color: ${Theme.colors.black};
 `;
@@ -246,7 +246,6 @@ const ActionButtonContainer = styled.div`
     justify-content: flex-end;
     width: 100%;
     gap: 10px;
-    margin-top: 20px;
 `;
 
 const Input = styled.input`
