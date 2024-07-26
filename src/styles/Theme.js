@@ -34,7 +34,7 @@ export const Theme = {
         `,
         subTitle: css`
             font-family: 'Noto Sans KR', sans-serif;
-            font-weight: 800;
+            font-weight: 600;
             font-size: 36px;
             line-height: 44px;
         `,
@@ -112,7 +112,7 @@ export const Theme = {
         Context: css`
             font-family: 'Inter';
             font-style: normal;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 32px;
             line-height: 39px;
         `,

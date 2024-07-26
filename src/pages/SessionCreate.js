@@ -125,8 +125,8 @@ const Container = styled.div`
 `;
 
 const Title = styled.h1`
-    margin-top: 87px;
-    margin-bottom: 50px;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
     ${Theme.fonts.subTitle};
     color: ${Theme.colors.black};
 `;

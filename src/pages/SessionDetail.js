@@ -5,7 +5,9 @@ import styled from 'styled-components';
 import { deleteRoom } from '../api/Rooms/RoomsDeleteApi';
 import { getRoom } from '../api/Rooms/RoomsGetApi';
 import { updateRoom } from '../api/Rooms/RoomsPatchApi';
+import AlertModal from '../components/AlertModal';
 import Header from '../components/Header';
+import Loading from '../components/Loading';
 import TinyButton from '../components/TinyButton';
 import { schemaSessionDetail } from '../hooks/ValidationYup';
 import { Theme } from '../styles/Theme';
@@ -20,14 +22,29 @@ const SessionDetail = () => {
     const [room, setRoom] = useState(null);
     const [titleError, setTitleError] = useState('');
     const [linkError, setLinkError] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
 
     useEffect(() => {
         const fetchRoom = async () => {
             try {
+                setLoading(true);
+                const timeoutId = setTimeout(() => {
+                    setLoading(false);
+                    setModalMessage(
+                        '링크를 찾을 수 없습니다. \n실시간 집중세션 페이지로 돌아갑니다.'
+                    );
+                    setIsModalOpen(true);
+                }, 2000);
+
                 const data = await getRoom(roomId);
+                clearTimeout(timeoutId);
                 setRoom(data.data);
+                setLoading(false);
             } catch (error) {
                 console.error('방 조회 실패', error);
+                setLoading(false);
             }
         };
 
@@ -77,7 +94,31 @@ const SessionDetail = () => {
         }
     };
 
-    if (!room) return <div>로딩...</div>;
+    const handleLinkButtonClick = (link) => {
+        setLoading(true);
+        window.open(link, '_blank');
+        setLoading(false);
+    };
+
+    const handleModalConfirm = () => {
+        setIsModalOpen(false);
+        navigate('/rooms');
+    };
+
+    if (loading) return <Loading />;
+
+    if (!room)
+        return (
+            <div>
+                <Loading />
+                <AlertModal
+                    isOpen={isModalOpen}
+                    close={() => setIsModalOpen(false)}
+                    message={modalMessage}
+                    handleConfirm={handleModalConfirm}
+                />
+            </div>
+        );
 
     return (
         <Div>
@@ -94,54 +135,68 @@ const SessionDetail = () => {
                     onSubmit={handleUpdate}
                 >
                     {({ errors, touched, setFieldValue }) => (
-                        <StyledForm>
-                            <Field
-                                name='title'
-                                placeholder='title'
-                                as={Input}
-                                maxLength={TITLE_MAX_LENGTH}
-                                onChange={(e) =>
-                                    handleTitleChange(e, setFieldValue)
-                                }
-                            />
-                            {titleError ? <Error>{titleError}</Error> : null}
-                            {errors.title && touched.title ? (
-                                <Error>{errors.title}</Error>
-                            ) : null}
-                            <Field
-                                name='link'
-                                placeholder='Link'
-                                as={Input}
-                                maxLength={LINK_MAX_LENGTH}
-                                onChange={(e) =>
-                                    handleLinkChange(e, setFieldValue)
-                                }
-                            />
-                            {linkError ? <Error>{linkError}</Error> : null}
-                            {errors.link && touched.link ? (
-                                <Error>{errors.link}</Error>
-                            ) : null}
-                            <Field
-                                name='content'
-                                placeholder='content'
-                                as={TextArea}
-                            />
-                            {errors.content && touched.content ? (
-                                <Error>{errors.content}</Error>
-                            ) : null}
-                            <ButtonContainer>
-                                <TinyButton onClick={handleDelete}>
-                                    삭제하기
-                                </TinyButton>
-                                <TinyButton onClick={() => navigate('/rooms')}>
-                                    목록으로
-                                </TinyButton>
-                                <TinyButton type='submit'>수정하기</TinyButton>
-                            </ButtonContainer>
-                        </StyledForm>
+                        <FormWrapper>
+                            <StyledForm>
+                                <ButtonContainer>
+                                    <TinyButton
+                                        onClick={() =>
+                                            handleLinkButtonClick(room.link)
+                                        }
+                                    >
+                                        링크 이동
+                                    </TinyButton>
+                                    <TinyButton
+                                        onClick={() => navigate('/rooms')}
+                                    >
+                                        목록으로
+                                    </TinyButton>
+                                </ButtonContainer>
+                                <Field
+                                    name='title'
+                                    placeholder='title'
+                                    as={Input}
+                                    maxLength={TITLE_MAX_LENGTH}
+                                    onChange={(e) =>
+                                        handleTitleChange(e, setFieldValue)
+                                    }
+                                />
+                                {titleError ? (
+                                    <Error>{titleError}</Error>
+                                ) : null}
+                                {errors.title && touched.title ? (
+                                    <Error>{errors.title}</Error>
+                                ) : null}
+                                {linkError ? <Error>{linkError}</Error> : null}
+                                {errors.link && touched.link ? (
+                                    <Error>{errors.link}</Error>
+                                ) : null}
+                                <Field
+                                    name='content'
+                                    placeholder='content'
+                                    as={TextArea}
+                                />
+                                {errors.content && touched.content ? (
+                                    <Error>{errors.content}</Error>
+                                ) : null}
+                                <ActionButtonContainer>
+                                    <TinyButton onClick={handleDelete}>
+                                        삭제하기
+                                    </TinyButton>
+                                    <TinyButton type='submit'>
+                                        수정하기
+                                    </TinyButton>
+                                </ActionButtonContainer>
+                            </StyledForm>
+                        </FormWrapper>
                     )}
                 </Formik>
             </Container>
+            <AlertModal
+                isOpen={isModalOpen}
+                close={() => setIsModalOpen(false)}
+                message={modalMessage}
+                handleConfirm={handleModalConfirm}
+            />
         </Div>
     );
 };
@@ -161,20 +216,32 @@ const Container = styled.div`
 `;
 
 const Title = styled.h1`
-    margin-top: 87px;
-    margin-bottom: 50px;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
     ${Theme.fonts.subTitle};
     color: ${Theme.colors.black};
 `;
 
-const StyledForm = styled(Form)`
+const FormWrapper = styled.div`
     width: 60vw;
+`;
+
+const StyledForm = styled(Form)`
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    position: relative;
 `;
 
 const ButtonContainer = styled.div`
+    display: flex;
+    gap: 10px;
+    align-self: flex-end;
+    margin-bottom: 20px;
+`;
+
+const ActionButtonContainer = styled.div`
     display: flex;
     justify-content: flex-end;
     width: 100%;
@@ -207,7 +274,7 @@ const TextArea = styled.textarea`
     height: 150px;
     resize: none;
     box-sizing: border-box;
-    width: 60vw;
+    width: 100%;
     height: 368px;
     background: ${Theme.colors.white};
     margin-bottom: 10px;

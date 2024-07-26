@@ -11,13 +11,20 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         <PaginationContainer>
             {totalPages > 0 && (
                 <>
-                    <PageNumber onClick={() => onPageChange(currentPage - 1)}>&lt;</PageNumber>
-                    {pageNumbers.map(number => (
-                        <PageNumber key={number} onClick={() => onPageChange(number)}>
+                    <PageNumber onClick={() => onPageChange(currentPage - 1)}>
+                        &lt;
+                    </PageNumber>
+                    {pageNumbers.map((number) => (
+                        <PageNumber
+                            key={number}
+                            onClick={() => onPageChange(number)}
+                        >
                             {number}
                         </PageNumber>
                     ))}
-                    <PageNumber onClick={() => onPageChange(currentPage + 1)}>&gt;</PageNumber>
+                    <PageNumber onClick={() => onPageChange(currentPage + 1)}>
+                        &gt;
+                    </PageNumber>
                 </>
             )}
         </PaginationContainer>
@@ -29,7 +36,11 @@ export default Pagination;
 const PaginationContainer = styled.div`
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    position: fixed;
+    bottom: 00px;
+    left: 0;
+    right: 0;
+    padding: 30px 0;
 `;
 
 const PageNumber = styled.div`
