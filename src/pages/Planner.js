@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { PlannersDeleteApi } from '../api/Planners/PlannersDeleteApi'; // 삭제 API 추가
+import { PlannersDeleteApi } from '../api/Planners/PlannersDeleteApi';
 import { PlannersGetApi } from '../api/Planners/PlannersGetApi';
 import { PlannersPatchApi } from '../api/Planners/PlannersPatchApi';
 import { PlannersPostApi } from '../api/Planners/PlannersPostApi';
@@ -232,7 +232,7 @@ const Planner = () => {
                                 completedList={sortedCompletedList}
                                 handleCheck={handleCheck}
                                 handleUpdate={handleUpdate}
-                                handleDelete={handleDelete} // 삭제 핸들러 전달
+                                handleDelete={handleDelete}
                             />
                             <AddButtonContainer>
                                 <TinyButton onClick={handleAddItem}>

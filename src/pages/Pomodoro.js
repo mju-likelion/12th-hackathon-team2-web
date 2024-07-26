@@ -1,4 +1,3 @@
-// Pomodoro.jsx
 import React, { useEffect, useState } from 'react';
 import 'react-circular-progressbar/dist/styles.css';
 import styled from 'styled-components';
