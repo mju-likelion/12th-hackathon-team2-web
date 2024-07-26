@@ -1,1 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+@font-face {
+    font-family: 'Inside Out';
+    src: url('/fonts/InsideFont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
