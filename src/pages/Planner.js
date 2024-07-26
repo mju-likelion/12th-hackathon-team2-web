@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { PlannersDeleteApi } from '../api/Planners/PlannersDeleteApi'; // 삭제 API 추가
 import { PlannersGetApi } from '../api/Planners/PlannersGetApi';
 import { PlannersPatchApi } from '../api/Planners/PlannersPatchApi';
 import { PlannersPostApi } from '../api/Planners/PlannersPostApi';
@@ -186,6 +187,26 @@ const Planner = () => {
             });
     };
 
+    const handleDelete = (id) => {
+        PlannersDeleteApi(id)
+            .then((response) => {
+                if (response.data.statusCode === '200 OK') {
+                    setToDoList((prevList) =>
+                        prevList.filter((item) => item && item.plannerId !== id)
+                    );
+                    setCompletedList((prevList) =>
+                        prevList.filter((item) => item && item.plannerId !== id)
+                    );
+                }
+            })
+            .catch((error) => {
+                console.error(
+                    'There was an error deleting the planner item!',
+                    error
+                );
+            });
+    };
+
     const sortedCompletedList = completedList
         .sort((a, b) => new Date(b.completedDate) - new Date(a.completedDate))
         .filter((item) => item !== null);
@@ -211,6 +232,7 @@ const Planner = () => {
                                 completedList={sortedCompletedList}
                                 handleCheck={handleCheck}
                                 handleUpdate={handleUpdate}
+                                handleDelete={handleDelete} // 삭제 핸들러 전달
                             />
                             <AddButtonContainer>
                                 <TinyButton onClick={handleAddItem}>

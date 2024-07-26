@@ -3,9 +3,16 @@ import styled from 'styled-components';
 import { schemaPlanner } from '../../hooks/ValidationYup';
 import CheckButtonOff from '../../img/CheckButtonOff.png';
 import CheckButtonOn from '../../img/CheckButtonOn.png';
-import DeleteIcon from '../../img/deleteIcon.png'; // 삭제 아이콘 추가
+import DeleteIcon from '../../img/deleteIcon.png';
 
-const ToDoItem = ({ item, onCheck, onUpdate, onDelete, editable }) => {
+const ToDoItem = ({
+    item,
+    onCheck,
+    onUpdate,
+    onDelete,
+    editable,
+    showDeleteIcon,
+}) => {
     const [editMode, setEditMode] = useState(false);
     const [text, setText] = useState(item.content);
     const [error, setError] = useState('');
@@ -76,11 +83,13 @@ const ToDoItem = ({ item, onCheck, onUpdate, onDelete, editable }) => {
                     <Text onClick={handleTextClick}>{text}</Text>
                 )}
             </Content>
-            <DeleteButton
-                src={DeleteIcon}
-                alt='Delete Button'
-                onClick={() => onDelete(item.plannerId)}
-            />
+            {showDeleteIcon && (
+                <DeleteButton
+                    src={DeleteIcon}
+                    alt='Delete Button'
+                    onClick={() => onDelete(item.plannerId)}
+                />
+            )}
             {error && <Error>{error}</Error>}
         </Item>
     );
@@ -155,8 +164,8 @@ const EditTextarea = styled.textarea`
 `;
 
 const DeleteButton = styled.img`
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     margin-left: 10px;
     cursor: pointer;
 
