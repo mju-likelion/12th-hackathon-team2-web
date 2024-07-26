@@ -1,20 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
-import CompletedTab from './CompletedTab';
 import ToDoItem from './ToDoItem.js';
 
-const PlannerListContainer = ({ activeTab, toDoList, completedList, handleCheck, handleUpdate }) => (
+const PlannerListContainer = ({
+    activeTab,
+    toDoList,
+    completedList,
+    handleCheck,
+    handleUpdate,
+    handleDelete,
+}) => (
     <Container>
         {activeTab === 'to-do' ? (
             <InnerContainer>
                 <ItemList>
                     {toDoList.map((item) => (
-                        <ToDoItem 
-                            key={item.plannerId} 
-                            item={item} 
-                            onCheck={handleCheck} 
-                            onUpdate={handleUpdate} 
+                        <ToDoItem
+                            key={item.plannerId}
+                            item={item}
+                            onCheck={handleCheck}
+                            onUpdate={handleUpdate}
+                            onDelete={handleDelete}
                             editable={!item.completed}
+                            showDeleteIcon={true}
                         />
                     ))}
                 </ItemList>
@@ -22,11 +30,17 @@ const PlannerListContainer = ({ activeTab, toDoList, completedList, handleCheck,
         ) : (
             <InnerContainer>
                 <ItemList>
-                    <CompletedTab 
-                        completedList={completedList} 
-                        onCheck={handleCheck} 
-                        onUpdate={handleUpdate} 
-                    />
+                    {completedList.map((item) => (
+                        <ToDoItem
+                            key={item.plannerId}
+                            item={item}
+                            onCheck={handleCheck}
+                            onUpdate={handleUpdate}
+                            onDelete={handleDelete}
+                            editable={false}
+                            showDeleteIcon={false}
+                        />
+                    ))}
                 </ItemList>
             </InnerContainer>
         )}
@@ -51,7 +65,7 @@ const InnerContainer = styled.div`
 const ItemList = styled.div`
     overflow-y: auto;
     height: 100%;
-    
+
     &::-webkit-scrollbar {
         width: 8px;
     }
