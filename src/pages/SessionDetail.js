@@ -166,15 +166,6 @@ const SessionDetail = () => {
                                 {errors.title && touched.title ? (
                                     <Error>{errors.title}</Error>
                                 ) : null}
-                                <Field
-                                    name='link'
-                                    placeholder='Link'
-                                    as={Input}
-                                    maxLength={LINK_MAX_LENGTH}
-                                    onChange={(e) =>
-                                        handleLinkChange(e, setFieldValue)
-                                    }
-                                />
                                 {linkError ? <Error>{linkError}</Error> : null}
                                 {errors.link && touched.link ? (
                                     <Error>{errors.link}</Error>
