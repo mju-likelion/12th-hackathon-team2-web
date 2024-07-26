@@ -5,11 +5,13 @@ import styled from 'styled-components';
 import { deleteRoom } from '../api/Rooms/RoomsDeleteApi';
 import { getRoom } from '../api/Rooms/RoomsGetApi';
 import { updateRoom } from '../api/Rooms/RoomsPatchApi';
+import AlertModal from '../components/AlertModal';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
 import TinyButton from '../components/TinyButton';
 import { schemaSessionDetail } from '../hooks/ValidationYup';
 import { Theme } from '../styles/Theme';
+
 const TITLE_MAX_LENGTH = 40;
 const LINK_MAX_LENGTH = 40;
 
@@ -21,12 +23,23 @@ const SessionDetail = () => {
     const [titleError, setTitleError] = useState('');
     const [linkError, setLinkError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
 
     useEffect(() => {
         const fetchRoom = async () => {
             try {
                 setLoading(true);
+                const timeoutId = setTimeout(() => {
+                    setLoading(false);
+                    setModalMessage(
+                        '링크를 찾을 수 없습니다. \n실시간 집중세션 페이지로 돌아갑니다.'
+                    );
+                    setIsModalOpen(true);
+                }, 2000);
+
                 const data = await getRoom(roomId);
+                clearTimeout(timeoutId);
                 setRoom(data.data);
                 setLoading(false);
             } catch (error) {
@@ -87,10 +100,23 @@ const SessionDetail = () => {
         setLoading(false);
     };
 
+    const handleModalConfirm = () => {
+        setIsModalOpen(false);
+        navigate('/rooms');
+    };
+
+    if (loading) return <Loading />;
+
     if (!room)
         return (
             <div>
                 <Loading />
+                <AlertModal
+                    isOpen={isModalOpen}
+                    close={() => setIsModalOpen(false)}
+                    message={modalMessage}
+                    handleConfirm={handleModalConfirm}
+                />
             </div>
         );
 
@@ -174,6 +200,12 @@ const SessionDetail = () => {
                     )}
                 </Formik>
             </Container>
+            <AlertModal
+                isOpen={isModalOpen}
+                close={() => setIsModalOpen(false)}
+                message={modalMessage}
+                handleConfirm={handleModalConfirm}
+            />
         </Div>
     );
 };
