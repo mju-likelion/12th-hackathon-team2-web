@@ -6,10 +6,10 @@ import { deleteRoom } from '../api/Rooms/RoomsDeleteApi';
 import { getRoom } from '../api/Rooms/RoomsGetApi';
 import { updateRoom } from '../api/Rooms/RoomsPatchApi';
 import Header from '../components/Header';
+import Loading from '../components/Loading';
 import TinyButton from '../components/TinyButton';
 import { schemaSessionDetail } from '../hooks/ValidationYup';
 import { Theme } from '../styles/Theme';
-
 const TITLE_MAX_LENGTH = 40;
 const LINK_MAX_LENGTH = 40;
 
@@ -20,14 +20,18 @@ const SessionDetail = () => {
     const [room, setRoom] = useState(null);
     const [titleError, setTitleError] = useState('');
     const [linkError, setLinkError] = useState('');
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchRoom = async () => {
             try {
+                setLoading(true);
                 const data = await getRoom(roomId);
                 setRoom(data.data);
+                setLoading(false);
             } catch (error) {
                 console.error('방 조회 실패', error);
+                setLoading(false);
             }
         };
 
@@ -78,10 +82,17 @@ const SessionDetail = () => {
     };
 
     const handleLinkButtonClick = (link) => {
+        setLoading(true);
         window.open(link, '_blank');
+        setLoading(false);
     };
 
-    if (!room) return <div>로딩...</div>;
+    if (!room)
+        return (
+            <div>
+                <Loading />
+            </div>
+        );
 
     return (
         <Div>
@@ -212,6 +223,7 @@ const ActionButtonContainer = styled.div`
     justify-content: flex-end;
     width: 100%;
     gap: 10px;
+    margin-top: 20px;
 `;
 
 const Input = styled.input`
