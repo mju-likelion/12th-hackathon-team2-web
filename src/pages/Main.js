@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import { gradeGetApi } from '../api/users/gradeGetApi';
 import AlertModal from '../components/AlertModal';
-import Container from '../components/Container';
 import AvocadoImage from '../img/Avocado.svg';
+import background from '../img/background.svg';
 import BananaImage from '../img/Banana.svg';
 import TomatoImage from '../img/Tomato.svg';
 import GlobalStyle from '../styles/GlobalStyle';
@@ -95,6 +95,19 @@ const Main = () => {
 };
 
 export default Main;
+
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background: url(${background}) no-repeat center center;
+    background-size: cover;
+    position: relative;
+    padding: 20px;
+`;
 
 const Logo = styled.img`
     width: 238px;
