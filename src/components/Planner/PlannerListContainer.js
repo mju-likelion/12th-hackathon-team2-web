@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import CompletedTab from './CompletedTab';
 import ToDoItem from './ToDoItem.js';
 
 const PlannerListContainer = ({
@@ -30,17 +31,11 @@ const PlannerListContainer = ({
         ) : (
             <InnerContainer>
                 <ItemList>
-                    {completedList.map((item) => (
-                        <ToDoItem
-                            key={item.plannerId}
-                            item={item}
-                            onCheck={handleCheck}
-                            onUpdate={handleUpdate}
-                            onDelete={handleDelete}
-                            editable={false}
-                            showDeleteIcon={false}
-                        />
-                    ))}
+                    <CompletedTab
+                        completedList={completedList}
+                        onCheck={handleCheck}
+                        onUpdate={handleUpdate}
+                    />
                 </ItemList>
             </InnerContainer>
         )}
