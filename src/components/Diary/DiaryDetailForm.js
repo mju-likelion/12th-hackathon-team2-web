@@ -2,46 +2,56 @@ import React from 'react';
 import { Controller } from 'react-hook-form';
 import styled from 'styled-components';
 import TinyButton from '../TinyButton';
-
 const TITLE_MAX_LENGTH = 40;
 
-const DiaryDetailForm = ({ control, handleSave, handleDelete, isNew, errors }) => {
+const DiaryDetailForm = ({
+    control,
+    handleSave,
+    handleDelete,
+    isNew,
+    errors,
+}) => {
     return (
         <Form onSubmit={handleSave}>
             <Controller
-                name="title"
+                name='title'
                 control={control}
                 render={({ field }) => (
                     <>
                         <Input
-                            placeholder="제목"
+                            placeholder='제목'
                             {...field}
                             maxLength={TITLE_MAX_LENGTH}
                         />
-                        {errors.title && <ErrorMessage>{errors.title.message}</ErrorMessage>}
+                        {errors.title && (
+                            <ErrorMessage>{errors.title.message}</ErrorMessage>
+                        )}
                     </>
                 )}
             />
             <Controller
-                name="content"
+                name='content'
                 control={control}
                 render={({ field }) => (
                     <>
-                        <TextArea
-                            placeholder="내용"
-                            {...field}
-                        />
-                        {errors.content && <ErrorMessage>{errors.content.message}</ErrorMessage>}
+                        <TextArea placeholder='내용' {...field} />
+                        {errors.content && (
+                            <ErrorMessage>
+                                {errors.content.message}
+                            </ErrorMessage>
+                        )}
                     </>
                 )}
             />
             <ButtonContainer>
                 {isNew ? (
-                    <TinyButton type="submit">작성완료</TinyButton>
+                    <TinyButton type='submit'>작성완료</TinyButton>
                 ) : (
                     <>
-                        <TinyButton type="submit">수정하기</TinyButton>
-                        <TinyButton type="button" onClick={handleDelete}>삭제하기</TinyButton>
+                        <TinyButton type='submit'>수정하기</TinyButton>
+                        <TinyButton type='button' onClick={handleDelete}>
+                            삭제하기
+                        </TinyButton>
                     </>
                 )}
             </ButtonContainer>
@@ -61,7 +71,7 @@ const Form = styled.form`
 `;
 
 const Input = styled.input`
-    ${({ theme }) => theme.fonts.Context};
+    ${({ theme }) => theme.fonts.heading};
     padding: 20px;
     margin-bottom: 12px;
     border: 3px solid ${({ theme }) => theme.colors.pink2};
@@ -79,7 +89,7 @@ const Input = styled.input`
 `;
 
 const TextArea = styled.textarea`
-    ${({ theme }) => theme.fonts.Context};
+    ${({ theme }) => theme.fonts.heading};
     padding: 20px;
     margin-bottom: 10px;
     border: 3px solid ${({ theme }) => theme.colors.pink2};
@@ -96,7 +106,6 @@ const TextArea = styled.textarea`
         color: ${({ theme }) => theme.colors.gray};
     }
 `;
-
 const ButtonContainer = styled.div`
     display: flex;
     justify-content: flex-end;

@@ -11,6 +11,7 @@ import DiaryDetailForm from '../components/Diary/DiaryDetailForm';
 import Header from '../components/Header';
 import TinyButton from '../components/TinyButton';
 import { schemaDiaryDetail } from '../hooks/ValidationYup';
+import { Theme } from '../styles/Theme';
 
 const DiaryDetail = () => {
     const { id } = useParams();
@@ -105,10 +106,11 @@ const DiaryDetail = () => {
         <Div>
             <Header />
             <Container>
-                <Title>
+                <Title>실시간 집중 세션</Title>
+                <SubTitle>
                     <DateHeader>{formattedDate}</DateHeader>
                     <TinyButton onClick={handleBackToList}>목록으로</TinyButton>
-                </Title>
+                </SubTitle>
                 <DiaryDetailForm
                     control={control}
                     handleSave={handleSubmit(handleSaveEntry)}
@@ -139,14 +141,23 @@ const Container = styled.div`
 
 const Title = styled.div`
     display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 1117px;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    ${Theme.fonts.subTitle};
+    color: ${Theme.colors.black};
+`;
+const SubTitle = styled.div`
+    display: flex;
     justify-content: space-between;
     width: 100%;
     max-width: 1117px;
-    margin-top: 52px;
 `;
 
 const DateHeader = styled.div`
     margin-top: 20px;
-    ${({ theme }) => theme.fonts.DateHeader};
-    color: ${({ theme }) => theme.colors.pink3};
+    ${Theme.fonts.Context};
+    color: ${Theme.colors.pink3};
 `;
