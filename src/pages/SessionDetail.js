@@ -77,6 +77,10 @@ const SessionDetail = () => {
         }
     };
 
+    const handleLinkButtonClick = (link) => {
+        window.open(link, '_blank');
+    };
+
     if (!room) return <div>로딩...</div>;
 
     return (
@@ -94,51 +98,68 @@ const SessionDetail = () => {
                     onSubmit={handleUpdate}
                 >
                     {({ errors, touched, setFieldValue }) => (
-                        <StyledForm>
-                            <Field
-                                name='title'
-                                placeholder='title'
-                                as={Input}
-                                maxLength={TITLE_MAX_LENGTH}
-                                onChange={(e) =>
-                                    handleTitleChange(e, setFieldValue)
-                                }
-                            />
-                            {titleError ? <Error>{titleError}</Error> : null}
-                            {errors.title && touched.title ? (
-                                <Error>{errors.title}</Error>
-                            ) : null}
-                            <Field
-                                name='link'
-                                placeholder='Link'
-                                as={Input}
-                                maxLength={LINK_MAX_LENGTH}
-                                onChange={(e) =>
-                                    handleLinkChange(e, setFieldValue)
-                                }
-                            />
-                            {linkError ? <Error>{linkError}</Error> : null}
-                            {errors.link && touched.link ? (
-                                <Error>{errors.link}</Error>
-                            ) : null}
-                            <Field
-                                name='content'
-                                placeholder='content'
-                                as={TextArea}
-                            />
-                            {errors.content && touched.content ? (
-                                <Error>{errors.content}</Error>
-                            ) : null}
-                            <ButtonContainer>
-                                <TinyButton onClick={handleDelete}>
-                                    삭제하기
-                                </TinyButton>
-                                <TinyButton onClick={() => navigate('/rooms')}>
-                                    목록으로
-                                </TinyButton>
-                                <TinyButton type='submit'>수정하기</TinyButton>
-                            </ButtonContainer>
-                        </StyledForm>
+                        <FormWrapper>
+                            <StyledForm>
+                                <ButtonContainer>
+                                    <TinyButton
+                                        onClick={() =>
+                                            handleLinkButtonClick(room.link)
+                                        }
+                                    >
+                                        링크 이동
+                                    </TinyButton>
+                                    <TinyButton
+                                        onClick={() => navigate('/rooms')}
+                                    >
+                                        목록으로
+                                    </TinyButton>
+                                </ButtonContainer>
+                                <Field
+                                    name='title'
+                                    placeholder='title'
+                                    as={Input}
+                                    maxLength={TITLE_MAX_LENGTH}
+                                    onChange={(e) =>
+                                        handleTitleChange(e, setFieldValue)
+                                    }
+                                />
+                                {titleError ? (
+                                    <Error>{titleError}</Error>
+                                ) : null}
+                                {errors.title && touched.title ? (
+                                    <Error>{errors.title}</Error>
+                                ) : null}
+                                <Field
+                                    name='link'
+                                    placeholder='Link'
+                                    as={Input}
+                                    maxLength={LINK_MAX_LENGTH}
+                                    onChange={(e) =>
+                                        handleLinkChange(e, setFieldValue)
+                                    }
+                                />
+                                {linkError ? <Error>{linkError}</Error> : null}
+                                {errors.link && touched.link ? (
+                                    <Error>{errors.link}</Error>
+                                ) : null}
+                                <Field
+                                    name='content'
+                                    placeholder='content'
+                                    as={TextArea}
+                                />
+                                {errors.content && touched.content ? (
+                                    <Error>{errors.content}</Error>
+                                ) : null}
+                                <ActionButtonContainer>
+                                    <TinyButton onClick={handleDelete}>
+                                        삭제하기
+                                    </TinyButton>
+                                    <TinyButton type='submit'>
+                                        수정하기
+                                    </TinyButton>
+                                </ActionButtonContainer>
+                            </StyledForm>
+                        </FormWrapper>
                     )}
                 </Formik>
             </Container>
@@ -167,14 +188,26 @@ const Title = styled.h1`
     color: ${Theme.colors.black};
 `;
 
-const StyledForm = styled(Form)`
+const FormWrapper = styled.div`
     width: 60vw;
+`;
+
+const StyledForm = styled(Form)`
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    position: relative;
 `;
 
 const ButtonContainer = styled.div`
+    display: flex;
+    gap: 10px;
+    align-self: flex-end;
+    margin-bottom: 20px;
+`;
+
+const ActionButtonContainer = styled.div`
     display: flex;
     justify-content: flex-end;
     width: 100%;
@@ -207,7 +240,7 @@ const TextArea = styled.textarea`
     height: 150px;
     resize: none;
     box-sizing: border-box;
-    width: 60vw;
+    width: 100%;
     height: 368px;
     background: ${Theme.colors.white};
     margin-bottom: 10px;

@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { Theme } from "../styles/Theme";
+import React from 'react';
+import styled from 'styled-components';
+import { Theme } from '../styles/Theme';
 
 const TinyButton = ({ children, onClick }) => {
     return <Button onClick={onClick}>{children}</Button>;
