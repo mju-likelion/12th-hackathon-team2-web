@@ -162,9 +162,19 @@ const MonthTitle = styled.h2`
 `;
 
 const MonthButton = styled.button`
-    padding: 5px 10px;
+    padding: 5px 15px;
     font-size: 16px;
     cursor: pointer;
+    background-color: ${({ theme }) => theme.colors.white};
+    border: 2px solid ${({ theme }) => theme.colors.pink2};
+    border-radius: 5px;
+    color: ${({ theme }) => theme.colors.pink2};
+    transition: all 0.3s ease;
+
+    &:hover {
+        background-color: ${({ theme }) => theme.colors.pink2};
+        color: ${({ theme }) => theme.colors.white};
+    }
 `;
 
 const DaysOfWeek = styled.div`

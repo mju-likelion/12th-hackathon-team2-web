@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { PlannersCompleteGetApi } from '../api/Planners/PlannersCompleteGetApi';
 import Header from '../components/Header';
+import Calendar from '../components/Planner/Calendar.js';
 import PlannerHeader from '../components/Planner/PlannerHeader';
 import PlannerListContainer from '../components/Planner/PlannerListContainer';
 import PlannerTabs from '../components/Planner/PlannerTabs';
@@ -62,6 +63,7 @@ const CompletedPlanner = () => {
                         </InnerContent>
                     </Content>
                 </PlannerContainer>
+                <Calendar />
             </PageContainer>
         </Div>
     );
