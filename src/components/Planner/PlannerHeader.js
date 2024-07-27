@@ -17,5 +17,4 @@ const Title = styled.h1`
     ${({ theme }) => theme.fonts.subTitle};
     display: flex;
     align-items: center;
-    
 `;

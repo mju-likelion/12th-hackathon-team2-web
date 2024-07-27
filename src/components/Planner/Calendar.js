@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Header from '../components/Header';
-import { Theme } from '../styles/Theme';
+import { Theme } from '../../styles/Theme';
 
 const Calendar = () => {
     const [completedCounts, setCompletedCounts] = useState({});
@@ -84,8 +83,10 @@ const Calendar = () => {
     };
 
     return (
-        <Div>
-            <Header />
+        <OuterContainer>
+            <HeaderContainer>
+                <Title>캘린더</Title>
+            </HeaderContainer>
             <CalendarContainer>
                 <MonthTitleContainer>
                     <MonthButton onClick={handlePrevMonth}>이전</MonthButton>
@@ -114,26 +115,39 @@ const Calendar = () => {
                     ))}
                 </CalendarGrid>
             </CalendarContainer>
-        </Div>
+        </OuterContainer>
     );
 };
 
 export default Calendar;
 
-const Div = styled.div`
-    width: 100%;
-    padding: 20px;
-`;
-
-const CalendarContainer = styled.div`
+const OuterContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2vh;
-    position: relative;
     width: 100%;
-    max-width: 800px;
-    margin: auto;
+    max-width: 1082px;
+    margin: 2vh;
+`;
+
+const HeaderContainer = styled.div`
+    margin: 2vh;
+`;
+
+const Title = styled.h1`
+    ${({ theme }) => theme.fonts.subTitle};
+    display: flex;
+    align-items: center;
+`;
+
+const CalendarContainer = styled.div`
+    background: ${({ theme }) => theme.colors.pink1};
+    padding: 4vh;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 `;
 
 const MonthTitleContainer = styled.div`

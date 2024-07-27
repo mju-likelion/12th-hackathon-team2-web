@@ -6,6 +6,7 @@ import { PlannersPatchApi } from '../api/Planners/PlannersPatchApi';
 import { PlannersPostApi } from '../api/Planners/PlannersPostApi';
 import { PlannersPutApi } from '../api/Planners/PlannersPutApi';
 import Header from '../components/Header';
+import Calendar from '../components/Planner/Calendar.js';
 import PlannerHeader from '../components/Planner/PlannerHeader';
 import PlannerListContainer from '../components/Planner/PlannerListContainer';
 import PlannerTabs from '../components/Planner/PlannerTabs';
@@ -17,7 +18,6 @@ const formatDate = (date) => {
     const year = d.getFullYear();
     const month = String(d.getMonth() + 1).padStart(2, '0');
     const day = String(d.getDate()).padStart(2, '0');
-
     return `${year}-${month}-${day}`;
 };
 
@@ -242,6 +242,7 @@ const Planner = () => {
                         </InnerContent>
                     </Content>
                 </PlannerContainer>
+                <Calendar /> {/* 캘린더 컴포넌트 추가 */}
             </PageContainer>
         </Div>
     );
@@ -270,7 +271,6 @@ const PlannerContainer = styled.div`
     border-radius: 20px;
     width: 100%;
     max-width: 1082px;
-
     min-height: 453px;
     margin-top: 2vh;
     padding: 4vh;
