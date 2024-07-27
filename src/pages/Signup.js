@@ -143,12 +143,12 @@ const SignupForm = styled.form`
   border-radius: 30px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
-  @media (max-width: 768px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
     padding: 20px;
     border-radius: 20px;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
     padding: 10px;
     border-radius: 10px;
   }
@@ -159,19 +159,19 @@ const SignupText = styled.h2`
   margin-bottom: 20px;
   color: ${(props) => props.theme.colors.white};
 
-  @media (max-width: 1024px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.desktop}) {
     font-size: 1.8rem;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
     font-size: 1.5rem;
   }
 
-  @media (max-width: 480px) {
-    font-size: 0.7rem;
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    font-size: 1.2rem;
   }
 
   @media (max-width: 360px) {
-    font-size: 0.6rem;
+    font-size: 1rem;
   }
 `;

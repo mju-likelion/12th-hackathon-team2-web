@@ -111,6 +111,11 @@ const LoginWrapper = styled.div`
   justify-content: center;
   max-width: 587px;
   margin-top: 20px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    max-width: 100%;
+    padding: 10px;
+  }
 `;
 
 const LoginForm = styled.form`
@@ -122,13 +127,17 @@ const LoginForm = styled.form`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   margin-bottom: auto;
 
-  @media (max-width: 1024px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
     padding: 30px;
     border-radius: 20px;
   }
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     padding: 20px;
     border-radius: 20px;
+  }
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    padding: 10px;
+    border-radius: 15px;
   }
 `;
 
@@ -137,12 +146,16 @@ const LoginText = styled.h2`
   ${(props) => props.theme.fonts.loginText};
   color: ${(props) => props.theme.colors.white};
 
-  @media (max-width: 1024px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
     font-size: 1.8rem;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     font-size: 1.5rem;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    font-size: 1.2rem;
   }
 `;
 
@@ -162,14 +175,20 @@ const SignupWrapper = styled.div`
   justify-content: flex-end;
   width: 80%;
   margin-top: 20px;
-  @media (max-width: 1024px) {
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
     margin-top: 15px;
     margin-right: 40px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     margin-top: 10px;
-    margin-right: 80px;
+    margin-right: 30px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    margin-top: 5px;
+    margin-right: 20px;
   }
 `;
 
@@ -178,11 +197,15 @@ const NoAccountText = styled.span`
   color: ${(props) => props.theme.colors.black};
   margin-right: 10px;
 
-  @media (max-width: 1024px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
     margin-right: 15px;
   }
 
-  @media (max-width: 768px) {
-    margin-right: 8px;
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    margin-right: 10px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    margin-right: 5px;
   }
 `;

@@ -46,9 +46,9 @@ const TopBarContainer = styled.div`
   margin: 0 auto;
   padding: 0 30px;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     flex-direction: column;
-    padding: 0 30px;
+    padding: 0 20px;
   }
 `;
 
@@ -60,9 +60,10 @@ const CurrentTime = styled.div`
   margin-bottom: 20px;
   color: ${({ theme }) => theme.colors.gray};
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     font-size: 1em;
     text-align: center;
+    margin-bottom: 10px;
   }
 `;
 
@@ -74,7 +75,7 @@ const Counter = styled.div`
   text-align: right;
   flex: 1;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     margin-bottom: 10px;
     width: 100%;
     text-align: center;

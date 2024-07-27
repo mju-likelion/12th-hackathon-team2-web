@@ -139,4 +139,9 @@ export const Theme = {
     blue: '#004DFF',
     yellow: '#FFF375',
   },
+  breakpoints: {
+    mobile: '480px',
+    tablet: '768px',
+    desktop: '1024px',
+  },
 };

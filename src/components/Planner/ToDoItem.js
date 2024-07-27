@@ -128,13 +128,13 @@ const Item = styled.div`
   border-bottom: 3px solid ${({ theme }) => theme.colors.pink3};
   position: relative;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     width: 90%;
     margin: 10px auto;
     padding: 8px;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     margin: 8px auto;
     padding: 6px;
   }
@@ -146,7 +146,7 @@ const CheckButton = styled.img`
   opacity: ${({ completed }) => (completed === 'true' ? 0.5 : 1)};
   margin-right: 10px;
 
-  @media (max-width: 480px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     width: 18px;
     height: 18px;
     margin-right: 8px;
@@ -161,7 +161,7 @@ const Text = styled.span`
   ${({ theme }) => theme.fonts.semiText};
   cursor: pointer;
 
-  @media (max-width: 480px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     font-size: 14px;
   }
 `;
@@ -178,7 +178,7 @@ const EditTextarea = styled.textarea`
   margin: 0;
   background: none;
 
-  @media (max-width: 480px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     font-size: 14px;
   }
 `;
@@ -189,7 +189,7 @@ const DeleteButton = styled.img`
   margin-left: 10px;
   cursor: pointer;
 
-  @media (max-width: 480px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     width: 18px;
     height: 18px;
     margin-left: 8px;
@@ -204,11 +204,11 @@ const Error = styled.div`
   bottom: -20px;
   left: 10px;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     bottom: -25px;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     font-size: 10px;
     bottom: -20px;
   }

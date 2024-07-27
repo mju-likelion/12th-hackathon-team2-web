@@ -33,17 +33,17 @@ const InputWrapper = styled.div`
   align-items: center;
   margin-bottom: 34px;
 
-  @media (max-width: 1024px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
     margin-bottom: 30px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 25px;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     margin-bottom: 20px;
   }
 `;
@@ -54,17 +54,18 @@ const InputLabel = styled.label`
   width: 100%;
   margin-right: 10px;
   text-align: center;
-  @media (max-width: 1024px) {
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
     font-size: 1rem;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     text-align: left;
     margin-bottom: 5px;
     font-size: 0.9rem;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     font-size: 0.8rem;
   }
 `;
@@ -85,8 +86,6 @@ const StyledInputField = styled.input`
   padding: 20px;
   ${(props) => props.theme.fonts.inputField};
   color: ${(props) => props.theme.colors.black};
-
-  border-radius: 20px;
   background: ${(props) => props.theme.colors.white};
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   margin-bottom: ${(props) => (props.hasError ? '10px' : '0')};
@@ -97,17 +96,17 @@ const StyledInputField = styled.input`
     outline: none;
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
     width: 300px;
     height: 48px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     width: 300px;
     height: 45px;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     height: 40px;
     padding: 15px;
   }

@@ -87,14 +87,18 @@ const PlannerContainer = styled.div`
   border-radius: 20px;
   width: 100%;
   max-width: 1082px;
-
   min-height: 453px;
   margin-top: 2vh;
   padding: 4vh;
   position: relative;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     min-width: 462px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    min-width: 300px;
+    padding: 2vh;
   }
 `;
 
@@ -105,8 +109,7 @@ const Content = styled.div`
   position: relative;
   flex-direction: column;
 
-  @media (min-width: 768px) {
-    min-width: 362px;
+  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     flex-direction: row;
   }
 `;
@@ -121,8 +124,12 @@ const InnerContent = styled.div`
   flex-direction: column;
   align-items: center;
 
-  @media (max-width: 768px) {
-    min-width: 362px;
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     height: 50vh;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    height: 40vh;
+    padding: 1vh;
   }
 `;

@@ -18,27 +18,12 @@ export default DiaryList;
 
 const ListContainer = styled.div`
   margin-top: 60px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 3vh;
   margin-left: 20px;
   margin-right: 20px;
-
-  @media (min-width: 1200px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  @media (min-width: 900px) and (max-width: 1199px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (min-width: 600px) and (max-width: 899px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 599px) and (max-width: 899px) {
-    grid-template-columns: repeat(1, 1fr);
-  }
 `;
 
 const PostItItem = styled.div`
@@ -46,28 +31,34 @@ const PostItItem = styled.div`
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  aspect-ratio: 1;
+  width: 200px;
+  height: 200px;
   box-sizing: border-box;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
+  margin: 10px;
 
-  @media (min-width: 1200px) {
-    height: 300px;
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    width: 220px;
+    height: 220px;
   }
 
-  @media (min-width: 900px) and (max-width: 1199px) {
-    height: 250px;
-  }
-
-  @media (min-width: 600px) and (max-width: 899px) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    width: 200px;
     height: 200px;
   }
 
-  @media (max-width: 599px) {
-    height: 200px;
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    width: 180px;
+    height: 180px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    width: 160px;
+    height: 160px;
   }
 `;
 
@@ -76,6 +67,9 @@ const DiaryTitle = styled.div`
   color: ${({ theme }) => theme.colors.black};
   margin-bottom: 10px;
   font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const DiaryDate = styled.div`

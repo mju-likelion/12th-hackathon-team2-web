@@ -75,6 +75,6 @@ const ItemList = styled.div`
   }
 
   @media (max-width: 859px) {
-    height: 45vh;
+    height: 35vh;
   }
 `;

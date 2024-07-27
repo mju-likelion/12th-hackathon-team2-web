@@ -18,17 +18,17 @@ const StyledButton = styled.button`
   border-radius: 20px;
   cursor: pointer;
 
-  @media (max-width: 1024px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
     padding: 14px;
     font-size: 1.1rem;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     padding: 12px;
     font-size: 1rem;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     padding: 10px;
     font-size: 0.9rem;
   }

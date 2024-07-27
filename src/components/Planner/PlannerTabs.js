@@ -39,7 +39,7 @@ const TabsContainer = styled.div`
   flex-direction: column;
   margin-top: 26px;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     flex-direction: row;
     justify-content: center;
     margin-top: 10px;
@@ -60,7 +60,7 @@ const TabItem = styled.div`
   color: ${({ $isActive, theme }) =>
     $isActive ? theme.colors.pink3 : theme.colors.white};
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     width: 90px;
     height: 45px;
     border-radius: 14px 14px 0 0;
@@ -75,7 +75,7 @@ const TabText = styled.div`
   color: ${({ $isActive, theme }) =>
     $isActive ? theme.colors.pink3 : theme.colors.white};
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     transform: none;
   }
 `;

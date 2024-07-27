@@ -92,25 +92,61 @@ const Container = styled.div`
   background-size: cover;
   position: relative;
   padding: 20px;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
+    padding: 15px;
+  }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    padding: 10px;
+  }
 `;
 
 const Logo = styled.img`
   width: 238px;
   height: 238px;
   margin-bottom: 69px;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
+    width: 180px;
+    height: 180px;
+    margin-bottom: 50px;
+  }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    width: 140px;
+    height: 140px;
+    margin-bottom: 30px;
+  }
 `;
 
 const Header = styled.h1`
   ${(props) => props.theme.fonts.title};
   color: ${(props) => props.theme.colors.pink3};
   margin-bottom: 10px;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
+    font-size: 2.5rem;
+  }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    font-size: 2rem;
+  }
 `;
 
 const UserGrade = styled.div`
-  ${(props) => props.theme.fonts.pagenumber};
+  ${(props) => props.theme.fonts.PageNumber};
   color: ${(props) => props.theme.colors.pink2};
   margin-bottom: 10px;
   font-weight: 700;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    font-size: 1rem;
+  }
 `;
 
 const Menu = styled.div`
@@ -119,6 +155,16 @@ const Menu = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 26px;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
+    gap: 20px;
+    margin-top: 30px;
+  }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    gap: 15px;
+    margin-top: 20px;
+  }
 `;
 
 const MenuItem = styled.div`
@@ -127,5 +173,13 @@ const MenuItem = styled.div`
   cursor: pointer;
   &:hover {
     color: ${(props) => props.theme.colors.pink3};
+  }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
+    font-size: 1.8rem;
+  }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    font-size: 1.5rem;
   }
 `;

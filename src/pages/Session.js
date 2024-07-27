@@ -18,7 +18,7 @@ const SessionPageContent = () => {
     if (!isNaN(page) && page !== currentPage) {
       setCurrentPage(page);
     }
-  }, [location.search]);
+  }, [location.search, currentPage, setCurrentPage]);
 
   const handleAddRoom = () => {
     navigate(`/rooms/new`);
@@ -74,6 +74,14 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin: auto;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    width: 90%;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    width: 95%;
+  }
 `;
 
 const Title = styled.div`
@@ -82,24 +90,37 @@ const Title = styled.div`
   align-items: center;
   width: 100%;
   margin-top: 52px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+  }
 `;
 
 const SubTitle = styled.h2`
   ${({ theme }) => theme.fonts.subTitle};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    margin-bottom: 10px;
+  }
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   width: 150px;
+
   @media (max-width: 1024px) {
-    width: 150px;
-  }
-  @media (max-width: 768px) {
     width: 130px;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 768px) {
     width: 110px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    width: 100px;
+    justify-content: center;
   }
 `;

@@ -225,6 +225,11 @@ const Container = styled.div`
   height: 80vh;
   width: 100%;
   margin-top: 20px;
+  flex-direction: column;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    flex-direction: row;
+  }
 `;
 
 const Right = styled.div`
@@ -248,7 +253,7 @@ const Title = styled.div`
 
 const Info = styled.div`
   font-size: 1em;
-  ${(props) => props.theme.fonts.defalut};
+  ${(props) => props.theme.fonts.default};
   color: ${(props) => props.theme.colors.pink5};
   span {
     ${(props) => props.theme.fonts.PageNumber};
@@ -258,24 +263,37 @@ const Info = styled.div`
 
 const TimerContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   width: 100%;
   height: 80vh;
   margin: 20px 0;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    flex-direction: row;
+  }
 `;
 
 const ButtonGroup = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 5vh;
+  gap: 1vh;
   margin-bottom: 20px;
   max-width: 900px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    gap: 2vh;
+  }
 `;
 
 const Logo = styled.img`
   width: 309px;
   height: 61px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    width: 200px;
+    height: 40px;
+  }
 `;
 
 export default Pomodoro;

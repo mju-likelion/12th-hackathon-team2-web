@@ -252,8 +252,12 @@ const PlannerContainer = styled.div`
   padding: 4vh;
   position: relative;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     min-width: 462px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    min-width: 320px;
   }
 `;
 
@@ -264,8 +268,7 @@ const Content = styled.div`
   position: relative;
   flex-direction: column;
 
-  @media (min-width: 768px) {
-    min-width: 362px;
+  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     flex-direction: row;
   }
 `;
@@ -280,9 +283,12 @@ const InnerContent = styled.div`
   flex-direction: column;
   align-items: center;
 
-  @media (max-width: 768px) {
-    min-width: 362px;
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     height: 50vh;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    height: 40vh;
   }
 `;
 
@@ -292,8 +298,13 @@ const AddButtonContainer = styled.div`
   right: 2vh;
   z-index: 1000;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     right: 1vh;
     bottom: 1vh;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    right: 0.5vh;
+    bottom: 0.5vh;
   }
 `;

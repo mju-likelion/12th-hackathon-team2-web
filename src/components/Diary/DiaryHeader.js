@@ -28,14 +28,16 @@ const Header = styled.h1`
 const ButtonWrapper = styled.div`
   display: flex;
   width: 150px;
-  @media (max-width: 1024px) {
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
     width: 150px;
   }
-  @media (max-width: 768px) {
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     width: 130px;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     width: 110px;
   }
 `;

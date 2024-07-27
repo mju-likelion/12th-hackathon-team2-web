@@ -31,8 +31,24 @@ const BackgroundImg = styled.div`
   width: 100%;
   height: 100vh;
   min-height: 851px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    min-height: 700px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    min-height: 600px;
+  }
 `;
 
 const StyledSmallButton = styled(SmallButton)`
   margin-bottom: 150px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    margin-bottom: 100px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    margin-bottom: 50px;
+  }
 `;
