@@ -45,6 +45,13 @@ const Planner = () => {
     }, []);
 
     const handleCheck = (id) => {
+        const itemToUpdate = toDoList.find((item) => item.plannerId === id);
+
+        if (!itemToUpdate || !itemToUpdate.content.trim()) {
+            console.log('할 일 내용이 비어있습니다. 체크할 수 없습니다.');
+            return;
+        }
+
         PlannersPutApi(id, { isCompleted: true })
             .then((response) => {
                 if (response.data.statusCode === '200 OK') {

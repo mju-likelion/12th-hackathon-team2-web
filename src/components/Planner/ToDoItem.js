@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import AlertModal from '../../components/AlertModal';
 import { schemaPlanner } from '../../hooks/ValidationYup';
 import CheckButtonOff from '../../img/CheckButtonOff.png';
 import CheckButtonOn from '../../img/CheckButtonOn.png';
@@ -16,6 +17,7 @@ const ToDoItem = ({
     const [editMode, setEditMode] = useState(false);
     const [text, setText] = useState(item.content);
     const [error, setError] = useState('');
+    const [isAlertOpen, setIsAlertOpen] = useState(false);
 
     const handleTextClick = () => {
         if (editable) {
@@ -61,12 +63,24 @@ const ToDoItem = ({
         }
     };
 
+    const handleCheckClick = () => {
+        if (text === '할 일을 입력하세요' || text.trim() === '') {
+            setIsAlertOpen(true);
+            return;
+        }
+        onCheck(item.plannerId);
+    };
+
+    const closeAlert = () => {
+        setIsAlertOpen(false);
+    };
+
     return (
         <Item>
             <CheckButton
                 src={item.completed ? CheckButtonOn : CheckButtonOff}
                 alt='Check Button'
-                onClick={() => !item.completed && onCheck(item.plannerId)}
+                onClick={() => !item.completed && handleCheckClick()}
                 completed={item.completed.toString()}
             />
             <Content>
@@ -91,6 +105,12 @@ const ToDoItem = ({
                 />
             )}
             {error && <Error>{error}</Error>}
+            <AlertModal
+                isOpen={isAlertOpen}
+                close={closeAlert}
+                message='할 일을 입력해야 Complete 할 수 있습니다!'
+                handleConfirm={closeAlert}
+            />
         </Item>
     );
 };
