@@ -20,24 +20,24 @@ const ListContainer = styled.div`
     margin-top: 60px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+    gap: 3vh;
     margin-left: 20px;
     margin-right: 20px;
 
     @media (min-width: 1200px) {
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(4, 1fr);
     }
 
-    @media (min-width: 900px) and (max-width: 1200px) {
+    @media (min-width: 900px) and (max-width: 1199px) {
         grid-template-columns: repeat(3, 1fr);
     }
 
-    @media (min-width: 600px) and (max-width: 900px) {
-        grid-template-columns: repeat(3, 1fr);
+    @media (min-width: 600px) and (max-width: 899px) {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    @media (max-width: 599px) {
-        grid-template-columns: repeat(3, 1fr);
+    @media (max-width: 599px) and (max-width: 899px) {
+        grid-template-columns: repeat(1, 1fr);
     }
 `;
 
@@ -54,18 +54,32 @@ const PostItItem = styled.div`
     justify-content: space-between;
     position: relative;
 
-    max-width: 1200px;
-    width: 100%;
+    @media (min-width: 1200px) {
+        height: 300px;
+    }
+
+    @media (min-width: 900px) and (max-width: 1199px) {
+        height: 250px;
+    }
+
+    @media (min-width: 600px) and (max-width: 899px) {
+        height: 200px;
+    }
+
+    @media (max-width: 599px) {
+        height: 200px;
+    }
 `;
 
 const DiaryTitle = styled.div`
     ${({ theme }) => theme.fonts.heading};
     color: ${({ theme }) => theme.colors.black};
     margin-bottom: 10px;
+    font-weight: bold;
 `;
 
 const DiaryDate = styled.div`
-    ${({ theme }) => theme.fonts.PageNumber};
+    ${({ theme }) => theme.fonts.default};
     color: ${({ theme }) => theme.colors.pink3};
     font-size: 14px;
 `;

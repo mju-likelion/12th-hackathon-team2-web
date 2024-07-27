@@ -17,6 +17,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
                     {pageNumbers.map((number) => (
                         <PageNumber
                             key={number}
+                            isActive={number === currentPage}
                             onClick={() => onPageChange(number)}
                         >
                             {number}
@@ -37,7 +38,7 @@ const PaginationContainer = styled.div`
     display: flex;
     justify-content: center;
     position: fixed;
-    bottom: 00px;
+    bottom: 0;
     left: 0;
     right: 0;
     padding: 30px 0;
@@ -47,7 +48,8 @@ const PageNumber = styled.div`
     margin: 0 10px;
     cursor: pointer;
     ${({ theme }) => theme.fonts.mediumText};
-    color: ${({ theme }) => theme.colors.gray};
+    color: ${({ theme, isActive }) =>
+        isActive ? theme.colors.black : theme.colors.gray};
 
     &:hover {
         color: ${({ theme }) => theme.colors.pink2};
