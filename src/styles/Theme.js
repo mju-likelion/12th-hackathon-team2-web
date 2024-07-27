@@ -137,5 +137,6 @@ export const Theme = {
         black: '#000000',
         white: '#FFFFFF',
         blue: '#004DFF',
+        yellow: '#FFF375',
     },
 };

@@ -106,7 +106,7 @@ const DiaryDetail = () => {
         <Div>
             <Header />
             <Container>
-                <Title>실시간 집중 세션</Title>
+                <Title>감정 일기장</Title>
                 <SubTitle>
                     <DateHeader>{formattedDate}</DateHeader>
                     <TinyButton onClick={handleBackToList}>목록으로</TinyButton>

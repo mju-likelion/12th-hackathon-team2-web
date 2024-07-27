@@ -61,7 +61,7 @@ export const schemaDiaryDetail = yup.object().shape({
     title: yup
         .string()
         .required('제목을 입력해주세요.')
-        .max(40, '제목은 최대 40자까지 입력할 수 있습니다.'),
+        .max(30, '제목은 최대 30자까지 입력할 수 있습니다.'),
     content: yup.string().required('내용을 입력해주세요.'),
 });
 

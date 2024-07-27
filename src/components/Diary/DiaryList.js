@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import PinIcon from '../../img/PinIcon.svg'; // 아이콘 파일 경로에 맞게 수정하세요.
+import PinIcon from '../../img/PinIcon.svg';
 
 const DiaryList = ({ entries, onEntryClick }) => (
     <ListContainer>
@@ -29,7 +29,7 @@ const ListContainer = styled.div`
     }
 
     @media (min-width: 900px) and (max-width: 1200px) {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 
     @media (min-width: 600px) and (max-width: 900px) {
@@ -37,12 +37,12 @@ const ListContainer = styled.div`
     }
 
     @media (max-width: 599px) {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 `;
 
 const PostItItem = styled.div`
-    background: #fff375;
+    background-color: ${({ theme }) => theme.colors.yellow};
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -59,10 +59,9 @@ const PostItItem = styled.div`
 `;
 
 const DiaryTitle = styled.div`
-    ${({ theme }) => theme.fonts.inputLabel};
+    ${({ theme }) => theme.fonts.heading};
     color: ${({ theme }) => theme.colors.black};
     margin-bottom: 10px;
-    font-size: 16px;
 `;
 
 const DiaryDate = styled.div`
