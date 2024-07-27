@@ -73,12 +73,6 @@ const Header = () => {
                 >
                     뽀모도로
                 </MenuItem>
-                <MenuItem
-                    $active={isActive('/calendar')}
-                    onClick={() => handleNavigation('/calendar')}
-                >
-                    캘린더
-                </MenuItem>
                 <MenuItem className='logout' onClick={handleLogout}>
                     로그아웃
                 </MenuItem>
