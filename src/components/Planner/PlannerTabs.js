@@ -53,10 +53,12 @@ const TabItem = styled.div`
   width: 45px;
   height: 139px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  background: ${({ $isActive, theme }) => ($isActive ? theme.colors.white : theme.colors.pink3)};
+  background: ${({ $isActive, theme }) =>
+    $isActive ? theme.colors.white : theme.colors.pink3};
   border-radius: 14px 0 0 14px;
   cursor: pointer;
-  color: ${({ $isActive, theme }) => ($isActive ? theme.colors.pink3 : theme.colors.white)};
+  color: ${({ $isActive, theme }) =>
+    $isActive ? theme.colors.pink3 : theme.colors.white};
 
   @media (max-width: 768px) {
     width: 90px;
@@ -70,7 +72,8 @@ const TabText = styled.div`
   ${({ theme }) => theme.fonts.tinyButton};
   transform: rotate(-90deg);
   white-space: nowrap;
-  color: ${({ $isActive, theme }) => ($isActive ? theme.colors.pink3 : theme.colors.white)};
+  color: ${({ $isActive, theme }) =>
+    $isActive ? theme.colors.pink3 : theme.colors.white};
 
   @media (max-width: 768px) {
     transform: none;
