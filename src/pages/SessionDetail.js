@@ -94,6 +94,9 @@ const SessionDetail = () => {
 
   const handleLinkButtonClick = (link) => {
     setLoading(true);
+    if (!/^https?:\/\//i.test(link)) {
+      link = 'http://' + link;
+    }
     window.open(link, '_blank');
     setLoading(false);
   };
