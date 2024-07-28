@@ -13,7 +13,6 @@ import { schemaSessionDetail } from '../hooks/ValidationYup';
 import { Theme } from '../styles/Theme';
 
 const TITLE_MAX_LENGTH = 40;
-const LINK_MAX_LENGTH = 40;
 
 const SessionDetail = () => {
   const navigate = useNavigate();
@@ -21,7 +20,6 @@ const SessionDetail = () => {
   const roomId = id;
   const [room, setRoom] = useState(null);
   const [titleError, setTitleError] = useState('');
-  const [linkError, setLinkError] = useState('');
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
@@ -82,18 +80,11 @@ const SessionDetail = () => {
     }
   };
 
-  const handleLinkChange = (e, setFieldValue) => {
-    const { value } = e.target;
-    if (value.length <= LINK_MAX_LENGTH) {
-      setFieldValue('link', value);
-      setLinkError('');
-    } else {
-      setLinkError(`링크는 최대 ${LINK_MAX_LENGTH}자까지 입력할 수 있습니다.`);
-    }
-  };
-
   const handleLinkButtonClick = (link) => {
     setLoading(true);
+    if (!/^https?:\/\//i.test(link)) {
+      link = 'http://' + link;
+    }
     window.open(link, '_blank');
     setLoading(false);
   };
@@ -153,10 +144,6 @@ const SessionDetail = () => {
                 {titleError ? <Error>{titleError}</Error> : null}
                 {errors.title && touched.title ? (
                   <Error>{errors.title}</Error>
-                ) : null}
-                {linkError ? <Error>{linkError}</Error> : null}
-                {errors.link && touched.link ? (
-                  <Error>{errors.link}</Error>
                 ) : null}
                 <Field name='content' placeholder='content' as={TextArea} />
                 {errors.content && touched.content ? (

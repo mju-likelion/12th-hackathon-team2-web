@@ -27,7 +27,7 @@ const ListContainer = styled.div`
 `;
 
 const PostItItem = styled.div`
-  background-color: ${({ theme }) => theme.colors.yellow};
+  background-color: ${({ theme }) => theme.colors.pink1};
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -65,6 +65,8 @@ const DiaryTitle = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-top: 10px;
+  text-align: center;
 `;
 
 const DiaryDate = styled.div`
