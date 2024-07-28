@@ -65,6 +65,8 @@ const DiaryTitle = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-top: 10px;
+  text-align: center;
 `;
 
 const DiaryDate = styled.div`
