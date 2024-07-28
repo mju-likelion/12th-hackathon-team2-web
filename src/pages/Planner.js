@@ -202,10 +202,7 @@ const Planner = () => {
       <PageContainer>
         <PlannerHeader />
         <PlannerContainer>
-          <PlannerTopBar
-            toDoCount={toDoList.length}
-            totalDone={completedList.length}
-          />
+          <PlannerTopBar toDoCount={toDoList.length} />
           <Content>
             <PlannerTabs activeTab={activeTab} setActiveTab={setActiveTab} />
             <InnerContent>
@@ -239,7 +236,6 @@ const Planner = () => {
 
 export default Planner;
 
-// Styled Components
 const Div = styled.div`
   width: 100vw;
   padding: 2vh;

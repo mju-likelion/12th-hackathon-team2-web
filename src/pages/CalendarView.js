@@ -8,10 +8,12 @@ import PlannerTabs from '../components/Planner/PlannerTabs';
 import PlannerTopBar from '../components/Planner/PlannerTopBar';
 import { Theme } from '../styles/Theme';
 
-const CalendarView = ({ activeTab, setActiveTab, totalDone }) => {
+const CalendarView = ({ totalDone }) => {
   const [completedCounts, setCompletedCounts] = useState({});
   const { month } = useParams();
   const navigate = useNavigate();
+
+  const [activeTab, setActiveTab] = useState('calendar');
 
   useEffect(() => {
     const fetchCalendarData = async () => {

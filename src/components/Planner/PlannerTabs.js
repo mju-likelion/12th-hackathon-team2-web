@@ -48,7 +48,6 @@ const PlannerTabs = ({ activeTab, setActiveTab }) => {
 
 export default PlannerTabs;
 
-// Styled Components
 const TabsContainer = styled.div`
   display: flex;
   flex-direction: column;
