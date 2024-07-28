@@ -68,20 +68,14 @@ const Diary = () => {
       <Header />
       <Container>
         <DiaryHeader onAddEntry={handleAddEntry} />
-        {loading ? (
-          <p>로딩 중...</p>
-        ) : error ? (
-          <p>{error}</p>
-        ) : (
-          <>
-            <DiaryList entries={entries} onEntryClick={handleEntryClick} />
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={handlePageChange}
-            />
-          </>
-        )}
+        <>
+          <DiaryList entries={entries} onEntryClick={handleEntryClick} />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+        </>
       </Container>
     </Div>
   );

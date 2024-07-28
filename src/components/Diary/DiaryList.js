@@ -42,11 +42,6 @@ const PostItItem = styled.div`
   margin: 10px;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    width: 220px;
-    height: 220px;
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     width: 200px;
     height: 200px;
   }
