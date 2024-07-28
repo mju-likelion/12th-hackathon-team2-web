@@ -53,7 +53,7 @@ const CalendarView = ({ totalDone }) => {
       });
     }
 
-    const firstDayIndex = (startOfMonth.getDay() + 6) % 7;
+    const firstDayIndex = startOfMonth.getDay();
     for (let i = 0; i < firstDayIndex; i++) {
       monthData.unshift({ date: null, day: null, count: null });
     }
@@ -66,7 +66,7 @@ const CalendarView = ({ totalDone }) => {
   };
 
   const calendarData = getCurrentMonthData();
-  const daysOfWeek = ['월', '화', '수', '목', '금', '토', '일'];
+  const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
 
   const getColor = (count) => {
     if (count === null) return Theme.colors.gray;
@@ -146,6 +146,8 @@ const CalendarContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
 `;
 
 const MonthTitleContainer = styled.div`
