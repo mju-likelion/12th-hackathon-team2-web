@@ -27,7 +27,7 @@ const ListContainer = styled.div`
 `;
 
 const PostItItem = styled.div`
-  background-color: ${({ theme }) => theme.colors.yellow};
+  background-color: ${({ theme }) => theme.colors.pink1};
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
