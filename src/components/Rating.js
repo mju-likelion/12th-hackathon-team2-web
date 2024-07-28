@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import AvocadoImage from "../img/Avocado.svg";
-import TomatoImage from "../img/Tomato.svg";
-import BananaImage from "../img/Banana.svg";
+import React from 'react';
+import styled from 'styled-components';
+import AvocadoImage from '../img/Avocado.svg';
+import BananaImage from '../img/Banana.svg';
+import TomatoImage from '../img/Tomato.svg';
 
 const Rating = ({ circleImage, grade }) => {
   return (

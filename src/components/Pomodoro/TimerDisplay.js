@@ -4,7 +4,13 @@ import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import styled from 'styled-components';
 
-const TimerDisplay = ({ label, timeLeft, isBreak, formatTime, getPercentage }) => {
+const TimerDisplay = ({
+  label,
+  timeLeft,
+  isBreak,
+  formatTime,
+  getPercentage,
+}) => {
   return (
     <Timer>
       <StyledTitle>{label}</StyledTitle>
@@ -12,7 +18,10 @@ const TimerDisplay = ({ label, timeLeft, isBreak, formatTime, getPercentage }) =
         <TimerDisplayContainer>
           <CircularProgressbar
             value={getPercentage(timeLeft)}
-            text={timeLeft !== null && (isBreak ? formatTime(timeLeft) : formatTime(timeLeft))}
+            text={
+              timeLeft !== null &&
+              (isBreak ? formatTime(timeLeft) : formatTime(timeLeft))
+            }
             styles={buildStyles({
               pathColor: `#2DBA00`,
               textColor: '#E93C3C',

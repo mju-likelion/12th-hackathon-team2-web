@@ -4,7 +4,7 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { LogoutApi } from '../api/Auth/LogoutApi';
-import { Theme } from "../styles/Theme";
+import { Theme } from '../styles/Theme';
 import SurveyButton from './SurveyButton';
 
 const Header = () => {
@@ -90,12 +90,12 @@ const HeaderContainer = styled.div`
   min-width: 300px;
   padding-bottom: 0px;
 
-  @media (max-width: 1030px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
     padding: 10px 20px;
     padding-bottom: 0px;
   }
 
-  @media (max-width: 680px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     flex-direction: column;
     height: auto;
     padding-bottom: 10px;
@@ -107,7 +107,7 @@ const Sidebar = styled.div`
   align-items: center;
   gap: 20px;
 
-  @media (max-width: 680px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     width: 100%;
     justify-content: space-between;
   }
@@ -118,7 +118,7 @@ const SideMenu = styled.div`
   font-size: 24px;
   cursor: pointer;
 
-  @media (max-width: 680px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     display: block;
   }
 `;
@@ -130,7 +130,7 @@ const Title = styled.h1`
   cursor: pointer;
   white-space: nowrap;
 
-  @media (max-width: 1030px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
     font-size: 30px;
     padding-bottom: 0px;
   }
@@ -145,15 +145,11 @@ const Menu = styled.div`
   flex-grow: 1;
   flex-wrap: nowrap;
 
-  @media (max-width: 1200px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     gap: 4vw;
   }
 
-  @media (max-width: 900px) {
-    gap: 0.5vw;
-  }
-
-  @media (max-width: 680px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     flex-direction: column;
     gap: 5px;
     width: 100%;
@@ -172,13 +168,13 @@ const MenuItem = styled.div`
     props.$active ? props.theme.colors.black : props.theme.colors.gray};
   white-space: nowrap;
 
-  @media (max-width: 1030px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
     padding: 5px 10px;
     border-bottom: ${(props) =>
       props.$active ? `3px solid ${props.theme.colors.pink3}` : 'none'};
   }
 
-  @media (max-width: 680px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     padding: 5px 0;
     border-bottom: ${(props) =>
       props.$active ? `3px solid ${props.theme.colors.pink3}` : 'none'};
@@ -187,7 +183,7 @@ const MenuItem = styled.div`
   &.logout {
     display: none;
 
-    @media (max-width: 680px) {
+    @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
       display: block;
     }
   }
@@ -201,11 +197,11 @@ const LogoutButton = styled(SurveyButton)`
   width: 100px;
   height: 40px;
 
-  @media (max-width: 1030px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
     padding: 5px 10px;
   }
 
-  @media (max-width: 680px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     display: none;
   }
 `;

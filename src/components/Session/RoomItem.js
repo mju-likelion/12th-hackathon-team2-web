@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import RoomOff from '../../img/RoomOff.svg';
 import RoomOn from '../../img/RoomOn.svg';
 
 const RoomItem = ({ room, onClick }) => {
