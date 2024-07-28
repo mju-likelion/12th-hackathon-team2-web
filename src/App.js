@@ -27,6 +27,7 @@ const SessionDetail = lazy(() => import('./pages/SessionDetail'));
 const Signup = lazy(() => import('./pages/Signup'));
 const Survey = lazy(() => import('./pages/Survey'));
 const SurveyResult = lazy(() => import('./pages/SurveyResult'));
+const CalendarView = lazy(() => import('./pages/CalendarView'));
 
 function App() {
   return (
@@ -45,6 +46,10 @@ function App() {
                 <Route
                   path='/planners/completed'
                   element={<CompletedPlanner />}
+                />
+                <Route
+                  path='/planners/calendar/:month'
+                  element={<CalendarView />}
                 />
                 <Route path='/diaries' element={<Diary />} />
                 <Route path='/diaries/:id' element={<DiaryDetail />} />

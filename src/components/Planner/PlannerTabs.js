@@ -6,11 +6,19 @@ const PlannerTabs = ({ activeTab, setActiveTab }) => {
   const navigate = useNavigate();
 
   const handleTabClick = (tab) => {
-    setActiveTab(tab);
-    if (tab === 'to-do') {
-      navigate('/planners');
-    } else if (tab === 'completed') {
-      navigate('/planners/completed');
+    if (typeof setActiveTab === 'function') {
+      setActiveTab(tab);
+      if (tab === 'to-do') {
+        navigate('/planners');
+      } else if (tab === 'completed') {
+        navigate('/planners/completed');
+      } else if (tab === 'calendar') {
+        const currentDate = new Date();
+        const month = currentDate.toISOString().split('T')[0].slice(0, 7);
+        navigate(`/planners/calendar/${month}`);
+      }
+    } else {
+      console.error('setActiveTab is not defined');
     }
   };
 
@@ -27,6 +35,12 @@ const PlannerTabs = ({ activeTab, setActiveTab }) => {
         onClick={() => handleTabClick('completed')}
       >
         <TabText $isActive={activeTab === 'completed'}>Completed</TabText>
+      </TabItem>
+      <TabItem
+        $isActive={activeTab === 'calendar'}
+        onClick={() => handleTabClick('calendar')}
+      >
+        <TabText $isActive={activeTab === 'calendar'}>Calendar</TabText>
       </TabItem>
     </TabsContainer>
   );

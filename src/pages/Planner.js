@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { PlannersDeleteApi } from '../api/Planners/PlannersDeleteApi';
 import { PlannersGetApi } from '../api/Planners/PlannersGetApi';
@@ -6,12 +7,12 @@ import { PlannersPatchApi } from '../api/Planners/PlannersPatchApi';
 import { PlannersPostApi } from '../api/Planners/PlannersPostApi';
 import { PlannersPutApi } from '../api/Planners/PlannersPutApi';
 import Header from '../components/Header';
-import Calendar from '../components/Planner/Calendar.js';
 import PlannerHeader from '../components/Planner/PlannerHeader';
 import PlannerListContainer from '../components/Planner/PlannerListContainer';
 import PlannerTabs from '../components/Planner/PlannerTabs';
 import PlannerTopBar from '../components/Planner/PlannerTopBar';
 import TinyButton from '../components/TinyButton';
+import CalendarView from './CalendarView';
 
 const formatDate = (date) => {
   const d = new Date(date);
@@ -25,6 +26,7 @@ const Planner = () => {
   const [toDoList, setToDoList] = useState([]);
   const [completedList, setCompletedList] = useState([]);
   const [activeTab, setActiveTab] = useState('to-do');
+  const { month } = useParams();
 
   useEffect(() => {
     PlannersGetApi()
@@ -204,21 +206,29 @@ const Planner = () => {
           <Content>
             <PlannerTabs activeTab={activeTab} setActiveTab={setActiveTab} />
             <InnerContent>
-              <PlannerListContainer
-                activeTab={activeTab}
-                toDoList={toDoList.filter((item) => item !== null)}
-                completedList={sortedCompletedList}
-                handleCheck={handleCheck}
-                handleUpdate={handleUpdate}
-                handleDelete={handleDelete}
-              />
+              {activeTab === 'calendar' ? (
+                <CalendarView
+                  activeTab={activeTab}
+                  setActiveTab={setActiveTab}
+                  totalDone={completedList.length}
+                  month={month}
+                />
+              ) : (
+                <PlannerListContainer
+                  activeTab={activeTab}
+                  toDoList={toDoList.filter((item) => item !== null)}
+                  completedList={sortedCompletedList}
+                  handleCheck={handleCheck}
+                  handleUpdate={handleUpdate}
+                  handleDelete={handleDelete}
+                />
+              )}
               <AddButtonContainer>
                 <TinyButton onClick={handleAddItem}>추가하기</TinyButton>
               </AddButtonContainer>
             </InnerContent>
           </Content>
         </PlannerContainer>
-        <Calendar />
       </PageContainer>
     </Div>
   );
