@@ -46,8 +46,8 @@ const Settings = ({
           min='0'
         />
       </SettingBox>
-      <SideTitle>최근이용</SideTitle>
-      <Report>
+      <SideTitle className='recent-title'>최근이용</SideTitle>
+      <Report className='recent-report'>
         {history.map((item, index) => (
           <HistoryItem
             key={index}
@@ -65,39 +65,55 @@ const Settings = ({
 
 const Left = styled.div`
   width: 25vw;
-  min-width: 170px;
-  height: 80vh;
+  height: auto;
   background-color: ${(props) => props.theme.colors.pink1};
-  padding: 30px;
+  padding: 20px;
   border-radius: 20px;
   margin: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  @media (max-width: 768px) {
-    width: 50vw;
-  }
-  @media (max-width: 480px) {
-    width: 90vw;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    display: flex;
+    width: 95%;
+    justify-content: center;
   }
 `;
 
 const SideTitle = styled.h3`
   margin-top: 20px;
-  ${(props) => props.theme.fonts.PageNumber};
+  ${({ theme }) => theme.fonts.tinyButton};
+  text-align: left;
   border-bottom: solid 2px ${(props) => props.theme.colors.pink3};
   padding-bottom: 7px;
   margin-bottom: 30px;
+  padding-left: 5px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    margin-left: 10px;
+    margin-right: 50px;
+  }
+
+  &.recent-title {
+    @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+      display: none;
+    }
+  }
 `;
 
 const Report = styled.div`
   background-color: ${(props) => props.theme.colors.white};
-  height: 45%;
+  height: auto;
   width: 95%;
   border-radius: 5px;
   overflow-y: auto;
   padding: 20px;
-  @media (max-height: 653px) {
-    height: auto;
-    max-height: 50vh;
+
+  height: 35%;
+
+  &.recent-report {
+    @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+      display: none;
+    }
   }
 `;
 
@@ -134,6 +150,10 @@ const Input = styled.input`
   border: none;
   border-radius: 5px;
   margin-bottom: 10px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    width: 50%;
+  }
 `;
 
 export default Settings;

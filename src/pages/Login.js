@@ -40,7 +40,7 @@ const Login = () => {
   const onSubmit = async (data) => {
     const callbackFunctions = {
       navigateSuccess: handleLoginClick,
-      navigateError: (error) => console.error(error),
+      navigateError: (errorMessage) => alert(errorMessage),
     };
 
     try {
