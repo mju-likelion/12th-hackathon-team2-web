@@ -90,7 +90,7 @@ export const Theme = {
     menuItem: css`
       font-family: 'Noto Sans KR', sans-serif;
       font-weight: 600;
-      font-size: 32px;
+      font-size: 30px;
       line-height: 39px;
       text-align: center;
     `,
