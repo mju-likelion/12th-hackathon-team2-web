@@ -65,7 +65,7 @@ const Signup = () => {
     <ThemeProvider theme={Theme}>
       <GlobalStyle />
       <Container>
-        <Title>Mutside Out</Title>
+        <Title>MUTSIDE OUT</Title>
         <SignupForm onSubmit={handleSubmit(onSubmit)}>
           <SignupText>회원가입</SignupText>
           <Controller

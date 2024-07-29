@@ -55,15 +55,15 @@ const Main = () => {
     <ThemeProvider theme={Theme}>
       <GlobalStyle />
       <Container>
+        <Header>MUTSIDE OUT</Header>
         {gradeInfo.image && (
           <Logo src={gradeInfo.image} alt={`${gradeInfo.name} Logo`} />
         )}
-        <Header>Mutside Out</Header>
         {userGrade && <UserGrade>유저 등급: {gradeInfo.name}</UserGrade>}
         <Menu>
-          <MenuItem onClick={() => navigate('/planners')}>플래너</MenuItem>
           <MenuItem onClick={() => navigate('/diaries')}>감정일기</MenuItem>
           <MenuItem onClick={() => navigate('/rooms')}>집중세션</MenuItem>
+          <MenuItem onClick={() => navigate('/planners')}>플래너</MenuItem>
           <MenuItem onClick={() => navigate('/pomodoro')}>뽀모도로</MenuItem>
           <MenuItem onClick={() => navigate('/mypage')}>마이페이지</MenuItem>
         </Menu>
@@ -106,7 +106,7 @@ const Container = styled.div`
 const Logo = styled.img`
   width: 238px;
   height: 238px;
-  margin-bottom: 69px;
+  margin-bottom: 20px;
 
   @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
     width: 180px;
@@ -124,7 +124,7 @@ const Logo = styled.img`
 const Header = styled.h1`
   ${(props) => props.theme.fonts.title};
   color: ${(props) => props.theme.colors.pink3};
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 
   @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
     font-size: 2.5rem;
@@ -155,7 +155,7 @@ const Menu = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.7vw;
+  gap: 1.5vw;
 
   @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
     gap: 20px;

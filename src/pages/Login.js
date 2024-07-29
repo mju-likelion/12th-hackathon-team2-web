@@ -54,7 +54,7 @@ const Login = () => {
     <ThemeProvider theme={Theme}>
       <GlobalStyle />
       <Container>
-        <Title>Mutside Out</Title>
+        <Title>MUTSIDE OUT</Title>
         <LoginWrapper>
           <LoginForm onSubmit={handleSubmit(onSubmit)}>
             <LoginText>로그인</LoginText>

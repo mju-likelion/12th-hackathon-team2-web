@@ -41,7 +41,7 @@ const Header = () => {
   return (
     <HeaderContainer>
       <Sidebar>
-        <Title onClick={() => handleNavigation('/main')}>Mutside Out</Title>
+        <Title onClick={() => handleNavigation('/main')}>MUTSIDE OUT</Title>
         <SideMenu onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <Close /> : <MenuBars />}
         </SideMenu>
