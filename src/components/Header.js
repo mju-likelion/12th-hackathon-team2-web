@@ -1,11 +1,11 @@
+import Cookies from 'js-cookie';
 import React, { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Cookies from 'js-cookie';
 import { LogoutApi } from '../api/Auth/LogoutApi';
-import { ReactComponent as SettingsIcon } from '../img/SettingIcon.svg';
 import { ReactComponent as LogoutIcon } from '../img/Logout.svg';
+import { ReactComponent as SettingsIcon } from '../img/SettingIcon.svg';
 
 const Header = () => {
   const navigate = useNavigate();
