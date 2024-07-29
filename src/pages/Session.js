@@ -70,17 +70,18 @@ const Div = styled.div`
 
 const Container = styled.div`
   width: 80%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: auto;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    width: 90%;
+    width: 100%;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    width: 95%;
+    width: 100%;
   }
 `;
 
@@ -90,37 +91,44 @@ const Title = styled.div`
   align-items: center;
   width: 100%;
   margin-top: 52px;
+  ${({ theme }) => theme.fonts.subTitle};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    font-size: 1em;
+  }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 20px;
+    font-size: 0.8em;
   }
 `;
 
 const SubTitle = styled.h2`
   ${({ theme }) => theme.fonts.subTitle};
+  min-width: 190px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    font-size: 1.5em;
+  }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    margin-bottom: 10px;
+    font-size: 1.2em;
   }
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
-  justify-content: flex-end;
   width: 150px;
+  justify-content: flex-end;
 
-  @media (max-width: 1024px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    width: 150px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     width: 130px;
   }
 
-  @media (max-width: 768px) {
-    width: 110px;
-  }
-
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    width: 100px;
-    justify-content: center;
+    min-width: 110px;
   }
 `;
