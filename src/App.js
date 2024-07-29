@@ -26,6 +26,7 @@ const SessionCreate = lazy(() => import('./pages/SessionCreate'));
 const SessionDetail = lazy(() => import('./pages/SessionDetail'));
 const Signup = lazy(() => import('./pages/Signup'));
 const Survey = lazy(() => import('./pages/Survey'));
+const Mypage = lazy(() => import('./pages/Mypage'));
 const SurveyResult = lazy(() => import('./pages/SurveyResult'));
 const CalendarView = lazy(() => import('./pages/CalendarView'));
 
@@ -60,6 +61,7 @@ function App() {
                 <Route path='/pomodoro' element={<Pomodoro />} />
                 <Route path='/surveys' element={<Survey />} />
                 <Route path='/surveys/result' element={<SurveyResult />} />
+                <Route path='/Mypage' element={<Mypage />} />
                 <Route path='/*' element={<NotFound />} />
               </Routes>
             </Suspense>

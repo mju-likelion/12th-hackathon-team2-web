@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../components/Header';
 import styled from 'styled-components';
-import { getMypage } from '../api/Mypage/MypageApi'; // API 파일을 임포트합니다.
+import { getMypage } from '../api/Mypage/MypageApi';
+import Header from '../components/Header';
+import Loading from '../components/Loading';
 import AvocadoImage from '../img/Avocado.svg';
 import BananaImage from '../img/Banana.svg';
 import TomatoImage from '../img/Tomato.svg';
@@ -29,7 +30,7 @@ const Mypage = () => {
   }, []);
 
   if (!userData) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   const gradeInfo = gradeMapping[userData.grade] || {};
@@ -47,8 +48,10 @@ const Mypage = () => {
             <InfoText>이메일: {userData.email}</InfoText>
             <InfoText>회원등급: {gradeInfo.name}</InfoText>
           </UserInfo>
-          <Button>회원탈퇴</Button>
-          <Button>정보수정</Button>
+          <ButtonContainer>
+            <Button>회원탈퇴</Button>
+            <Button>정보수정</Button>
+          </ButtonContainer>
         </ProfileContainer>
       </Info>
     </Container>
@@ -58,24 +61,33 @@ const Mypage = () => {
 const Container = styled.div`
   width: 100%;
   padding: 20px;
+  background-color: ${(props) => props.theme.colors.lightGray};
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Info = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   margin-top: 70px;
-  /* background-color: gray; */
+  background-color: ${(props) => props.theme.colors.white};
+  border-radius: 15px;
+  border: 2px solid ${(props) => props.theme.colors.gray};
+  padding: 40px;
+  width: 80%;
+  max-width: 800px;
 `;
 
 const ProfileContainer = styled.div`
-  width: 80%;
-  /* background-color: yellow; */
-  padding: 30px;
+  width: 100%;
+  margin-top: 20px;
 `;
 
 const Img = styled.div`
-  border: 1px solid ${(props) => props.theme.colors.gray};
+  border: 2px solid ${(props) => props.theme.colors.gray};
   border-radius: 50%;
   background-color: ${(props) => props.theme.colors.pink1};
   display: flex;
@@ -83,6 +95,7 @@ const Img = styled.div`
   align-items: center;
   width: 200px;
   height: 200px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;
 
 const Grade = styled.img`
@@ -92,11 +105,11 @@ const Grade = styled.img`
 
 const UserInfo = styled.div`
   width: 100%;
-  height: 16vw;
   padding: 20px;
   background-color: ${(props) => props.theme.colors.pink1};
   border: 1px solid ${(props) => props.theme.colors.gray};
   border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;
 
 const InfoText = styled.p`
@@ -104,19 +117,28 @@ const InfoText = styled.p`
   ${(props) => props.theme.fonts.tinyButton};
   text-align: left;
   line-height: 1.5em;
+  color: ${(props) => props.theme.colors.darkGray};
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
 `;
 
 const Button = styled.button`
-  margin-top: 10px;
   margin-left: 10px;
   padding: 10px 20px;
   background-color: ${(props) => props.theme.colors.pink3};
   color: ${(props) => props.theme.colors.white};
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: none;
   border-radius: 5px;
-  float: right;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+
   &:hover {
-    background-color: #ff4757;
+    background-color: ${(props) => props.theme.colors.pink5};
   }
 `;
 
