@@ -56,7 +56,7 @@ const DiaryDetailForm = ({
 export default DiaryDetailForm;
 
 const Form = styled.form`
-  margin-top: 30px;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
   width: 100%;
