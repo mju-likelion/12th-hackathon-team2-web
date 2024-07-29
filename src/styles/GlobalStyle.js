@@ -1,20 +1,13 @@
 import { createGlobalStyle } from 'styled-components';
-import reset from 'styled-reset';
+import { reset } from 'styled-reset';
+import './GlobalFont.css';
 
 const GlobalStyle = createGlobalStyle`
-  ${reset}
+  ${reset};
 
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
-
-  @font-face {
-    font-family: 'Inside Out';
-    src:
-      url('/fonts/InsideFont.woff2') format('woff2'),
-      url('/fonts/InsideFont.woff') format('woff'),
-      url('/fonts/InsideFont.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-  }
+  :root {
+       --vh: 100%;
+    }
 
   html, body, div, span, h1, h2, h3, h4, h5, h6, p,
   a, dl, dt, dd, ol, ul, li, form, label, table {
@@ -23,6 +16,7 @@ const GlobalStyle = createGlobalStyle`
     border: 0;
     text-decoration: none;
     box-sizing: border-box;
+    height: var(--vh);
     ${({ theme }) => theme.fonts.default};
     font-family: 'Noto Sans KR', sans-serif;
     &:visited {
