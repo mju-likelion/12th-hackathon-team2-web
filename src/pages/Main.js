@@ -4,9 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import { gradeGetApi } from '../api/users/gradeGetApi';
 import AlertModal from '../components/AlertModal';
+import QuestionModal from '../components/Main/QuestionModal';
 import AvocadoImage from '../img/Avocado.svg';
 import background from '../img/background.svg';
 import BananaImage from '../img/Banana.svg';
+import Question from '../img/Question.svg';
 import TomatoImage from '../img/Tomato.svg';
 import GlobalStyle from '../styles/GlobalStyle';
 import { Theme } from '../styles/Theme';
@@ -21,6 +23,7 @@ const Main = () => {
   const navigate = useNavigate();
   const [userGrade, setUserGrade] = useState(null);
   const [alertMessage, setAlertMessage] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const loginToken = Cookies.get('loginToken');
@@ -49,23 +52,34 @@ const Main = () => {
     navigate('/auth/login');
   };
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   const gradeInfo = gradeMapping[userGrade] || {};
 
   return (
     <ThemeProvider theme={Theme}>
       <GlobalStyle />
       <Container>
+        <Header>MUTSIDE OUT</Header>
         {gradeInfo.image && (
           <Logo src={gradeInfo.image} alt={`${gradeInfo.name} Logo`} />
         )}
-        <Header>Mutside Out</Header>
         {userGrade && <UserGrade>유저 등급: {gradeInfo.name}</UserGrade>}
         <Menu>
-          <MenuItem onClick={() => navigate('/planners')}>플래너</MenuItem>
           <MenuItem onClick={() => navigate('/diaries')}>감정일기</MenuItem>
           <MenuItem onClick={() => navigate('/rooms')}>집중세션</MenuItem>
+          <MenuItem onClick={() => navigate('/planners')}>플래너</MenuItem>
           <MenuItem onClick={() => navigate('/pomodoro')}>뽀모도로</MenuItem>
           <MenuItem onClick={() => navigate('/mypage')}>마이페이지</MenuItem>
+          <QuestionItem onClick={openModal}>
+            <QuestionLogo src={Question} />
+          </QuestionItem>
         </Menu>
         {alertMessage && (
           <AlertModal
@@ -75,6 +89,7 @@ const Main = () => {
             handleConfirm={handleAlertConfirm}
           />
         )}
+        <QuestionModal isOpen={isModalOpen} onRequestClose={closeModal} />
       </Container>
     </ThemeProvider>
   );
@@ -93,6 +108,7 @@ const Container = styled.div`
   background-size: cover;
   position: relative;
   padding: 20px;
+  overflow-y: scroll;
 
   @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
     padding: 15px;
@@ -106,7 +122,7 @@ const Container = styled.div`
 const Logo = styled.img`
   width: 238px;
   height: 238px;
-  margin-bottom: 69px;
+  margin-bottom: 20px;
 
   @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
     width: 180px;
@@ -121,10 +137,16 @@ const Logo = styled.img`
   }
 `;
 
+const QuestionLogo = styled.img`
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+`;
+
 const Header = styled.h1`
   ${(props) => props.theme.fonts.title};
   color: ${(props) => props.theme.colors.pink3};
-  margin-bottom: 10px;
+  margin: 20px;
 
   @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
     font-size: 2.5rem;
@@ -155,7 +177,7 @@ const Menu = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.7vw;
+  gap: 20px;
 
   @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
     gap: 20px;
@@ -165,6 +187,11 @@ const Menu = styled.div`
   @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
     gap: 15px;
     margin-top: 20px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 10px;
+    margin-top: 15px;
   }
 `;
 
@@ -177,10 +204,32 @@ const MenuItem = styled.div`
   }
 
   @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
+    font-size: 25px;
+  }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    font-size: 20px;
+  }
+`;
+
+const QuestionItem = styled.div`
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    color: ${(props) => props.theme.colors.pink3};
+  }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
     font-size: 1.8rem;
   }
 
   @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
     font-size: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
   }
 `;
