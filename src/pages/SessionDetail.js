@@ -207,10 +207,33 @@ const Title = styled.h1`
   margin-bottom: 3vh;
   ${Theme.fonts.subTitle};
   color: ${Theme.colors.black};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    margin-bottom: 30px;
+    font-size: 3rem;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    margin-bottom: 20px;
+    font-size: 2rem;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+  }
 `;
 
 const FormWrapper = styled.div`
   width: 60vw;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    width: 80vw;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    width: 90vw;
+  }
 `;
 
 const StyledForm = styled(Form)`
@@ -250,6 +273,16 @@ const Input = styled.input`
   &::placeholder {
     color: ${Theme.colors.gray};
   }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    padding: 8px;
+    height: 60px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    padding: 6px;
+    height: 50px;
+  }
 `;
 
 const TextArea = styled.textarea`
@@ -265,8 +298,19 @@ const TextArea = styled.textarea`
   height: 368px;
   background: ${Theme.colors.white};
   margin-bottom: 10px;
+
   &::placeholder {
     color: ${Theme.colors.gray};
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    padding: 8px;
+    height: 300px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    padding: 6px;
+    height: 250px;
   }
 `;
 

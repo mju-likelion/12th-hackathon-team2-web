@@ -126,6 +126,8 @@ export default DiaryDetail;
 const Div = styled.div`
   width: 100%;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Container = styled.div`
@@ -135,18 +137,38 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  flex-grow: 1;
+  justify-content: space-between;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    width: 90%;
+    padding: 15px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    width: 95%;
+    padding: 10px;
+  }
 `;
 
 const Title = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  max-width: 1117px;
-  margin-top: 3vh;
-  margin-bottom: 3vh;
+  margin-top: 2vh;
+  margin-bottom: 1vh;
   ${Theme.fonts.subTitle};
   color: ${Theme.colors.black};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    font-size: 1.5em;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    font-size: 1.2em;
+  }
 `;
+
 const SubTitle = styled.div`
   display: flex;
   justify-content: space-between;
@@ -158,4 +180,14 @@ const DateHeader = styled.div`
   margin-top: 20px;
   ${Theme.fonts.Context};
   color: ${Theme.colors.pink3};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    font-size: 1em;
+    margin-top: 10px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    font-size: 0.8em;
+    margin-top: 13px;
+  }
 `;
