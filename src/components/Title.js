@@ -1,10 +1,7 @@
 import styled from 'styled-components';
 
 const Title = styled.h1`
-  font-family: 'Inside Out', sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 66px;
+  ${(props) => props.theme.fonts.title};
   color: ${(props) => props.theme.colors.pink3};
   margin-bottom: 40px;
 

@@ -173,22 +173,23 @@ const SignupWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  width: 80%;
+  width: 514px;
   margin-top: 20px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
     margin-top: 15px;
     margin-right: 40px;
+    width: 494px;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    margin-top: 10px;
-    margin-right: 30px;
+    margin-top: 15px;
+    width: 394px;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    margin-top: 5px;
-    margin-right: 20px;
+    margin-top: 15px;
+    width: 374px;
   }
 `;
 
@@ -196,6 +197,7 @@ const NoAccountText = styled.span`
   ${(props) => props.theme.fonts.noAccountText};
   color: ${(props) => props.theme.colors.black};
   margin-right: 10px;
+  width: 587px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
     margin-right: 15px;
@@ -203,9 +205,11 @@ const NoAccountText = styled.span`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     margin-right: 10px;
+    width: 487px;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     margin-right: 5px;
+    width: 387px;
   }
 `;
