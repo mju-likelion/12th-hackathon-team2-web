@@ -71,11 +71,23 @@ const Header = () => {
         >
           뽀모도로
         </MenuItem>
+        <MenuItem className='logout' onClick={handleLogout}>
+          로그아웃
+        </MenuItem>
+        <MenuItem
+          className='mypage'
+          onClick={() => handleNavigation('/mypage')}
+        >
+          마이페이지
+        </MenuItem>
       </Menu>
-      <LogoutIconStyled onClick={handleLogout} />
-      <MenuItem onClick={() => handleNavigation('/mypage')}>
-        <SettingIconStyled />
-      </MenuItem>
+      <IconContainer>
+        <LogoutIconStyled className='desktop' onClick={handleLogout} />
+        <SettingIconStyled
+          className='desktop'
+          onClick={() => handleNavigation('/mypage')}
+        />
+      </IconContainer>
     </HeaderContainer>
   );
 };
@@ -184,31 +196,61 @@ const MenuItem = styled.div`
     display: flex;
     align-items: center;
 
-    @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-      display: flex;
+    @media (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
+      display: none;
     }
+  }
+
+  &.mypage {
+    display: flex;
+    align-items: center;
+
+    @media (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
+      display: none;
+    }
+  }
+
+  &.desktop {
+    display: none;
+
+    @media (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
+      display: flex;
+      align-items: center;
+    }
+  }
+`;
+
+const IconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    display: none;
   }
 `;
 
 const LogoutIconStyled = styled(LogoutIcon)`
   width: 28px;
   height: 28px;
-  fill: none;
   cursor: pointer;
-  border: none;
-`;
-
-const MenuBars = styled(FaBars)`
-  color: ${(props) => props.theme.colors.pink3};
-`;
-const Close = styled(FaTimes)`
-  color: ${(props) => props.theme.colors.pink3};
+  fill: ${(props) => props.theme.colors.pink3};
 `;
 
 const SettingIconStyled = styled(SettingsIcon)`
   margin-left: 5px;
   width: 30px;
   height: 30px;
+  cursor: pointer;
+  fill: ${(props) => props.theme.colors.pink3};
+`;
+
+const MenuBars = styled(FaBars)`
+  color: ${(props) => props.theme.colors.pink3};
+`;
+
+const Close = styled(FaTimes)`
+  color: ${(props) => props.theme.colors.pink3};
 `;
 
 export default Header;
