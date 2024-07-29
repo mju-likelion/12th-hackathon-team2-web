@@ -20,7 +20,10 @@ const CalendarView = ({ totalDone }) => {
       try {
         const data = await PlannersCalendarGetApi(month);
         const dailyList = data.dailyList.reduce((acc, { date, statsGrade }) => {
-          acc[date] =
+          const adjustedDate = new Date(date);
+          adjustedDate.setDate(adjustedDate.getDate() - 1);
+          const dateString = adjustedDate.toISOString().split('T')[0];
+          acc[dateString] =
             statsGrade === 'LEVEL1' ? 1 : statsGrade === 'LEVEL2' ? 2 : 3;
           return acc;
         }, {});
@@ -214,6 +217,7 @@ const DateLabel = styled.div`
   top: 5px;
   left: 5px;
 `;
+
 const Div = styled.div`
   width: 100vw;
   padding: 2vh;
