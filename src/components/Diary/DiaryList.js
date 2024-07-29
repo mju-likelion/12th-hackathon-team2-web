@@ -31,8 +31,8 @@ const PostItItem = styled.div`
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
   box-sizing: border-box;
   cursor: pointer;
   display: flex;
@@ -42,18 +42,20 @@ const PostItItem = styled.div`
   margin: 10px;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    width: 180px;
-    height: 180px;
+    width: 220px;
+    height: 220px;
+    padding: 15px;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    width: 160px;
-    height: 160px;
+    width: 180px;
+    height: 180px;
+    padding: 10px;
   }
 `;
 
@@ -67,12 +69,28 @@ const DiaryTitle = styled.div`
   text-overflow: ellipsis;
   margin-top: 10px;
   text-align: center;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    font-size: 1em;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    font-size: 0.8em;
+  }
 `;
 
 const DiaryDate = styled.div`
   ${({ theme }) => theme.fonts.default};
   color: ${({ theme }) => theme.colors.pink3};
   font-size: 14px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    font-size: 12px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    font-size: 10px;
+  }
 `;
 
 const PinDecoration = styled.div`
@@ -84,4 +102,16 @@ const PinDecoration = styled.div`
   height: 40px;
   background: url(${PinIcon}) no-repeat center center;
   background-size: contain;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    top: -20px;
+    width: 30px;
+    height: 30px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    top: -15px;
+    width: 20px;
+    height: 20px;
+  }
 `;

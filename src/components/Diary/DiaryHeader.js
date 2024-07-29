@@ -4,9 +4,9 @@ import BigButton from '../BigButton';
 
 const DiaryHeader = ({ onAddEntry }) => (
   <HeaderContainer>
-    <Header>감정 일기</Header>
+    <Title>감정 일기</Title>
     <ButtonWrapper>
-      <BigButton onClick={onAddEntry}>일기 작성</BigButton>
+      <StyledBigButton onClick={onAddEntry}>일기 작성</StyledBigButton>
     </ButtonWrapper>
   </HeaderContainer>
 );
@@ -17,27 +17,51 @@ const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+
   margin-top: 52px;
 `;
 
-const Header = styled.h1`
+const Title = styled.h1`
+  min-width: 150px;
   ${({ theme }) => theme.fonts.subTitle};
   color: ${({ theme }) => theme.colors.black};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    font-size: 1.5em;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    font-size: 1em;
+  }
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
+  justify-content: flex-end;
   width: 150px;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    width: 150px;
-  }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     width: 130px;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    width: 110px;
+    min-width: 110px;
+  }
+`;
+
+const StyledBigButton = styled(BigButton)`
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    padding: 8px;
+    font-size: 0.9em;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    padding: 6px;
+    font-size: 0.8em;
   }
 `;
