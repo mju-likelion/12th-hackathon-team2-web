@@ -10,10 +10,10 @@ export const getMypage = async () => {
   }
 };
 
-export const updateMypage = async (name, originPassword, newPassword) => {
+export const updateMypage = async (newName, originPassword, newPassword) => {
   try {
     const response = await Axios.patch('/users', {
-      name,
+      newName,
       originPassword,
       newPassword,
     });
