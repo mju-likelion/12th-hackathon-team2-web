@@ -271,7 +271,7 @@ const TimerContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 80vh;
-  margin: 20px 0;
+  margin: 10px 0;
   flex-direction: row;
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     height: 50vw;
@@ -281,7 +281,7 @@ const TimerContainer = styled.div`
 const ButtonGroup = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 1vh;
+  gap: 3vh;
   margin-bottom: 20px;
   max-width: 900px;
 
@@ -289,6 +289,7 @@ const ButtonGroup = styled.div`
     gap: 1.5vh;
     width: 110%;
     margin-top: 10px;
+    justify-content: center;
   }
 `;
 

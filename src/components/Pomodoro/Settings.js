@@ -75,19 +75,22 @@ const Left = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     display: flex;
     width: 95%;
+    justify-content: center;
   }
 `;
 
 const SideTitle = styled.h3`
   margin-top: 20px;
-  ${(props) => props.theme.fonts.PageNumber};
+  ${({ theme }) => theme.fonts.tinyButton};
+  text-align: left;
   border-bottom: solid 2px ${(props) => props.theme.colors.pink3};
   padding-bottom: 7px;
   margin-bottom: 30px;
+  padding-left: 5px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    margin-left: 20px;
-    margin-right: 30px;
+    margin-left: 10px;
+    margin-right: 50px;
   }
 
   &.recent-title {
