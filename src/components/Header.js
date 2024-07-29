@@ -4,8 +4,8 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { LogoutApi } from '../api/Auth/LogoutApi';
-import { Theme } from '../styles/Theme';
-import SurveyButton from './SurveyButton';
+import { ReactComponent as LogoutIcon } from '../img/Logout.svg';
+import { ReactComponent as SettingsIcon } from '../img/SettingIcon.svg';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -71,11 +71,11 @@ const Header = () => {
         >
           뽀모도로
         </MenuItem>
-        <MenuItem className='logout' onClick={handleLogout}>
-          로그아웃
-        </MenuItem>
       </Menu>
-      <LogoutButton content='로그아웃' onClick={handleLogout} />
+      <LogoutIconStyled onClick={handleLogout} />
+      <MenuItem onClick={() => handleNavigation('/mypage')}>
+        <SettingIconStyled />
+      </MenuItem>
     </HeaderContainer>
   );
 };
@@ -140,7 +140,7 @@ const Menu = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5vw;
+  gap: 4vw;
   ${(props) => props.theme.fonts.Context};
   flex-grow: 1;
   flex-wrap: nowrap;
@@ -181,29 +181,21 @@ const MenuItem = styled.div`
   }
 
   &.logout {
-    display: none;
+    display: flex;
+    align-items: center;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-      display: block;
+      display: flex;
     }
   }
 `;
 
-const LogoutButton = styled(SurveyButton)`
-  padding: 7px 15px;
-  white-space: nowrap;
-  color: ${(props) => props.theme.colors.white};
-  background-color: ${Theme.colors.pink2};
-  width: 100px;
-  height: 40px;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    padding: 5px 10px;
-  }
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    display: none;
-  }
+const LogoutIconStyled = styled(LogoutIcon)`
+  width: 28px;
+  height: 28px;
+  fill: none;
+  cursor: pointer;
+  border: none;
 `;
 
 const MenuBars = styled(FaBars)`
@@ -211,6 +203,12 @@ const MenuBars = styled(FaBars)`
 `;
 const Close = styled(FaTimes)`
   color: ${(props) => props.theme.colors.pink3};
+`;
+
+const SettingIconStyled = styled(SettingsIcon)`
+  margin-left: 5px;
+  width: 30px;
+  height: 30px;
 `;
 
 export default Header;
