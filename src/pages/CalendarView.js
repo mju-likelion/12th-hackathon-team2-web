@@ -143,13 +143,12 @@ export default CalendarView;
 
 const CalendarContainer = styled.div`
   background: ${({ theme }) => theme.colors.white};
-  padding: 4vh;
+  padding: 2vh;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 700px;
   margin: 0 auto;
 `;
 
@@ -284,5 +283,6 @@ const InnerContent = styled.div`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     height: 40vh;
+    padding: 1vh;
   }
 `;
