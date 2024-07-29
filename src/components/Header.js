@@ -4,8 +4,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Cookies from 'js-cookie';
 import { LogoutApi } from '../api/Auth/LogoutApi';
-import SurveyButton from './SurveyButton';
 import { ReactComponent as SettingsIcon } from '../img/SettingIcon.svg';
+import { ReactComponent as LogoutIcon } from '../img/Logout.svg';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -71,14 +71,8 @@ const Header = () => {
         >
           뽀모도로
         </MenuItem>
-        {/* <MenuItem
-          $active={isActive('/mypage')}
-          onClick={() => handleNavigation('/mypage')}
-        >
-          마이페이지
-        </MenuItem> */}
       </Menu>
-      <LogoutButton content='로그아웃' onClick={handleLogout} />
+      <LogoutIconStyled onClick={handleLogout} />
       <MenuItem onClick={() => handleNavigation('/mypage')}>
         <SettingIconStyled />
       </MenuItem>
@@ -196,21 +190,12 @@ const MenuItem = styled.div`
   }
 `;
 
-const LogoutButton = styled(SurveyButton)`
-  padding: 7px 15px;
-  white-space: nowrap;
-  color: ${(props) => props.theme.colors.white};
-  background-color: ${(props) => props.theme.colors.pink2};
-  width: 100px;
-  height: 40px;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    padding: 5px 10px;
-  }
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    display: none;
-  }
+const LogoutIconStyled = styled(LogoutIcon)`
+  width: 28px;
+  height: 28px;
+  fill: none;
+  cursor: pointer;
+  border: none;
 `;
 
 const MenuBars = styled(FaBars)`
