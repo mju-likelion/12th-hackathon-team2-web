@@ -1,5 +1,4 @@
-// TimerDisplay.jsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import styled from 'styled-components';
@@ -11,17 +10,28 @@ const TimerDisplay = ({
   formatTime,
   getPercentage,
 }) => {
+  const [initialRender, setInitialRender] = useState(true);
+
+  useEffect(() => {
+    if (initialRender) {
+      setInitialRender(false);
+    }
+  }, [initialRender]);
+
+  const formattedTime = initialRender
+    ? '00:00'
+    : timeLeft !== null && timeLeft !== undefined
+      ? formatTime(timeLeft)
+      : '00:00';
+
   return (
     <Timer>
       <StyledTitle>{label}</StyledTitle>
       <TimerSection>
         <TimerDisplayContainer>
           <CircularProgressbar
-            value={getPercentage(timeLeft)}
-            text={
-              timeLeft !== null &&
-              (isBreak ? formatTime(timeLeft) : formatTime(timeLeft))
-            }
+            value={getPercentage(timeLeft || 0)}
+            text={formattedTime}
             styles={buildStyles({
               pathColor: `#2DBA00`,
               textColor: '#E93C3C',
@@ -39,16 +49,19 @@ const Timer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
-  height: 100%;
+  width: 100%;
+  margin-bottom: 20px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    width: 45%;
+  }
 `;
 
 const TimerDisplayContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-size: 100px;
-  padding: 10px;
+  font-size: 60px;
 `;
 
 const TimerSection = styled.div`
@@ -56,7 +69,6 @@ const TimerSection = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-bottom: 20px;
 `;
 
 const StyledTitle = styled.div`

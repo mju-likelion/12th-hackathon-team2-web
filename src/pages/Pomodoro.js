@@ -222,13 +222,14 @@ const Div = styled.div`
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   height: 80vh;
   width: 100%;
   margin-top: 20px;
-  flex-direction: column;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     flex-direction: row;
+    align-content: center;
   }
 `;
 
@@ -243,6 +244,9 @@ const Right = styled.div`
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   height: 100%;
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    margin-top: 20px;
+  }
 `;
 
 const Title = styled.div`
@@ -268,9 +272,9 @@ const TimerContainer = styled.div`
   width: 100%;
   height: 80vh;
   margin: 20px 0;
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    flex-direction: row;
+  flex-direction: row;
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    height: 50vw;
   }
 `;
 
@@ -282,17 +286,17 @@ const ButtonGroup = styled.div`
   max-width: 900px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    gap: 2vh;
+    gap: 1.5vh;
+    width: 110%;
+    margin-top: 10px;
   }
 `;
 
 const Logo = styled.img`
   width: 309px;
-  height: 61px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     width: 200px;
-    height: 40px;
   }
 `;
 
