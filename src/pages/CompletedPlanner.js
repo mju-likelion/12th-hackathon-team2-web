@@ -95,8 +95,7 @@ const PlannerContainer = styled.div`
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    min-width: 300px;
-    padding: 2vh;
+    min-width: 320px;
   }
 `;
 
@@ -130,6 +129,5 @@ const InnerContent = styled.div`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     height: 40vh;
-    padding: 1vh;
   }
 `;
