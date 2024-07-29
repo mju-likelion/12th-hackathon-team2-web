@@ -65,6 +65,7 @@ const Main = () => {
           <MenuItem onClick={() => navigate('/diaries')}>감정일기</MenuItem>
           <MenuItem onClick={() => navigate('/rooms')}>집중세션</MenuItem>
           <MenuItem onClick={() => navigate('/pomodoro')}>뽀모도로</MenuItem>
+          <MenuItem onClick={() => navigate('/mypage')}>마이페이지</MenuItem>
         </Menu>
         {alertMessage && (
           <AlertModal
@@ -154,7 +155,7 @@ const Menu = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 26px;
+  gap: 1.7vw;
 
   @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
     gap: 20px;
