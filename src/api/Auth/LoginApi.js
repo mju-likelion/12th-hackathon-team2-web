@@ -9,6 +9,7 @@ export const LoginApi = (data, callbackFunctions) => {
       navigateSuccess();
     })
     .catch((error) => {
-      navigateError(error);
+      const errorMessage = error.response?.data?.message;
+      navigateError(errorMessage);
     });
 };
