@@ -6,25 +6,15 @@ export const Axios = axios.create({
   withCredentials: true,
 });
 
-Axios.interceptors.request.use(
-  (config) => {
-    const token = Cookies.get('loginToken');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
 Axios.interceptors.response.use(
   (response) => {
     return response;
   },
   async (error) => {
     const originalRequest = error.config;
+    if (window.location.pathname === '/auth/login') {
+      return Promise.reject(error);
+    }
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
