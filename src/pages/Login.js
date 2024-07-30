@@ -197,7 +197,7 @@ const NoAccountText = styled.span`
   ${(props) => props.theme.fonts.noAccountText};
   color: ${(props) => props.theme.colors.black};
   margin-right: 10px;
-  width: 587px;
+  width: 45%;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
     margin-right: 15px;
@@ -205,11 +205,9 @@ const NoAccountText = styled.span`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     margin-right: 10px;
-    width: 487px;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     margin-right: 5px;
-    width: 387px;
   }
 `;
