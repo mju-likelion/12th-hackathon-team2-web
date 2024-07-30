@@ -24,6 +24,16 @@ const Button = styled.button`
       ? `1px solid ${props.theme.colors.pink2}`
       : `1px solid ${props.theme.colors.gray}`};
   white-space: nowrap;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.3);
+  }
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
 `;
 
 export default SurveyButton;
