@@ -19,7 +19,7 @@ const ToDoItem = ({
   const [error, setError] = useState('');
   const [isAlertOpen, setIsAlertOpen] = useState(false);
 
-  const handleTextClick = () => {
+  const handleContainerClick = () => {
     if (editable) {
       setEditMode(true);
       if (text === '할 일을 입력하세요') {
@@ -76,11 +76,14 @@ const ToDoItem = ({
   };
 
   return (
-    <Item>
+    <Item onClick={handleContainerClick}>
       <CheckButton
         src={item.completed ? CheckButtonOn : CheckButtonOff}
         alt='Check Button'
-        onClick={() => !item.completed && handleCheckClick()}
+        onClick={(e) => {
+          e.stopPropagation();
+          !item.completed && handleCheckClick();
+        }}
         completed={item.completed.toString()}
       />
       <Content>
@@ -94,14 +97,17 @@ const ToDoItem = ({
             rows={1}
           />
         ) : (
-          <Text onClick={handleTextClick}>{text}</Text>
+          <Text>{text}</Text>
         )}
       </Content>
       {showDeleteIcon && (
         <DeleteButton
           src={DeleteIcon}
           alt='Delete Button'
-          onClick={() => onDelete(item.plannerId)}
+          onClick={(e) => {
+            e.stopPropagation();
+            onDelete(item.plannerId);
+          }}
         />
       )}
       {error && <Error>{error}</Error>}
@@ -127,6 +133,7 @@ const Item = styled.div`
   padding: 10px;
   border-bottom: 3px solid ${({ theme }) => theme.colors.pink3};
   position: relative;
+  cursor: pointer;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     width: 90%;
@@ -159,7 +166,6 @@ const Content = styled.div`
 
 const Text = styled.span`
   ${({ theme }) => theme.fonts.semiText};
-  cursor: pointer;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     font-size: 14px;
