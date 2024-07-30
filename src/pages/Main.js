@@ -35,7 +35,7 @@ const Main = () => {
     gradeGetApi()
       .then((response) => {
         if (response.status === 200) {
-          setUserGrade(response.data.data.grade);
+          setUserGrade(response.data.data.userGrade);
         }
       })
       .catch((error) => {
@@ -76,7 +76,7 @@ const Main = () => {
           <MenuItem onClick={() => navigate('/rooms')}>집중세션</MenuItem>
           <MenuItem onClick={() => navigate('/planners')}>플래너</MenuItem>
           <MenuItem onClick={() => navigate('/pomodoro')}>뽀모도로</MenuItem>
-          <MenuItem onClick={() => navigate('/mypage')}>마이페이지</MenuItem>
+          {/* <MenuItem onClick={() => navigate('/mypage')}>마이페이지</MenuItem> */}
           <QuestionItem onClick={openModal}>
             <QuestionLogo src={Question} />
           </QuestionItem>
@@ -120,7 +120,7 @@ const Container = styled.div`
 `;
 
 const Logo = styled.img`
-  width: 238px;
+  width: 200px;
   height: 238px;
   margin-bottom: 20px;
 
@@ -135,11 +135,14 @@ const Logo = styled.img`
     height: 140px;
     margin-bottom: 30px;
   }
+  @media (max-height: 700px) {
+    width: 120px;
+  }
 `;
 
 const QuestionLogo = styled.img`
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   margin-bottom: 20px;
 `;
 
@@ -189,6 +192,10 @@ const Menu = styled.div`
     margin-top: 20px;
   }
 
+  @media (max-height: 900px) {
+    gap: 15px;
+  }
+
   @media (max-width: 480px) {
     gap: 10px;
     margin-top: 15px;
@@ -214,6 +221,7 @@ const MenuItem = styled.div`
 
 const QuestionItem = styled.div`
   margin-top: 20px;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
   cursor: pointer;

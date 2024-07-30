@@ -107,7 +107,7 @@ const HeaderContainer = styled.div`
     padding-bottom: 0px;
   }
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+  @media (max-width: 550px) {
     flex-direction: column;
     height: auto;
     padding-bottom: 10px;
@@ -119,7 +119,7 @@ const Sidebar = styled.div`
   align-items: center;
   gap: 20px;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+  @media (max-width: 550px) {
     width: 100%;
     justify-content: space-between;
   }
@@ -130,7 +130,7 @@ const SideMenu = styled.div`
   font-size: 24px;
   cursor: pointer;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+  @media (max-width: 550px) {
     display: block;
   }
 `;
@@ -145,6 +145,14 @@ const Title = styled.h1`
   @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
     font-size: 30px;
     padding-bottom: 0px;
+  }
+
+  @media (max-width: 850px) {
+    font-size: 26px;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 20px;
   }
 `;
 
@@ -161,11 +169,18 @@ const Menu = styled.div`
     gap: 4vw;
   }
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+  @media (max-width: 550px) {
     flex-direction: column;
     gap: 5px;
     width: 100%;
     display: ${(props) => (props.open ? 'flex' : 'none')};
+  }
+
+  @media (max-width: 700px) {
+    gap: 2vw;
+  }
+  @media (max-width: 700px) {
+    gap: 1vw;
   }
 `;
 
@@ -180,13 +195,20 @@ const MenuItem = styled.div`
     props.$active ? props.theme.colors.black : props.theme.colors.gray};
   white-space: nowrap;
 
+  @media (max-width: 850px) {
+    font-size: 16px;
+  }
+  @media (max-width: 700px) {
+    font-size: 13px;
+  }
+
   @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
     padding: 5px 10px;
     border-bottom: ${(props) =>
       props.$active ? `3px solid ${props.theme.colors.pink3}` : 'none'};
   }
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+  @media (max-width: 550px) {
     padding: 5px 0;
     border-bottom: ${(props) =>
       props.$active ? `3px solid ${props.theme.colors.pink3}` : 'none'};
@@ -196,7 +218,7 @@ const MenuItem = styled.div`
     display: flex;
     align-items: center;
 
-    @media (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    @media (min-width: 550px) {
       display: none;
     }
   }
@@ -205,7 +227,7 @@ const MenuItem = styled.div`
     display: flex;
     align-items: center;
 
-    @media (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    @media (min-width: 550px) {
       display: none;
     }
   }
@@ -213,7 +235,7 @@ const MenuItem = styled.div`
   &.desktop {
     display: none;
 
-    @media (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    @media (min-width: 550px) {
       display: flex;
       align-items: center;
     }
@@ -225,7 +247,7 @@ const IconContainer = styled.div`
   align-items: center;
   gap: 20px;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+  @media (max-width: 550px) {
     display: none;
   }
 `;
@@ -235,14 +257,22 @@ const LogoutIconStyled = styled(LogoutIcon)`
   height: 28px;
   cursor: pointer;
   fill: ${(props) => props.theme.colors.pink3};
+  @media (max-width: 850px) {
+    width: 23px;
+    height: 23px;
+  }
 `;
 
 const SettingIconStyled = styled(SettingsIcon)`
   margin-left: 5px;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   cursor: pointer;
   fill: ${(props) => props.theme.colors.pink3};
+  @media (max-width: 850px) {
+    width: 23px;
+    margin-left: 0px;
+  }
 `;
 
 const MenuBars = styled(FaBars)`

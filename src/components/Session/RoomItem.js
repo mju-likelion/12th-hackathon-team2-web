@@ -1,13 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import MeetIcon from '../../img/googleMeet.svg';
-import NaverIcon from '../../img/naver.svg';
 import RoomOn from '../../img/RoomOn.svg';
-import Teams from '../../img/teams.svg';
-import ZoomIcon from '../../img/zoom.svg';
 
 const RoomItem = ({ room, onClick }) => {
-  const roomIcon = getIconByLink(room.link);
+  const roomIcon = room.imageLink || RoomOn;
 
   const handleJoinRoom = () => {
     onClick();
@@ -24,25 +20,6 @@ const RoomItem = ({ room, onClick }) => {
       </RoomButtonWrapper>
     </Room>
   );
-};
-
-const getIconByLink = (link) => {
-  if (!link) return RoomOn;
-
-  if (link.includes('naver.com')) {
-    return NaverIcon;
-  }
-  if (link.includes('zoom.us')) {
-    return ZoomIcon;
-  }
-  if (link.includes('meet.google')) {
-    return MeetIcon;
-  }
-  if (link.includes('microsoft-teams')) {
-    return Teams;
-  }
-
-  return RoomOn;
 };
 
 export default RoomItem;

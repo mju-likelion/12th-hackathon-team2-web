@@ -111,7 +111,7 @@ const Mypage = () => {
     return <Loading />;
   }
 
-  const gradeInfo = gradeMapping[userData.grade] || {};
+  const gradeInfo = gradeMapping[userData.userGrade] || {};
 
   return (
     <Div>
