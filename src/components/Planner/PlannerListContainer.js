@@ -46,7 +46,7 @@ export default PlannerListContainer;
 
 const Container = styled.div`
   width: 100%;
-  height: 453px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -72,9 +72,5 @@ const ItemList = styled.div`
   }
   &::-webkit-scrollbar-thumb:hover {
     background: #555;
-  }
-
-  @media (max-width: 859px) {
-    height: 35vh;
   }
 `;

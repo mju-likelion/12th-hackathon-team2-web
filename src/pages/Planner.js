@@ -313,10 +313,12 @@ const AddButtonContainer = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     right: 1vh;
     bottom: 1vh;
+    transform: scale(0.8);
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    right: 0.5vh;
-    bottom: 0.5vh;
+    right: 0.1vh;
+    bottom: 0.1vh;
+    transform: scale(0.6);
   }
 `;

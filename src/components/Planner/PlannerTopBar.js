@@ -80,8 +80,4 @@ const Counter = styled.div`
     width: 100%;
     text-align: center;
   }
-
-  div {
-    margin-bottom: 5px;
-  }
 `;

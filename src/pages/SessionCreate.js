@@ -108,6 +108,7 @@ const Div = styled.div`
 `;
 
 const Container = styled.div`
+  margin-top: 3vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -115,12 +116,20 @@ const Container = styled.div`
 `;
 
 const Title = styled.h1`
-  margin-top: 3vh;
-  margin-bottom: 3vh;
-  ${Theme.fonts.subTitle};
-  color: ${Theme.colors.black};
-`;
+  margin-bottom: 20px;
+  ${({ theme }) => theme.fonts.subTitle};
+  display: flex;
+  align-items: center;
 
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    font-size: 1.5em;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    font-size: 1.2em;
+    ${Theme.fonts.tinyButton};
+  }
+`;
 const StyledForm = styled(Form)`
   width: 60vw;
   display: flex;

@@ -143,13 +143,12 @@ export default CalendarView;
 
 const CalendarContainer = styled.div`
   background: ${({ theme }) => theme.colors.white};
-  padding: 4vh;
+  padding: 2vh;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 700px;
   margin: 0 auto;
 `;
 
@@ -162,6 +161,7 @@ const MonthTitleContainer = styled.div`
 
 const MonthTitle = styled.h2`
   margin: 0 10px;
+  width: 100%;
 `;
 
 const MonthButton = styled.button`
@@ -217,7 +217,6 @@ const DateLabel = styled.div`
   top: 5px;
   left: 5px;
 `;
-
 const Div = styled.div`
   width: 100vw;
   padding: 2vh;
@@ -249,8 +248,7 @@ const PlannerContainer = styled.div`
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    min-width: 300px;
-    padding: 2vh;
+    min-width: 320px;
   }
 `;
 
