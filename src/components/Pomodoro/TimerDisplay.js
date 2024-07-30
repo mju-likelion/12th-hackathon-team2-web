@@ -53,6 +53,7 @@ const Timer = styled.div`
   margin-bottom: 20px;
   padding: 20px;
   border-radius: 15px;
+  border: 2px solid ${(props) => props.theme.colors.pink2};
   background-color: ${({ theme }) => theme.colors.pink1};
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
@@ -67,6 +68,7 @@ const Timer = styled.div`
 `;
 
 const TimerDisplayContainer = styled.div`
+  border: 10px solid ${(props) => props.theme.colors.black};
   display: flex;
   flex-direction: row;
   align-items: center;
