@@ -4,6 +4,7 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { LogoutApi } from '../api/Auth/LogoutApi';
+import AlertModal from '../components/AlertModal';
 import { ReactComponent as LogoutIcon } from '../img/Logout.svg';
 import { ReactComponent as SettingsIcon } from '../img/SettingIcon.svg';
 
@@ -12,6 +13,7 @@ const Header = () => {
   const location = useLocation();
   const activePath = location.pathname.toLowerCase();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const isActive = (path) => {
     return activePath.startsWith(path.toLowerCase());
@@ -28,7 +30,6 @@ const Header = () => {
         console.log('Logged out');
         Cookies.remove('loginToken');
         window.location.replace('/auth/login');
-        alert('로그아웃되었습니다. 다시 로그인화면으로 돌아갑니다.');
         setMenuOpen(false);
       },
       navigateError: (error) => {
@@ -36,6 +37,19 @@ const Header = () => {
         error.response && navigate('/*');
       },
     });
+  };
+
+  const handleLogoutClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleModalConfirm = () => {
+    handleModalClose();
+    handleLogout();
   };
 
   return (
@@ -71,7 +85,7 @@ const Header = () => {
         >
           뽀모도로
         </MenuItem>
-        <MenuItem className='logout' onClick={handleLogout}>
+        <MenuItem className='logout' onClick={handleLogoutClick}>
           로그아웃
         </MenuItem>
         <MenuItem
@@ -82,12 +96,18 @@ const Header = () => {
         </MenuItem>
       </Menu>
       <IconContainer>
-        <LogoutIconStyled className='desktop' onClick={handleLogout} />
+        <LogoutIconStyled className='desktop' onClick={handleLogoutClick} />
         <SettingIconStyled
           className='desktop'
           onClick={() => handleNavigation('/mypage')}
         />
       </IconContainer>
+      <AlertModal
+        isOpen={isModalOpen}
+        close={handleModalClose}
+        message='로그아웃되었습니다. 다시 로그인화면으로 돌아갑니다.'
+        handleConfirm={handleModalConfirm}
+      />
     </HeaderContainer>
   );
 };

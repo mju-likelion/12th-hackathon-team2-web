@@ -76,7 +76,7 @@ const DiaryTitle = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-top: 10px;
+  margin-top: 40px;
   text-align: center;
   transition: color 0.3s;
 
