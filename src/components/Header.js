@@ -239,8 +239,8 @@ const LogoutIconStyled = styled(LogoutIcon)`
 
 const SettingIconStyled = styled(SettingsIcon)`
   margin-left: 5px;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   cursor: pointer;
   fill: ${(props) => props.theme.colors.pink3};
 `;
