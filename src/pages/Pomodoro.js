@@ -223,7 +223,7 @@ const Div = styled.div`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 80vh;
+  height: auto;
   width: 100%;
   margin-top: 20px;
 
@@ -244,6 +244,7 @@ const Right = styled.div`
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   height: 100%;
+
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     margin-top: 20px;
   }
@@ -267,14 +268,15 @@ const Info = styled.div`
 
 const TimerContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  height: 80vh;
+  height: auto;
   margin: 10px 0;
-  flex-direction: row;
-  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    height: 50vw;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    flex-direction: low;
+    height: auto;
   }
 `;
 

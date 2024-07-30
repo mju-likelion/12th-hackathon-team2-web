@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import styled from 'styled-components';
@@ -33,8 +33,8 @@ const TimerDisplay = ({
             value={getPercentage(timeLeft || 0)}
             text={formattedTime}
             styles={buildStyles({
-              pathColor: `#2DBA00`,
-              textColor: '#E93C3C',
+              pathColor: isBreak ? '#E93C3C' : '#2DBA00',
+              textColor: isBreak ? '#2DBA00' : '#E93C3C',
               trailColor: '#E93C3C',
               backgroundColor: '#FFFFFF',
             })}
@@ -51,9 +51,18 @@ const Timer = styled.div`
   align-items: center;
   width: 100%;
   margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 15px;
+  background-color: ${({ theme }) => theme.colors.pink1};
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    width: 45%;
+    width: 90%;
+    padding: 10px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    width: 100%;
+    padding: 5px;
   }
 `;
 
@@ -62,6 +71,20 @@ const TimerDisplayContainer = styled.div`
   flex-direction: row;
   align-items: center;
   font-size: 60px;
+  padding: 20px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.colors.white};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    padding: 10px;
+    font-size: 50px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    padding: 5px;
+    font-size: 40px;
+  }
 `;
 
 const TimerSection = styled.div`
@@ -85,6 +108,18 @@ const StyledTitle = styled.div`
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.pink3};
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    width: 100px;
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    width: 90px;
+    padding: 6px;
+    font-size: 0.8rem;
   }
 `;
 

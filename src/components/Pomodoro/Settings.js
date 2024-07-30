@@ -25,9 +25,9 @@ const Settings = ({
 
   return (
     <Left>
-      <SideTitle>주기설정</SideTitle>
+      <SideTitle>주기 설정</SideTitle>
       <SettingBox>
-        <h3>집중시간</h3>
+        <Label>집중 시간</Label>
         <Input
           type='number'
           value={workMinutes}
@@ -37,7 +37,7 @@ const Settings = ({
         />
       </SettingBox>
       <SettingBox>
-        <h3>휴식시간</h3>
+        <Label>휴식 시간</Label>
         <Input
           type='number'
           value={breakMinutes}
@@ -46,7 +46,7 @@ const Settings = ({
           min='0'
         />
       </SettingBox>
-      <SideTitle className='recent-title'>최근이용</SideTitle>
+      <SideTitle className='recent-title'>최근 이용</SideTitle>
       <Report className='recent-report'>
         {history.map((item, index) => (
           <HistoryItem
@@ -55,7 +55,8 @@ const Settings = ({
               handleHistoryClick(item.workMinutes, item.breakMinutes)
             }
           >
-            {item.workMinutes}분 / {item.breakMinutes}분
+            <Time>{item.workMinutes}분</Time> /{' '}
+            <Time>{item.breakMinutes}분</Time>
           </HistoryItem>
         ))}
       </Report>
@@ -65,7 +66,6 @@ const Settings = ({
 
 const Left = styled.div`
   width: 25vw;
-  height: auto;
   background-color: ${(props) => props.theme.colors.pink1};
   padding: 20px;
   border-radius: 20px;
@@ -73,87 +73,122 @@ const Left = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    display: flex;
     width: 95%;
-    justify-content: center;
+    margin: 10px auto;
+    padding: 15px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    width: 100%;
+    padding: 10px;
+    margin: 5px;
   }
 `;
 
 const SideTitle = styled.h3`
-  margin-top: 20px;
   ${({ theme }) => theme.fonts.tinyButton};
   text-align: left;
   border-bottom: solid 2px ${(props) => props.theme.colors.pink3};
-  padding-bottom: 7px;
-  margin-bottom: 30px;
   padding-left: 5px;
-
+  margin-top: 20px;
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     margin-left: 10px;
-    margin-right: 50px;
+    margin-right: 10px;
   }
 
   &.recent-title {
-    @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
       display: none;
     }
   }
 `;
 
 const Report = styled.div`
+  width: 100%;
   background-color: ${(props) => props.theme.colors.white};
-  height: auto;
-  width: 95%;
-  border-radius: 5px;
+  border-radius: 10px;
   overflow-y: auto;
   padding: 20px;
+  height: 350px;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 2px solid ${(props) => props.theme.colors.pink2};
 
-  height: 35%;
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    padding: 15px;
+    height: 250px;
+  }
 
   &.recent-report {
-    @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
       display: none;
     }
   }
 `;
 
 const HistoryItem = styled.div`
-  ${(props) => props.theme.fonts.PageNumber};
+  ${({ theme }) => theme.fonts.PageNumber};
   margin-bottom: 15px;
   cursor: pointer;
   font-weight: 400;
   font-size: 17px;
+  padding: 10px;
+  border-radius: 5px;
+
   &:hover {
-    color: ${(props) => props.theme.colors.pink3};
+    background-color: ${(props) => props.theme.colors.pink1};
+    color: ${(props) => props.theme.colors.white};
   }
+`;
+
+const Time = styled.span`
+  font-weight: bold;
+  color: ${(props) => props.theme.colors.pink4};
 `;
 
 const SettingBox = styled.div`
   background-color: ${(props) => props.theme.colors.pink1};
-  margin-top: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   border-radius: 30px;
-  h3 {
-    font-weight: 400;
-    font-size: 17px;
+  padding: 15px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    padding: 10px;
   }
 `;
 
 const Input = styled.input`
   margin-top: 10px;
-  width: 90%;
-  height: 20px;
+  width: 95%;
+  height: 15px;
   padding: 10px;
   outline: none;
-  border: none;
+  border: 2px solid ${(props) => props.theme.colors.pink3};
   border-radius: 5px;
-  margin-bottom: 10px;
+
+  transition: border-color 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  &:focus {
+    border-color: ${(props) => props.theme.colors.pink3};
+  }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    width: 50%;
+    width: 95%;
   }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    width: 90%;
+    padding: 5px;
+  }
+`;
+
+const Label = styled.h3`
+  margin: 0;
+  color: ${(props) => props.theme.colors.pink4};
+  font-weight: bold;
+  font-size: 16px;
 `;
 
 export default Settings;
