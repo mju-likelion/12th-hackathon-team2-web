@@ -237,8 +237,8 @@ const Planner = () => {
 export default Planner;
 
 const Div = styled.div`
-  width: 100vw;
-  padding: 2vh;
+  width: 100%;
+  padding: 20px;
 `;
 
 const PageContainer = styled.div`
