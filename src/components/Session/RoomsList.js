@@ -42,7 +42,7 @@ const RoomContainer = styled.div`
   margin-top: 20px;
   width: 100%;
   min-width: 300px;
-  max-width: 1200px;
+  max-width: 1000px;
   align-items: center;
   justify-content: center;
   margin-left: auto;

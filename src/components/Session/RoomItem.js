@@ -31,19 +31,29 @@ const Room = styled.div`
   justify-content: flex-start;
   position: relative;
   height: 140px;
-  border: 1px solid ${({ theme }) => theme.colors.pink3};
-  border-radius: 10px;
-  padding: 8px;
+  border: 2px solid ${({ theme }) => theme.colors.pink3};
+  border-radius: 12px;
+  padding: 10px;
   width: 100%;
+  background: ${({ theme }) => theme.colors.white};
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     height: 120px;
-    padding: 6px;
+    padding: 8px;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     height: 100px;
-    padding: 4px;
+    padding: 6px;
   }
 `;
 
@@ -51,7 +61,7 @@ const RoomContent = styled.div`
   display: flex;
   align-items: center;
   margin-top: 16px;
-  margin-left: 24px;
+  margin-left: 14px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     margin-top: 12px;
@@ -65,21 +75,26 @@ const RoomContent = styled.div`
 `;
 
 const RoomIcon = styled.img`
-  width: 30px;
-  height: 30px;
+  width: 45px;
+  height: 45px;
+  border: 2px solid ${({ theme }) => theme.colors.pink2};
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    width: 25px;
-    height: 25px;
+    width: 40px;
+    height: 40px;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    width: 20px;
-    height: 20px;
+    width: 35px;
+    height: 35px;
   }
 `;
 
 const RoomName = styled.span`
+  border: 2px solid ${({ theme }) => theme.colors.pink2};
+  border-radius: 10px;
   ${({ theme }) => theme.fonts.semiText};
   margin-left: 20px;
   background-color: ${({ theme }) => theme.colors.pink1};
@@ -127,9 +142,14 @@ const RoomButton = styled.button`
   font-size: 13px;
   margin-top: 8px;
   margin-right: 20px;
+  border: 2px solid ${({ theme }) => theme.colors.pink2};
+  transition:
+    background-color 0.3s,
+    transform 0.2s;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.pink2};
+    transform: translateY(-2px);
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
