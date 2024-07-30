@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { PlannersCalendarGetApi } from '../api/Planners/PlannersCalendarGetApi.js';
@@ -105,14 +106,18 @@ const CalendarView = ({ totalDone }) => {
             <InnerContent>
               <CalendarContainer>
                 <MonthTitleContainer>
-                  <MonthButton onClick={handlePrevMonth}>이전</MonthButton>
+                  <MonthButton onClick={handlePrevMonth}>
+                    <FaChevronLeft />
+                  </MonthButton>
                   <MonthTitle>
                     {new Date(month).toLocaleString('default', {
                       month: 'long',
                       year: 'numeric',
                     })}
                   </MonthTitle>
-                  <MonthButton onClick={handleNextMonth}>다음</MonthButton>
+                  <MonthButton onClick={handleNextMonth}>
+                    <FaChevronRight />
+                  </MonthButton>
                 </MonthTitleContainer>
                 <DaysOfWeek>
                   {daysOfWeek.map((day) => (
@@ -155,13 +160,15 @@ const CalendarContainer = styled.div`
 const MonthTitleContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   margin-bottom: 10px;
+  margin-top: 5vh;
 `;
 
 const MonthTitle = styled.h2`
   margin: 0 10px;
-  width: 100%;
+  text-align: center;
+  flex-grow: 1;
 `;
 
 const MonthButton = styled.button`
@@ -170,13 +177,16 @@ const MonthButton = styled.button`
   cursor: pointer;
   background-color: ${({ theme }) => theme.colors.white};
   border: 2px solid ${({ theme }) => theme.colors.pink2};
-  border-radius: 5px;
+  border-radius: 10px;
   color: ${({ theme }) => theme.colors.pink2};
   transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.pink2};
     color: ${({ theme }) => theme.colors.white};
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
 `;
 
@@ -217,6 +227,7 @@ const DateLabel = styled.div`
   top: 5px;
   left: 5px;
 `;
+
 const Div = styled.div`
   width: 100vw;
   padding: 2vh;
