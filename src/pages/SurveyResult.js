@@ -37,7 +37,7 @@ const SurveyResult = () => {
 
   console.log('Result Data:', resultData);
 
-  const gradeInfo = gradeMapping[resultData.data.grade] || {};
+  const gradeInfo = gradeMapping[resultData.data.userGrade] || {};
   const message = gradeInfo.message;
 
   return (

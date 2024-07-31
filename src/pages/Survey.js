@@ -104,6 +104,22 @@ const Container = styled.div`
   padding: 30px;
   border: 2px solid ${(props) => props.theme.colors.pink2};
   border-radius: 20px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    padding: 20px;
+    margin: 30px auto;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    width: 100%;
+    padding: 15px 30px;
+    margin: auto;
+    background-color: ${(props) => props.theme.colors.pink1};
+    border: none;
+    border-radius: 0;
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const Title = styled.div`
@@ -115,6 +131,14 @@ const Title = styled.div`
   border-bottom: 3px solid ${(props) => props.theme.colors.gray};
   width: 310px;
   padding-bottom: 25px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    padding-top: 30px;
+    margin-bottom: 50px;
+    width: 260px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid ${(props) => props.theme.colors.pink2};
+  }
 `;
 
 const Question = styled.div`
@@ -123,18 +147,33 @@ const Question = styled.div`
   p {
     margin-bottom: 34px;
   }
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    margin-bottom: 50px;
+    p {
+      margin-bottom: 20px;
+    }
+  }
 `;
 
 const Options = styled.div`
   display: flex;
   justify-content: space-around;
-  gap: 40px;
+  gap: 30px;
   margin-top: 10px;
+  @media (max-width: 700px) {
+    flex-direction: column;
+    margin: 0 70px;
+    gap: 20px;
+  }
 `;
 
 const SaveBtn = styled.div`
   text-align: right;
   margin-top: 20px;
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    text-align: center;
+    margin-top: 0;
+  }
 `;
 
 const LoadingMessage = styled.div`
