@@ -58,6 +58,12 @@ const TabsContainer = styled.div`
     justify-content: center;
     margin-top: 10px;
   }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
 `;
 
 const TabItem = styled.div`
@@ -91,10 +97,19 @@ const TabItem = styled.div`
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    width: 90px;
-    height: 45px;
+    width: 100px;
+    height: 50px;
     border-radius: 14px 14px 0 0;
     margin: 0 5px;
+    box-shadow: none;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    width: 80px;
+    height: 45px;
+    margin: 0 5px;
+    border-radius: 14px 14px 0 0;
+    box-shadow: none;
   }
 `;
 
@@ -108,5 +123,11 @@ const TabText = styled.div`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     transform: none;
+    font-size: ${({ theme }) => theme.fonts.small};
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    transform: none;
+    font-size: ${({ theme }) => theme.fonts.helperText};
   }
 `;
