@@ -35,7 +35,7 @@ const TimerDisplay = ({
             styles={buildStyles({
               pathColor: isBreak ? '#E93C3C' : '#2DBA00',
               textColor: isBreak ? '#2DBA00' : '#E93C3C',
-              trailColor: '#E93C3C',
+              trailColor: isBreak ? '#2DBA00' : '#E93C3C',
               backgroundColor: '#FFFFFF',
             })}
           />

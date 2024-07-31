@@ -234,7 +234,7 @@ const Container = styled.div`
 `;
 
 const Right = styled.div`
-  flex: 1;
+  flex: 4;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -246,7 +246,14 @@ const Right = styled.div`
   height: 100%;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    margin-top: 20px;
+    margin: 10px;
+    padding: 15px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    width: 100%;
+    padding: 10px;
+    margin: 5px;
   }
 `;
 
