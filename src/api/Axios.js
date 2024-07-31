@@ -6,15 +6,18 @@ export const Axios = axios.create({
   withCredentials: true,
 });
 
+Axios.interceptors.request.use((config) => {
+  const token = Cookies.get('loginToken');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
 Axios.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+  (response) => response,
   async (error) => {
     const originalRequest = error.config;
-    if (window.location.pathname === '/auth/login') {
-      return Promise.reject(error);
-    }
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
@@ -25,7 +28,7 @@ Axios.interceptors.response.use(
             withCredentials: true,
           }
         );
-        Cookies.set('loginToken', data.token);
+        Cookies.set('loginToken', data.token, { expires: 1 / 24 / 60 });
         originalRequest.headers.Authorization = `Bearer ${data.token}`;
         return Axios(originalRequest);
       } catch (refreshError) {
@@ -37,3 +40,31 @@ Axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+export const setTokenRefreshTimer = () => {
+  const token = Cookies.get('loginToken');
+  if (token) {
+    const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+    const exp = tokenPayload.exp * 1000;
+    const now = new Date().getTime();
+    const timeout = exp - now - 60000;
+    if (timeout > 0) {
+      setTimeout(async () => {
+        try {
+          const { data } = await axios.post(
+            '/auth/refresh',
+            {},
+            { withCredentials: true }
+          );
+          Cookies.set('loginToken', data.token, { expires: 1 / 24 / 60 });
+          setTokenRefreshTimer();
+        } catch (refreshError) {
+          Cookies.remove('loginToken');
+          window.location.replace('/auth/login');
+        }
+      }, timeout);
+    }
+  }
+};
+
+setTokenRefreshTimer();
