@@ -36,6 +36,9 @@ const Image = styled.img`
   height: auto;
   margin: 0 60px;
   opacity: 30%;
+  @media (max-width: 1100px) {
+    margin: 0 20px;
+  }
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     display: none;
   }
