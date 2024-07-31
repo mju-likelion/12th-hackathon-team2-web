@@ -55,11 +55,24 @@ const Container = styled.div`
 const InnerContainer = styled.div`
   width: 100%;
   height: 100%;
+  padding: 16px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    padding: 12px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    padding: 8px;
+  }
 `;
 
 const ItemList = styled.div`
   overflow-y: auto;
   height: 100%;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -72,5 +85,15 @@ const ItemList = styled.div`
   }
   &::-webkit-scrollbar-thumb:hover {
     background: #555;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    padding: 6px;
+    gap: 12px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    padding: 4px;
+    gap: 8px;
   }
 `;

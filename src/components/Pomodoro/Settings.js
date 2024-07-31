@@ -65,7 +65,7 @@ const Settings = ({
 };
 
 const Left = styled.div`
-  width: 25vw;
+  flex: 2;
   background-color: ${(props) => props.theme.colors.pink1};
   padding: 20px;
   border-radius: 20px;
@@ -74,8 +74,7 @@ const Left = styled.div`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     width: 95%;
-    margin: 10px auto;
-    padding: 15px;
+    margin: 10px;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
@@ -109,14 +108,14 @@ const Report = styled.div`
   border-radius: 10px;
   overflow-y: auto;
   padding: 20px;
-  height: 350px;
+  height: 15vh;
+  max-height: 350px;
   margin-top: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border: 2px solid ${(props) => props.theme.colors.pink2};
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    padding: 15px;
-    height: 250px;
+    max-height: 200px;
   }
 
   &.recent-report {

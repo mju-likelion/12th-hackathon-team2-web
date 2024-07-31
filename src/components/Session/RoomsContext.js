@@ -3,7 +3,7 @@ import { fetchRooms } from '../../api/Rooms/RoomsPageGetApi';
 
 const RoomsContext = createContext();
 
-export const RoomsProvider = ({ children }) => {
+export const RoomsProvider = ({ children, isLoggedIn }) => {
   const [rooms, setRooms] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,8 +20,10 @@ export const RoomsProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    loadRooms(currentPage);
-  }, [currentPage]);
+    if (isLoggedIn) {
+      loadRooms(currentPage);
+    }
+  }, [currentPage, isLoggedIn]);
 
   return (
     <RoomsContext.Provider

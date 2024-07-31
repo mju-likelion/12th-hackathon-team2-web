@@ -70,14 +70,13 @@ const Div = styled.div`
 
 const Container = styled.div`
   width: 80%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: auto;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    width: 100%;
+    width: 80%;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
@@ -86,6 +85,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.div`
+  margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;

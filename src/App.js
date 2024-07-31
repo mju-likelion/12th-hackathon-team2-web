@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import {
   BrowserRouter as Router,
   Navigate,
@@ -31,16 +31,21 @@ const SurveyResult = lazy(() => import('./pages/SurveyResult'));
 const CalendarView = lazy(() => import('./pages/CalendarView'));
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <ThemeProvider theme={Theme}>
       <GlobalStyle />
       <Router>
         <DiaryProvider>
-          <RoomsProvider>
+          <RoomsProvider isLoggedIn={isLoggedIn}>
             <Suspense fallback={<Loading />}>
               <Routes>
-                <Route path='/' element={<Navigate to='/auth/login' />} />
-                <Route path='/auth/login' element={<Login />} />
+                <Route path='/' element={<Navigate to='/main' />} />
+                <Route
+                  path='/auth/login'
+                  element={<Login setIsLoggedIn={setIsLoggedIn} />}
+                />
                 <Route path='/auth/signup' element={<Signup />} />
                 <Route path='/main' element={<Main />} />
                 <Route path='/planners' element={<Planner />} />

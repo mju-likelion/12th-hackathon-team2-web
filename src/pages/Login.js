@@ -12,20 +12,12 @@ import SmallButton from '../components/SmallButton';
 import Title from '../components/Title';
 import { schemaLogin } from '../hooks/ValidationYup';
 import GlobalStyle from '../styles/GlobalStyle';
-import { Theme } from '../styles/Theme.js';
+import { Theme } from '../styles/Theme';
 
-const Login = () => {
+const Login = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
-
-  const handleLoginClick = () => {
-    navigate('/main');
-  };
-
-  const handleSignupClick = () => {
-    navigate('/auth/signup');
-  };
 
   const {
     control,
@@ -42,7 +34,10 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     const callbackFunctions = {
-      navigateSuccess: handleLoginClick,
+      navigateSuccess: () => {
+        setIsLoggedIn(true);
+        navigate('/main');
+      },
       navigateError: (errorMessage) => {
         setModalMessage('로그인에 실패했습니다. \n' + errorMessage);
         setIsModalOpen(true);
@@ -58,12 +53,12 @@ const Login = () => {
     }
   };
 
-  const handleModalClose = () => {
-    setIsModalOpen(false);
+  const handleSignupClick = () => {
+    navigate('/auth/signup');
   };
 
-  const handleModalConfirm = () => {
-    handleModalClose();
+  const handleModalClose = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -117,7 +112,7 @@ const Login = () => {
         isOpen={isModalOpen}
         close={handleModalClose}
         message={modalMessage}
-        handleConfirm={handleModalConfirm}
+        handleConfirm={handleModalClose}
       />
     </ThemeProvider>
   );

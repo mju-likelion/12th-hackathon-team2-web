@@ -27,7 +27,7 @@ const Title = styled.h1`
   align-items: center;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    font-size: 1.5em;
+    font-size: 1.4em;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {

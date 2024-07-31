@@ -77,7 +77,9 @@ const InputContainer = styled.div`
   width: 100%;
 `;
 
-const StyledInputField = styled.input`
+const StyledInputField = styled.input.attrs((props) => ({
+  'data-haserror': props.hasError,
+}))`
   box-sizing: border-box;
   width: 330px;
   height: 50px;
