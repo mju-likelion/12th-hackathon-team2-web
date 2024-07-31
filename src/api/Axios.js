@@ -44,7 +44,16 @@ Axios.interceptors.response.use(
 export const setTokenRefreshTimer = () => {
   const token = Cookies.get('loginToken');
   if (token) {
-    const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+    let tokenPayload;
+    try {
+      tokenPayload = JSON.parse(atob(token.split('.')[1]));
+    } catch (error) {
+      console.error('Invalid token:', error);
+      Cookies.remove('loginToken');
+      window.location.replace('/auth/login');
+      return;
+    }
+
     const exp = tokenPayload.exp * 1000;
     const now = new Date().getTime();
     const timeout = exp - now - 60000;
