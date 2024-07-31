@@ -1,9 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react';
+import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import { LoginApi } from '../api/Auth/LoginApi';
+import AlertModal from '../components/AlertModal';
 import BigButton from '../components/BigButton';
 import Container from '../components/Container';
 import InputField from '../components/InputField';
@@ -15,6 +16,8 @@ import { Theme } from '../styles/Theme.js';
 
 const Login = () => {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
 
   const handleLoginClick = () => {
     navigate('/main');
@@ -40,14 +43,27 @@ const Login = () => {
   const onSubmit = async (data) => {
     const callbackFunctions = {
       navigateSuccess: handleLoginClick,
-      navigateError: (errorMessage) => alert(errorMessage),
+      navigateError: (errorMessage) => {
+        setModalMessage('로그인에 실패했습니다. \n' + errorMessage);
+        setIsModalOpen(true);
+      },
     };
 
     try {
       await LoginApi(data, callbackFunctions);
     } catch (error) {
       console.error(error);
+      setModalMessage('로그인에 실패했습니다.');
+      setIsModalOpen(true);
     }
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleModalConfirm = () => {
+    handleModalClose();
   };
 
   return (
@@ -97,6 +113,12 @@ const Login = () => {
           </SignupWrapper>
         </LoginWrapper>
       </Container>
+      <AlertModal
+        isOpen={isModalOpen}
+        close={handleModalClose}
+        message={modalMessage}
+        handleConfirm={handleModalConfirm}
+      />
     </ThemeProvider>
   );
 };
@@ -197,7 +219,7 @@ const NoAccountText = styled.span`
   ${(props) => props.theme.fonts.noAccountText};
   color: ${(props) => props.theme.colors.black};
   margin-right: 10px;
-  width: 587px;
+  width: 45%;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
     margin-right: 15px;
@@ -205,11 +227,9 @@ const NoAccountText = styled.span`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     margin-right: 10px;
-    width: 487px;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     margin-right: 5px;
-    width: 387px;
   }
 `;

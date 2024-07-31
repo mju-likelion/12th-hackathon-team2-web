@@ -73,6 +73,22 @@ const TabItem = styled.div`
   cursor: pointer;
   color: ${({ $isActive, theme }) =>
     $isActive ? theme.colors.pink3 : theme.colors.white};
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  transform: ${({ $isActive }) => ($isActive ? 'scale(1.05)' : 'scale(1)')};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.white};
+    color: ${({ theme }) => theme.colors.pink3};
+    transform: scale(1.05);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+
+    & > div {
+      color: ${({ theme }) => theme.colors.pink3};
+    }
+  }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     width: 90px;
@@ -88,6 +104,7 @@ const TabText = styled.div`
   white-space: nowrap;
   color: ${({ $isActive, theme }) =>
     $isActive ? theme.colors.pink3 : theme.colors.white};
+  transition: color 0.3s ease;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     transform: none;

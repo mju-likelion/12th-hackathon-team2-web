@@ -20,9 +20,15 @@ const Button = styled.button`
   width: 145.36px;
   height: 50.77px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  transition: all 0.3s ease;
 
   &:hover {
-    background-color: ${Theme.colors.pink3};
+    transform: translateY(-3px);
+    box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.3);
+  }
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {

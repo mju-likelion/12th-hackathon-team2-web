@@ -6,9 +6,9 @@ const DiaryList = ({ entries, onEntryClick }) => (
   <ListContainer>
     {entries.map((entry, index) => (
       <PostItItem key={index} onClick={() => onEntryClick(entry.id)}>
+        <PinDecoration />
         <DiaryTitle>{entry.title}</DiaryTitle>
         <DiaryDate>{entry.date}</DiaryDate>
-        <PinDecoration />
       </PostItItem>
     ))}
   </ListContainer>
@@ -41,6 +41,15 @@ const PostItItem = styled.div`
   position: relative;
   margin: 10px;
 
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+
+  &:hover {
+    transform: scale(1.05) rotate(2deg);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     width: 300px;
     height: 300px;
@@ -67,8 +76,13 @@ const DiaryTitle = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-top: 10px;
+  margin-top: 40px;
   text-align: center;
+  transition: color 0.3s;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.primary};
+  }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     font-size: 1em;
@@ -83,6 +97,7 @@ const DiaryDate = styled.div`
   ${({ theme }) => theme.fonts.default};
   color: ${({ theme }) => theme.colors.pink3};
   font-size: 14px;
+  transition: color 0.3s;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     font-size: 12px;

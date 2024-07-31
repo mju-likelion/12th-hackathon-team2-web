@@ -17,6 +17,17 @@ const StyledButton = styled.button`
   border: none;
   border-radius: 20px;
   cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
     padding: 14px;
