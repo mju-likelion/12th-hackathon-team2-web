@@ -36,6 +36,12 @@ const Image = styled.img`
   height: auto;
   margin: 0 60px;
   opacity: 30%;
+  @media (max-width: 1100px) {
+    margin: 0 20px;
+  }
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    display: none;
+  }
 `;
 
 const Circle = styled.div`
@@ -47,6 +53,10 @@ const Circle = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0 30px;
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    width: 200px;
+    height: 200px;
+  }
 `;
 
 const CImage = styled.img`
