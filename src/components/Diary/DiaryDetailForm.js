@@ -2,6 +2,7 @@ import React from 'react';
 import { Controller } from 'react-hook-form';
 import styled from 'styled-components';
 import TinyButton from '../TinyButton';
+
 const TITLE_MAX_LENGTH = 30;
 
 const DiaryDetailForm = ({
@@ -10,6 +11,7 @@ const DiaryDetailForm = ({
   handleDelete,
   isNew,
   errors,
+  imageUrls,
 }) => {
   return (
     <Form onSubmit={handleSave}>
@@ -25,6 +27,13 @@ const DiaryDetailForm = ({
           </>
         )}
       />
+      {imageUrls && imageUrls.length > 0 && (
+        <ImageWrapper>
+          {imageUrls.map((url, index) => (
+            <ImagePreview key={index} src={url} />
+          ))}
+        </ImageWrapper>
+      )}
       <Controller
         name='content'
         control={control}
@@ -37,6 +46,9 @@ const DiaryDetailForm = ({
           </>
         )}
       />
+      <InputWrapper>
+        <input type='file' />
+      </InputWrapper>
       <ButtonContainer>
         {isNew ? (
           <TinyButton type='submit'>작성완료</TinyButton>
@@ -109,4 +121,22 @@ const ButtonContainer = styled.div`
 const ErrorMessage = styled.div`
   color: red;
   margin-left: 10px;
+`;
+
+const ImageWrapper = styled.div`
+  margin-bottom: 12px;
+  border: 3px solid ${({ theme }) => theme.colors.pink2};
+  border-radius: 10px;
+  height: auto;
+  display: flex;
+  overflow: hidden;
+`;
+
+const ImagePreview = styled.img`
+  max-width: 100%;
+  height: auto;
+`;
+
+const InputWrapper = styled.div`
+  margin-bottom: 15px;
 `;

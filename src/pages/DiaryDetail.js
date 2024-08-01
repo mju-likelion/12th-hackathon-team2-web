@@ -17,7 +17,12 @@ const DiaryDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [entry, setEntry] = useState({ title: '', content: '', date: '' });
+  const [entry, setEntry] = useState({
+    title: '',
+    content: '',
+    date: '',
+    imageUrls: [],
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const {
@@ -45,6 +50,7 @@ const DiaryDetail = () => {
           title: diaryData.title,
           content: diaryData.content,
           date: diaryData.createdAt,
+          imageUrls: diaryData.imageUrls || [],
         });
         reset({
           title: diaryData.title,
@@ -115,6 +121,7 @@ const DiaryDetail = () => {
           handleDelete={handleDeleteEntry}
           isNew={false}
           errors={errors}
+          imageUrls={entry.imageUrls}
         />
       </Container>
     </Div>
