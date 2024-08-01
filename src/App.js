@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState } from 'react';
+import React, { lazy, Suspense } from 'react';
 import {
   BrowserRouter as Router,
   Navigate,
@@ -31,21 +31,16 @@ const SurveyResult = lazy(() => import('./pages/SurveyResult'));
 const CalendarView = lazy(() => import('./pages/CalendarView'));
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   return (
     <ThemeProvider theme={Theme}>
       <GlobalStyle />
       <Router>
         <DiaryProvider>
-          <RoomsProvider isLoggedIn={isLoggedIn}>
+          <RoomsProvider>
             <Suspense fallback={<Loading />}>
               <Routes>
-                <Route path='/' element={<Navigate to='/main' />} />
-                <Route
-                  path='/auth/login'
-                  element={<Login setIsLoggedIn={setIsLoggedIn} />}
-                />
+                <Route path='/' element={<Navigate to='/auth/login' />} />
+                <Route path='/auth/login' element={<Login />} />
                 <Route path='/auth/signup' element={<Signup />} />
                 <Route path='/main' element={<Main />} />
                 <Route path='/planners' element={<Planner />} />
@@ -66,7 +61,7 @@ function App() {
                 <Route path='/pomodoro' element={<Pomodoro />} />
                 <Route path='/surveys' element={<Survey />} />
                 <Route path='/surveys/result' element={<SurveyResult />} />
-                <Route path='/mypage' element={<Mypage />} />
+                <Route path='/Mypage' element={<Mypage />} />
                 <Route path='/*' element={<NotFound />} />
               </Routes>
             </Suspense>
