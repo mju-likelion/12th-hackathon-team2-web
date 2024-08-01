@@ -110,6 +110,7 @@ const StyledInputField = styled.input.attrs((props) => ({
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     height: 40px;
+    width: 100%;
     padding: 15px;
   }
 
@@ -124,7 +125,21 @@ const ErrorText = styled(({ showError, ...rest }) => <span {...rest} />)`
   color: ${(props) =>
     props.showError ? props.theme.colors.blue : props.theme.colors.black};
   margin-left: 10px;
-  width: 300px;
+  width: 330px;
   height: 0px;
+
   font-size: 0.7rem;
+  word-break: break-word;
+  @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    width: 300px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    width: 300px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    width: 100%;
+    height: 10px;
+  }
 `;

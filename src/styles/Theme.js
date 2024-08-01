@@ -83,7 +83,7 @@ export const Theme = {
     noAccountText: css`
       font-family: 'Noto Sans KR', sans-serif;
       font-weight: 400;
-      font-size: 20px;
+      font-size: 14px;
       line-height: 24px;
       text-align: center;
     `,
