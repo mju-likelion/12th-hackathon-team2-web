@@ -167,7 +167,7 @@ const Content = styled.div`
 
 const Text = styled.span`
   ${({ theme }) => theme.fonts.default};
-  color: ${({ theme }) => theme.colors.gray};
+  color: ${({ theme }) => theme.colors.black};
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     font-size: 14px;
   }

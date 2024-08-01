@@ -141,8 +141,9 @@ const Planner = () => {
       });
   };
   const handleAddItem = () => {
-    const content = '';
-    PlannersPostApi(content)
+    const defaultContent = '';
+
+    PlannersPostApi(defaultContent)
       .then((response) => {
         if (response.data.statusCode === '201 CREATED') {
           return PlannersGetApi();
@@ -153,7 +154,7 @@ const Planner = () => {
       .then((response) => {
         if (response.data.statusCode === '200 OK') {
           const filteredList = response.data.data.plannerList.filter(
-            (item) => item !== null && item.content.trim() !== ''
+            (item) => item !== null
           );
           setToDoList((prevList) => {
             const newList = filteredList.filter(
