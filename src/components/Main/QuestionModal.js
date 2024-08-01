@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import styled from 'styled-components';
+import main from '../../img/main.png';
 import diary from '../../img/diary.png';
 import session from '../../img/session.png';
 import planner from '../../img/planner.png';
@@ -18,6 +19,7 @@ const QuestionModal = ({ isOpen, onRequestClose }) => {
       title: '앱 소개',
       content: (
         <>
+          <Image src={main} />
           <ModalText>
             이 앱은 여러분의 감정을 기록하고, 집중 세션을 통해 목표를 달성하는데
             도움을 주기 위해 만들어졌습니다.
@@ -133,12 +135,19 @@ const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100%;
 `;
 
 const ModalHeader = styled.h2`
   ${(props) => props.theme.fonts.menuItem};
   color: ${(props) => props.theme.colors.pink3};
   margin-bottom: 20px;
+
+
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    font-size: 25px;
+    }
+  }
 `;
 
 const ModalText = styled.p`
@@ -147,6 +156,14 @@ const ModalText = styled.p`
   margin-bottom: 20px;
   text-align: center;
   line-height: 1.5em;
+  height: 60px;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    font-size: 15px;
+    li {
+      font-size: 15px;
+    }
+  }
 `;
 
 const Image = styled.img`
@@ -184,7 +201,7 @@ const CloseButton = styled.button`
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 20px;
+  margin-top: 10px;
 
   &:hover {
     background-color: ${(props) => props.theme.colors.pink2};
