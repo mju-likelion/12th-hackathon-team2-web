@@ -56,8 +56,16 @@ const Header = () => {
     <HeaderContainer>
       <Sidebar>
         <Title onClick={() => handleNavigation('/main')}>MUTSIDE OUT</Title>
+
         <SideMenu onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? <Close /> : <MenuBars />}
+          <SideIconContainer>
+            <LogoutIconStyled className='desktop' onClick={handleLogoutClick} />
+            <SettingIconStyled
+              className='desktop'
+              onClick={() => handleNavigation('/mypage')}
+            />
+            {menuOpen ? <Close /> : <MenuBars />}
+          </SideIconContainer>
         </SideMenu>
       </Sidebar>
       <Menu open={menuOpen}>
@@ -84,15 +92,6 @@ const Header = () => {
           onClick={() => handleNavigation('/pomodoro')}
         >
           뽀모도로
-        </MenuItem>
-        <MenuItem className='logout' onClick={handleLogoutClick}>
-          로그아웃
-        </MenuItem>
-        <MenuItem
-          className='mypage'
-          onClick={() => handleNavigation('/mypage')}
-        >
-          마이페이지
         </MenuItem>
       </Menu>
       <IconContainer>
@@ -130,7 +129,9 @@ const HeaderContainer = styled.div`
   @media (max-width: 550px) {
     flex-direction: column;
     height: auto;
+    margin: 0px;
     padding-bottom: 10px;
+    padding: 10px 10px;
   }
 `;
 
@@ -152,6 +153,16 @@ const SideMenu = styled.div`
 
   @media (max-width: 550px) {
     display: block;
+    margin-left: 10px;
+  }
+`;
+
+const SideIconContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media (min-width: 550px) {
+    display: none;
   }
 `;
 
@@ -234,24 +245,6 @@ const MenuItem = styled.div`
       props.$active ? `3px solid ${props.theme.colors.pink3}` : 'none'};
   }
 
-  &.logout {
-    display: flex;
-    align-items: center;
-
-    @media (min-width: 550px) {
-      display: none;
-    }
-  }
-
-  &.mypage {
-    display: flex;
-    align-items: center;
-
-    @media (min-width: 550px) {
-      display: none;
-    }
-  }
-
   &.desktop {
     display: none;
 
@@ -281,6 +274,11 @@ const LogoutIconStyled = styled(LogoutIcon)`
     width: 23px;
     height: 23px;
   }
+  @media (max-width: 550px) {
+    margin-right: 12px;
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 const SettingIconStyled = styled(SettingsIcon)`
@@ -292,6 +290,11 @@ const SettingIconStyled = styled(SettingsIcon)`
   @media (max-width: 850px) {
     width: 23px;
     margin-left: 0px;
+  }
+  @media (max-width: 550px) {
+    margin-right: 12px;
+    width: 20px;
+    height: 20px;
   }
 `;
 
