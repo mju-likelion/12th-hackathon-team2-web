@@ -68,7 +68,7 @@ const ModalButton = styled.button`
   }
 `;
 
-const ModalMessage = styled.p`
+const ModalMessage = styled.div`
   color: ${(props) => props.theme.colors.black};
   font: ${(props) => props.theme.fonts.default};
   text-align: center;

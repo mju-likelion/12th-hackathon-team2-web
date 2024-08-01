@@ -66,7 +66,7 @@ function App() {
                 <Route path='/pomodoro' element={<Pomodoro />} />
                 <Route path='/surveys' element={<Survey />} />
                 <Route path='/surveys/result' element={<SurveyResult />} />
-                <Route path='/Mypage' element={<Mypage />} />
+                <Route path='/mypage' element={<Mypage />} />
                 <Route path='/*' element={<NotFound />} />
               </Routes>
             </Suspense>

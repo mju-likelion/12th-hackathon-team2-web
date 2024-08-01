@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 export const Axios = axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL || 'https://api.mutsideout.com',
+  baseURL: 'https://api.mutsideout.com',
   withCredentials: true,
 });
 
@@ -18,15 +18,17 @@ Axios.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry) {
+    if (
+      error.response &&
+      error.response.status === 401 &&
+      !originalRequest._retry
+    ) {
       originalRequest._retry = true;
       try {
         const { data } = await axios.post(
-          '/auth/refresh',
+          'https://api.mutsideout.com/auth/refresh',
           {},
-          {
-            withCredentials: true,
-          }
+          { withCredentials: true }
         );
         Cookies.set('loginToken', data.token, { expires: 1 / 24 / 60 });
         originalRequest.headers.Authorization = `Bearer ${data.token}`;
@@ -40,6 +42,20 @@ Axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+export const LoginApi = (data, callbackFunctions) => {
+  const { navigateSuccess, navigateError } = callbackFunctions;
+  Axios.post('/auth/login', data)
+    .then((response) => {
+      Cookies.set('loginToken', response.data.token);
+      setTokenRefreshTimer();
+      navigateSuccess();
+    })
+    .catch((error) => {
+      const errorMessage = error.response?.data?.message;
+      navigateError(errorMessage);
+    });
+};
 
 export const setTokenRefreshTimer = () => {
   const token = Cookies.get('loginToken');
@@ -61,7 +77,7 @@ export const setTokenRefreshTimer = () => {
       setTimeout(async () => {
         try {
           const { data } = await axios.post(
-            '/auth/refresh',
+            'https://api.mutsideout.com/auth/refresh',
             {},
             { withCredentials: true }
           );
