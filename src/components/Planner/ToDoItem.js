@@ -90,6 +90,7 @@ const ToDoItem = ({
         {editMode ? (
           <EditTextarea
             value={text}
+            placeholder='할 일을 입력하세요'
             onChange={handleTextChange}
             onBlur={handleBlur}
             onKeyPress={handleKeyPress}
@@ -165,15 +166,15 @@ const Content = styled.div`
 `;
 
 const Text = styled.span`
-  ${({ theme }) => theme.fonts.semiText};
-
+  ${({ theme }) => theme.fonts.default};
+  color: ${({ theme }) => theme.colors.gray};
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     font-size: 14px;
   }
 `;
 
 const EditTextarea = styled.textarea`
-  ${({ theme }) => theme.fonts.semiText};
+  ${({ theme }) => theme.fonts.default};
   border: none;
   outline: none;
   width: 100%;
@@ -183,6 +184,10 @@ const EditTextarea = styled.textarea`
   padding: 0;
   margin: 0;
   background: none;
+
+  ::placeholder {
+    color: ${({ theme }) => theme.colors.gray};
+  }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     font-size: 14px;
