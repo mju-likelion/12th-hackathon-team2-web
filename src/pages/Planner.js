@@ -140,9 +140,8 @@ const Planner = () => {
         console.error('There was an error updating the planner item!', error);
       });
   };
-
   const handleAddItem = () => {
-    const content = '할 일을 입력하세요';
+    const content = '';
     PlannersPostApi(content)
       .then((response) => {
         if (response.data.statusCode === '201 CREATED') {
@@ -154,7 +153,7 @@ const Planner = () => {
       .then((response) => {
         if (response.data.statusCode === '200 OK') {
           const filteredList = response.data.data.plannerList.filter(
-            (item) => item !== null
+            (item) => item !== null && item.content.trim() !== ''
           );
           setToDoList((prevList) => {
             const newList = filteredList.filter(

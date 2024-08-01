@@ -30,18 +30,4 @@ const Button = styled.button`
     transform: translateY(0);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    padding: 8px;
-    width: 120px;
-    height: 45px;
-    font-size: 0.9em;
-  }
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    padding: 6px;
-    width: 100px;
-    height: 40px;
-    font-size: 0.8em;
-  }
 `;
