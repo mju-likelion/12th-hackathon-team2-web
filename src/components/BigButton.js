@@ -17,6 +17,7 @@ const StyledButton = styled.button`
   border: none;
   border-radius: 20px;
   cursor: pointer;
+  margin-top: 10px;
   transition: all 0.3s ease;
 
   &:hover {

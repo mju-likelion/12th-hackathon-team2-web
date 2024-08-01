@@ -129,13 +129,12 @@ const LoginWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 100vw;
   justify-content: center;
   max-width: 587px;
   margin-top: 20px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    max-width: 100%;
     padding: 10px;
   }
 `;
@@ -160,6 +159,7 @@ const LoginForm = styled.form`
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     padding: 10px;
     border-radius: 15px;
+    width: 90%;
   }
 `;
 
@@ -210,19 +210,17 @@ const SignupWrapper = styled.div`
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    margin-top: 15px;
-    width: 374px;
+    margin-top: 10px;
+    width: 314px;
   }
 `;
 
 const NoAccountText = styled.span`
-  ${(props) => props.theme.fonts.noAccountText};
   color: ${(props) => props.theme.colors.black};
   margin-right: 10px;
   width: 45%;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    margin-right: 15px;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
@@ -231,5 +229,6 @@ const NoAccountText = styled.span`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     margin-right: 5px;
+    ${(props) => props.theme.fonts.noAccountText};
   }
 `;
