@@ -13,6 +13,7 @@ const ToDoItem = ({
   onDelete,
   editable,
   showDeleteIcon,
+  handleSaveItem,
 }) => {
   const [editMode, setEditMode] = useState(false);
   const [text, setText] = useState(item.content);
@@ -51,7 +52,7 @@ const ToDoItem = ({
         setText('할 일을 입력하세요');
       }
       setEditMode(false);
-      onUpdate(item.plannerId, text);
+      handleSaveItem(item.plannerId, text);
     } catch (err) {
       setError(err.message);
     }

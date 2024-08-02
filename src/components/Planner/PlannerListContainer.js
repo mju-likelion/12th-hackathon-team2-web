@@ -10,6 +10,7 @@ const PlannerListContainer = ({
   handleCheck,
   handleUpdate,
   handleDelete,
+  handleSaveItem,
 }) => (
   <Container>
     {activeTab === 'to-do' ? (
@@ -24,6 +25,7 @@ const PlannerListContainer = ({
               onDelete={handleDelete}
               editable={!item.completed}
               showDeleteIcon={true}
+              handleSaveItem={handleSaveItem}
             />
           ))}
         </ItemList>

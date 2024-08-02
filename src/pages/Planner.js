@@ -140,12 +140,28 @@ const Planner = () => {
         console.error('There was an error updating the planner item!', error);
       });
   };
-  const handleAddItem = () => {
-    const defaultContent = '';
 
-    PlannersPostApi(defaultContent)
+  const handleAddItem = () => {
+    const newItem = {
+      plannerId: Date.now().toString(),
+      content: '',
+      completed: false,
+    };
+    setToDoList((prevList) => [newItem, ...prevList]);
+  };
+
+  const handleSaveItem = (id, text) => {
+    if (!text.trim()) {
+      console.log('내용을 입력해 주세요');
+      return;
+    }
+
+    console.log(`Saving item with id: ${id} and text: ${text}`);
+
+    PlannersPostApi(text)
       .then((response) => {
         if (response.data.statusCode === '201 CREATED') {
+          console.log('Item created successfully:', response.data);
           return PlannersGetApi();
         } else {
           throw new Error('Failed to create new item');
@@ -156,22 +172,13 @@ const Planner = () => {
           const filteredList = response.data.data.plannerList.filter(
             (item) => item !== null
           );
-          setToDoList((prevList) => {
-            const newList = filteredList.filter(
-              (item) =>
-                !prevList.some(
-                  (prevItem) =>
-                    prevItem && prevItem.plannerId === item.plannerId
-                )
-            );
-            return [...newList, ...prevList];
-          });
+          setToDoList(filteredList);
         } else {
           throw new Error('Failed to fetch updated planner list');
         }
       })
       .catch((error) => {
-        console.error('There was an error handling the planner item!', error);
+        console.error('There was an error creating the planner item!', error);
       });
   };
 
@@ -221,6 +228,7 @@ const Planner = () => {
                   handleCheck={handleCheck}
                   handleUpdate={handleUpdate}
                   handleDelete={handleDelete}
+                  handleSaveItem={handleSaveItem}
                 />
               )}
               <AddButtonContainer>
