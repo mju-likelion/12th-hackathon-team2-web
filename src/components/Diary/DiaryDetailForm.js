@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Controller } from 'react-hook-form';
 import styled from 'styled-components';
 import TinyButton from '../TinyButton';
@@ -12,10 +12,18 @@ const DiaryDetailForm = ({
   isNew,
   errors,
   titleError,
-  onTitleChange,
   onImageChange,
   imageUrls,
 }) => {
+  const [selectedImages, setSelectedImages] = useState([]);
+
+  const handleImageChange = (event) => {
+    const files = Array.from(event.target.files);
+    const newImageUrls = files.map((file) => URL.createObjectURL(file));
+    setSelectedImages((prevImages) => [...prevImages, ...newImageUrls]);
+    onImageChange(files);
+  };
+
   return (
     <Form onSubmit={handleSave}>
       <Controller
@@ -31,9 +39,9 @@ const DiaryDetailForm = ({
           </>
         )}
       />
-      {imageUrls && imageUrls.length > 0 && (
+      {(imageUrls || selectedImages).length > 0 && (
         <ImageWrapper>
-          {imageUrls.map((url, index) => (
+          {(imageUrls || selectedImages).map((url, index) => (
             <ImagePreview key={index} src={url} />
           ))}
         </ImageWrapper>
@@ -51,7 +59,7 @@ const DiaryDetailForm = ({
         )}
       />
       <InputWrapper>
-        <input type='file' onChange={onImageChange} />
+        <input type='file' multiple onChange={handleImageChange} />
       </InputWrapper>
       <ButtonContainer>
         {isNew ? (
@@ -134,12 +142,16 @@ const ImageWrapper = styled.div`
   border-radius: 10px;
   height: auto;
   display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   overflow: hidden;
 `;
 
 const ImagePreview = styled.img`
   max-width: 100%;
   height: auto;
+  max-height: 150px;
+  object-fit: cover;
 `;
 
 const InputWrapper = styled.div`
