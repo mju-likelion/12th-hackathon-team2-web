@@ -23,6 +23,7 @@ const DiaryDetail = () => {
     date: '',
     imageUrls: [],
   });
+  const [imageFile, setImageFile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const {
@@ -74,7 +75,7 @@ const DiaryDetail = () => {
     };
 
     try {
-      await updateDiary(entry.id, updatedEntry);
+      await updateDiary(entry.id, updatedEntry, imageFile);
       navigate('/diaries');
     } catch (err) {
       setError('일기수정실패');
@@ -97,6 +98,10 @@ const DiaryDetail = () => {
 
   const handleBackToList = () => {
     navigate('/diaries');
+  };
+
+  const handleImageChange = (e) => {
+    setImageFile(e.target.files[0]);
   };
 
   const formattedDate = entry.date
@@ -122,6 +127,7 @@ const DiaryDetail = () => {
           isNew={false}
           errors={errors}
           imageUrls={entry.imageUrls}
+          onImageChange={handleImageChange}
         />
       </Container>
     </Div>

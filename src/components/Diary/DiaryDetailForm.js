@@ -23,12 +23,7 @@ const DiaryDetailForm = ({
         control={control}
         render={({ field }) => (
           <>
-            <Input
-              placeholder='제목'
-              {...field}
-              maxLength={TITLE_MAX_LENGTH}
-              onChange={onTitleChange}
-            />
+            <Input placeholder='제목' {...field} maxLength={TITLE_MAX_LENGTH} />
             {errors.title && (
               <ErrorMessage>{errors.title.message}</ErrorMessage>
             )}
