@@ -14,6 +14,7 @@ const TITLE_MAX_LENGTH = 40;
 const DiaryWrite = () => {
   const navigate = useNavigate();
   const [titleError, setTitleError] = useState('');
+  const [imageFiles, setImageFiles] = useState([]);
 
   const {
     control,
@@ -39,16 +40,12 @@ const DiaryWrite = () => {
     const newEntry = { title: data.title, content: data.content };
 
     try {
-      await postDiary(newEntry);
+      await postDiary(newEntry, imageFiles);
       navigate('/diaries');
     } catch (error) {
-      console.error('일기등록실패:', error);
+      console.error('일기 등록 실패:', error);
       return;
     }
-  };
-
-  const handleBackToList = () => {
-    navigate('/diaries');
   };
 
   const handleTitleChange = (e) => {
@@ -61,6 +58,10 @@ const DiaryWrite = () => {
         `타이틀은 최대 ${TITLE_MAX_LENGTH}자까지 입력할 수 있습니다.`
       );
     }
+  };
+
+  const handleImageChange = (files) => {
+    setImageFiles(files);
   };
 
   const formattedDate = format(new Date(), 'yyyy.MM.dd');
@@ -79,6 +80,7 @@ const DiaryWrite = () => {
           errors={errors}
           titleError={titleError}
           onTitleChange={handleTitleChange}
+          onImageChange={handleImageChange}
         />
       </Container>
     </Div>

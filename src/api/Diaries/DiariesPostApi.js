@@ -1,14 +1,27 @@
 import { Axios } from '../Axios';
 
-const postDiary = async (diary) => {
+const postDiary = async (diary, imageFiles = []) => {
   try {
     const url = '/diaries';
-    console.log(` ${Axios.defaults.baseURL}${url}`);
-    const response = await Axios.post(url, diary);
-    console.log('일기작성성공: ', response.data);
+    const formData = new FormData();
+    formData.append(
+      'data',
+      new Blob([JSON.stringify(diary)], { type: 'application/json' })
+    );
+    imageFiles.forEach((file) => {
+      formData.append('image', file);
+    });
+
+    const response = await Axios.post(url, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    console.log('일기 작성 성공: ', response.data);
     return response.data;
   } catch (error) {
-    console.error('작성실패: ', error);
+    console.error('작성 실패: ', error);
     throw error;
   }
 };

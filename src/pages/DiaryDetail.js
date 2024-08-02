@@ -12,12 +12,19 @@ import Header from '../components/Header';
 import TinyButton from '../components/TinyButton';
 import { schemaDiaryDetail } from '../hooks/ValidationYup';
 import { Theme } from '../styles/Theme';
+import Loading from '../components/Loading';
 
 const DiaryDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [entry, setEntry] = useState({ title: '', content: '', date: '' });
+  const [entry, setEntry] = useState({
+    title: '',
+    content: '',
+    date: '',
+    imageUrls: [],
+  });
+  const [imageFiles, setImageFiles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const {
@@ -45,6 +52,7 @@ const DiaryDetail = () => {
           title: diaryData.title,
           content: diaryData.content,
           date: diaryData.createdAt,
+          imageUrls: diaryData.imageUrls || [],
         });
         reset({
           title: diaryData.title,
@@ -68,7 +76,7 @@ const DiaryDetail = () => {
     };
 
     try {
-      await updateDiary(entry.id, updatedEntry);
+      await updateDiary(entry.id, updatedEntry, imageFiles);
       navigate('/diaries');
     } catch (err) {
       setError('일기수정실패');
@@ -93,11 +101,22 @@ const DiaryDetail = () => {
     navigate('/diaries');
   };
 
+  const handleImageChange = (files) => {
+    const newImageUrls = Array.from(files).map((file) =>
+      URL.createObjectURL(file)
+    );
+    setEntry((prevEntry) => ({
+      ...prevEntry,
+      imageUrls: newImageUrls,
+    }));
+    setImageFiles(files);
+  };
+
   const formattedDate = entry.date
     ? format(new Date(entry.date), 'yyyy.MM.dd')
     : '';
 
-  if (loading) return <div>로딩...</div>;
+  if (loading) return <Loading />;
   if (error) return <div>{error}</div>;
 
   return (
@@ -115,6 +134,9 @@ const DiaryDetail = () => {
           handleDelete={handleDeleteEntry}
           isNew={false}
           errors={errors}
+          titleError={null}
+          imageUrls={entry.imageUrls}
+          onImageChange={handleImageChange}
         />
       </Container>
     </Div>
