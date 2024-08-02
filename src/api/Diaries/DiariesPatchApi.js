@@ -1,17 +1,19 @@
 import { Axios } from '../Axios';
 
-const updateDiary = async (diaryId, updatedDiary, imageFile = null) => {
+const updateDiary = async (diaryId, updatedDiary, imageFiles = []) => {
   try {
     const url = `/diaries/${diaryId}`;
     let response;
 
-    if (imageFile) {
+    if (imageFiles) {
       const formData = new FormData();
       formData.append(
         'data',
         new Blob([JSON.stringify(updatedDiary)], { type: 'application/json' })
       );
-      formData.append('image', imageFile);
+      imageFiles.forEach((file) => {
+        formData.append('image', file);
+      });
 
       response = await Axios.patch(url, formData, {
         headers: {

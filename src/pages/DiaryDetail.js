@@ -23,7 +23,7 @@ const DiaryDetail = () => {
     date: '',
     imageUrls: [],
   });
-  const [imageFile, setImageFile] = useState(null);
+  const [imageFiles, setImageFiles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const {
@@ -75,7 +75,7 @@ const DiaryDetail = () => {
     };
 
     try {
-      await updateDiary(entry.id, updatedEntry, imageFile);
+      await updateDiary(entry.id, updatedEntry, imageFiles);
       navigate('/diaries');
     } catch (err) {
       setError('일기수정실패');
@@ -100,8 +100,8 @@ const DiaryDetail = () => {
     navigate('/diaries');
   };
 
-  const handleImageChange = (e) => {
-    setImageFile(e.target.files[0]);
+  const handleImageChange = (files) => {
+    setImageFiles(Array.from(files));
   };
 
   const formattedDate = entry.date
