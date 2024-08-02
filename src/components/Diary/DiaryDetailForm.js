@@ -14,18 +14,30 @@ const DiaryDetailForm = ({
   titleError,
   onImageChange,
   imageUrls,
+  imageIds,
+  onImageDelete,
 }) => {
   const [selectedImages, setSelectedImages] = useState(imageUrls || []);
+  const [selectedImageIds, setSelectedImageIds] = useState(imageIds || []);
 
   useEffect(() => {
     setSelectedImages(imageUrls || []);
-  }, [imageUrls]);
+    setSelectedImageIds(imageIds || []);
+  }, [imageUrls, imageIds]);
 
   const handleImageChange = (event) => {
     const files = Array.from(event.target.files);
     const newImageUrls = files.map((file) => URL.createObjectURL(file));
-    setSelectedImages(newImageUrls);
+    setSelectedImages((prev) => [...prev, ...newImageUrls]);
     onImageChange(files);
+  };
+
+  const handleImageDelete = (index) => {
+    const newImageUrls = selectedImages.filter((_, i) => i !== index);
+    const newImageIds = selectedImageIds.filter((_, i) => i !== index);
+    setSelectedImages(newImageUrls);
+    setSelectedImageIds(newImageIds);
+    onImageDelete(selectedImageIds[index]);
   };
 
   return (
@@ -46,7 +58,12 @@ const DiaryDetailForm = ({
       {selectedImages.length > 0 && (
         <ImageWrapper>
           {selectedImages.map((url, index) => (
-            <ImagePreview key={index} src={url} />
+            <ImagePreviewContainer key={index}>
+              <ImagePreview src={url} />
+              <DeleteButton onClick={() => handleImageDelete(index)}>
+                삭제
+              </DeleteButton>
+            </ImagePreviewContainer>
           ))}
         </ImageWrapper>
       )}
@@ -187,11 +204,32 @@ const ImageWrapper = styled.div`
   overflow: hidden;
 `;
 
+const ImagePreviewContainer = styled.div`
+  position: relative;
+`;
+
 const ImagePreview = styled.img`
   max-width: 100%;
   width: 100%;
   height: auto;
   object-fit: cover;
+`;
+
+const DeleteButton = styled.button`
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 5px;
+  font-size: 12px;
+
+  &:hover {
+    background: darkred;
+  }
 `;
 
 const InputWrapper = styled.div`

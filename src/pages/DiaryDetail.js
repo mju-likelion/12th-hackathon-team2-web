@@ -23,8 +23,10 @@ const DiaryDetail = () => {
     content: '',
     date: '',
     imageUrls: [],
+    imageIds: [],
   });
   const [imageFiles, setImageFiles] = useState([]);
+  const [deletedImageIds, setDeletedImageIds] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const {
@@ -45,14 +47,11 @@ const DiaryDetail = () => {
     const fetchDiary = async () => {
       try {
         setLoading(true);
-        const response = await getDiary(id);
-        const diaryData = response.data;
+        const diaryData = await getDiary(id);
         setEntry({
-          id: diaryData.id,
-          title: diaryData.title,
-          content: diaryData.content,
-          date: diaryData.createdAt,
-          imageUrls: diaryData.imageUrls || [],
+          ...diaryData,
+          imageUrls: diaryData.imageData.map((image) => image.url),
+          imageIds: diaryData.imageData.map((image) => image.id),
         });
         reset({
           title: diaryData.title,
@@ -76,7 +75,7 @@ const DiaryDetail = () => {
     };
 
     try {
-      await updateDiary(entry.id, updatedEntry, imageFiles);
+      await updateDiary(entry.id, updatedEntry, imageFiles, deletedImageIds);
       navigate('/diaries');
     } catch (err) {
       setError('일기수정실패');
@@ -107,9 +106,13 @@ const DiaryDetail = () => {
     );
     setEntry((prevEntry) => ({
       ...prevEntry,
-      imageUrls: newImageUrls,
+      imageUrls: [...prevEntry.imageUrls, ...newImageUrls],
     }));
-    setImageFiles(files);
+    setImageFiles((prevFiles) => [...prevFiles, ...files]);
+  };
+
+  const handleImageDelete = (id) => {
+    setDeletedImageIds((prev) => [...prev, id]);
   };
 
   const formattedDate = entry.date
@@ -136,7 +139,9 @@ const DiaryDetail = () => {
           errors={errors}
           titleError={null}
           imageUrls={entry.imageUrls}
+          imageIds={entry.imageIds}
           onImageChange={handleImageChange}
+          onImageDelete={handleImageDelete}
         />
       </Container>
     </Div>
