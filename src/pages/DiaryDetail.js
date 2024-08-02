@@ -12,6 +12,7 @@ import Header from '../components/Header';
 import TinyButton from '../components/TinyButton';
 import { schemaDiaryDetail } from '../hooks/ValidationYup';
 import { Theme } from '../styles/Theme';
+import Loading from '../components/Loading';
 
 const DiaryDetail = () => {
   const { id } = useParams();
@@ -101,14 +102,21 @@ const DiaryDetail = () => {
   };
 
   const handleImageChange = (files) => {
-    setImageFiles(Array.from(files));
+    const newImageUrls = Array.from(files).map((file) =>
+      URL.createObjectURL(file)
+    );
+    setEntry((prevEntry) => ({
+      ...prevEntry,
+      imageUrls: newImageUrls,
+    }));
+    setImageFiles(files);
   };
 
   const formattedDate = entry.date
     ? format(new Date(entry.date), 'yyyy.MM.dd')
     : '';
 
-  if (loading) return <div>로딩...</div>;
+  if (loading) return <Loading />;
   if (error) return <div>{error}</div>;
 
   return (
@@ -126,6 +134,7 @@ const DiaryDetail = () => {
           handleDelete={handleDeleteEntry}
           isNew={false}
           errors={errors}
+          titleError={null}
           imageUrls={entry.imageUrls}
           onImageChange={handleImageChange}
         />
