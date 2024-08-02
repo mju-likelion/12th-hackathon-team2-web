@@ -11,6 +11,9 @@ const DiaryDetailForm = ({
   handleDelete,
   isNew,
   errors,
+  titleError,
+  onTitleChange,
+  onImageChange,
   imageUrls,
 }) => {
   return (
@@ -20,10 +23,16 @@ const DiaryDetailForm = ({
         control={control}
         render={({ field }) => (
           <>
-            <Input placeholder='제목' {...field} maxLength={TITLE_MAX_LENGTH} />
+            <Input
+              placeholder='제목'
+              {...field}
+              maxLength={TITLE_MAX_LENGTH}
+              onChange={onTitleChange}
+            />
             {errors.title && (
               <ErrorMessage>{errors.title.message}</ErrorMessage>
             )}
+            {titleError && <ErrorMessage>{titleError}</ErrorMessage>}
           </>
         )}
       />
@@ -47,7 +56,7 @@ const DiaryDetailForm = ({
         )}
       />
       <InputWrapper>
-        <input type='file' />
+        <input type='file' onChange={onImageChange} />
       </InputWrapper>
       <ButtonContainer>
         {isNew ? (
@@ -112,6 +121,7 @@ const TextArea = styled.textarea`
     color: ${({ theme }) => theme.colors.gray};
   }
 `;
+
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
