@@ -25,7 +25,7 @@ const DiaryDetailForm = ({
     setSelectedImageIds(imageIds || []);
   }, [imageUrls, imageIds]);
 
-  const handleImageChange = (event) => {
+  const handleFileChange = (event) => {
     const files = Array.from(event.target.files);
     const newImageUrls = files.map((file) => URL.createObjectURL(file));
     setSelectedImages((prev) => [...prev, ...newImageUrls]);
@@ -34,10 +34,10 @@ const DiaryDetailForm = ({
 
   const handleImageDelete = (index) => {
     const newImageUrls = selectedImages.filter((_, i) => i !== index);
-    const newImageIds = selectedImageIds.filter((_, i) => i !== index);
+    const deletedImageId = selectedImageIds[index];
     setSelectedImages(newImageUrls);
-    setSelectedImageIds(newImageIds);
-    onImageDelete(selectedImageIds[index]);
+    setSelectedImageIds((prev) => prev.filter((_, i) => i !== index));
+    onImageDelete(deletedImageId);
   };
 
   return (
@@ -60,7 +60,13 @@ const DiaryDetailForm = ({
           {selectedImages.map((url, index) => (
             <ImagePreviewContainer key={index}>
               <ImagePreview src={url} />
-              <DeleteButton onClick={() => handleImageDelete(index)}>
+              <DeleteButton
+                type='button'
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleImageDelete(index);
+                }}
+              >
                 삭제
               </DeleteButton>
             </ImagePreviewContainer>
@@ -85,7 +91,7 @@ const DiaryDetailForm = ({
             type='file'
             id='fileInput'
             multiple
-            onChange={handleImageChange}
+            onChange={handleFileChange}
             style={{ display: 'none' }}
           />
           <CustomFileButton

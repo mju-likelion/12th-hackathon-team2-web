@@ -58,7 +58,7 @@ const DiaryDetail = () => {
           content: diaryData.content,
         });
       } catch (err) {
-        setError('일기조회실패');
+        setError('일기 조회 실패');
         console.error(err);
       } finally {
         setLoading(false);
@@ -78,7 +78,7 @@ const DiaryDetail = () => {
       await updateDiary(entry.id, updatedEntry, imageFiles, deletedImageIds);
       navigate('/diaries');
     } catch (err) {
-      setError('일기수정실패');
+      setError('일기 수정 실패');
       console.error(err);
     }
   };
@@ -90,7 +90,7 @@ const DiaryDetail = () => {
         await deleteDiary(entry.id);
         navigate('/diaries');
       } catch (err) {
-        setError('일기삭제실패');
+        setError('일기 삭제 실패');
         console.error(err);
       }
     }
@@ -113,6 +113,13 @@ const DiaryDetail = () => {
 
   const handleImageDelete = (id) => {
     setDeletedImageIds((prev) => [...prev, id]);
+    setEntry((prevEntry) => ({
+      ...prevEntry,
+      imageUrls: prevEntry.imageUrls.filter(
+        (_, index) => prevEntry.imageIds[index] !== id
+      ),
+      imageIds: prevEntry.imageIds.filter((imageId) => imageId !== id),
+    }));
   };
 
   const formattedDate = entry.date
