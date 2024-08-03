@@ -208,20 +208,20 @@ const SubTitle = styled.div`
   justify-content: space-between;
   width: 100%;
   max-width: 1117px;
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    width: 97%;
+    gap: 30px;
+  }
 `;
 
 const DateHeader = styled.div`
   margin-top: 20px;
   ${Theme.fonts.Context};
   color: ${Theme.colors.pink3};
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    font-size: 1em;
-    margin-top: 10px;
-  }
+  margin-left: 10px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    font-size: 0.8em;
-    margin-top: 13px;
+    margin-top: 20px;
+    margin-left: 7px;
   }
 `;

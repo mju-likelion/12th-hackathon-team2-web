@@ -81,7 +81,7 @@ const DiaryDetailForm = ({
         control={control}
         render={({ field }) => (
           <>
-            <TextArea placeholder='내용' {...field} />
+            <TextArea placeholder='내용' {...field} isNew={isNew} />
             {errors.content && (
               <ErrorMessage>{errors.content.message}</ErrorMessage>
             )}
@@ -133,7 +133,7 @@ const Form = styled.form`
   max-width: 1117px;
   position: relative;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+  @media (max-width: 550px) {
     padding: 0 10px;
   }
 `;
@@ -165,7 +165,8 @@ const TextArea = styled.textarea`
   outline: none;
   box-sizing: border-box;
   width: 100%;
-  height: 437px;
+  height: ${({ isNew }) => (isNew ? '437px' : 'auto')};
+  min-height: ${({ isNew }) => (isNew ? 'auto' : '200px')};
   background: ${({ theme }) => theme.colors.white};
   resize: none;
   color: ${({ theme }) => theme.colors.black};
@@ -181,7 +182,7 @@ const ButtonContainer = styled.div`
   width: 100%;
   align-items: center;
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
+  @media (min-width: 550px) {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -193,7 +194,7 @@ const RightBtn = styled.div`
   gap: 10px;
   margin-top: 10px;
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
+  @media (min-width: 550px) {
     margin-top: 0;
   }
 `;
@@ -212,6 +213,8 @@ const ImageWrapper = styled.div`
   gap: 10px;
   overflow: hidden;
   padding: 30px;
+  align-items: center;
+  flex-direction: column;
 `;
 
 const ImagePreviewContainer = styled.div`
@@ -223,6 +226,7 @@ const ImagePreview = styled.img`
   width: 100%;
   height: auto;
   object-fit: cover;
+  border-radius: 10px;
 `;
 
 const DeleteButton = styled.button`
@@ -248,7 +252,7 @@ const DeleteIconImg = styled.img`
 const InputWrapper = styled.div`
   margin-top: 10px;
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
+  @media (min-width: 550px) {
     margin-top: 0;
   }
 `;
