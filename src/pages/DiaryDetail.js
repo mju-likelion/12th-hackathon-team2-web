@@ -23,8 +23,10 @@ const DiaryDetail = () => {
     content: '',
     date: '',
     imageUrls: [],
+    imageIds: [],
   });
   const [imageFiles, setImageFiles] = useState([]);
+  const [deletedImageIds, setDeletedImageIds] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const {
@@ -45,21 +47,18 @@ const DiaryDetail = () => {
     const fetchDiary = async () => {
       try {
         setLoading(true);
-        const response = await getDiary(id);
-        const diaryData = response.data;
+        const diaryData = await getDiary(id);
         setEntry({
-          id: diaryData.id,
-          title: diaryData.title,
-          content: diaryData.content,
-          date: diaryData.createdAt,
-          imageUrls: diaryData.imageUrls || [],
+          ...diaryData,
+          imageUrls: diaryData.imageData.map((image) => image.url),
+          imageIds: diaryData.imageData.map((image) => image.id),
         });
         reset({
           title: diaryData.title,
           content: diaryData.content,
         });
       } catch (err) {
-        setError('일기조회실패');
+        setError('일기 조회 실패');
         console.error(err);
       } finally {
         setLoading(false);
@@ -76,10 +75,10 @@ const DiaryDetail = () => {
     };
 
     try {
-      await updateDiary(entry.id, updatedEntry, imageFiles);
+      await updateDiary(entry.id, updatedEntry, imageFiles, deletedImageIds);
       navigate('/diaries');
     } catch (err) {
-      setError('일기수정실패');
+      setError('일기 수정 실패');
       console.error(err);
     }
   };
@@ -91,7 +90,7 @@ const DiaryDetail = () => {
         await deleteDiary(entry.id);
         navigate('/diaries');
       } catch (err) {
-        setError('일기삭제실패');
+        setError('일기 삭제 실패');
         console.error(err);
       }
     }
@@ -107,9 +106,20 @@ const DiaryDetail = () => {
     );
     setEntry((prevEntry) => ({
       ...prevEntry,
-      imageUrls: newImageUrls,
+      imageUrls: [...prevEntry.imageUrls, ...newImageUrls],
     }));
-    setImageFiles(files);
+    setImageFiles((prevFiles) => [...prevFiles, ...files]);
+  };
+
+  const handleImageDelete = (id) => {
+    setDeletedImageIds((prev) => [...prev, id]);
+    setEntry((prevEntry) => ({
+      ...prevEntry,
+      imageUrls: prevEntry.imageUrls.filter(
+        (_, index) => prevEntry.imageIds[index] !== id
+      ),
+      imageIds: prevEntry.imageIds.filter((imageId) => imageId !== id),
+    }));
   };
 
   const formattedDate = entry.date
@@ -136,7 +146,9 @@ const DiaryDetail = () => {
           errors={errors}
           titleError={null}
           imageUrls={entry.imageUrls}
+          imageIds={entry.imageIds}
           onImageChange={handleImageChange}
+          onImageDelete={handleImageDelete}
         />
       </Container>
     </Div>
@@ -196,20 +208,20 @@ const SubTitle = styled.div`
   justify-content: space-between;
   width: 100%;
   max-width: 1117px;
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    width: 97%;
+    gap: 30px;
+  }
 `;
 
 const DateHeader = styled.div`
   margin-top: 20px;
   ${Theme.fonts.Context};
   color: ${Theme.colors.pink3};
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    font-size: 1em;
-    margin-top: 10px;
-  }
+  margin-left: 10px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    font-size: 0.8em;
-    margin-top: 13px;
+    margin-top: 20px;
+    margin-left: 7px;
   }
 `;

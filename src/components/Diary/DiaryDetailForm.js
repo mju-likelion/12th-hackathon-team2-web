@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Controller } from 'react-hook-form';
 import styled from 'styled-components';
 import TinyButton from '../TinyButton';
+import DeleteIcon from '../../img/deleteIcon.png';
 
 const TITLE_MAX_LENGTH = 30;
 
@@ -14,18 +15,30 @@ const DiaryDetailForm = ({
   titleError,
   onImageChange,
   imageUrls,
+  imageIds,
+  onImageDelete,
 }) => {
   const [selectedImages, setSelectedImages] = useState(imageUrls || []);
+  const [selectedImageIds, setSelectedImageIds] = useState(imageIds || []);
 
   useEffect(() => {
     setSelectedImages(imageUrls || []);
-  }, [imageUrls]);
+    setSelectedImageIds(imageIds || []);
+  }, [imageUrls, imageIds]);
 
-  const handleImageChange = (event) => {
+  const handleFileChange = (event) => {
     const files = Array.from(event.target.files);
     const newImageUrls = files.map((file) => URL.createObjectURL(file));
-    setSelectedImages(newImageUrls);
+    setSelectedImages((prev) => [...prev, ...newImageUrls]);
     onImageChange(files);
+  };
+
+  const handleImageDelete = (index) => {
+    const newImageUrls = selectedImages.filter((_, i) => i !== index);
+    const deletedImageId = selectedImageIds[index];
+    setSelectedImages(newImageUrls);
+    setSelectedImageIds((prev) => prev.filter((_, i) => i !== index));
+    onImageDelete(deletedImageId);
   };
 
   return (
@@ -46,7 +59,20 @@ const DiaryDetailForm = ({
       {selectedImages.length > 0 && (
         <ImageWrapper>
           {selectedImages.map((url, index) => (
-            <ImagePreview key={index} src={url} />
+            <ImagePreviewContainer key={index}>
+              <ImagePreview src={url} />
+              {!isNew && (
+                <DeleteButton
+                  type='button'
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleImageDelete(index);
+                  }}
+                >
+                  <DeleteIconImg src={DeleteIcon} />
+                </DeleteButton>
+              )}
+            </ImagePreviewContainer>
           ))}
         </ImageWrapper>
       )}
@@ -55,7 +81,7 @@ const DiaryDetailForm = ({
         control={control}
         render={({ field }) => (
           <>
-            <TextArea placeholder='내용' {...field} />
+            <TextArea placeholder='내용' {...field} isNew={isNew} />
             {errors.content && (
               <ErrorMessage>{errors.content.message}</ErrorMessage>
             )}
@@ -68,7 +94,7 @@ const DiaryDetailForm = ({
             type='file'
             id='fileInput'
             multiple
-            onChange={handleImageChange}
+            onChange={handleFileChange}
             style={{ display: 'none' }}
           />
           <CustomFileButton
@@ -107,7 +133,7 @@ const Form = styled.form`
   max-width: 1117px;
   position: relative;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+  @media (max-width: 550px) {
     padding: 0 10px;
   }
 `;
@@ -139,7 +165,8 @@ const TextArea = styled.textarea`
   outline: none;
   box-sizing: border-box;
   width: 100%;
-  height: 437px;
+  height: ${({ isNew }) => (isNew ? '437px' : 'auto')};
+  min-height: ${({ isNew }) => (isNew ? 'auto' : '200px')};
   background: ${({ theme }) => theme.colors.white};
   resize: none;
   color: ${({ theme }) => theme.colors.black};
@@ -155,7 +182,7 @@ const ButtonContainer = styled.div`
   width: 100%;
   align-items: center;
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
+  @media (min-width: 550px) {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -167,7 +194,7 @@ const RightBtn = styled.div`
   gap: 10px;
   margin-top: 10px;
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
+  @media (min-width: 550px) {
     margin-top: 0;
   }
 `;
@@ -185,6 +212,13 @@ const ImageWrapper = styled.div`
   flex-wrap: wrap;
   gap: 10px;
   overflow: hidden;
+  padding: 30px;
+  align-items: center;
+  flex-direction: column;
+`;
+
+const ImagePreviewContainer = styled.div`
+  position: relative;
 `;
 
 const ImagePreview = styled.img`
@@ -192,12 +226,33 @@ const ImagePreview = styled.img`
   width: 100%;
   height: auto;
   object-fit: cover;
+  border-radius: 10px;
+`;
+
+const DeleteButton = styled.button`
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  font-size: 12px;
+
+  &:hover {
+    opacity: 0.5;
+  }
+`;
+
+const DeleteIconImg = styled.img`
+  width: 20px;
+  height: 20px;
 `;
 
 const InputWrapper = styled.div`
   margin-top: 10px;
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
+  @media (min-width: 550px) {
     margin-top: 0;
   }
 `;

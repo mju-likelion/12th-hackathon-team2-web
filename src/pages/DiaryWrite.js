@@ -61,7 +61,7 @@ const DiaryWrite = () => {
   };
 
   const handleImageChange = (files) => {
-    setImageFiles(files);
+    setImageFiles((prev) => [...prev, ...files]);
   };
 
   const formattedDate = format(new Date(), 'yyyy.MM.dd');
@@ -124,14 +124,14 @@ const DateHeader = styled.div`
   margin-top: 20px;
   ${({ theme }) => theme.fonts.subTitle};
   color: ${({ theme }) => theme.colors.pink3};
+  margin-left: 15px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    font-size: 1em;
-    margin-top: 10px;
+    font-size: 1.3em;
+    margin-top: 20px;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    font-size: 0.8em;
-    margin-top: 5px;
+    margin-top: 20px;
   }
 `;
