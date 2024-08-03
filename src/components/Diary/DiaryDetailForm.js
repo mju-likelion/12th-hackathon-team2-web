@@ -60,15 +60,17 @@ const DiaryDetailForm = ({
           {selectedImages.map((url, index) => (
             <ImagePreviewContainer key={index}>
               <ImagePreview src={url} />
-              <DeleteButton
-                type='button'
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleImageDelete(index);
-                }}
-              >
-                삭제
-              </DeleteButton>
+              {!isNew && (
+                <DeleteButton
+                  type='button'
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleImageDelete(index);
+                  }}
+                >
+                  삭제
+                </DeleteButton>
+              )}
             </ImagePreviewContainer>
           ))}
         </ImageWrapper>
