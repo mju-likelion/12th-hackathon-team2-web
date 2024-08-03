@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Controller } from 'react-hook-form';
 import styled from 'styled-components';
 import TinyButton from '../TinyButton';
+import DeleteIcon from '../../img/deleteIcon.png';
 
 const TITLE_MAX_LENGTH = 30;
 
@@ -68,7 +69,7 @@ const DiaryDetailForm = ({
                     handleImageDelete(index);
                   }}
                 >
-                  삭제
+                  <DeleteIconImg src={DeleteIcon} />
                 </DeleteButton>
               )}
             </ImagePreviewContainer>
@@ -210,6 +211,7 @@ const ImageWrapper = styled.div`
   flex-wrap: wrap;
   gap: 10px;
   overflow: hidden;
+  padding: 30px;
 `;
 
 const ImagePreviewContainer = styled.div`
@@ -227,17 +229,20 @@ const DeleteButton = styled.button`
   position: absolute;
   top: 5px;
   right: 5px;
-  background: red;
-  color: white;
+  background: none;
   border: none;
-  border-radius: 50%;
   cursor: pointer;
   padding: 5px;
   font-size: 12px;
 
   &:hover {
-    background: darkred;
+    opacity: 0.5;
   }
+`;
+
+const DeleteIconImg = styled.img`
+  width: 20px;
+  height: 20px;
 `;
 
 const InputWrapper = styled.div`
