@@ -154,7 +154,14 @@ const CalendarContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin: 0 auto;
+  margin: 30px auto;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    margin: 0 auto;
+  }
+  @media (max-height: 810px) {
+    margin: 0 auto;
+  }
 `;
 
 const MonthTitleContainer = styled.div`
