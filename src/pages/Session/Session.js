@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import BigButton from '../components/BigButton';
-import Header from '../components/Header';
-import Pagination from '../components/Pagination';
-import { RoomsProvider, useRooms } from '../components/Session/RoomsContext';
-import RoomsList from '../components/Session/RoomsList';
+import BigButton from '../../components/BigButton';
+import Header from '../../components/Header';
+import Pagination from '../../components/Pagination';
+import { RoomsProvider, useRooms } from '../../components/Session/RoomsContext';
+import RoomsList from '../../components/Session/RoomsList';
 
 const SessionPageContent = () => {
   const { rooms, totalPages, currentPage, setCurrentPage } = useRooms();

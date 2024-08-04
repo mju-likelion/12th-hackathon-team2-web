@@ -3,15 +3,15 @@ import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
-import { SignupApi } from '../api/Auth/SignupApi';
-import AlertModal from '../components/AlertModal';
-import Button from '../components/BigButton';
-import Container from '../components/Container';
-import InputField from '../components/InputField';
-import Title from '../components/Title';
-import { schemaSignup } from '../hooks/ValidationYup';
-import GlobalStyle from '../styles/GlobalStyle';
-import { Theme } from '../styles/Theme';
+import { SignupApi } from '../../api/Auth/SignupApi';
+import AlertModal from '../../components/AlertModal';
+import Button from '../../components/BigButton';
+import Container from '../../components/Container';
+import InputField from '../../components/InputField';
+import Title from '../../components/Title';
+import { schemaSignup } from '../../hooks/ValidationYup';
+import GlobalStyle from '../../styles/GlobalStyle';
+import { Theme } from '../../styles/Theme';
 
 const Signup = () => {
   const navigate = useNavigate();

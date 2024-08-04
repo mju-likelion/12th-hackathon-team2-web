@@ -1,12 +1,12 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Header from '../components/Header';
-import Rating from '../components/Rating';
-import TinyButton from '../components/TinyButton';
-import AvocadoImage from '../img/Avocado.svg';
-import BananaImage from '../img/Banana.svg';
-import TomatoImage from '../img/Tomato.svg';
+import Header from '../../components/Header';
+import Rating from '../../components/Rating';
+import TinyButton from '../../components/TinyButton';
+import AvocadoImage from '../../img/Avocado.svg';
+import BananaImage from '../../img/Banana.svg';
+import TomatoImage from '../../img/Tomato.svg';
 
 const gradeMapping = {
   AVOCADO: {

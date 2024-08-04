@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import 'react-circular-progressbar/dist/styles.css';
 import styled from 'styled-components';
-import Sound from '../assets/alarm.mp3';
-import Header from '../components/Header';
-import Settings from '../components/Pomodoro/Settings';
-import TimerDisplay from '../components/Pomodoro/TimerDisplay';
-import TinyButton from '../components/TinyButton';
-import pomodoroLogo from '../img/pomodoroLogo.svg';
+import Sound from '../../assets/alarm.mp3';
+import Header from '../../components/Header';
+import Settings from '../../components/Pomodoro/Settings';
+import TimerDisplay from '../../components/Pomodoro/TimerDisplay';
+import TinyButton from '../../components/TinyButton';
+import pomodoroLogo from '../../img/pomodoroLogo.svg';
 
 const Pomodoro = () => {
   const [workMinutes, setWorkMinutes] = useState('');

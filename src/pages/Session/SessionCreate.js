@@ -2,11 +2,11 @@ import { Field, Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { createRoom } from '../api/Rooms/RoomsPostApi';
-import Header from '../components/Header';
-import TinyButton from '../components/TinyButton';
-import { schemaSessionDetail } from '../hooks/ValidationYup';
-import { Theme } from '../styles/Theme';
+import { createRoom } from '../../api/Rooms/RoomsPostApi';
+import Header from '../../components/Header';
+import TinyButton from '../../components/TinyButton';
+import { schemaSessionDetail } from '../../hooks/ValidationYup';
+import { Theme } from '../../styles/Theme';
 
 const TITLE_MAX_LENGTH = 40;
 const LINK_MAX_LENGTH = 40;

@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { PlannersCalendarGetApi } from '../api/Planners/PlannersCalendarGetApi.js';
-import Header from '../components/Header';
-import PlannerHeader from '../components/Planner/PlannerHeader';
-import PlannerTabs from '../components/Planner/PlannerTabs';
-import PlannerTopBar from '../components/Planner/PlannerTopBar';
-import { Theme } from '../styles/Theme';
+import { PlannersCalendarGetApi } from '../../api/Planners/PlannersCalendarGetApi.js';
+import Header from '../../components/Header.js';
+import PlannerHeader from '../../components/Planner/PlannerHeader.js';
+import PlannerTabs from '../../components/Planner/PlannerTabs.js';
+import PlannerTopBar from '../../components/Planner/PlannerTopBar.js';
+import { Theme } from '../../styles/Theme.js';
 
 const CalendarView = ({ totalDone }) => {
   const [completedCounts, setCompletedCounts] = useState({});
@@ -162,13 +162,24 @@ const MonthTitleContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
-  margin-top: 5vh;
+  margin-top: 20px;
 `;
-
 const MonthTitle = styled.h2`
   margin: 0 10px;
   text-align: center;
   flex-grow: 1;
+  font-size: 2em;
+  width: 100%;
+  min-width: 80px;
+  ${(props) => props.theme.fonts.default};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    font-size: 1.2em;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    font-size: 0.8em;
+  }
 `;
 
 const MonthButton = styled.button`
