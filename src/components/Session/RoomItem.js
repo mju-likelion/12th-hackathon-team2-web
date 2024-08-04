@@ -75,10 +75,10 @@ const RoomContent = styled.div`
 `;
 
 const RoomIcon = styled.img`
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
   border: 2px solid ${({ theme }) => theme.colors.pink2};
-  border-radius: 50%;
+  border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
