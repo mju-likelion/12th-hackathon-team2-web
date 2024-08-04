@@ -12,23 +12,23 @@ import { RoomsProvider } from './components/Session/RoomsContext';
 import GlobalStyle from './styles/GlobalStyle';
 import { Theme } from './styles/Theme';
 
-const CompletedPlanner = lazy(() => import('./pages/CompletedPlanner'));
-const Diary = lazy(() => import('./pages/Diary'));
-const DiaryDetail = lazy(() => import('./pages/DiaryDetail'));
-const DiaryWrite = lazy(() => import('./pages/DiaryWrite'));
-const Login = lazy(() => import('./pages/Login'));
+const CompletedPlanner = lazy(() => import('./pages/Planner/CompletedPlanner'));
+const Diary = lazy(() => import('./pages/Diary/Diary'));
+const DiaryDetail = lazy(() => import('./pages/Diary/DiaryDetail'));
+const DiaryWrite = lazy(() => import('./pages/Diary/DiaryWrite'));
+const Login = lazy(() => import('./pages/LoginSignup/Login'));
 const Main = lazy(() => import('./pages/Main'));
 const NotFound = lazy(() => import('./pages/NotFound'));
-const Planner = lazy(() => import('./pages/Planner'));
-const Pomodoro = lazy(() => import('./pages/Pomodoro'));
-const Session = lazy(() => import('./pages/Session'));
-const SessionCreate = lazy(() => import('./pages/SessionCreate'));
-const SessionDetail = lazy(() => import('./pages/SessionDetail'));
-const Signup = lazy(() => import('./pages/Signup'));
-const Survey = lazy(() => import('./pages/Survey'));
-const Mypage = lazy(() => import('./pages/Mypage'));
-const SurveyResult = lazy(() => import('./pages/SurveyResult'));
-const CalendarView = lazy(() => import('./pages/CalendarView'));
+const Planner = lazy(() => import('./pages/Planner/Planner'));
+const Pomodoro = lazy(() => import('./pages/Pomodoro/Pomodoro'));
+const Session = lazy(() => import('./pages/Session/Session'));
+const SessionCreate = lazy(() => import('./pages/Session/SessionCreate'));
+const SessionDetail = lazy(() => import('./pages/Session/SessionDetail'));
+const Signup = lazy(() => import('./pages/LoginSignup/Signup'));
+const Survey = lazy(() => import('./pages/Survey/Survey'));
+const Mypage = lazy(() => import('./pages/MyPage/Mypage'));
+const SurveyResult = lazy(() => import('./pages/Survey/SurveyResult'));
+const CalendarView = lazy(() => import('./pages/Planner/CalendarView'));
 
 function App() {
   return (

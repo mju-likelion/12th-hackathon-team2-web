@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { fetchSurveyQuestions } from '../api/Surveys/SurveyGetApi';
-import { submitSurveyResults } from '../api/Surveys/SurveyPostApi';
-import SurveyButton from '../components/SurveyButton';
-import TinyButton from '../components/TinyButton';
+import { fetchSurveyQuestions } from '../../api/Surveys/SurveyGetApi';
+import { submitSurveyResults } from '../../api/Surveys/SurveyPostApi';
+import SurveyButton from '../../components/SurveyButton';
+import TinyButton from '../../components/TinyButton';
 
 const Survey = () => {
   const [answers, setAnswers] = useState({});
@@ -104,6 +104,7 @@ const Container = styled.div`
   padding: 30px;
   border: 2px solid ${(props) => props.theme.colors.pink2};
   border-radius: 20px;
+  background-color: ${(props) => props.theme.colors.white};
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     padding: 20px;
@@ -112,13 +113,10 @@ const Container = styled.div`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     width: 100%;
-    padding: 15px 30px;
+    padding: 15px;
     margin: auto;
-    background-color: ${(props) => props.theme.colors.pink1};
     border: none;
     border-radius: 0;
-    width: 100%;
-    height: 100%;
   }
 `;
 
@@ -138,33 +136,31 @@ const Title = styled.div`
     width: 260px;
     padding-bottom: 15px;
     border-bottom: 3px solid ${(props) => props.theme.colors.pink2};
+    font-size: 1.2em;
   }
 `;
 
 const Question = styled.div`
   margin-bottom: 70px;
+
   ${(props) => props.theme.fonts.mediumText};
   p {
     margin-bottom: 34px;
   }
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     p {
-      margin-bottom: 20px;
+      margin-bottom: 15px;
+      font-size: 0.7em;
     }
   }
 `;
 
 const Options = styled.div`
   display: flex;
-  justify-content: space-around;
-  gap: 30px;
+  flex-direction: row;
+  gap: 10px;
   margin-top: 10px;
-  @media (max-width: 700px) {
-    flex-direction: column;
-    margin: 0 70px;
-    gap: 20px;
-  }
 `;
 
 const SaveBtn = styled.div`
@@ -181,6 +177,10 @@ const LoadingMessage = styled.div`
   ${(props) => props.theme.fonts.mediumText};
   color: ${(props) => props.theme.colors.gray};
   margin-top: 50px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    font-size: 0.9em;
+  }
 `;
 
 export default Survey;

@@ -2,11 +2,11 @@ import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import fetchDiaries from '../api/Diaries/DiariesGetApi';
-import DiaryHeader from '../components/Diary/DiaryHeader';
-import DiaryList from '../components/Diary/DiaryList';
-import Header from '../components/Header';
-import Pagination from '../components/Pagination';
+import fetchDiaries from '../../api/Diaries/DiariesGetApi';
+import DiaryHeader from '../../components/Diary/DiaryHeader';
+import DiaryList from '../../components/Diary/DiaryList';
+import Header from '../../components/Header';
+import Pagination from '../../components/Pagination';
 
 const Diary = () => {
   const [entries, setEntries] = useState([]);

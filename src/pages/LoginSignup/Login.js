@@ -3,16 +3,16 @@ import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
-import { LoginApi } from '../api/Auth/LoginApi';
-import AlertModal from '../components/AlertModal';
-import BigButton from '../components/BigButton';
-import Container from '../components/Container';
-import InputField from '../components/InputField';
-import SmallButton from '../components/SmallButton';
-import Title from '../components/Title';
-import { schemaLogin } from '../hooks/ValidationYup';
-import GlobalStyle from '../styles/GlobalStyle';
-import { Theme } from '../styles/Theme.js';
+import { LoginApi } from '../../api/Auth/LoginApi.js';
+import AlertModal from '../../components/AlertModal.js';
+import BigButton from '../../components/BigButton.js';
+import Container from '../../components/Container.js';
+import InputField from '../../components/InputField.js';
+import SmallButton from '../../components/SmallButton.js';
+import Title from '../../components/Title.js';
+import { schemaLogin } from '../../hooks/ValidationYup.js';
+import GlobalStyle from '../../styles/GlobalStyle.js';
+import { Theme } from '../../styles/Theme.js';
 
 const Login = () => {
   const navigate = useNavigate();

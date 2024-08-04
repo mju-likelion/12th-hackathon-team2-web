@@ -11,7 +11,9 @@ const SurveyButton = ({ content, selected, onClick, className }) => {
 
 const Button = styled.button`
   padding: 14px 39px;
+  width: 100%;
   border-radius: 11px;
+
   cursor: pointer;
   ${(props) => props.theme.fonts.helperText};
   font-weight: 500;
@@ -25,6 +27,7 @@ const Button = styled.button`
       : `1px solid ${props.theme.colors.gray}`};
   white-space: nowrap;
   transition: all 0.3s ease;
+  text-align: center;
 
   &:hover {
     transform: translateY(-3px);
@@ -33,6 +36,11 @@ const Button = styled.button`
   &:active {
     transform: translateY(0);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    padding: 10px 20px;
+    font-size: 0.5em;
   }
 `;
 

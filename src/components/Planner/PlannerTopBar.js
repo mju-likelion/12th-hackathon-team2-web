@@ -65,6 +65,10 @@ const CurrentTime = styled.div`
     text-align: center;
     margin-bottom: 10px;
   }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    font-size: 0.6em;
+  }
 `;
 
 const Counter = styled.div`
@@ -76,8 +80,13 @@ const Counter = styled.div`
   flex: 1;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    font-size: 1em;
     margin-bottom: 10px;
     width: 100%;
     text-align: center;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    font-size: 0.8em;
   }
 `;

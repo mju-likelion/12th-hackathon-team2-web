@@ -22,6 +22,18 @@ const Button = styled.button`
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   transition: all 0.3s ease;
 
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    width: 120px;
+    height: 45px;
+    font-size: 0.9em;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    width: 100px;
+    height: 40px;
+    font-size: 0.8em;
+  }
+
   &:hover {
     transform: translateY(-3px);
     box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.3);

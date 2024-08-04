@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import postDiary from '../api/Diaries/DiariesPostApi';
-import DiaryDetailForm from '../components/Diary/DiaryDetailForm';
-import Header from '../components/Header';
-import { schemaDiaryDetail } from '../hooks/ValidationYup';
+import postDiary from '../../api/Diaries/DiariesPostApi';
+import DiaryDetailForm from '../../components/Diary/DiaryDetailForm';
+import Header from '../../components/Header';
+import { schemaDiaryDetail } from '../../hooks/ValidationYup';
 
 const TITLE_MAX_LENGTH = 40;
 

@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { getMypage, updateMypage, deleteMypage } from '../api/Mypage/MypageApi';
-import Header from '../components/Header';
-import Loading from '../components/Loading';
-import AvocadoImage from '../img/Avocado.svg';
-import BananaImage from '../img/Banana.svg';
-import TomatoImage from '../img/Tomato.svg';
+import {
+  getMypage,
+  updateMypage,
+  deleteMypage,
+} from '../../api/Mypage/MypageApi';
+import Header from '../../components/Header';
+import Loading from '../../components/Loading';
+import AvocadoImage from '../../img/Avocado.svg';
+import BananaImage from '../../img/Banana.svg';
+import TomatoImage from '../../img/Tomato.svg';
 import { useNavigate } from 'react-router-dom';
 
 const gradeMapping = {
@@ -200,15 +204,23 @@ const Mypage = () => {
     </Div>
   );
 };
+
 const Div = styled.div`
   width: 100%;
   padding: 20px;
+  background-color: ${(props) => props.theme.colors.background};
 `;
+
 const Container = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    padding: 10px;
+  }
 `;
 
 const Info = styled.div`
@@ -222,11 +234,25 @@ const Info = styled.div`
   padding: 40px;
   width: 80%;
   max-width: 800px;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
+    padding: 30px;
+    width: 90%;
+  }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    padding: 20px;
+    width: 100%;
+  }
 `;
 
 const ProfileContainer = styled.div`
   width: 100%;
   margin-top: 20px;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    margin-top: 15px;
+  }
 `;
 
 const Img = styled.div`
@@ -239,6 +265,16 @@ const Img = styled.div`
   width: 200px;
   height: 200px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
+    width: 150px;
+    height: 150px;
+  }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    width: 120px;
+    height: 120px;
+  }
 `;
 
 const Grade = styled.img`
@@ -253,6 +289,10 @@ const UserInfo = styled.div`
   border: 1px solid ${(props) => props.theme.colors.gray};
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    padding: 15px;
+  }
 `;
 
 const InfoText = styled.p`
@@ -261,21 +301,35 @@ const InfoText = styled.p`
   text-align: left;
   line-height: 1.5em;
   color: ${(props) => props.theme.colors.darkGray};
+  word-wrap: break-word;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    font-size: 12px;
+  }
 `;
 
 const Input = styled.input`
-  width: 96%;
+  width: 100%;
   padding: 10px;
   margin-bottom: 8px;
   border: 1px solid ${(props) => props.theme.colors.gray};
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    padding: 8px;
+  }
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    margin-top: 15px;
+    justify-content: center;
+  }
 `;
 
 const Button = styled.button`
@@ -292,7 +346,14 @@ const Button = styled.button`
   &:hover {
     background-color: ${(props) => props.theme.colors.pink5};
   }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    margin-left: 5px;
+    padding: 8px 12px;
+    font-size: 12px;
+  }
 `;
+
 const DeleteContainer = styled.div`
   width: 100%;
   margin-top: 20px;
@@ -302,6 +363,10 @@ const DeleteContainer = styled.div`
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: left;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    padding: 15px;
+  }
 `;
 
 const ErrorText = styled.p`
@@ -309,5 +374,10 @@ const ErrorText = styled.p`
   ${(props) => props.theme.fonts.tinyButton};
   text-align: left;
   margin-bottom: 10px;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    font-size: 12px;
+  }
 `;
+
 export default Mypage;

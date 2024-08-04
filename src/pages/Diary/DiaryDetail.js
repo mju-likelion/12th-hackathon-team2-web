@@ -4,15 +4,15 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import deleteDiary from '../api/Diaries/DiariesDeleteApi';
-import getDiary from '../api/Diaries/DiariesDetailGetApi';
-import updateDiary from '../api/Diaries/DiariesPatchApi';
-import DiaryDetailForm from '../components/Diary/DiaryDetailForm';
-import Header from '../components/Header';
-import TinyButton from '../components/TinyButton';
-import { schemaDiaryDetail } from '../hooks/ValidationYup';
-import { Theme } from '../styles/Theme';
-import Loading from '../components/Loading';
+import deleteDiary from '../../api/Diaries/DiariesDeleteApi';
+import getDiary from '../../api/Diaries/DiariesDetailGetApi';
+import updateDiary from '../../api/Diaries/DiariesPatchApi';
+import DiaryDetailForm from '../../components/Diary/DiaryDetailForm';
+import Header from '../../components/Header';
+import TinyButton from '../../components/TinyButton';
+import { schemaDiaryDetail } from '../../hooks/ValidationYup';
+import { Theme } from '../../styles/Theme';
+import Loading from '../../components/Loading';
 
 const DiaryDetail = () => {
   const { id } = useParams();
