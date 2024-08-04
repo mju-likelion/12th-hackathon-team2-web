@@ -73,7 +73,7 @@ const CalendarView = ({ totalDone }) => {
   const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
 
   const getColor = (count) => {
-    if (count === null) return Theme.colors.gray;
+    if (count === null) return '#ddd';
     if (count === 0) return Theme.colors.white;
     if (count === 1) return Theme.colors.pink1;
     if (count === 2) return Theme.colors.pink2;
@@ -161,21 +161,17 @@ const MonthTitleContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 10px;
-  margin-top: 20px;
+  margin-bottom: 18px;
 `;
+
 const MonthTitle = styled.h2`
-  margin: 0 10px;
+  margin: 0 20px;
   text-align: center;
   flex-grow: 1;
-  font-size: 2em;
   width: 100%;
   min-width: 80px;
   ${(props) => props.theme.fonts.default};
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    font-size: 1.2em;
-  }
+  font-size: 1.5em;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     font-size: 0.8em;
@@ -199,6 +195,15 @@ const MonthButton = styled.button`
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    padding: 5px 10px;
+    font-size: 13px;
+  }
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    padding: 5px 5px;
+    font-size: 10px;
+  }
 `;
 
 const DaysOfWeek = styled.div`
@@ -212,16 +217,29 @@ const DayOfWeek = styled.div`
   text-align: center;
   font-weight: bold;
   padding: 10px 0;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    padding: 5px 0;
+    font-size: 0.8em;
+  }
 `;
 
 const CalendarGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   width: 100%;
+  gap: 1vh;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    gap: 0.5vh;
+  }
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    gap: 0.5vh;
+  }
 `;
 
 const CalendarCell = styled.div`
-  height: 3vh;
+  height: 7vh;
   border: 1px solid #ddd;
   background-color: ${(props) => props.color};
   position: relative;
@@ -229,6 +247,22 @@ const CalendarCell = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  border-radius: 10px;
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    height: 5vh;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    height: 4vh;
+    font-size: 0.6em;
+  }
 `;
 
 const DateLabel = styled.div`
@@ -237,6 +271,11 @@ const DateLabel = styled.div`
   position: absolute;
   top: 5px;
   left: 5px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    height: 4vh;
+    font-size: 0.6em;
+  }
 `;
 
 const Div = styled.div`
@@ -289,7 +328,6 @@ const Content = styled.div`
 const InnerContent = styled.div`
   width: 100%;
   height: 60vh;
-  min-height: 447px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   background: ${({ theme }) => theme.colors.white};
   border-radius: 14px;
