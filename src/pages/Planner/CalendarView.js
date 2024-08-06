@@ -332,7 +332,7 @@ const Content = styled.div`
 
 const InnerContent = styled.div`
   width: 100%;
-  /* min-height: 60vh; */
+  min-height: 430px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   background: ${({ theme }) => theme.colors.white};
   border-radius: 14px;
