@@ -39,7 +39,7 @@ function App() {
           <RoomsProvider>
             <Suspense fallback={<Loading />}>
               <Routes>
-                <Route path='/' element={<Navigate to='/auth/login' />} />
+                {/* <Route path='/' element={<Navigate to='/auth/login' />} /> */}
                 <Route path='/auth/login' element={<Login />} />
                 <Route path='/auth/signup' element={<Signup />} />
                 <Route path='/main' element={<Main />} />

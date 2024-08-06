@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 export const Axios = axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL || 'https://api.mutsideout.com',
+  baseURL: 'https://api.mutsideout.com',
   withCredentials: true,
 });
 
@@ -11,25 +11,20 @@ Axios.interceptors.response.use(
     return response;
   },
   async (error) => {
-    const originalRequest = error.config;
     if (window.location.pathname === '/auth/login') {
       return Promise.reject(error);
     }
-    if (error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
+    console.log(error);
+    if (error.response?.status === 401) {
+      console.log('실행');
       try {
-        const { data } = await axios.post(
-          '/auth/refresh',
-          {},
-          {
-            withCredentials: true,
-          }
-        );
-        Cookies.set('loginToken', data.token);
-        originalRequest.headers.Authorization = `Bearer ${data.token}`;
-        return Axios(originalRequest);
+        console.log('실행2');
+        const { data } = await Axios.get('/auth/refresh', {
+          withCredentials: true,
+        });
+
+        return Axios;
       } catch (refreshError) {
-        Cookies.remove('loginToken');
         window.location.replace('/auth/login');
         return Promise.reject(refreshError);
       }

@@ -26,11 +26,12 @@ const Main = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    const loginToken = Cookies.get('loginToken');
-    if (!loginToken) {
-      setAlertMessage('로그인이 필요합니다. \n로그인 페이지로 이동합니다.');
-      return;
-    }
+    // const loginToken = Cookies.get('RefreshToken');
+    // console.log(loginToken);
+    // if (!loginToken) {
+    //   setAlertMessage('로그인이 필요합니다. \n로그인 페이지로 이동합니다.');
+    //   return;
+    // }
 
     gradeGetApi()
       .then((response) => {

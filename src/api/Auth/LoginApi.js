@@ -1,11 +1,10 @@
 import Cookies from 'js-cookie';
 import { Axios } from '../Axios';
 
-export const LoginApi = (data, callbackFunctions) => {
+export const LoginApi = async (data, callbackFunctions) => {
   const { navigateSuccess, navigateError } = callbackFunctions;
-  Axios.post('/auth/login', data)
-    .then((response) => {
-      Cookies.set('loginToken', response.data.token);
+  await Axios.post('/auth/login', data)
+    .then(() => {
       navigateSuccess();
     })
     .catch((error) => {

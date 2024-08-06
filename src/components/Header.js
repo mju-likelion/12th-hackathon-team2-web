@@ -28,7 +28,7 @@ const Header = () => {
     LogoutApi({
       navigateSuccess: () => {
         console.log('Logged out');
-        Cookies.remove('loginToken');
+        // Cookies.remove('loginToken');
         window.location.replace('/auth/login');
         setMenuOpen(false);
       },

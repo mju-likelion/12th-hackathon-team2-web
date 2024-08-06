@@ -3,6 +3,7 @@ import { Axios } from '../Axios';
 export const fetchRooms = async (page) => {
   try {
     const response = await Axios.get(`/rooms?page=${page}`);
+
     console.log('전체조회 성공:', response.data);
     const { roomList, pagination } = response.data.data;
     return {
