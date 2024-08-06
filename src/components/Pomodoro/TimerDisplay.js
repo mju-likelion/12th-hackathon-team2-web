@@ -53,7 +53,6 @@ const Timer = styled.div`
   margin-bottom: 20px;
   padding: 20px;
   border-radius: 15px;
-  border: 2px solid ${(props) => props.theme.colors.pink2};
   background-color: ${({ theme }) => theme.colors.pink1};
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
@@ -68,7 +67,7 @@ const Timer = styled.div`
 `;
 
 const TimerDisplayContainer = styled.div`
-  border: 10px solid ${(props) => props.theme.colors.black};
+  border: 6px solid ${(props) => props.theme.colors.pink3};
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -86,6 +85,7 @@ const TimerDisplayContainer = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     padding: 5px;
     font-size: 40px;
+    border: 3px solid ${(props) => props.theme.colors.pink3};
   }
 `;
 

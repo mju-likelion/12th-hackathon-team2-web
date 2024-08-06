@@ -254,6 +254,7 @@ const Right = styled.div`
     width: 100%;
     padding: 10px;
     margin: 5px;
+    margin-top: 20px;
   }
 `;
 
