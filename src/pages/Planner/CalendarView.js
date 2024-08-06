@@ -154,14 +154,21 @@ const CalendarContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin: 0 auto;
+  margin: 30px auto;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    margin: 0 auto;
+  }
+  @media (max-height: 810px) {
+    margin: 0 auto;
+  }
 `;
 
 const MonthTitleContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 `;
 
 const MonthTitle = styled.h2`
@@ -173,6 +180,9 @@ const MonthTitle = styled.h2`
   ${(props) => props.theme.fonts.default};
   font-size: 1.5em;
 
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    font-size: 1em;
+  }
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     font-size: 0.8em;
   }
@@ -250,11 +260,6 @@ const CalendarCell = styled.div`
   border-radius: 10px;
   transition: transform 0.2s ease-in-out;
 
-  &:hover {
-    transform: scale(1.1);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
-
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     height: 5vh;
   }
@@ -299,7 +304,7 @@ const PlannerContainer = styled.div`
   border-radius: 20px;
   width: 100%;
   max-width: 1082px;
-  min-height: 453px;
+  /* min-height: 453px; */
   margin-top: 2vh;
   padding: 4vh;
   position: relative;
@@ -327,7 +332,7 @@ const Content = styled.div`
 
 const InnerContent = styled.div`
   width: 100%;
-  height: 60vh;
+  /* min-height: 60vh; */
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   background: ${({ theme }) => theme.colors.white};
   border-radius: 14px;
@@ -335,12 +340,4 @@ const InnerContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    height: 50vh;
-  }
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    height: 40vh;
-  }
 `;
