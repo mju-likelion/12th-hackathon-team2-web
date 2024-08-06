@@ -50,7 +50,7 @@ const SurveyResult = () => {
           <br />
           정확한 검사를 위해서는 추가적인 검사가 필요해요.
         </Info>
-        <TinyButton onClick={() => navigate('/main')}>확인</TinyButton>
+        <TinyButton onClick={() => navigate('/')}>확인</TinyButton>
       </Container>
     </Div>
   );

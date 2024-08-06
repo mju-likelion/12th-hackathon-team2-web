@@ -20,7 +20,7 @@ const Login = () => {
   const [modalMessage, setModalMessage] = useState('');
 
   const handleLoginClick = () => {
-    navigate('/main');
+    navigate('/');
   };
 
   const handleSignupClick = () => {

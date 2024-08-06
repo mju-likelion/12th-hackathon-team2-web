@@ -17,7 +17,7 @@ const Diary = lazy(() => import('./pages/Diary/Diary'));
 const DiaryDetail = lazy(() => import('./pages/Diary/DiaryDetail'));
 const DiaryWrite = lazy(() => import('./pages/Diary/DiaryWrite'));
 const Login = lazy(() => import('./pages/LoginSignup/Login'));
-const Main = lazy(() => import('./pages/Main'));
+const Main = lazy(() => import('./pages/Main.js'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const Planner = lazy(() => import('./pages/Planner/Planner'));
 const Pomodoro = lazy(() => import('./pages/Pomodoro/Pomodoro'));
@@ -42,7 +42,7 @@ function App() {
                 {/* <Route path='/' element={<Navigate to='/auth/login' />} /> */}
                 <Route path='/auth/login' element={<Login />} />
                 <Route path='/auth/signup' element={<Signup />} />
-                <Route path='/main' element={<Main />} />
+                <Route path='/' element={<Main />} />
                 <Route path='/planners' element={<Planner />} />
                 <Route
                   path='/planners/completed'

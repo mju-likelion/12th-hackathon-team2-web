@@ -8,7 +8,7 @@ const NotFound = () => {
   const navigate = useNavigate();
 
   const goToMain = () => {
-    navigate('/main');
+    navigate('/');
   };
 
   return (
